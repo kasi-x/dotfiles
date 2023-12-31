@@ -1,0 +1,204 @@
+[tool.poetry]
+name = ""
+version = "0.1.0"
+description = ""
+authors = ["kasi-x <kashimiya.exe@gmail.com>"]
+license = "private"
+readme = "README.md"
+packages = [{ include = "src" }]
+
+[tool.poetry.dependencies]
+python = "3.11.*"
+pandera = { extras = [
+    "io",
+    "mypy",
+    "strategies",
+    "geopandas",
+], version = "^0.18.0" }
+pydantic = "^2.5.3"
+python-dotenv = "^1.0.0"
+returns = "^0.22.0"
+rich = "^13.7.0"
+structlog = "^23.3.0"
+better-exceptions = "^0.3.3"
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.1.9"
+bpython = "^0.24"
+coverage = "^7.4.0"
+debugpy = "^1.8.0"
+jupyterlab = "^4.0.10"
+mypy = "^1.8.0"
+pre-commit = "^3.6.0"
+pytest = "^7.4.3"
+pytest-clarity = "^1.0.1"
+pytest-cov = "^4.1.0"
+pytest-datadir = "^1.5.0"
+pytest-mock = "^3.12.0"
+pytest-picked = "^0.5.0"
+pytest-pretty = "^1.2.0"
+python-lsp-ruff = "^2.0.1"
+setuptools = "^69.0.3"
+tox = "^4.11.4"
+
+[tool.mypy]
+python_version = "3.11"
+plugins = [
+    "returns.contrib.mypy.returns_plugin",
+    "numpy.typing.mypy_plugin",
+    "pandera.mypy",
+    "pydantic.mypy",
+]
+exclude = ['venv', '.venv']
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+xfail_strict = true
+addopts = [
+    "-v",
+    "--strict-config",
+    "--strict-markers",
+    "--picked",
+    "--cov=src",
+    "--no-cov-on-fail",
+]
+filterwarnings = [
+    "error",
+    "ignore::UserWarning",
+    'ignore:function ham\(\) is deprecated:DeprecationWarning',
+]
+
+[tool.coverage.paths]
+source = ["src", "*/site-packages"]
+
+[tool.coverage.run]
+branch = true
+source = ["src"]
+parallel = true
+omit = ["tests/*"]
+
+[tool.coverage.report]
+show_missing = true
+fail_under = 100
+
+[tool.pyright]
+pythonVersion = "3.11"
+include = ["src"]
+exclude = [
+    "**/node_modules",
+    "**/__pycache__",
+    "src/experimental",
+    "src/typestubs",
+    ".venv",
+]
+venvPath = "."
+venv = ".venv"
+stubPath = "src/stubs"
+reportMissingImports = true
+reportMissingTypeStubs = false
+ignore = ["src/old*", ".venv/*"]
+basic = ["**"]
+
+[tool.ruff]
+ignore = [
+    "ANN101", # Missing type annotation for {name} in method
+    "ANN102", # Missing type annotation for {name} in classmethod
+    "ANN401", # Dynamically typed expressions (typing.Any) are disallowed in {name} NOTE:cause false-positive.
+    "T20",    # flake8-print
+    "TD003",  # Missing issue link on the line following this TODO
+    "TRY003", # Avoid specifying long messages outside the exception class
+    "D100",   # Missing docstring in public module
+    "D102",   # Missing docstring in public method
+    "D105",   # Missing docstring in magic method
+    "D107",   # Missing docstring in __init__
+    # "EM",     # flake8-errmsg
+    # "FIX",    # flake8-fixme     
+    # "INP",    # flake8-no-pep420
+    # "TCH",    # flake8-type-checking 
+    # "TD",     # flake8-todos
+]
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "venv",
+]
+line-length = 99
+select = ["ALL"]
+fix = true
+unfixable = [
+    "F401",   # unused-import
+    "RET504", # unnecessary-assign
+    # "B",      # flake8-bugbear
+    # "D202",   # no-blank-line-after-function
+]
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+target-version = "py311"
+cache-dir = "~/.cache/ruff"
+src = ["src", "test"]
+indent-width = 4
+task-tags = [
+    "BUG",
+    "ERROR",
+    "FIXME",
+    "FUTURE",
+    "HACK",
+    "MEMO",
+    "NOTE",
+    "OPTIMIZE",
+    "TOBE",
+    "TODO",
+    "WARM",
+    "XXX",
+]
+
+[tool.ruff.per-file-ignores]
+"__init__.py" = ["E402", "INP001"]
+"tests/*" = ["S101", "S301", "ARG", "FBT", "PLR2004", "E402", "INP001"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = true
+line-ending = "auto"
+docstring-code-format = true
+# docstring-code-line-length = "dynamic"
+
+[tool.ruff.mccabe]
+max-complexity = 8
+
+[tool.ruff.lint.pydocstyle]
+convention = "google" # "google" | "numpy" | "pep257"
+
+[tool.ruff.isort]
+force-single-line = true
+
+[tool.ruff.flake8-tidy-imports]
+ban-relative-imports = "parents"
+
+[tool.ruff.lint.pycodestyle]
+ignore-overlong-task-comments = true
+max-line-length = 110
+max-doc-length = 120
+
+[tool.ruff.lint.flake8-import-conventions.extend-aliases]
+"dask.dataframe" = "dd"
+"xarray" = "xr"

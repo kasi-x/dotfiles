@@ -1,0 +1,45 @@
+#! /bin/sh
+
+xrandr --output DP-0 --mode 3840x2160 --pos 0x0 --rotate right --scale 0.5x0.5 --output DP-1 --off --output HDMI-0 --off --output DP-2 --off --output DP-3 --off --output DP-4 --primary --mode 3840x2160 --pos 2160x900 --rotate normal --output --scale 0.5x0.5 DP-5 --off
+
+# killall xcape # to prevent xcape daemon duplication
+# xmodmap -e 'keycode 255=space'
+# xmodmap -e 'keycode 65=Shift_L'
+# /usr/sbin/xcape -e '#65=space'
+# /usr/sbin/xcape -e 'Control_L=Escape'
+#
+# xmodmap /home/akizora/.Xmodmap
+
+/usr/local/sbin/yaskkserv2 --config-filename /home/akizora/.skk/linux_yaskkserv2.conf
+
+# GTK_IM_MODULE=ibus
+# QT_IM_MODULE=ibus
+# XMODIFIERS=@im=ibus
+# ibus-daemon -drxR
+# ibus-daemon --daemonize --xim
+
+pgrep -x sxhkd > /dev/null || sxhkd &
+
+bspc monitor -d I II III IV V VI VII VIII IX X
+
+bspc config border_width         2
+bspc config window_gap          12
+
+bspc config split_ratio          0.52
+bspc config borderless_monocle   true
+bspc config gapless_monocle      true
+
+# bspc rule -a Gimp desktop='^8' state=floating follow=on
+# bspc rule -a Chromium desktop='^2'
+# bspc rule -a mplayer2 state=floating
+# bspc rule -a Kupfer.py focus=on
+# bspc rule -a Screenkey manage=off
+bspc rule -a kindle.exe state=floating
+#
+# bspc rule -a "Wine" state=floating focus=off
+#
+~/.config/polybar/launch.sh &
+picom & 
+feh --bg-fill ~/Pictures/wall/neon.png &
+xrdb merge ~/.Xresources &
+# sxhkd 

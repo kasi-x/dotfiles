@@ -1,0 +1,56 @@
+realpath() {
+    [[ $1 = /* ]] && echo "$1" || echo "$PWD/${1#./}"
+}
+
+# Python {{{
+# layout_pyenv {{{
+# https://github.com/direnv/direnv/wiki/Python#venv-stdlib-module
+layout_activate() {
+    if [ -n "$(which pyenv)" ]; then
+        source $(pyenv root)/versions/$1/bin/activate
+    fi
+}
+# }}}
+
+# layout_poetry {{{
+layout_poetry() {
+  if [[ ! -f pyproject.toml ]]; then
+    log_error 'No pyproject.toml found. Use `poetry new` or `poetry init` to create one first.'
+    exit 2
+  fi
+
+  local VENV=$(poetry env list --full-path | cut -d' ' -f1)
+  if [[ -z $VENV || ! -d $VENV/bin ]]; then
+    log_error 'No poetry virtual environment found. Use `poetry install` to create one first.'
+    exit 2
+  fi
+
+  export POETRY_ACTIVE=1
+  export VIRTUAL_ENV=$VENV
+  PATH_add "$VENV/bin"
+}
+# }}}
+
+# layout_pipenv {{{
+layout_pipenv() {
+  PIPENV_PIPFILE="${PIPENV_PIPFILE:-Pipfile}"
+
+  if [[ ! -f "$PIPENV_PIPFILE" ]]; then
+    log_error "No Pipfile found.  Use \`pipenv\` to create a \`$PIPENV_PIPFILE\` first."
+    exit 2
+  fi
+
+  VIRTUAL_ENV=$(pipenv --venv 2>/dev/null ; true)
+
+
+  if [[ -z $VIRTUAL_ENV || ! -d $VIRTUAL_ENV ]]; then
+    pipenv install --dev
+    VIRTUAL_ENV=$(pipenv --venv)
+  fi
+
+  PATH_add "$VIRTUAL_ENV/bin"
+  export PIPENV_ACTIVE=1
+  export VIRTUAL_ENV
+}
+# }}}
+# Python }}}

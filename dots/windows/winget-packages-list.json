@@ -1,0 +1,245 @@
+{
+	"$schema" : "https://aka.ms/winget-packages.schema.2.0.json",
+	"CreationDate" : "2023-11-14T10:20:19.389-00:00",
+	"Sources" : 
+	[
+		{
+			"Packages" : 
+			[
+				{
+					"PackageIdentifier" : "Bitwarden.Bitwarden"
+				},
+				{
+					"PackageIdentifier" : "Tutanota.Tutanota"
+				},
+				{
+					"PackageIdentifier" : "DMM.GamePlayer"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.VisualStudio.2022.Community"
+				},
+				{
+					"PackageIdentifier" : "Amazon.Kindle"
+				},
+				{
+					"PackageIdentifier" : "BurntSushi.ripgrep.MSVC"
+				},
+				{
+					"PackageIdentifier" : "CPUID.CPU-Z"
+				},
+				{
+					"PackageIdentifier" : "Canonical.Ubuntu.2204"
+				},
+				{
+					"PackageIdentifier" : "Discord.Discord"
+				},
+				{
+					"PackageIdentifier" : "Docker.DockerDesktop"
+				},
+				{
+					"PackageIdentifier" : "Figma.Figma"
+				},
+				{
+					"PackageIdentifier" : "Mozilla.Firefox.DeveloperEdition"
+				},
+				{
+					"PackageIdentifier" : "Git.Git"
+				},
+				{
+					"PackageIdentifier" : "bmatzelle.Gow"
+				},
+				{
+					"PackageIdentifier" : "Gyan.FFmpeg"
+				},
+				{
+					"PackageIdentifier" : "REALiX.HWiNFO"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.Edge"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.EdgeWebView2Runtime"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.DevHome"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.WindowsTerminal"
+				},
+				{
+					"PackageIdentifier" : "OBSProject.OBSStudio"
+				},
+				{
+					"PackageIdentifier" : "Rufus.Rufus"
+				},
+				{
+					"PackageIdentifier" : "Valve.Steam"
+				},
+				{
+					"PackageIdentifier" : "SublimeHQ.SublimeText.4"
+				},
+				{
+					"PackageIdentifier" : "SumatraPDF.SumatraPDF"
+				},
+				{
+					"PackageIdentifier" : "Wox.Wox"
+				},
+				{
+					"PackageIdentifier" : "Zoom.Zoom"
+				},
+				{
+					"PackageIdentifier" : "ajeetdsouza.zoxide"
+				},
+				{
+					"PackageIdentifier" : "Axosoft.GitKraken"
+				},
+				{
+					"PackageIdentifier" : "junegunn.fzf"
+				},
+				{
+					"PackageIdentifier" : "peco.peco"
+				},
+				{
+					"PackageIdentifier" : "qBittorrent.qBittorrent"
+				},
+				{
+					"PackageIdentifier" : "yt-dlp.yt-dlp"
+				},
+				{
+					"PackageIdentifier" : "KhronosGroup.VulkanSDK"
+				},
+				{
+					"PackageIdentifier" : "OpenJS.NodeJS.LTS"
+				},
+				{
+					"PackageIdentifier" : "DuongDieuPhap.ImageGlass"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.DotNet.Runtime.7"
+				},
+				{
+					"PackageIdentifier" : "Neovim.Neovim"
+				},
+				{
+					"PackageIdentifier" : "Chocolatey.Chocolatey"
+				},
+				{
+					"PackageIdentifier" : "GitHub.cli"
+				},
+				{
+					"PackageIdentifier" : "7zip.7zip"
+				},
+				{
+					"PackageIdentifier" : "Python.Launcher"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.VCRedist.2012.x86"
+				},
+				{
+					"PackageIdentifier" : "OlegDanilov.RapidEnvironmentEditor"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.CLRTypesSQLServer.2019"
+				},
+				{
+					"PackageIdentifier" : "nathancorvussolis.corvusskk"
+				},
+				{
+					"PackageIdentifier" : "Oracle.VirtualBox"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.VCRedist.2015+.x86"
+				},
+				{
+					"PackageIdentifier" : "Oracle.JavaRuntimeEnvironment"
+				},
+				{
+					"PackageIdentifier" : "Starship.Starship"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.VisualStudioCode"
+				},
+				{
+					"PackageIdentifier" : "Oracle.JDK.17"
+				},
+				{
+					"PackageIdentifier" : "MSYS2.MSYS2"
+				},
+				{
+					"PackageIdentifier" : "TechPowerUp.GPU-Z"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.PowerShell"
+				},
+				{
+					"PackageIdentifier" : "VideoLAN.VLC"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.VCRedist.2015+.x64"
+				},
+				{
+					"PackageIdentifier" : "voidtools.Everything"
+				},
+				{
+					"PackageIdentifier" : "Neovide.Neovide"
+				},
+				{
+					"PackageIdentifier" : "Python.Launcher"
+				},
+				{
+					"PackageIdentifier" : "Nvidia.CUDA"
+				},
+				{
+					"PackageIdentifier" : "Nvidia.GeForceExperience"
+				},
+				{
+					"PackageIdentifier" : "Nvidia.PhysX"
+				},
+				{
+					"PackageIdentifier" : "Google.Chrome"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.PowerToys"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.VCRedist.2012.x64"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.DotNet.SDK.7"
+				},
+				{
+					"PackageIdentifier" : "Python.Python.3.11"
+				}
+			],
+			"SourceDetails" : 
+			{
+				"Argument" : "https://cdn.winget.microsoft.com/cache",
+				"Identifier" : "Microsoft.Winget.Source_8wekyb3d8bbwe",
+				"Name" : "winget",
+				"Type" : "Microsoft.PreIndexed.Package"
+			}
+		},
+		{
+			"Packages" : 
+			[
+				{
+					"PackageIdentifier" : "9N3SQK8PDS8G"
+				},
+				{
+					"PackageIdentifier" : "9NBLGGH516XP"
+				},
+				{
+					"PackageIdentifier" : "XP99GVQDX7JPR4"
+				}
+			],
+			"SourceDetails" : 
+			{
+				"Argument" : "https://storeedgefd.dsx.mp.microsoft.com/v9.0",
+				"Identifier" : "StoreEdgeFD",
+				"Name" : "msstore",
+				"Type" : "Microsoft.Rest"
+			}
+		}
+	],
+	"WinGetVersion" : "1.6.2771"
+}

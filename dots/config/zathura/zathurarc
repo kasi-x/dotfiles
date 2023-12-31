@@ -1,0 +1,183 @@
+# Zathura configuration file
+# See man `man zathurarc'
+map r reload
+map R recolor
+map <C-n> scroll half-down
+map <C-e> scroll half-up
+map I scroll right
+map H scroll left
+map h jumplist backward
+map i jumplist forward
+map e navigate previous
+map n navigate next
+
+map N scroll down
+map E scroll up
+
+map u scroll page-bottom
+map y scroll page-top
+
+map U zoom in
+map Y zoom out
+
+map <C-h> jumplist previous
+map <C-i> jumplist next
+
+map , search
+map k search forward
+map K search backward
+map . goto
+
+map b focus_inputbar ":bmark "
+map B focus_inputbar ":blist "
+map d focus_inputbar ":bdelete "
+
+unmap o
+map o toggle_index
+
+unmap q
+# index
+map [index] q quit
+# naviation
+map [index] n navigate_index down
+map [index] e navigate_index up
+map [index] h navigate_index expand
+map [index] i navigate_index collapse
+map [index] H navigate_index expand-all
+map [index] I navigate_index collapse-all
+
+
+unmap f
+map f toggle_fullscreen
+map [fullscreen] f toggle_fullscreen
+map [fullscreen] q toggle_fullscreen
+
+unmap p
+map p toggle_presentation
+map [presentation] p toggle_presentation
+map [presentation] q toggle_presentation
+map [presentation] f toggle_fullscreen
+
+map ; toggle_inputbar
+
+map w adjust_window width
+map <C-w> adjust_window height
+map W adjust_window best-fit
+
+map M mark_add
+map m mark_evaluate
+
+map > rotate
+map < rotate rotate-ccw
+
+# Open document in fit-width mode by default
+set adjust-open "best-fit"
+
+# One page per row by default
+set pages-per-row 2
+set page-padding
+
+#stop at page boundries
+set scroll-page-aware "true"
+set scroll-full-overlap 0.01
+set scroll-step 100
+
+#zoom settings
+set zoom-min 10
+set guioptions ""
+
+# set font "noto sans 20"
+# set font "UDEV Gothic 35NFLG 15"
+set font "UDEV Gothic 20"
+
+
+# {{{
+# # zathurarc-dark
+# set notification-error-bg       "#586e75" # base01  # seem not work
+# set notification-error-fg       "#dc322f" # red
+# set notification-warning-bg     "#586e75" # base01
+# set notification-warning-fg     "#dc322f" # red
+# set notification-bg             "#586e75" # base01
+# set notification-fg             "#b58900" # yellow
+#
+# set completion-group-bg         "#002b36" # base03
+# set completion-group-fg         "#839496" # base0
+# set completion-bg               "#073642" # base02
+# set completion-fg               "#93a1a1" # base1
+# set completion-highlight-bg     "#586e75" # base01
+# set completion-highlight-fg     "#eee8d5" # base2
+#
+# # Define the color in index mode
+# set index-bg                   "#073642" # base02
+# set index-fg                   "#93a1a1" # base1
+# set index-active-bg             "#586e75" # base01
+# set index-active-fg             "#eee8d5" # base2
+#
+# set inputbar-bg                 "#586e75" # base01
+# set inputbar-fg                 "#eee8d5" # base2
+#
+# set statusbar-bg                "#073642" # base02
+# set statusbar-fg                "#93a1a1" # base1
+#
+# set highlight-color             "#657b83" # base00  # hightlight match when search keyword(vim's /)
+# set highlight-active-color      "#268bd2" # blue
+#
+# set default-bg                  "#073642" # base02
+# set default-fg                  "#93a1a1" # base1
+# set render-loading              true
+# set render-loading-fg           "#073642" # base02
+# set render-loading-bg           "#073642" # base02
+#
+# # Recolor book content's color
+# set recolor                     true
+# set recolor-lightcolor          "#073642" # base02
+# set recolor-darkcolor           "#93a1a1" # base1
+# set recolor-keephue             true      # keep original color
+# }}}
+
+# {{{
+set notification-error-bg       "#f2e5bc" # bg
+set notification-error-fg       "#9d0006" # bright:red
+set notification-warning-bg     "#f2e5bc" # bg
+set notification-warning-fg     "#b57614" # bright:yellow
+set notification-bg             "#f2e5bc" # bg
+set notification-fg             "#79740e" # bright:green
+
+set completion-bg               "#d5c4a1" # bg2
+set completion-fg               "#3c3836" # fg
+set completion-group-bg         "#ebdbb2" # bg1
+set completion-group-fg         "#928374" # gray
+set completion-highlight-bg     "#076678" # bright:blue
+set completion-highlight-fg     "#d5c4a1" # bg2
+
+# Define the color in index mode
+set index-bg                    "#d5c4a1" # bg2
+set index-fg                    "#3c3836" # fg
+set index-active-bg             "#076678" # bright:blue
+set index-active-fg             "#d5c4a1" # bg2
+
+set inputbar-bg                 "#f2e5bc" # bg
+set inputbar-fg                 "#3c3836" # fg
+
+set statusbar-bg                "#d5c4a1" # bg2
+set statusbar-fg                "#3c3836" # fg
+
+set highlight-color             "#b57614" # bright:yellow
+set highlight-active-color      "#af3a03" # bright:orange
+
+set default-bg                  "#f2e5bc" # bg
+set default-fg                  "#3c3836" # fg
+set render-loading              true
+set render-loading-bg           "#f2e5bc" # bg
+set render-loading-fg           "#3c3836" # fg
+
+# Recolor book content's color
+set recolor-lightcolor          "#f2e5bc" # bg
+set recolor-darkcolor           "#3c3836" # fg
+set recolor                     "true"
+# set recolor-keephue             true      # keep original color
+# }}}
+
+set page-cache-size 50
+set smooth-scroll true
+set window-title-page true

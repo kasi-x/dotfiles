@@ -1,0 +1,11 @@
+[codestyle]
+workspace_dir = '~/git/github.com/user/procon/atcoder'
+lang = 'nim'
+template_file = '~/dotfiles/template/procon/template.nim'
+[tester]
+compile_before_testing = true
+compile_only_when_diff_detected = true
+[etc]
+download_without_login = true
+parallel_download = false
+save_no_session_cache = false

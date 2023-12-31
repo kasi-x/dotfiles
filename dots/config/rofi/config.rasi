@@ -1,0 +1,15 @@
+/** Basic config file **/
+
+configuration {
+  show-icons:          true;
+  icon-theme:          "Papirus";
+  sidebar-mode:    true;
+  hide-scrollbar:  true;
+  show-match:      true ;
+  matching:        "regex" ;
+  
+}
+
+
+
+@import "/usr/share/rofi/themes/glue_pro_blue.rasi"

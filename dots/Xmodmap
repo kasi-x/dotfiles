@@ -1,0 +1,6 @@
+! .xmodmap file
+! shift_r -> @
+clear Shift
+add Shift = Shift_L
+
+keycode 62 = at 

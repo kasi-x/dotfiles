@@ -1,0 +1,46 @@
+return {
+  --  {
+  --     "kiyoon/jupynium.nvim",
+  --     build = "pip3 install --user .",
+  --     on_ft = {"python"},
+  --     -- lazy = false,
+  --     opts = {
+  --       use_default_keybindings = false
+  --     },
+  --     -- keys = {
+  --     --   {
+  --     --     "<C-s>",
+  --     --     "<cmd>JupyniumExecuteSelectedCells<CR>",
+  --     --     mode = { "n", "x" },
+  --     --     desc = "Jupynium execute selected cells"
+  --     --   }
+  --     -- },
+  -- -- vim.keymap.set(
+  -- --   { "n", "x" },
+  -- --   "<space>c",
+  -- --   "<cmd>JupyniumClearSelectedCellsOutputs<CR>",
+  -- --   { buffer = buf_id, desc = "Jupynium clear selected cells" }
+  -- -- )
+  -- -- vim.keymap.set(
+  -- --   { "n" },
+  -- --   "<space>K",
+  -- --   "<cmd>JupyniumKernelHover<cr>",
+  -- --   { buffer = buf_id, desc = "Jupynium hover (inspect a variable)" }
+  -- -- )
+  -- -- vim.keymap.set(
+  -- --   { "n", "x" },
+  -- --   "<space>js",
+  -- --   "<cmd>JupyniumScrollToCell<cr>",
+  -- --   { buffer = buf_id, desc = "Jupynium scroll to cell" }
+  -- -- )
+  -- -- vim.keymap.set(
+  -- --   { "n", "x" },
+  -- --   "<space>jo",
+  -- --   "<cmd>JupyniumToggleSelectedCellsOutputsScroll<cr>",
+  -- --   { buffer = buf_id, desc = "Jupynium toggle selected cell output scroll" }
+  -- -- )
+  -- --
+  --   }
+  --   -- build = "conda run --no-capture-output -n jupynium pip install .",
+  --   -- enabled = vim.fn.isdirectory(vim.fn.expand "~/miniconda3/envs/jupynium"),
+}

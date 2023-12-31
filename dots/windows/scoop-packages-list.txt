@@ -1,0 +1,144 @@
+{
+    "apps": [
+        {
+            "Updated": "2023-11-05T21:09:55.9532503-08:00",
+            "Version": "2111.01",
+            "Source": "nerd-fonts",
+            "Name": "Cascadia-Code",
+            "Info": ""
+        },
+        {
+            "Updated": "2023-11-05T21:10:00.5265865-08:00",
+            "Version": "3.0.2",
+            "Source": "nerd-fonts",
+            "Name": "CascadiaCode-NF",
+            "Info": ""
+        },
+        {
+            "Updated": "2023-11-05T21:10:04.4381891-08:00",
+            "Version": "3.0.2",
+            "Source": "nerd-fonts",
+            "Name": "CascadiaCode-NF-Mono",
+            "Info": ""
+        },
+        {
+            "Updated": "2023-11-05T21:10:05.2382191-08:00",
+            "Version": "6.2",
+            "Source": "nerd-fonts",
+            "Name": "FiraCode",
+            "Info": ""
+        },
+        {
+            "Updated": "2023-11-05T21:10:07.8401613-08:00",
+            "Version": "3.0.2",
+            "Source": "nerd-fonts",
+            "Name": "FiraCode-NF",
+            "Info": ""
+        },
+        {
+            "Updated": "2023-11-05T21:10:09.9867138-08:00",
+            "Version": "3.0.2",
+            "Source": "nerd-fonts",
+            "Name": "FiraCode-NF-Mono",
+            "Info": ""
+        },
+        {
+            "Updated": "2023-11-05T21:10:12.2055012-08:00",
+            "Version": "0.0.28",
+            "Source": "nerd-fonts",
+            "Name": "FiraCode-Script",
+            "Info": ""
+        },
+        {
+            "Updated": "2023-11-06T00:29:18.5536944-08:00",
+            "Version": "1.4.2",
+            "Source": "main",
+            "Name": "ghq",
+            "Info": ""
+        },
+        {
+            "Updated": "2023-11-05T21:13:52.9478897-08:00",
+            "Version": "20190603",
+            "Source": "nerd-fonts",
+            "Name": "Noto-CJK-Mega-OTC",
+            "Info": ""
+        },
+        {
+            "Updated": "2023-11-05T21:14:35.715479-08:00",
+            "Version": "3.0.2",
+            "Source": "nerd-fonts",
+            "Name": "Noto-NF",
+            "Info": ""
+        },
+        {
+            "Updated": "2023-11-05T21:15:19.5255878-08:00",
+            "Version": "3.0.2",
+            "Source": "nerd-fonts",
+            "Name": "Noto-NF-Mono",
+            "Info": ""
+        },
+        {
+            "Updated": "2023-11-05T21:16:03.9871136-08:00",
+            "Version": "3.0.2",
+            "Source": "nerd-fonts",
+            "Name": "Noto-NF-propo",
+            "Info": ""
+        },
+        {
+            "Updated": "2023-11-05T23:26:00.2182887-08:00",
+            "Version": "4.4.14_0",
+            "Source": "main",
+            "Name": "nyagos",
+            "Info": ""
+        },
+        {
+            "Updated": "2023-11-05T20:47:17.8735287-08:00",
+            "Version": "0.2020.01.26",
+            "Source": "main",
+            "Name": "sudo",
+            "Info": ""
+        },
+        {
+            "Updated": "2023-11-05T21:10:17.4814512-08:00",
+            "Version": "3.0.2",
+            "Source": "nerd-fonts",
+            "Name": "Ubuntu-NF",
+            "Info": ""
+        },
+        {
+            "Updated": "2023-11-05T21:10:19.732792-08:00",
+            "Version": "3.0.2",
+            "Source": "nerd-fonts",
+            "Name": "Ubuntu-NF-Mono",
+            "Info": ""
+        },
+        {
+            "Updated": "2023-11-05T21:10:21.4758301-08:00",
+            "Version": "3.0.2",
+            "Source": "nerd-fonts",
+            "Name": "UbuntuMono-NF",
+            "Info": ""
+        },
+        {
+            "Updated": "2023-11-05T21:10:22.8665661-08:00",
+            "Version": "3.0.2",
+            "Source": "nerd-fonts",
+            "Name": "UbuntuMono-NF-Mono",
+            "Info": ""
+        }
+    ],
+    "buckets": [
+        {
+            "Name": "main",
+            "Source": "https://github.com/ScoopInstaller/Main.git",
+            "Updated": "2023-11-07T20:25:35-08:00",
+            "Manifests": 1262
+        },
+        {
+            "Name": "nerd-fonts",
+            "Source": "https://github.com/matthewjberger/scoop-nerd-fonts",
+            "Updated": "2023-11-04T08:16:49-07:00",
+            "Manifests": 296
+        }
+    ]
+}
