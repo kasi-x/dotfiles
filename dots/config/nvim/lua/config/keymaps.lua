@@ -2,7 +2,8 @@
 local function map(mode, lhs, rhs, opts)
   local keys = require("lazy.core.handler").handlers.keys
   if not keys.active[keys.parse({ lhs, mode = mode }).id] then
-    opts = vim.tbl_extend("force", { expr = false, silent = true, nowait = true, noremap = true }, opts or {})
+    opts = vim.tbl_extend("force", { expr = false, silent = true, nowait = true, noremap = true },
+      opts or {})
     vim.keymap.set(mode, lhs, rhs, opts)
   end
 end
@@ -16,9 +17,11 @@ map({ "n", "x", "o" }, "<Del>", "<Nop>", { desc = "Disable Del" })
 map({ "n", "x", "o" }, "<BS>", "<Nop>", { desc = "Disable bs" })
 
 if is_vscode then
-  map("n", "<leader><leader>", "<Cmd>call VSCodeNotify('workbench.action.files.save')<CR>", { desc = "Save File" })
+  map("n", "<leader><leader>", "<Cmd>call VSCodeNotify('workbench.action.files.save')<CR>",
+    { desc = "Save File" })
 else
-  map({ "n", "x" }, "<leader><leader>", '<CMD>w!<CR><CMD>lua vim.cmd("nohlsearch")<CR>', { desc = "Save File" })
+  map({ "n", "x" }, "<leader><leader>", '<CMD>w!<CR><CMD>lua vim.cmd("nohlsearch")<CR>',
+    { desc = "Save File" })
 end
 -- Space }}}
 -- TAB {{{
@@ -47,8 +50,10 @@ map({ "n", "x" }, "g,", "?", { desc = "Search backward" })
 -- map({ "n", "x" }, ",,", "<ESC>:nohlsearch<CR>", { desc = "Search forward" })
 
 if is_vscode then
-  map({ "n", "x" }, "<C-,>", "<Cmd>call VSCodeNotify('workbench.action.navigateBack')<CR>", { desc = "move" })
-  map({ "n", "x" }, "<C-.>", "<Cmd>call VSCodeNotify('workbench.action.navigateForward')<CR>", { desc = "move" })
+  map({ "n", "x" }, "<C-,>", "<Cmd>call VSCodeNotify('workbench.action.navigateBack')<CR>",
+    { desc = "move" })
+  map({ "n", "x" }, "<C-.>", "<Cmd>call VSCodeNotify('workbench.action.navigateForward')<CR>",
+    { desc = "move" })
 else
   map({ "n", "x" }, "<C-,>", "<C-o>", { desc = "Older cursor position in jump list" })
   map({ "n", "x" }, "<C-.>", "<C-i>", { desc = "Newer cursor position in jump list" })
@@ -132,9 +137,11 @@ n  yi          * <Cmd>lua require("which-key").show("yi", {mode = "n", auto = tr
 -- {{{ <Leader>
 -- {{{ Normal / Visual / Operator
 map({ "n", "x", "o" }, "<leader>n", '"}"', { expr = true, desc = "Navigate to the next paragraph" })
-map({ "n", "x", "o" }, "<leader>e", '"{"', { expr = true, desc = "Navigate to the previous paragraph" })
+map({ "n", "x", "o" }, "<leader>e", '"{"',
+  { expr = true, desc = "Navigate to the previous paragraph" })
 map({ "n", "x", "o" }, "<leader>N", '"]"', { expr = false, desc = "Navigate to the next sentence" })
-map({ "n", "x", "o" }, "<leader>E", '"["', { expr = false, desc = "Navigate to the previous sentence" })
+map({ "n", "x", "o" }, "<leader>E", '"["',
+  { expr = false, desc = "Navigate to the previous sentence" })
 -- }}} Normal / Visual / Operator
 -- }}} <Leader>
 -- {{{ <g>
@@ -187,9 +194,12 @@ map("i", "<C-h>", "<Left>", {})
 -- {{{ <Leader> (12/12)
 -- {{{ Normal / Visual / Operator (12/12)
 map({ "n", "x", "o" }, "<leader>h", '"^"', { expr = true, desc = "To the end of the line" })
-map({ "n", "x", "o" }, "<leader>i", '"$"', { expr = true, desc = "To the first non-blank character of the line" })
-map({ "n", "x", "o" }, "<leader>H", '"0"', { expr = true, desc = "To the first character of the line" })
-map({ "n", "x", "o" }, "<leader>I", '"+"', { expr = true, desc = "Lines downward, on the first non-blank character" })
+map({ "n", "x", "o" }, "<leader>i", '"$"',
+  { expr = true, desc = "To the first non-blank character of the line" })
+map({ "n", "x", "o" }, "<leader>H", '"0"',
+  { expr = true, desc = "To the first character of the line" })
+map({ "n", "x", "o" }, "<leader>I", '"+"',
+  { expr = true, desc = "Lines downward, on the first non-blank character" })
 -- }}} Normal / Visual / Operator
 -- }}} <Leader>
 -- {{{ <g> (4/12)
@@ -228,8 +238,10 @@ map("n", "gI", "<C-w>L", { desc = "Move window Right", remap = false })
 -- map({ "x", "o" }, "n", "gj", { expr = true, noremap = true })
 -- map({ "x", "o" }, "e", "gk", { expr = true, noremap = true })
 
-map({ "n", "x", "o" }, "n", "v:count == 0 ? 'gjzz' : 'jzz'", { expr = true, desc = "Move cursor to next line" })
-map({ "n", "x", "o" }, "e", "v:count == 0 ? 'gkzz' : 'kzz'", { expr = true, desc = "Move cursor to previous line" })
+map({ "n", "x", "o" }, "n", "v:count == 0 ? 'gjzz' : 'jzz'",
+  { expr = true, desc = "Move cursor to next line" })
+map({ "n", "x", "o" }, "e", "v:count == 0 ? 'gkzz' : 'kzz'",
+  { expr = true, desc = "Move cursor to previous line" })
 -- map({ "n", "x", "o" }, "n", "gjzz", { expr = true, desc = "Move cursor to next line" })
 -- map({ "n", "x", "o" }, "e", "gkzz", { expr = true, desc = "Move cursor to previous line" })
 
@@ -260,9 +272,11 @@ map({ "n", "x", "o" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { expr = true })
 -- {{{ <Leader> (12/12)
 -- {{{ Normal / Visual / Operator
 map({ "n", "x", "o" }, "<leader>n", '"}"', { expr = true, desc = "Navigate to the next paragraph" })
-map({ "n", "x", "o" }, "<leader>e", '"{"', { expr = true, desc = "Navigate to the previous paragraph" })
+map({ "n", "x", "o" }, "<leader>e", '"{"',
+  { expr = true, desc = "Navigate to the previous paragraph" })
 map({ "n", "x", "o" }, "<leader>N", '"]"', { expr = false, desc = "Navigate to the next sentence" })
-map({ "n", "x", "o" }, "<leader>E", '"["', { expr = false, desc = "Navigate to the previous sentence" })
+map({ "n", "x", "o" }, "<leader>E", '"["',
+  { expr = false, desc = "Navigate to the previous sentence" })
 -- }}} Normal / Visual / Operator
 -- }}} <Leader>
 -- {{{ <g> (4/12)
@@ -356,8 +370,13 @@ map("n", "<leader>U", "<C-w>T", { expr = true, desc = "Move window to tab" })
 --   map("n", "<leader>y", "<Cmd>call VSCodeNotify('editor.action.marker.nextInFiles')<CR>",
 --     { desc = "Go to Next Problem (Error, Warning, Info)" })
 -- else
-map("n", "gu", "<Cmd>sp<CR>", { desc = "side split" })
-map("n", "gy", "<CMD>vs<CR>", { desc = "vertical split" })
+-- map("n", "gu", "<Cmd>sp<CR>", { desc = "side split" })
+-- map("n", "gy", "<CMD>vs<CR>", { desc = "vertical split" })
+map("n", "gu", "<cmd>lua require 'gitsigns'.prev_hunk()<cr>")
+map("n", "gy", "<cmd>lua require 'gitsigns'.prev_hunk()<cr>")
+
+map("n", "gU", "<Cmd>sp<CR>", { desc = "side split" })
+map("n", "gY", "<CMD>vs<CR>", { desc = "vertical split" })
 
 -- end
 -- TODO: gU/gY
@@ -435,7 +454,7 @@ map("x", "gs", ":s/\\v/g<Left><Left>", { silent = false })
 -- }}} <m/M>
 -- }}} <N/E> Up/Down
 
--- {{{ <A> Visual (-12, S(2), c(2), L(6), g(2))
+-- {{{ <A> Visual (4, S(2, operator), c(2,error))
 -- {{{ Single / Shift (4/6)
 -- {{{ Normal / Visual (4/4)
 map("n", "a", "'v'", { expr = true, desc = "visual" })
@@ -463,17 +482,18 @@ map("i", "<C-a>", "<C-o>^", { desc = "Head of line" })
 -- }}} <Ctrl>
 -- }}} Command
 -- }}} <Ctrl>
--- {{{ <Leader> (0/6)
--- {{{ Normal / Visual / Operator
--- TODO:Some Telescope keys
-map({ "n", "x", "o" }, "<leader>a", "gv", { desc = "select last selected area" })
-map({ "n", "x", "o" }, "<leader>A", "gV", { desc = "select last selected Area" })
--- }}} Normal / Visual / Operator
+-- {{{ <Leader> (4/4)
+-- {{{ Normal / Visual
+map({ "n" }, "<leader>a", "gv", { desc = "select last selected area" })
+map({ "n" }, "<leader>A", "gV", { desc = "select last selected Area" })
+map({ "x", "o" }, "<leader>a", "ggV", { desc = "select to top" })
+map({ "x", "o" }, "<leader>A", "ggVG", { desc = "select all area" })
+
+-- }}} Normal / Visual
 -- }}} <Leader>
--- {{{ <g> (2/4)
+-- {{{ <g> (4/4)
 -- {{{ Normal / Visual (2/4)
--- map({"n", "x"}, "gA", "gv", { desc = "select last selected area" })
--- map("n", "gA", "gV", { desc = "" })
+-- Align
 -- }}} Norma / Visual
 -- }}} <g>
 -- {{{ <m/M> (0/0)
@@ -552,8 +572,8 @@ end -- }}} Norma / Visual
 -- {{{ Normal / Visual / Operator
 map("n", "<Leader>f", vim.diagnostic.goto_prev)
 map("n", "<Leader>p", vim.diagnostic.goto_next)
-map("n", "<Leader>F", "<cmd>lua require 'gitsigns'.prev_hunk()<cr>")
-map("n", "<Leader>P", "<cmd>lua require 'gitsigns'.prev_hunk()<cr>")
+-- map("n", "<Leader>F", "<cmd>lua require 'gitsigns'.prev_hunk()<cr>")
+-- map("n", "<Leader>P", "<cmd>lua require 'gitsigns'.prev_hunk()<cr>")
 -- }}} Normal / Visual / Operator
 -- }}} <Leader>
 -- {{{ <g> (4/8)
@@ -591,7 +611,8 @@ map("n", "gp", "<Nop>", { desc = "unused" })
 -- }}} Leader
 --{{{ g (1/2)
 if is_vscode then
-  map("n", "gD", "<Cmd>call VSCodeNotify('editor.action.revealDefinitionAside')<CR>", { desc = "move" })
+  map("n", "gD", "<Cmd>call VSCodeNotify('editor.action.revealDefinitionAside')<CR>",
+    { desc = "move" })
   map("n", "gd", "<Cmd>call VSCodeNotify('editor.action.revealDefinition')<CR>", { desc = "move" })
   -- map("n", "gf", "<Cmd>call VSCodeNotify('editor.action.peekDeclaration')<CR>", { desc = "move" })
   -- map("n", "gf", "<Cmd>call VSCodeNotify('editor.action.revealDeclaration')<CR>", { desc = "move" })
@@ -691,7 +712,8 @@ map({ "n", "x" }, "K", "'N'", { expr = true, noremap = true, desc = "Search oppo
 if is_vscode then
   map("n", "b", "<Cmd>call VSCodeNotify('editor.action.showHover')<CR>", { desc = "Hover" })
   map("n", "B", "<Cmd>call VSCodeNotify('editor.action.peekDefinition')<CR>", { desc = "move" })
-  map("n", "<C-b>", "<Cmd>call VSCodeNotify('editor.action.referenceSearch.trigger')<CR>", { desc = "move" })
+  map("n", "<C-b>", "<Cmd>call VSCodeNotify('editor.action.referenceSearch.trigger')<CR>",
+    { desc = "move" })
 else
   -- map("n", "b", "K", { desc = "Hover" })
   -- map("n", "b", "<Cmd>lua vim.lsp.buf.type_definition()<CR>", { desc = "type definition" })
@@ -770,14 +792,15 @@ if is_vscode then
     "<Cmd>call VSCodeNotify('github.copilot.collectDiagnostics')<CR>",
     { desc = "Error Lens: Toggle (Enable/Disable) Everything" }
   )
-  map("n", "qq", "<Cmd>call VSCodeNotify('editor.action.formatDocument')<CR>", { desc = "AutoFormat" })
+  map("n", "qq", "<Cmd>call VSCodeNotify('editor.action.formatDocument')<CR>",
+    { desc = "AutoFormat" })
   -- {
   --   "key": "shift+alt+f",
   --   "command": "editor.action.formatDocument",
   --   "when": "editorHasDocumentFormattingProvider && editorTextFocus && !editorReadonly && !inCompositeEditor"
   -- }
 else
-  map("n", "<C-q>", "<Nop>", { expr = false, desc = "MacroRecord" })
+  map("n", "<C-q>", "<Nop>", { expr = false, desc = "Nop" })
 end
 -- }}} Normal
 -- {{{ Visual (0/2)
@@ -806,15 +829,21 @@ map(
 if is_vscode then
   -- map({"n", "x"}, "mn", "<Cmd>call VSCodeNotify('editor.foldNext')<CR>", { desc = "Move to next fold" })
   -- map({"n", "x"}, "me", "<Cmd>call VSCodeNotify('editor.foldPrev')<CR>", { desc = "Move to previous fold" })
-  map("n", "mE", "<Cmd>call VSCodeNotify('editor.unfoldRecursively')<CR>", { desc = "Move to top of current fold" })
-  map("n", "mN", "<Cmd>call VSCodeNotify('editor.foldRecursively')<CR>", { desc = "Move to bottom of current fold" })
+  map("n", "mE", "<Cmd>call VSCodeNotify('editor.unfoldRecursively')<CR>",
+    { desc = "Move to top of current fold" })
+  map("n", "mN", "<Cmd>call VSCodeNotify('editor.foldRecursively')<CR>",
+    { desc = "Move to bottom of current fold" })
   map("n", "mh", "<Cmd>call VSCodeNotify('editor.fold')<CR>", { desc = "Close current fold" })
-  map("n", "mH", "<Cmd>call VSCodeNotify('editor.foldAll')<CR>", { desc = "Close all folds recursively" })
+  map("n", "mH", "<Cmd>call VSCodeNotify('editor.foldAll')<CR>",
+    { desc = "Close all folds recursively" })
   map("n", "mi", "<Cmd>call VSCodeNotify('editor.unfold')<CR>", { desc = "Open current fold" })
-  map("n", "mI", "<Cmd>call VSCodeNotify('editor.unfoldAll')<CR>", { desc = "Open all folds recursively" })
+  map("n", "mI", "<Cmd>call VSCodeNotify('editor.unfoldAll')<CR>",
+    { desc = "Open all folds recursively" })
   map("n", "mm", "<Cmd>call VSCodeNotify('editor.foldAll')<CR>", { desc = "Fold current level" })
-  map("n", "mM", "<Cmd>call VSCodeNotify('editor.unfoldAll')<CR>", { desc = "Unfold all levels recursively" })
-  map("n", "mx", "<Cmd>call VSCodeNotify('editor.foldRecursively')<CR>", { desc = "Delete current fold" })
+  map("n", "mM", "<Cmd>call VSCodeNotify('editor.unfoldAll')<CR>",
+    { desc = "Unfold all levels recursively" })
+  map("n", "mx", "<Cmd>call VSCodeNotify('editor.foldRecursively')<CR>",
+    { desc = "Delete current fold" })
   map(
     "n",
     "mX",

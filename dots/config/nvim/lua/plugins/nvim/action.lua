@@ -1,19 +1,10 @@
 return {
   {
     "cshuaimin/ssr.nvim", --{{{
-    keys = {
-      {
-        "gr",
-        function()
-          require("ssr").open()
-        end,
-        mode = { "n", "x" },
-        desc = "Structural Replace",
-      },
-    },
-  }, --}}}
+    keys = { { "gr", function() require("ssr").open() end, mode = { "n", "x" }, desc = "Structural Replace" } },
+  },                      --}}}
   {
-    "michaelb/sniprun", --{{{
+    "michaelb/sniprun",   --{{{
     build = "sh ./install.sh",
     cmd = { "SnipRun", "SnipRunOperator" },
     opts = {
@@ -23,37 +14,27 @@ return {
       repl_enable = { "Python3_fifo" },
     },
     keys = {
-      {
-        "<Leader>s",
-        "<Plug>SnipRunOperator",
-        desc = "snip_run",
-        mode = "o",
-      },
-      {
-        "<Leader>s",
-        "<esc><cmd>'<,'>SnipRun<cr>",
-        desc = "snip_run",
-        mode = "x",
-      },
+      { "<Leader>s", "<Plug>SnipRunOperator",      desc = "snip_run", mode = "o", },
+      { "<Leader>s", "<esc><cmd>'<,'>SnipRun<cr>", desc = "snip_run", mode = "x", },
     },
-  }, --}}}
+  },                       --}}}
   {
     "folke/zen-mode.nvim", --{{{
     cmd = { "ZenMode" },
     config = function()
       require("zen-mode").setup({
         window = {
-          backdrop = 0.95, -- shade the backdrop of the Zen window. Set to 1 to keep the same as Normal
-          width = 120, -- width of the Zen window
-          height = 1, -- height of the Zen window
+          backdrop = 0.95,     -- shade the backdrop of the Zen window. Set to 1 to keep the same as Normal
+          width = 120,         -- width of the Zen window
+          height = 1,          -- height of the Zen window
           options = {
             signcolumn = "no", -- disable signcolumn
-            number = false, -- disable number column
+            number = false,    -- disable number column
             -- relativenumber = false, -- disable relative numbers
             -- cursorline = false, -- disable cursorline
             cursorcolumn = false, -- disable cursor column
-            foldcolumn = "0", -- disable fold column
-            list = false, -- disable whitespace characters
+            foldcolumn = "0",     -- disable fold column
+            list = false,         -- disable whitespace characters
           },
         },
         plugins = {
@@ -61,7 +42,7 @@ return {
           -- comment the lines to not apply the options
           options = {
             enabled = true,
-            ruler = false, -- disables the ruler text in the cmd line area
+            ruler = false,   -- disables the ruler text in the cmd line area
             showcmd = false, -- disables the command in the last line of the screen
           },
           twilight = {
@@ -121,72 +102,173 @@ return {
       },
     },
   }, --}}}
+
+  {
+    "folke/todo-comments.nvim",
+    opts = {
+      keywords = {
+        FIX       = {
+          icon = "🐞",
+          color = "red",
+          alt = { "BUG", "FIXME", "MISSING", }
+        },
+        DOCME     = {
+          icon = "📝",
+          color = "blue",
+          alt = { "MEMO", "NOTION", "DOC-ENHANCE" },
+        },
+        PLAN      = { " ", color = "info", alt = { "TODO", "WIP", "STRATEGY", "FUTURE", "MVP" } },
+        HACK      = { icon = " ", color = "warning", alt = { "ISSUE", "WARN" } },
+        CHALLENGE = {
+          icon = "💡",
+          color = "yellow",
+          alt = { "META", "INNOVATE", "OUTSIDE-BOX", "PILOT", "UNEXPLORED" }
+        },
+        WHYNOT    = {
+          icon = "⚖️",
+          -- color = "orange",
+          alt = { "WHYNOT", "PURPOSE", "CONTEXT", "RATIONAL", "EXAMPLE", "FOLLOW" }
+        },
+        REVIEW    = {
+          icon = "🗣️",
+          -- color = "hint",
+          alt = { "DISCUSS", "QUESTION", "REQUEST", "BLOCKER" }
+        },
+        TDD       = {
+          icon = "🧪",
+          color = "pink",
+          alt = { "RED", "GREEN", "REFACTOR", "DEPENDENT", "OVERTEST", "UNCOVERED", "INTEGRATION", "EDGE-CASE", "SLOW" }
+        },
+        BLUE      = { icon = "🔵", color = "blue" },
+        OPTIMIZE  = {
+          icon = " ",
+          color = "silver",
+          alt = { "BENCHMARK", "EVALUATION", "SCALE", "PERF" }
+        },
+        CODE      = {
+          icon = "🔧",
+          color = "brown",
+          alt = { "CLARITY", "LOGIC", "UPGRADE", "CLEANUP" }
+        },
+        SECURITY  = {
+          icon = "🔒",
+          color = "darkblue",
+          alt = { "SECURE", "PRIVACY", "ILLEGAL", "ACCESSIBILITY", "LOCALIZE" }
+        },
+        LEGACY    = {
+          icon = "🕰️",
+          color = "grey",
+          alt = { "DEPRECATE", "MAINTAIN", "DEBT", "UNKNOWN", "PHASE-OUT" }
+        },
+        TEST      = {
+          icon = "🧪 ",
+          color = "info",
+          alt = { "DEPENDENT", "OVERTEST", "UNCOVERED", "INTEGRATION", "EDGE-CASE", "SLOW" }
+          -- NOTE = { icon = " ", color = "hint", alt = { "INFO" } },
+        },
+      },
+      cmd = "TodoTrouble",
+    }
+  },
   {
     "folke/trouble.nvim", --{{{
     dependencies = {
       "nvim-tree/nvim-web-devicons",
       "nvim-lua/plenary.nvim",
-      { "folke/todo-comments.nvim", opts = true, cmd = "TodoTrouble" },
     },
     cmd = { "TroubleToggle" },
-    keys = {
-      {
-        "<C-d>",
-        "<CMD>TroubleToggle workspace_diagnostics<CR>",
-        desc = "trouble_toggle",
-        mode = { "n" },
-      },
-      {
-        "<leader>d",
-        "<cmd>TodoTrouble  keywords=TODO,FIX,FIXME<CR>",
-        desc = "todo",
-        mode = { "n" },
-      },
-      -- 	["<C-o>o"] = { "<cmd>TroubleToggle snipfix <CR>", "Show Error by LSPs" },
-      -- 	["<C-o>d"] = { "<cmd>TroubleToggle workspace_diagnostics<CR>", "diagnostics" },
-      -- 	["<C-o>r"] = { "<cmd>TroubleToggle loclist<CR>", "diagnostics" },
-      -- 	["<C-o>a"] = { "<cmd>TroubleToggle snipfix<CR>", "diagnostics" },
-      -- 	["<C-o>o"] = { "<cmd>TroubleToggle lsp_references<CR>", "diagnostics" },
-    },
+    -- keys = {
+    --   {
+    --     "<C-d>",
+    --     "<CMD>TroubleToggle workspace_diagnostics<CR>",
+    --     desc = "trouble_toggle",
+    --     mode = { "n" },
+    --   },
+    -- {
+    --   "<leader>d",
+    --   "<cmd>TodoTrouble  keywords=TODO,FIXME<CR>",
+    --   desc = "todo",
+    --   mode = { "n" },
+    -- },
+    -- 	["<C-o>o"] = { "<cmd>TroubleToggle snipfix <CR>", "Show Error by LSPs" },
+    -- 	["<C-o>d"] = { "<cmd>TroubleToggle workspace_diagnostics<CR>", "diagnostics" },
+    -- 	["<C-o>r"] = { "<cmd>TroubleToggle loclist<CR>", "diagnostics" },
+    -- 	["<C-o>a"] = { "<cmd>TroubleToggle snipfix<CR>", "diagnostics" },
+    -- 	["<C-o>o"] = { "<cmd>TroubleToggle lsp_references<CR>", "diagnostics" },
+    -- },
     config = function() -- {{{
       require("trouble").setup({
         action_keys = {
           -- key mappings for actions in the trouble list
-          close = { "<C-d>", "q" }, -- close the list
-          cancel = "<esc>", -- cancel the preview and get back to your last window / buffer / cursor
-          refresh = "r", -- manually refresh
-          jump = { "<cr>", "<tab>" }, -- jump to the diagnostic or open / close folds
-          open_split = { "u" }, -- open buffer in new split
-          open_vsplit = { "y" }, -- open buffer in new vsplit
-          open_tab = { "<C-t>" }, -- open buffer in new tab
-          jump_close = { "o" }, -- jump to the diagnostic and close the list
-          toggle_mode = ",", -- toggle between "workspace" and "document" diagnostics mode
-          toggle_preview = ".", -- toggle auto_preview
-          hover = "B", -- opens a small popup with the full multiline message
-          preview = "b", -- preview the diagnostic location
-          close_folds = { "mM" }, -- close all folds
-          open_folds = { "mm" }, -- open all folds
+          close = { "<C-d>", "q" },     -- close the list
+          cancel = "<esc>",             -- cancel the preview and get back to your last window / buffer / cursor
+          refresh = "r",                -- manually refresh
+          jump = { "<cr>", "<tab>" },   -- jump to the diagnostic or open / close folds
+          open_split = { "u" },         -- open buffer in new split
+          open_vsplit = { "y" },        -- open buffer in new vsplit
+          open_tab = { "<C-t>" },       -- open buffer in new tab
+          jump_close = { "o" },         -- jump to the diagnostic and close the list
+          toggle_mode = ",",            -- toggle between "workspace" and "document" diagnostics mode
+          toggle_preview = ".",         -- toggle auto_preview
+          hover = "B",                  -- opens a small popup with the full multiline message
+          preview = "b",                -- preview the diagnostic location
+          close_folds = { "mM" },       -- close all folds
+          open_folds = { "mm" },        -- open all folds
           toggle_fold = { "mi", "mh" }, -- toggle fold of current file
-          previous = "e", -- previous item
-          next = "n", -- next item
+          previous = "e",               -- previous item
+          next = "n",                   -- next item
         },
         auto_open = false,
         auto_close = false,
         use_diagnostic_signs = true,
       })
-    end, -- }}}
-  }, --}}}
+    end,                        -- }}}
+  },                            --}}}
   {
     "dstein64/vim-startuptime", --{{{
     cmd = "StartupTime",
     init = function()
       vim.g.startuptime_tries = 10
     end,
-  }, --}}}
+  },                          --}}}
   {
     "sindrets/diffview.nvim", --{{{
     cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewToggleFiles", "DiffviewFocusFiles" },
-  }, --}}}
+  },                          --}}}
+  -- {
+  --   "lewis6991/gitsigns.nvim",
+  --   opts = {
+  --     signs = {
+  --       add = { text = "▎" },
+  --       change = { text = "▎" },
+  --       delete = { text = "" },
+  --       topdelete = { text = "" },
+  --       changedelete = { text = "▎" },
+  --       untracked = { text = "▎" },
+  --     },
+  --     on_attach = function(buffer)
+  --       local gs = package.loaded.gitsigns
+  --
+  --       local function map(mode, l, r, desc)
+  --         vim.keymap.set(mode, l, r, { buffer = buffer, desc = desc })
+  --       end
+  --
+  --       -- stylua: ignore start
+  --       map("n", "]h", gs.next_hunk, "Next Hunk")
+  --       map("n", "[h", gs.prev_hunk, "Prev Hunk")
+  --       map({ "n", "v" }, "<leader>ghs", ":Gitsigns stage_hunk<CR>", "Stage Hunk")
+  --       map({ "n", "v" }, "<leader>ghr", ":Gitsigns reset_hunk<CR>", "Reset Hunk")
+  --       map("n", "<leader>ghS", gs.stage_buffer, "Stage Buffer")
+  --       map("n", "<leader>ghu", gs.undo_stage_hunk, "Undo Stage Hunk")
+  --       map("n", "<leader>ghR", gs.reset_buffer, "Reset Buffer")
+  --       map("n", "<leader>ghp", gs.preview_hunk, "Preview Hunk")
+  --       map("n", "<leader>ghb", function() gs.blame_line({ full = true }) end, "Blame Line")
+  --       map("n", "<leader>ghd", gs.diffthis, "Diff This")
+  --       map("n", "<leader>ghD", function() gs.diffthis("~") end, "Diff This ~")
+  --       map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "GitSigns Select Hunk")
+  --     end,
+  --   },
+  -- },
   {
     "lewis6991/gitsigns.nvim", --{{{
     event = { "BufReadPre", "BufNewFile" },
@@ -202,8 +284,8 @@ return {
         changedelete = { hl = "GitSignsChange", text = "▎", numhl = "GitSignsChangeNr", linehl = "GitSignsChangeLn" },
       },
       signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
-      numhl = false, -- Toggle with `:Gitsigns toggle_numhl`
-      linehl = false, -- Toggle with `:Gitsigns toggle_linehl`
+      numhl = false,     -- Toggle with `:Gitsigns toggle_numhl`
+      linehl = false,    -- Toggle with `:Gitsigns toggle_linehl`
       word_diff = false, -- Toggle with `:Gitsigns toggle_word_diff`
       watch_gitdir = {
         interval = 1000,
@@ -235,85 +317,195 @@ return {
         enable = false,
       },
     },
-  }, --}}}
+  },                                 --}}}
   {
     "mrjones2014/smart-splits.nvim", --{{{
     event = "VeryLazy",
-  }, --}}}
+  },                                 --}}}
   {
-    "echasnovski/mini.align", --{{{
+    "echasnovski/mini.align",        --{{{
     opts = {},
     keys = {
       { "ga", mode = { "v" } },
       { "gA", mode = { "v" } },
     },
-  }, --}}}
+  },                        --}}}
   {
     "nvimtools/hydra.nvim", --{{{
     event = "VeryLazy",
-    dependencies = {
-      "mrjones2014/smart-splits.nvim",
-    },
+    dependencies = { "mrjones2014/smart-splits.nvim", "lewis6991/gitsigns.nvim" },
     config = function()
-      local Hydra = require("hydra")
-      -- windows size {{{
-      Hydra({
+      local success, hydra = pcall(require, "hydra")
+      if not success then
+        print("Unable to locate hydra!")
+        return
+      end
+      local cmd = require("hydra.keymap-util").cmd
+      -- hydra({
+      --   name = "Search Commands",
+      --   mode = { "n", "v" },
+      --   hint = [[
+      --   Search Commands
+      --   ^
+      --   _d_: Search Directory           _w_: Search with highlighted word
+      --   _/_: Search File                _f_: Telescope Search
+      --   ^
+      --   ^ ^                              _q_/_<Esc>_: Exit Hydra
+      --   ]],
+      --   config = {
+      --     color = 'teal',
+      --     invoke_on_body = true,
+      --     hint = {
+      --       type = 'window',
+      --       position = 'bottom',
+      --       float_opts = { border = 'rounded', },
+      --       show_name = true
+      --     }
+      --   },
+      -- body = 'f',
+      -- heads = {
+      --   { "d", cmd 'lua require("spectre").open()<CR>', { desc = "Search", silent = true } },
+      --   { "w", cmd 'lua require("spectre").open_visual({select_word=true})<CR>',
+      --     {
+      --       desc = "Search word",
+      --       silent = true
+      --     } },
+      --   { "f", cmd 'Telescope live_grep', {
+      --     desc =
+      --     "Fuzzy Search with Telescope",
+      --     silent = true
+      --   } },
+      -- { "/", cmd 'lua require("spectre").open_file_search()<CR>', {
+      -- desc = "Search File",
+      -- silent = true
+      --   } },
+      --   { "q", nil, {
+      --     desc = "quit",
+      --     exit = true,
+      --     nowait = true
+      --   } },
+      --   { "<Esc>", nil, {
+      --     desc = "quit",
+      --     exit = true,
+      --     nowait = true
+      --   } }
+      -- }
+      -- })
+      --
+      hydra({
         name = "window",
         mode = "n",
         body = "<C-g>",
         heads = {
-          -- ウィンドウのサイズ変更
-          { "h", ":lua require('smart-splits').resize_left()<CR>", { desc = "←s" } },
-          { "n", ":lua require('smart-splits').resize_down()<CR>", { desc = "↓s" } },
-          { "e", ":lua require('smart-splits').resize_up()<CR>", { desc = "↑s" } },
-          { "i", ":lua require('smart-splits').resize_right()<CR>", { desc = "→s" } },
+          -- Resize windows
+          { "h", cmd("lua require('smart-splits').resize_left()"), { desc = "←s", silent = true } },
+          { "n", cmd("lua require('smart-splits').resize_down()"), { desc = "↓s", silent = true } },
+          { "e", cmd("lua require('smart-splits').resize_up()"), { desc = "↑s", silent = true } },
+          { "i", cmd("lua require('smart-splits').resize_right()"), { desc = "→s", silent = true } },
 
-          -- カーソルの移動
-          { "<M-h>", ":lua require('smart-splits').move_cursor_left()<CR>", { desc = "←m" } },
-          { "<M-n>", ":lua require('smart-splits').move_cursor_down()<CR>", { desc = "↓m" } },
-          { "<M-e>", ":lua require('smart-splits').move_cursor_up()<CR>", { desc = "↑m" } },
-          { "<M-i>", ":lua require('smart-splits').move_cursor_right()<CR>", { desc = "→m" } },
+          -- Move cursor between windows
+          { "<M-h>", cmd(":lua require('smart-splits').move_cursor_left()"), { desc = "←m", silent = true } },
+          { "<M-n>", cmd(":lua require('smart-splits').move_cursor_down()"), { desc = "↓m", silent = true } },
+          { "<M-e>", cmd(":lua require('smart-splits').move_cursor_up()"), { desc = "↑m", silent = true } },
+          { "<M-i>", cmd(":lua require('smart-splits').move_cursor_right()"), { desc = "→m", silent = true } },
 
-          -- バッファの交換
-          { "<C-h>", ":lua require('smart-splits').swap_buf_left()<CR>", { desc = "←w" } },
-          { "<C-n>", ":lua require('smart-splits').swap_buf_down()<CR>", { desc = "↓w" } },
-          { "<C-e>", ":lua require('smart-splits').swap_buf_up()<CR>", { desc = "↑w" } },
-          { "<C-i>", ":lua require('smart-splits').swap_buf_right()<CR>", { desc = "→w" } },
+          -- Swap buffers
+          { "<C-h>", cmd(":lua require('smart-splits').swap_buf_left()"), { desc = "←w", silent = true } },
+          { "<C-n>", cmd(":lua require('smart-splits').swap_buf_down()"), { desc = "↓w", silent = true } },
+          { "<C-e>", cmd(":lua require('smart-splits').swap_buf_up()"), { desc = "↑w", silent = true } },
+          { "<C-i>", cmd(":lua require('smart-splits').swap_buf_right()"), { desc = "→w", silent = true } },
 
-          -- ウィンドウの向きの変更
-          { "H", "<C-W>H", { desc = "R←" } },
-          { "N", "<C-W>K", { desc = "R↑" } },
-          { "E", "<C-W>J", { desc = "R↓" } },
-          { "I", "<C-W>L", { desc = "R→" } },
+          -- Change window layout
+          { "H", "<C-W>H", { desc = "R←", silent = true } },
+          { "N", "<C-W>K", { desc = "R↑", silent = true } },
+          { "E", "<C-W>J", { desc = "R↓", silent = true } },
+          { "I", "<C-W>L", { desc = "R→", silent = true } },
+          { "z", "<Cmd>WindowsMaximize<CR>", { desc = "Max", silent = true } },
+          { "S", "<Cmd>WindowsMaximizeVertically<CR>", { desc = "vMax", silent = true } },
+          { "V", "<Cmd>WindowsMaximizeHorizontally<CR>", { desc = "hMax", silent = true } },
+          { "=", "<cmd>WindowsEqualize<cr>", { desc = "=", silent = true } },
 
-          { "z", "<Cmd>WindowsMaximize<CR>", { desc = "Max" } },
-          { "S", "<Cmd>WindowsMaximizeVertically<CR>", { desc = "vMax" } },
-          { "V", "<Cmd>WindowsMaximizeHorizontally<CR>", { desc = "hMax" } },
-          { "=", "<cmd>WindowsEqualize<cr>", { desc = "=" } },
+          -- Window management
+          { "c", "<C-w>c", { desc = "Close", silent = true } },
+          { "v", "<C-w>v", { desc = "VSplit", silent = true } },
+          { "s", "<C-w>s", { desc = "HSplit", silent = true } },
 
-          -- -- ウィンドウ間の移動
-          -- { '<C-h>', '<C-W>h', { desc = 'Move ←' } },
-          -- { '<C-n>', '<C-W>k', { desc = 'Move ↑' } },
-          -- { '<C-e>', '<C-W>j', { desc = 'Move ↓' } },
-          -- { '<C-i>', '<C-W>l', { desc = 'Move →' } },
-          --
-          -- ウィンドウ操作
-          { "c", "<C-w>c", { desc = "Close" } },
-          { "v", "<C-w>v", { desc = "VSplit" } },
-          { "s", "<C-w>s", { desc = "HSplit" } },
+          -- Tab management
+          { "t", ":tabnew<CR>", { desc = "New Tab", silent = true } },
+          { "T", ":tabclose<CR>", { desc = "Close Tab", silent = true } },
+          { "]", ":tabnext<CR>", { desc = "Next Tab", silent = true } },
+          { "[", ":tabprev<CR>", { desc = "Prev Tab", silent = true } },
 
-          -- 新規タブの操作
-          { "t", ":tabnew<CR>", { desc = "New Tab" } },
-          { "T", ":tabclose<CR>", { desc = "Close Tab" } },
-          { "]", ":tabnext<CR>", { desc = "Next Tab" } },
-          { "[", ":tabprev<CR>", { desc = "Prev Tab" } },
-
-          -- ハイドラの終了
-          { "q", nil, { desc = "Exit", exit = true } },
+          -- Exit Hydra
+          { "q", nil, { desc = "Exit", exit = true, silent = true } },
         },
-      }) -- }}}
+      }) -- }}}      -- gitsigns {{{
+      local gitsigns = require('gitsigns')
+      local git_hint = [[
+ _N_: next hunk   _s_: stage hunk        _d_: show deleted   _b_: blame line
+ _E_: prev hunk   _u_: undo last stage   _p_: preview hunk   _B_: blame show full
+ ^ ^              _S_: stage buffer      ^ ^                 _/_: show base file
+ ^
+ ^ ^              _<Enter>_: Neogit              _<C-q>_: exit
+]]
+      hydra({
+        name = 'Git',
+        hint = git_hint,
+        config = {
+          buffer = bufnr,
+          color = 'pink',
+          invoke_on_body = true,
+          -- hint = {
+          --   float_opts = 'rounded'
+          -- },
+          on_enter = function()
+            vim.cmd 'mkview'
+            vim.cmd 'silent! %foldopen!'
+            vim.bo.modifiable = false
+            gitsigns.toggle_signs(true)
+            gitsigns.toggle_linehl(true)
+          end,
+          on_exit = function()
+            local cursor_pos = vim.api.nvim_win_get_cursor(0)
+            vim.cmd 'loadview'
+            vim.api.nvim_win_set_cursor(0, cursor_pos)
+            vim.cmd 'normal zv'
+            gitsigns.toggle_signs(false)
+            gitsigns.toggle_linehl(false)
+            gitsigns.toggle_deleted(false)
+          end,
+        },
+        mode = { 'n', 'x' },
+        body = '<leader>g',
+        heads = {
+          { 'N',
+            function()
+              if vim.wo.diff then return ']c' end
+              vim.schedule(function() gitsigns.next_hunk() end)
+              return '<Ignore>'
+            end,
+            { expr = true, desc = 'next hunk' } },
+          { 'E',
+            function()
+              if vim.wo.diff then return '[c' end
+              vim.schedule(function() gitsigns.prev_hunk() end)
+              return '<Ignore>'
+            end,
+            { expr = true, desc = 'prev hunk' } },
+          { 's',       ':Gitsigns stage_hunk<CR>',                         { silent = true, desc = 'stage hunk' } },
+          { 'u',       gitsigns.undo_stage_hunk,                           { desc = 'undo last stage' } },
+          { 'S',       gitsigns.stage_buffer,                              { desc = 'stage buffer' } },
+          { 'p',       gitsigns.preview_hunk,                              { desc = 'preview hunk' } },
+          { 'd',       gitsigns.toggle_deleted,                            { nowait = true, desc = 'toggle deleted' } },
+          { 'b',       gitsigns.blame_line,                                { desc = 'blame' } },
+          { 'B',       function() gitsigns.blame_line { full = true } end, { desc = 'blame show full' } },
+          { '/',       gitsigns.show,                                      { exit = true, desc = 'show base file' } }, -- show the base of the file
+          { '<Enter>', '<Cmd>Neogit<CR>',                                  { exit = true, desc = 'Neogit' } },
+          { '<C-q>',   nil,                                                { exit = true, nowait = true, desc = 'exit' } },
+        }
+      })                             --}}}
     end,
-  }, --}}}
+  },                                 --}}}
   {
     "nvim-telescope/telescope.nvim", --{{{
     cmd = "Telescope",
@@ -333,8 +525,6 @@ return {
     },
     dependencies = {
       { "nvim-lua/plenary.nvim" },
-      { "debugloop/telescope-undo.nvim" },
-      -- { 'nvim-telescope/telescope-ui-select.nvim' },
       {
         "debugloop/telescope-undo.nvim",
         keys = { { "<leader>z", "<cmd>Telescope undo<cr>", mode = "n", desc = "undo" } },
@@ -342,6 +532,25 @@ return {
           require("telescope").load_extension("undo")
         end,
         desc = "telescope-undo",
+      },
+      "delphinus/telescope-memo.nvim",
+      -- :Telescope memo live_grep
+      -- telescope.builtin.live_grep on memo_dir.
+      -- piersolenski/telescope-import.nvim,
+      { "nvim-telescope/telescope-dap.nvim",
+        -- mfussenegger / nvim-dap
+        -- require'telescope'.extensions.dap.commands{}
+        -- require'telescope'.extensions.dap.configurations{}
+        -- require'telescope'.extensions.dap.list_breakpoints{}
+        -- require'telescope'.extensions.dap.variables{}
+        -- require'telescope'.extensions.dap.frames{}
+      },
+      { "nvim-telescope/telescope-github.nvim",
+        -- lua require('telescope').extensions.gh.issues()<cr>
+        -- lua require('telescope').extensions.gh.pull_request()<cr>
+        -- lua require('telescope').extensions.gh.gist()<cr>
+        -- lua require('telescope').extensions.gh.run()<cr>
+        -- Telescope gh issues author=windwp label=bug
       },
       { "olimorris/persisted.nvim" },
     },
@@ -464,14 +673,14 @@ return {
       -- require("telescope").load_extension("ui-select")
       require("telescope").load_extension("undo")
     end,
-  }, --}}}
+  },                    --}}}
   {
     "NeogitOrg/neogit", --{{{
     cmd = "Neogit",
     dependencies = {
-      "nvim-lua/plenary.nvim", -- required
+      "nvim-lua/plenary.nvim",  -- required
       "sindrets/diffview.nvim", -- optional
-      "ibhagwan/fzf-lua", -- optional
+      "ibhagwan/fzf-lua",       -- optional
     },
     -- keys = {
     --   {
@@ -482,11 +691,11 @@ return {
     --   },
     -- },
     config = true,
-  }, --}}}
+  },                               --}}}
   {
     "nvim-tree/nvim-web-devicons", --{{{
     event = "VeryLazy",
-    config = function() --{{{
+    config = function()            --{{{
       require("nvim-web-devicons").setup({
         -- yes, this is all the icons w/ an extra space
         override = {
@@ -1285,7 +1494,7 @@ return {
         },
       })
     end, --}}}
-  }, --}}}
+  },     --}}}
   -- {
   --   "aznhe21/actions-preview.nvim",
   --   keys = {
@@ -1297,6 +1506,16 @@ return {
   --     },
   --   },
   -- },
+  {
+    "mbbill/undotree",
+    cmd = "UndotreeToggle",
+    keys = { {
+      "<leader>Z",
+      "<cmd>UndotreeToggle<cr>",
+      desc = "undotree",
+      mode = "n",
+    } },
+  },
   {
     "nvimdev/lspsaga.nvim",
     lazy = false,
@@ -1336,7 +1555,7 @@ return {
     end,
     dependencies = {
       "nvim-treesitter/nvim-treesitter", -- optional
-      "nvim-tree/nvim-web-devicons", -- optional
+      "nvim-tree/nvim-web-devicons",     -- optional
     },
     keys = {
       {
@@ -1363,7 +1582,6 @@ return {
         desc = "preview_type_definition",
         mode = { "n" },
       },
-
       {
         "<Leader>R",
         "<cmd>Lspsaga code_action<cr>",
@@ -1396,7 +1614,18 @@ return {
       },
     },
   },
-
+  {
+    "aznhe21/actions-preview.nvim",
+    dependencies = { "nvim-telescope/telescope.nvim", "MunifTanjim/nui.nvim" },
+    keys = {
+      {
+        "<Laader>gf",
+        "<cmd>lua require('actions-preview').code_actions()<CR>",
+        desc = "code_actions",
+        mode = { "n", "v" },
+      },
+    },
+  }
   -- vim.keymap.set("n", "[_Lsp]r", "<cmd>Lspsaga rename ++project<cr>", { silent = true, noremap = true })
   -- vim.keymap.set("n", "M", "<cmd>Lspsaga code_action<cr>", { silent = true, noremap = true })
   -- vim.keymap.set("x", "M", ":<c-u>Lspsaga range_code_action<cr>", { silent = true, noremap = true })

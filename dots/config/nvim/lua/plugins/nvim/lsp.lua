@@ -10,13 +10,7 @@ return {
     config = function()
       require("mason").setup()
     end,
-  }, --}}}
-  {
-    "neovim/nvim-lspconfig",
-    event = { "BufReadPost", "BufNewFile" },
-    cmd = { "LspInfo", "LspInstall", "LspUninstall" },
-    dependencies = { "williamboman/mason.nvim", "williamboman/mason-lspconfig.nvim" },
-  },
+  },                                     --}}}
   {
     "williamboman/mason-lspconfig.nvim", --{{{
     event = "VeryLazy",
@@ -63,14 +57,18 @@ return {
   },
   {
     "rshkarin/mason-nvim-lint", --{{{
-    config = function()
-      require("mason-nvim-lint").setup({
+    event = "VeryLazy",
+    opts = {
+      DEFAULT_SETTINGS = {
+        ---@type string[]
         ensure_installed = {
+          "golint",
           "beautysh",
           "clang_format",
           "astyle",
           "uncrustify",
           "codespell",
+          "cspell",
           "cpp_format",
           "cpplint",
           "gitlint",
@@ -79,7 +77,7 @@ return {
           "selene",
           "shellcheck",
           "shfmt",
-          "vale",
+          -- "vale",
           "hadolint",
           "commitlint",
           "cspell",
@@ -88,57 +86,62 @@ return {
           "gofmt",
           "gofumpt",
           "golines",
-          "write-good",
-          "dotenv_lint",
+          "markdownlint",
+          "typos",
+          "actionlint"
         },
-        automatic_installation = true,
-      })
-    end,
-  }, --}}}
+      }
+    },
+  },                          --}}}
   {
     "mfussenegger/nvim-lint", --{{{
-    -- events = { "BufWritePost", "BufReadPost", "InsertLeave" },
-    -- event = { "VimEnter" },
-    event = { "BufReadPre", "BufNewFile" },
-    -- event = "InsertEnter",
-    -- config = true,
-    config = function()
-      local lint = require("lint")
-      lint.linters_by_ft = {
-        sh = { "shellcheck", "codespell" },
-        bash = { "shellcheck", "codespell" },
-        zsh = { "shellcheck", "zsh", "codespell" },
-        ini = { "shellcheck", "shfmt", "codespell" },
-        ["yaml.ansible"] = { "ansible_lint" },
-        dotenv = { "dotenv_lint" },
-        dockerfile = { "hadolint", "codespell" },
+    events = { "BufWritePost", "BufReadPost", "InsertLeave" },
+    opts = {
+      linters_by_ft = {
+        sh = { "shellcheck" },
+        bash = { "shellcheck" },
+        zsh = { "shellcheck", "zsh" },
+        ini = { "shellcheck", "shfmt" },
+        -- ["yaml.ansible"] = { "ansible_lint" },
+        -- dotenv = { "dotenv_lint" },
+        dockerfile = { "hadolint" },
         ghaction = { "actionlint" },
-        git = { "gitlint", "cspell", "codespell" },
-        gitcommit = { "gitlint", "commitlint", "codespell", "cspell" },
-        htmldjango = { "curlylint" },
-        java = { "codespell" },
+        git = { "gitlint", "cspell" },
+        go = { "golangci_lint", "golint" },
+        gitcommit = { "gitlint", "commitlint", "cspell" },
+        -- java = {},
         javascript = { "eslint_d" },
-        lua = { "luacheck", "codespell" },
-        markdown = { "markdownlint", "value", "write-good", "codespell" },
-        powershell = { "codespell" },
-        python = { "ruff", "mypy", "codespell" },
-        rst = { "vale" },
-        c = { "clang_format", "cpplint", "codespell" },
-        cpp = { "clang_format", "cpplint", "codespell" },
-        arduino = { "clang_format", "cpplint", "codespell" },
-        rust = { "clippy", "codespell" },
-        typescript = { "eslint_d", "codespell" },
-        typescriptreact = { "eslint_d", "codespell" },
+        lua = { "luacheck" },
+        markdown = { "markdownlint" },
+        powershell = {},
+        python = { "ruff", "mypy" },
+        -- rst = { "vale" },
+        c = { "clang_format", "cpplint" },
+        cpp = { "clang_format", "cpplint" },
+        arduino = { "clang_format", "cpplint" },
+        rust = { "clippy" },
+        typescript = { "eslint_d" },
+        typescriptreact = { "eslint_d" },
         yaml = { "yamllint" },
-      }
-      vim.api.nvim_create_autocmd({ "BufWritePost", "BufEnter" }, {
-        group = vim.api.nvim_create_augroup("lint", { clear = true }),
-        callback = function()
-          lint.try_lint()
-        end,
-      })
+        ["*"] = { "codespell", "typos" },
+        ["_"] = { "trim_whitespace" },
+      },
+    },
+    config = function()
+      vim.cmd [[
+        augroup lint
+          autocmd!
+          autocmd BufWritePost,BufEnter * lua require('lint').try_lint()
+        augroup END
+      ]]
     end,
-  }, --}}}
+    -- vim.api.nvim_create_autocmd({ "BufWritePost", "BufEnter" }, {
+    --   group = vim.api.nvim_create_augroup("lint", { clear = true }),
+    --   callback = function()
+    --     lint.try_lint()
+    --   end,
+    -- })
+  },                         --}}}
   {
     "stevearc/conform.nvim", --{{{
     -- event = { "VeryLazy" },
@@ -176,7 +179,7 @@ return {
         cmake = { "cmake_format" },
         go = { "goimports", "gofmt", "gofumpt", "golines" },
         rust = { "rustfmt" },
-        ruby = { "rufo" },
+        -- ruby = { "rufo" },
         shell = { "shfmt", "beautysh", "shellcheck" },
         ini = { "shfmt", "beautysh", "shellcheck" },
         ["_"] = { "trim_whitespace", "injected" },
@@ -225,7 +228,9 @@ return {
   -- },
   {
     "neovim/nvim-lspconfig",
-    event = "VimEnter",
+    event = { "BufReadPost", "BufNewFile" },
+    cmd = { "LspInfo", "LspInstall", "LspUninstall" },
+    dependencies = { "williamboman/mason.nvim", "williamboman/mason-lspconfig.nvim" },
     opts = {
       diagnostics = { virtual_text = { prefix = "icons" } },
       inlay_hints = { enabled = true },
@@ -269,5 +274,5 @@ return {
         })
       end
     end,
-  },
+  }
 }

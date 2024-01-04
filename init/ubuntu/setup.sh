@@ -1,8 +1,10 @@
 
 sudo apt-get install ibus-skk
 sudo apt-get install gedit
+
+
 sudo gedit /usr/share/ibus/component/skk.xml
-   
+
 # Update and Upgrade System
 sudo apt-get update
 sudo apt-get upgrade -y
@@ -106,6 +108,7 @@ echo "Installing Go language..."
 sudo add-apt-repository ppa:longsleep/golang-backports -y
 sudo apt install golang-go -y
 echo "Go language setup complete!"
+go install github.com/mattn/memo@latest
 
 git clone https://github.com/pyenv/pyenv.git ~/.pyenv
 # git clone https://github.com/pyenv/pyenv-update.git $(pyenv root)/plugins/pyenv-update
@@ -118,7 +121,7 @@ sudo ln -s /usr/bin/batcat /usr/sbin/bat
 
 sudo apt install fonts-firacode -y
 curl -sS https://starship.rs/install.sh | sh
-cargo install sheldon
+cargo install sheldon git-delta
 sudo apt-get install fonts-noto -y
 echo "All installations complete. System is now supercharged!"
 sudo apt-get install ntfs-3g

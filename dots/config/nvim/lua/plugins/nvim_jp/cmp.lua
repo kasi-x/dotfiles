@@ -131,9 +131,9 @@ return {
       require("skkeleton_indicator").setup({})
       vim.fn["denops#plugin#register"]("skkeleton")
       vim.fn["skkeleton#config"]({
-        globalDictionaries = {
-          "/home/user/.skk/SKK-JISYO.L",
-        },
+        -- globalDictionaries = {
+        --   "/home/user/.skk/SKK-JISYO.L",
+        -- },
         eggLikeNewline = true,
         -- globalJisyo = "/home/user/.skk/SKK-JISYO.L",
         immediatelyCancel = true,

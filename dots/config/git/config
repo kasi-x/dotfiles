@@ -82,10 +82,10 @@
     ui = true
     pager = true
 [color "status"]
-added = green
-changed = blue
-untracked = magenta
-deleted = red
+    added = green
+    changed = blue
+    untracked = magenta
+    deleted = red
 [format]
     pretty = "Commit:  %C(yellow)%H%nAuthor:  %C(green)%aN <%aE>%nDate:    (%C(red)%ar%Creset) %ai%nSubject: %s%n%n%b"
 	name = kasi-x
@@ -95,6 +95,16 @@ deleted = red
 [core]
 	editor = subl -w
 	excludesfile = ~/.gitignore
+    pager = delta
+[interactive]
+    diffFilter = delta --color-only
+[delta]
+    navigate = true    # use n and N to move between diff sections
+    light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
+[merge]
+    conflictstyle = diff3
+[diff]
+    colorMoved = default
 [push]
 	default = simple
 [filter "lfs"]
@@ -102,6 +112,5 @@ deleted = red
 	smudge = git-lfs smudge %f
 	required = true
 	process = git-lfs filter-process
-
 [ghq]
         root = ~/ghq

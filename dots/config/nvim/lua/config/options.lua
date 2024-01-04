@@ -19,10 +19,10 @@ local options = {
   history = 1000, -- Remember more commands and search history
   undolevels = 1000, -- Remember more levels of undo
   formatoptions = "mMj",
-  undodir = "/home/user/.cache/undo",
+  undodir = vim.fn.expand("~/.cache/undo"),
+  undofile = true,
   backup = false,
   -- undodir = os.getenv("HOME") .. "/.vim/undodir",
-  undofile = true,
   --
   -- novisualbell = true,        -- No 'visual buzz' on error
   -- autoread = true,            -- Reload the file if changed from the outside

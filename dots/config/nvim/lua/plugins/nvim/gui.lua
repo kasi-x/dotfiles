@@ -20,6 +20,21 @@ return {
       },
     },
   }, --}}}
+  -- {
+  --   "ecthelionvi/NeoComposer.nvim",
+  --   dependencies = { "kkharji/sqlite.lua" },
+  --   opts = {
+  --     keymaps = {
+  --       play_macro = "q",
+  --       yank_macro = "yq",
+  --       stop_macro = "xq",
+  --       toggle_record = "Q",
+  --       cycle_next = "<c-n>",
+  --       cycle_prev = "<c-p>",
+  --       toggle_macro_menu = "<m-q>",
+  --     },
+  --   }
+  -- },
   {
     "nvim-lualine/lualine.nvim", --{{{
     event = "VeryLazy",
@@ -27,7 +42,7 @@ return {
     config = function()
       require("plugins.configs.statusline")
     end,
-  }, --}}}
+  },                    --}}}
   {
     "folke/noice.nvim", --{{{
     event = "VeryLazy",
@@ -64,16 +79,16 @@ return {
           },
         },
         presets = {
-          bottom_search = true, -- use a classic bottom cmdline for search
-          command_palette = true, -- position the cmdline and popupmenu together
+          bottom_search = true,         -- use a classic bottom cmdline for search
+          command_palette = true,       -- position the cmdline and popupmenu together
           long_message_to_split = true, -- long messages will be sent to a split
-          inc_rename = true, -- enables an input dialog for inc-rename.nvim
-          lsp_doc_border = true, -- add a border to hover docs and signature help
+          inc_rename = true,            -- enables an input dialog for inc-rename.nvim
+          lsp_doc_border = true,        -- add a border to hover docs and signature help
         },
       })
     end,
     dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
-  }, --}}}
+  },                           --}}}
   {
     "anuvyklack/windows.nvim", --{{{
     requires = {
@@ -92,7 +107,7 @@ return {
       vim.o.equalalways = false
       require("windows").setup()
     end,
-  }, --}}}
+  },                         --}}}
   {
     "jackMort/ChatGPT.nvim", --{{{
     event = "VeryLazy",
@@ -265,7 +280,8 @@ return {
         use_openai_functions_for_edits = false,
         actions_paths = {},
         show_quickfixes_cmd = "Trouble quickfix",
-        predefined_chat_gpt_prompts = "https://raw.githubusercontent.com/f/awesome-chatgpt-prompts/main/prompts.csv",
+        predefined_chat_gpt_prompts =
+        "https://raw.githubusercontent.com/f/awesome-chatgpt-prompts/main/prompts.csv",
         highlights = {
           help_key = "@symbol",
           help_description = "@comment",
@@ -277,7 +293,7 @@ return {
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope.nvim",
     },
-  }, --}}}
+  },                              --}}}
   {
     "stevanmilic/nvim-lspimport", --{{{
     ft = "python",
@@ -293,13 +309,13 @@ return {
         mode = { "n" }, -- Normal mode only
       },
     },
-  }, --}}}
+  },                     --}}}
   {
     "j-hui/fidget.nvim", --{{{
     branch = "legacy",
     ft = { "lua", "go", "python" },
     config = true,
-  }, --}}}
+  },                        --}}}
   {
     "folke/which-key.nvim", --{{{
     event = "VeryLazy",
@@ -327,22 +343,22 @@ return {
           padding = { 1, 1, 1, 1 },
         },
         plugins = {
-          marks = true, -- shows a list of your marks on ' and `
+          marks = true,      -- shows a list of your marks on ' and `
           registers = false, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
           -- the presets plugin, adds help for a bunch of default keybindings in Neovim
           -- No actual key bindings are created
           spelling = {
-            enabled = true, -- enabling this will show WhichKey when pressing z= to select spelling suggestions
+            enabled = true,   -- enabling this will show WhichKey when pressing z= to select spelling suggestions
             suggestions = 20, -- how many suggestions should be shown in the list?
           },
           presets = {
-            operators = true, -- adds help for operators like d, y, ...
-            motions = true, -- adds help for motions
+            operators = true,    -- adds help for operators like d, y, ...
+            motions = true,      -- adds help for motions
             text_objects = true, -- help for text objects triggered after entering an operator
-            windows = false, -- default bindings on <c-w>
-            nav = true, -- misc bindings to work with windows
-            z = false, -- bindings for folds, spelling and others prefixed with z
-            g = false, -- bindings for prefixed with g
+            windows = false,     -- default bindings on <c-w>
+            nav = true,          -- misc bindings to work with windows
+            z = false,           -- bindings for folds, spelling and others prefixed with z
+            g = false,           -- bindings for prefixed with g
           },
         },
         -- triggers_blacklist = {
@@ -372,10 +388,10 @@ return {
           -- spelling
         },
         layout = {
-          height = { min = 2, max = 5 }, -- min and max height of the columns
+          height = { min = 2, max = 5 },  -- min and max height of the columns
           width = { min = 20, max = 60 }, -- min and max width of the columns
-          spacing = 3, -- spacing between columns
-          align = "center", -- align columns left, center or right
+          spacing = 3,                    -- spacing between columns
+          align = "center",               -- align columns left, center or right
         },
       })
       --{{{ presets fix
@@ -426,34 +442,48 @@ return {
           l = { ":SnipLive<CR>", "Toggle SnipLive" },
         },
       }, { mode = { "n" } }) --}}}
-      -- {{{ Git
+      --{{{ TODO
       wk.register({
-        ["<leader>g"] = {
-          name = "Git",
-          g = { "<cmd>lua _LAZYGIT_TOGGLE()<CR>", "Lazygit" },
-          n = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },
-          e = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", "Prev Hunk" },
-          l = { "<cmd>GitBlameToggle<cr>", "Blame" },
-          N = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "Preview Hunk" },
-          E = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", "Reset Hunk" },
-          R = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
-          s = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk" },
-          u = { "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>", "Undo Stage Hunk" },
-          o = { "<cmd>Telescope git_status<cr>", "Open changed file" },
-          b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
-          c = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
-          d = { "<cmd>Gitsigns diffthis HEAD<cr>", "Diff" },
-          G = {
-            name = "Gist",
-            a = { "<cmd>Gist -b -a<cr>", "Create Anon" },
-            d = { "<cmd>Gist -d<cr>", "Delete" },
-            f = { "<cmd>Gist -f<cr>", "Fork" },
-            g = { "<cmd>Gist -b<cr>", "Create" },
-            l = { "<cmd>Gist -l<cr>", "List" },
-            p = { "<cmd>Gist -b -p<cr>", "Create Private" },
-          },
+        ["<C-d>"] = {
+          name = "Comments", -- group name for the popup
+          d = { "<CMD>TroubleToggle workspace_diagnostics<CR>", "trouble" },
+          -- o = {":'<,'>SnipRun<CR>", "Run SnipRunOperator (Visual Mode)"},
+          -- i = { ":SnipInfo<CR>", "SnipInfo" },
+          -- r = { ":SnipReset<CR>", "SnipReset" },
+          -- c = { ":SnipReplMemoryClean<CR>", "Clean SnipReplMemory" },
+          -- x = { ":SnipClose<CR>", "Close Snip" },
+          -- l = { ":SnipLive<CR>", "Toggle SnipLive" },
         },
       }, { mode = { "n" } }) --}}}
+
+      -- {{{ Git
+      -- wk.register({
+      --   ["<leader>g"] = {
+      --     name = "Git",
+      --     g = { "<cmd>lua _LAZYGIT_TOGGLE()<CR>", "Lazygit" },
+      --     n = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },
+      --     e = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", "Prev Hunk" },
+      --     l = { "<cmd>GitBlameToggle<cr>", "Blame" },
+      --     N = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "Preview Hunk" },
+      --     E = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", "Reset Hunk" },
+      --     R = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
+      --     s = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk" },
+      --     u = { "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>", "Undo Stage Hunk" },
+      --     o = { "<cmd>Telescope git_status<cr>", "Open changed file" },
+      --     b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
+      --     c = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
+      --     d = { "<cmd>Gitsigns diffthis HEAD<cr>", "Diff" },
+      --     G = {
+      --       name = "Gist",
+      --       a = { "<cmd>Gist -b -a<cr>", "Create Anon" },
+      --       d = { "<cmd>Gist -d<cr>", "Delete" },
+      --       f = { "<cmd>Gist -f<cr>", "Fork" },
+      --       g = { "<cmd>Gist -b<cr>", "Create" },
+      --       l = { "<cmd>Gist -l<cr>", "List" },
+      --       p = { "<cmd>Gist -b -p<cr>", "Create Private" },
+      --     },
+      --   },
+      -- }, { mode = { "n" } }) --}}}
       -- {{{ Telescope
       wk.register({
         ["j"] = {
@@ -642,7 +672,7 @@ return {
       --  }}, { mode = "i", prefix = "<C-x>" })--}}}
       ----}}}
     end,
-  }, --}}}
+  },                                 --}}}
   {
     "yuki-yano/highlight-undo.nvim", --{{{
     dependencies = { "vim-denops/denops.vim" },
@@ -667,7 +697,7 @@ return {
         duration = 200,
       })
     end,
-  }, --}}}
+  },                             --}}}
   {
     "shellRaining/hlchunk.nvim", --{{{
     event = { "UIEnter" },

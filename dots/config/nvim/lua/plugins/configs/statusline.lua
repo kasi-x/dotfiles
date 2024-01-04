@@ -156,6 +156,7 @@ require("lualine").setup({
         spell,
         color = { fg = "black", bg = "#a7c080" },
       },
+      -- { require('NeoComposer.ui').status_recording },
       {
         "diagnostics",
         sources = { "nvim_diagnostic" },

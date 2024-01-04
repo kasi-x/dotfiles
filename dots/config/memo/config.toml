@@ -1,0 +1,11 @@
+memodir = "/home/user/.config/memo/_posts"
+editor = "neovide"
+column = 20
+width = 0
+selectcmd = "peco"
+grepcmd = "grep -nH ${PATTERN} ${FILES}"
+memotemplate = ""
+assetsdir = "."
+pluginsdir = "/home/user/.config/memo/plugins"
+templatedirfile = "/home/user/.config/memo/templates/template.md"
+templatebodyfile = ""

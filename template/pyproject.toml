@@ -101,6 +101,91 @@ ignore = ["src/old*", ".venv/*"]
 basic = ["**"]
 
 [tool.ruff]
+task-tags = [
+    # General Purpose Tags
+    "TODO",
+    "BUG",
+    "FIXME",
+    "DOCME",
+    "HACK",
+    "MEMO",
+    "ISSUE",
+    "MISSING",
+    "HOLD",
+    "WARN",
+    "PLAN",
+
+    # More Hack
+    "META",
+    "INNOVATE",
+    "OUTSIDE-BOX",
+    "PILOT",
+    "UNEXPLORED",
+
+    # Decision Rationale
+    "WHYNOT",
+    "PURPOSE",
+    "CONTEXT",
+    "RATIONAL",
+    "EXAMPLE",
+    "FOLLOW",
+
+    # Team Communication
+    "WIP",
+    "BLOCKER",
+    "NOTION",
+    "REVIEW",
+    "DISCUSS",
+    "QUESTION",
+    "REQUEST",
+
+    # Production, Assumption
+    "STRATEGY",
+    "FUTURE",
+    "MVP",
+    "RISK",
+    "STAKEHOLDER",
+    "STORY",
+
+    # Test-Driven Development
+    "BLUE",
+    "RED",
+    "GREEN",
+    "REFACTOR",
+    "DEPENDENT",
+    "OVERTEST",
+    "UNCOVERED",
+    "INTEGRATION",
+    "EDGE-CASE",
+    "SLOW",
+
+    # Optimize and Evaluation
+    "BENCHMARK",
+    "EVALUATION",
+    "SCALE",
+    "PERF",
+
+    # Code Enhancement,
+    "CLARITY",
+    "LOGIC",
+    "UPGRADE",
+    "DOC-ENHANCE",
+    "CLEANUP",
+
+    # Security and Compliance
+    "SECURE",
+    "PRIVACY",
+    "ILLEGAL",
+    "ACCESSIBILITY",
+    "LOCALIZE",
+
+    # Legacy Management
+    "DEPRECATE",
+    "MAINTAIN",
+    "DEBT",
+    "UNKNOWN",
+    "PHASE-OUT",
+]
 ignore = [
     "ANN101", # Missing type annotation for {name} in method
     "ANN102", # Missing type annotation for {name} in classmethod
@@ -118,6 +203,7 @@ ignore = [
     # "TCH",    # flake8-type-checking 
     # "TD",     # flake8-todos
 ]
+
 exclude = [
     ".bzr",
     ".direnv",
@@ -155,20 +241,6 @@ target-version = "py311"
 cache-dir = "~/.cache/ruff"
 src = ["src", "test"]
 indent-width = 4
-task-tags = [
-    "BUG",
-    "ERROR",
-    "FIXME",
-    "FUTURE",
-    "HACK",
-    "MEMO",
-    "NOTE",
-    "OPTIMIZE",
-    "TOBE",
-    "TODO",
-    "WARM",
-    "XXX",
-]
 
 [tool.ruff.per-file-ignores]
 "__init__.py" = ["E402", "INP001"]
@@ -180,7 +252,6 @@ indent-style = "space"
 skip-magic-trailing-comma = true
 line-ending = "auto"
 docstring-code-format = true
-# docstring-code-line-length = "dynamic"
 
 [tool.ruff.mccabe]
 max-complexity = 8
@@ -196,9 +267,18 @@ ban-relative-imports = "parents"
 
 [tool.ruff.lint.pycodestyle]
 ignore-overlong-task-comments = true
-max-line-length = 110
+max-line-length = 100
 max-doc-length = 120
 
 [tool.ruff.lint.flake8-import-conventions.extend-aliases]
 "dask.dataframe" = "dd"
 "xarray" = "xr"
+
+[tool.ruff.lint.flake8-type-checking]
+exempt-modules = ["typing", "typing_extensions"]
+
+
+[tool.codespell]
+skip = '*.po,*.ts,./src/3rdParty,./src/Test'
+count = ''
+quiet-level = 3

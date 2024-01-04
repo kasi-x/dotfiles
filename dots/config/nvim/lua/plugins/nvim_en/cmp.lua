@@ -22,7 +22,7 @@ return {
       { "saadparwaiz1/cmp_luasnip" },
       { "onsails/lspkind-nvim" },
       { "hrsh7th/cmp-cmdline" },
-      { "tzachar/cmp-tabnine", build = "./install.sh" },
+      { "tzachar/cmp-tabnine",                 build = "./install.sh" },
       {
         "Exafunction/codeium.nvim",
         build = ":Codeium Auth",

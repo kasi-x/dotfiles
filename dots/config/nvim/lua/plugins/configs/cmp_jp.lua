@@ -9,7 +9,8 @@ cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 local has_words_before = function()
   local unpack = unpack or table.unpack ---@diagnostic disable-line: deprecated
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+  return col ~= 0 and
+      vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 end
 
 local t = function(str)
@@ -26,7 +27,7 @@ cmp.setup({
         -- buffer = "[Buffer]",
         -- nvim_lsp = "[LSP]",
         -- -- cmp_tabnine = "[TabNine]",
-        -- copilot = "[Copilot]",
+        copilot = "[Copilot]",
         -- luasnip = "[LuaSnip]",
         -- nvim_lua = "[NeovimLua]",
         -- latex_symbols = "[LaTeX]",
@@ -41,7 +42,7 @@ cmp.setup({
         -- mocword = "[mocword]",
         -- cmdline = "[Cmd]",
         -- cmdline_history = "[History]",
-        -- Codeium = "[Codium]",
+        Codeium = "[Codium]",
       },
     }),
   },
@@ -170,24 +171,24 @@ cmp.setup({
     },
   },
   sources = cmp.config.sources({
-    { name = "skkeleton", priority = 200 },
+    { name = "skkeleton",  priority = 200 },
     -- { name = "jupynium", priority = 1000 },
-    { name = "copilot", priority = 90 },
-    { name = "codeium", priority = 84 },
-    { name = "luasnip", option = { use_show_condition = false, show_autosnippets = true }, priority = 85 },
-    { name = "nvim_lsp", priority = 100 },
+    { name = "copilot",    priority = 90 },
+    { name = "codeium",    priority = 84 },
+    { name = "luasnip",    option = { use_show_condition = false, show_autosnippets = true }, priority = 85 },
+    { name = "nvim_lsp",   priority = 100 },
     -- { name = "cmp_tabnine", priority = 30 },
     -- { name = "path", priority = 100 },
-    { name = "emoji", insert = true, priority = 60 },
+    { name = "emoji",      insert = true,                                                     priority = 60 },
     -- { name = "nvim_lua", priority = 50 },
     -- { name = "nvim_lsp_signature_help", priority = 80 },
-    { name = "buffer", priority = 50 },
+    { name = "buffer",     priority = 50 },
     -- slow
     -- { name = "omni", priority = 40 },
-    { name = "spell", priority = 40 },
-    { name = "calc", priority = 50 },
+    { name = "spell",      priority = 40 },
+    { name = "calc",       priority = 50 },
     { name = "treesitter", priority = 30 },
-    { name = "dictionary", keyword_length = 2, priority = 10 },
+    { name = "dictionary", keyword_length = 2,                                                priority = 10 },
   }),
 })
 
