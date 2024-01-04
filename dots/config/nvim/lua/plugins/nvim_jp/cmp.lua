@@ -142,7 +142,6 @@ return {
         registerConvertResult = true,
         selectCandidateKeys = "hneirstdwfpluyj",
         showCandidatesCount = 4,
-        -- TODO: cannot use this with cmp-skkeleton?
         useSkkServer = true,
         userJisyo = "/home/user/.config/ibus-skk/user.dict",
       })

@@ -131,6 +131,9 @@ n  yi          * <Cmd>lua require("which-key").show("yi", {mode = "n", auto = tr
 -- {{{ Command}
 -- {{{ <Ctrl>
 -- TODO: Add Command Action for search history.
+--
+-- FIX: Add Command Action for search history.
+
 -- }}} <Ctrl>
 -- }}} Command
 -- }}} <Ctrl>

@@ -102,73 +102,31 @@ return {
       },
     },
   }, --}}}
-
   {
     "folke/todo-comments.nvim",
+    event = "VimEnter",
+    dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope.nvim" },
+    cmd = { "TodoTrouble", "TodoTelesocpe" },
     opts = {
       keywords = {
-        FIX       = {
-          icon = "🐞",
-          color = "red",
-          alt = { "BUG", "FIXME", "MISSING", }
-        },
-        DOCME     = {
-          icon = "📝",
-          color = "blue",
-          alt = { "MEMO", "NOTION", "DOC-ENHANCE" },
-        },
-        PLAN      = { " ", color = "info", alt = { "TODO", "WIP", "STRATEGY", "FUTURE", "MVP" } },
-        HACK      = { icon = " ", color = "warning", alt = { "ISSUE", "WARN" } },
-        CHALLENGE = {
-          icon = "💡",
-          color = "yellow",
-          alt = { "META", "INNOVATE", "OUTSIDE-BOX", "PILOT", "UNEXPLORED" }
-        },
-        WHYNOT    = {
-          icon = "⚖️",
-          -- color = "orange",
-          alt = { "WHYNOT", "PURPOSE", "CONTEXT", "RATIONAL", "EXAMPLE", "FOLLOW" }
-        },
-        REVIEW    = {
-          icon = "🗣️",
-          -- color = "hint",
-          alt = { "DISCUSS", "QUESTION", "REQUEST", "BLOCKER" }
-        },
-        TDD       = {
-          icon = "🧪",
-          color = "pink",
-          alt = { "RED", "GREEN", "REFACTOR", "DEPENDENT", "OVERTEST", "UNCOVERED", "INTEGRATION", "EDGE-CASE", "SLOW" }
-        },
-        BLUE      = { icon = "🔵", color = "blue" },
-        OPTIMIZE  = {
-          icon = " ",
-          color = "silver",
-          alt = { "BENCHMARK", "EVALUATION", "SCALE", "PERF" }
-        },
-        CODE      = {
-          icon = "🔧",
-          color = "brown",
-          alt = { "CLARITY", "LOGIC", "UPGRADE", "CLEANUP" }
-        },
-        SECURITY  = {
-          icon = "🔒",
-          color = "darkblue",
-          alt = { "SECURE", "PRIVACY", "ILLEGAL", "ACCESSIBILITY", "LOCALIZE" }
-        },
-        LEGACY    = {
-          icon = "🕰️",
-          color = "grey",
-          alt = { "DEPRECATE", "MAINTAIN", "DEBT", "UNKNOWN", "PHASE-OUT" }
-        },
-        TEST      = {
-          icon = "🧪 ",
-          color = "info",
-          alt = { "DEPENDENT", "OVERTEST", "UNCOVERED", "INTEGRATION", "EDGE-CASE", "SLOW" }
-          -- NOTE = { icon = " ", color = "hint", alt = { "INFO" } },
-        },
+        FIXME    = { icon = "󱏛", color = "error", alt = { "BUG", "MISSING" } },
+        DOCME    = { icon = "󰈙", color = "info", alt = { "MEMO", "NOTION" }, },
+        TODO     = { icon = " ", color = "info", alt = { "PLAN", "WIP", "STRATEGY", "FUTURE", "MVP" } },
+        HACK     = { icon = " ", color = "warning", alt = { "ISSUE", "WARN" } },
+        PILOT    = { icon = "", color = "info", alt = { "META", "INNOVATE", "OUTSIDE-BOX", "UNEXPLORED" } },
+        WHYNOT   = { icon = "󱄶", color = "info", alt = { "PURPOSE", "CONTEXT", "RATIONAL", "EXAMPLE", "FOLLOW" } },
+        REVIEW   = { icon = "", color = "hint", alt = { "DISCUSS", "QUESTION", "REQUEST", "BLOCKER" } },
+        REFACTOR = { icon = "󰵛", color = "info", alt = { "DEPENDENT", "OVERTEST", "UNCOVERED", "INTEGRATION", "EDGE-CASE", "SLOW" } },
+        BLUE     = { icon = "", color = "test" },
+        RED      = { icon = "", color = "test" },
+        GREEN    = { icon = "", color = "test" },
+        PERF     = { icon = "", alt = { "BENCHMARK", "EVALUATION", "SCALE" } },
+        LOGIC    = { icon = "", alt = { "CLARITY", "UPGRADE", "CLEANUP", "DOC-ENHANCE" } },
+        SECURE   = { icon = "󰒃", alt = { "PRIVACY", "ILLEGAL", "ACCESSIBILITY", "LOCALIZE" } },
+        LEGACY   = { icon = "󱦟", alt = { "DEPRECATE", "MAINTAIN", "DEBT", "UNKNOWN", "PHASE-OUT" } },
       },
-      cmd = "TodoTrouble",
-    }
+    },
+    config = true,
   },
   {
     "folke/trouble.nvim", --{{{
@@ -446,7 +404,7 @@ return {
  _E_: prev hunk   _u_: undo last stage   _p_: preview hunk   _B_: blame show full
  ^ ^              _S_: stage buffer      ^ ^                 _/_: show base file
  ^
- ^ ^              _<Enter>_: Neogit              _<C-q>_: exit
+ ^ ^              _<Enter>_: Neogit              _q_/_<Esc>_: quiet
 ]]
       hydra({
         name = 'Git',
@@ -461,7 +419,7 @@ return {
           on_enter = function()
             vim.cmd 'mkview'
             vim.cmd 'silent! %foldopen!'
-            vim.bo.modifiable = false
+            vexitim.bo.modifiable = true
             gitsigns.toggle_signs(true)
             gitsigns.toggle_linehl(true)
           end,
@@ -500,9 +458,9 @@ return {
           { 'b',       gitsigns.blame_line,                                { desc = 'blame' } },
           { 'B',       function() gitsigns.blame_line { full = true } end, { desc = 'blame show full' } },
           { '/',       gitsigns.show,                                      { exit = true, desc = 'show base file' } }, -- show the base of the file
-          { '<Enter>', '<Cmd>Neogit<CR>',                                  { exit = true, desc = 'Neogit' } },
-          { '<C-q>',   nil,                                                { exit = true, nowait = true, desc = 'exit' } },
-        }
+          { '<Enter>', cmd(":Neogit<CR>"),                                 { exit = true, desc = 'Neogit' } },
+          { "q",       nil,                                                { desc = "quit", exit = true, nowait = true } },
+          { "<Esc>",   nil,                                                { desc = "quit", exit = true, nowait = true } } }
       })                             --}}}
     end,
   },                                 --}}}
