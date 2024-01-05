@@ -66,7 +66,7 @@ return {
         },
         lsp = {
           progress = {
-            enabled = true,
+            enabled = false,
             format = "lsp_progress",
             format_done = "lsp_progress_done",
             throttle = 1000 / 30, -- frequency to update lsp progress message
@@ -293,23 +293,23 @@ return {
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope.nvim",
     },
-  },                              --}}}
-  {
-    "stevanmilic/nvim-lspimport", --{{{
-    ft = "python",
-    -- lazy = false,
-    -- opts = true,
-    keys = {
-      {
-        "<Leader>ri",
-        function()
-          require("lspimport").import()
-        end,
-        desc = "Import using LSP",
-        mode = { "n" }, -- Normal mode only
-      },
-    },
-  },                     --}}}
+  }, --}}}
+  -- {
+  --   "stevanmilic/nvim-lspimport", --{{{
+  --   ft = "python",
+  --   -- lazy = false,
+  --   -- opts = true,
+  --   keys = {
+  --     {
+  --       "<Leader>ri",
+  --       function()
+  --         require("lspimport").import()
+  --       end,
+  --       desc = "Import using LSP",
+  --       mode = { "n" }, -- Normal mode only
+  --     },
+  --   },
+  -- },                     --}}}
   {
     "j-hui/fidget.nvim", --{{{
     branch = "legacy",

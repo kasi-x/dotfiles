@@ -28,10 +28,35 @@ vim.api.nvim_create_autocmd("FileType", {
   group = vim.api.nvim_create_augroup("QuickFixMappings", { clear = true }),
   pattern = "qf",
   callback = function()
-    vim.api.nvim_buf_set_keymap(0, "n", "<Enter>", "<CR>:cclose<CR>", { noremap = true, silent = true })
+    vim.api.nvim_buf_set_keymap(0, "n", "<Enter>", "<CR>:cclose<CR>",
+      { noremap = true, silent = true })
     vim.api.nvim_buf_set_keymap(0, "n", "q", ":cclose<CR>", { noremap = true, silent = true })
   end,
 })
+
+
+-- function _G.show_pydoc()
+--   local word = vim.fn.expand("<cword>")
+--   local pydoc_output = vim.fn.system("pydoc " .. word)
+--   local bufnr = vim.api.nvim_create_buf(false, true)
+--   vim.api.nvim_buf_set_lines(bufnr, 0, -1, true, vim.split(pydoc_output, "\n"))
+--   vim.api.nvim_open_win(bufnr, true,
+--     { relative = "cursor", width = 80, height = 30, col = 0, row = 1, border = "single" })
+--   vim.api.nvim_buf_set_option(bufnr, 'filetype', 'help')
+-- end
+--
+-- -- FileTypeイベントに対するautocmdを設定
+-- vim.api.nvim_create_augroup("CustomPythonSettings", { clear = true })
+-- vim.api.nvim_create_autocmd("FileType", {
+--   group = "CustomPythonSettings",
+--   pattern = "python",
+--   callback = function()
+--     -- keywordprgをグローバル関数show_pydocに設定
+--     vim.bo.keywordprg = ':lua _G.show_pydoc()<CR>'
+--     -- bキーをKにリマップ
+--     vim.api.nvim_buf_set_keymap(0, 'n', 'b', 'K', { noremap = true, silent = true })
+--   end
+-- })
 
 -- vim.api.nvim_create_autocmd("BufRead,BufNewFile", {
 -- pattern = "git/config",

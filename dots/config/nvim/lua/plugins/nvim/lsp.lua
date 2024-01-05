@@ -31,7 +31,8 @@ return {
         "marksman",
         "nimls",
         "powershell_es",
-        "pyright",
+        -- "pyright"
+        "jedi_language_server",
         "rust_analyzer",
         "taplo",
         "terraformls",
@@ -39,8 +40,6 @@ return {
         "yamlls",
         -- "ruby_ls",
       },
-      -- The default handler will try to find a matching lspconfig server and
-      -- call the setup function with an empty table.
       default_handler = function(server_name)
         local lspconfig = require("lspconfig")
         lspconfig[server_name].setup({})
@@ -114,7 +113,7 @@ return {
         lua = { "luacheck" },
         markdown = { "markdownlint" },
         powershell = {},
-        python = { "ruff", "mypy" },
+        python = { "ruff" },
         -- rst = { "vale" },
         c = { "clang_format", "cpplint" },
         cpp = { "clang_format", "cpplint" },
@@ -128,19 +127,19 @@ return {
       },
     },
     config = function()
-      vim.cmd [[
-        augroup lint
-          autocmd!
-          autocmd BufWritePost,BufEnter * lua require('lint').try_lint()
-        augroup END
-      ]]
+      -- vim.cmd [[
+      --   augroup lint
+      --     autocmd!
+      --     autocmd BufWritePost,BufEnter * lua require('lint').try_lint()
+      --   augroup END
+      -- ]]
+      vim.api.nvim_create_autocmd({ "BufWritePost", "BufEnter" }, {
+        group = vim.api.nvim_create_augroup("lint", { clear = true }),
+        callback = function()
+          require('lint').try_lint()
+        end,
+      })
     end,
-    -- vim.api.nvim_create_autocmd({ "BufWritePost", "BufEnter" }, {
-    --   group = vim.api.nvim_create_augroup("lint", { clear = true }),
-    --   callback = function()
-    --     lint.try_lint()
-    --   end,
-    -- })
   },                         --}}}
   {
     "stevearc/conform.nvim", --{{{
@@ -258,8 +257,9 @@ return {
         "marksman",
         "nimls",
         -- "ruby_ls",
-        "powershell_es",
         "pyright",
+        "jedi_language_server",
+        "powershell_es",
         "rust_analyzer",
         "lua_ls",
         "taplo",
@@ -273,6 +273,52 @@ return {
           capabilities = capabilities,
         })
       end
+      local on_attach = function(client, bufnr)
+        --   if client.name == 'pyright' then
+        --     client.resolved_capabilities.hover = true
+        --     client.resolved_capabilities.definition = false
+        --     client.resolved_capabilities.signature_help = true
+        --     client.resolved_capabilities.references = false
+        --     client.resolved_capabilities.document_highlight = false
+        --   end
+        --   if client.name == 'jedi_language_server' then
+        --     client.resolved_capabilities.hover = false
+        --     client.resolved_capabilities.definition = true
+        --     client.resolved_capabilities.signature_help = false
+        --     client.resolved_capabilities.references = true
+        --     client.resolved_capabilities.document_highlight = true
+      end
+      lspconfig.pyright.setup({
+        on_attach = on_attach,
+        settings = {
+          disableLanguageServices = true,
+          disableOrganizeImports = false,
+          python = {
+            analysis = {
+              autoSearchPaths = true,
+              diagnosticMode = "workspace",
+              useLibraryCodeForTypes = true,
+              autoImportCompletions = false,
+            },
+          },
+        }
+      })
+      lspconfig.jedi_language_server.setup({
+        on_attach = on_attach,
+        settings = {
+          completion = {
+            disableSnippets = false,
+            resolveEagerly = false,
+            ignorePatterns = '[]',
+          },
+          diagnostics = {
+            enable = false,
+            didOpen = false,
+            didChange = false,
+            didSave = false,
+          },
+        },
+      })
     end,
   }
 }

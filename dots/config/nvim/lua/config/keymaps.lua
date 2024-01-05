@@ -718,7 +718,7 @@ if is_vscode then
   map("n", "<C-b>", "<Cmd>call VSCodeNotify('editor.action.referenceSearch.trigger')<CR>",
     { desc = "move" })
 else
-  -- map("n", "b", "K", { desc = "Hover" })
+  map("n", "b", "K", { desc = "keyworddrop" })
   -- map("n", "b", "<Cmd>lua vim.lsp.buf.type_definition()<CR>", { desc = "type definition" })
   -- map("n", "<leader>b", "<Cmd>lua vim.lsp.buf.references()<CR>", { desc = "Hover" })
   -- map("n", "<leader>k", "<Cmd>lua vim.lsp.buf.implementation()<CR>", { desc = "move" })
