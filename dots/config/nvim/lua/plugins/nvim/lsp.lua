@@ -258,7 +258,7 @@ return {
         "nimls",
         -- "ruby_ls",
         "pyright",
-        "jedi_language_server",
+        -- "jedi_language_server",
         "powershell_es",
         "rust_analyzer",
         "lua_ls",
@@ -273,21 +273,33 @@ return {
           capabilities = capabilities,
         })
       end
-      local on_attach = function(client, bufnr)
-        --   if client.name == 'pyright' then
-        --     client.resolved_capabilities.hover = true
-        --     client.resolved_capabilities.definition = false
-        --     client.resolved_capabilities.signature_help = true
-        --     client.resolved_capabilities.references = false
-        --     client.resolved_capabilities.document_highlight = false
-        --   end
-        --   if client.name == 'jedi_language_server' then
-        --     client.resolved_capabilities.hover = false
-        --     client.resolved_capabilities.definition = true
-        --     client.resolved_capabilities.signature_help = false
-        --     client.resolved_capabilities.references = true
-        --     client.resolved_capabilities.document_highlight = true
-      end
+      -- workspaceSymbolProvider
+      -- documentSymbolProvider
+      -- renameProvider
+      -- completionProvider
+      -- codeActionProvider
+      -- documentHighlightProvider
+      -- referencesProvider
+      -- signatureHelpProvider
+      -- definitionProvider
+      -- hoverProvider
+      -- local on_attach = function(client, bufnr)
+      --   if client.name == 'pyright' then
+      --     for k, _ in pairs(client.server_capabilities) do
+      --       client.server_capabilities[k] = false
+      --     end
+      --     -- client.server_capabilities.definitionProvider = true
+      --     -- client.server_capabilities.hoverProvider = true
+      --     -- client.server_capabilities.signatureHelpProvider = true
+      --   end
+      --   if client.name == 'jedi_language_server' then
+      --     client.server_capabilities.hoverProvider = false
+      --     client.server_capabilities.definitionProvider = true
+      --     client.server_capabilities.signatureHelpProvider = false
+      --     client.server_capabilities.referencesProvider = true
+      --     client.server_capabilities.documentHighlightProvider = true
+      --   end
+      -- end
       lspconfig.pyright.setup({
         on_attach = on_attach,
         settings = {

@@ -7,6 +7,7 @@ export PATH="$HOME/.nimble/bin:$PATH"
 export DENO_INSTALL="/home/user/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
 export NVM_DIR="$HOME/.nvm"
+export XDG_CACHE_HOME="$HOME/.cache"
 export RUFF_CACHE_DIR="$XDG_CACHE_HOME/ruff"
 
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
