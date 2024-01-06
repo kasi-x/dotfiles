@@ -273,33 +273,39 @@ return {
           capabilities = capabilities,
         })
       end
-      -- workspaceSymbolProvider
-      -- documentSymbolProvider
-      -- renameProvider
-      -- completionProvider
+      --{{{ all capabilities
+      -- analyzerServiceExecutor
+      -- autoImporter
+      -- callHierarchyProvider
       -- codeActionProvider
-      -- documentHighlightProvider
-      -- referencesProvider
-      -- signatureHelpProvider
+      -- completionProvider
+      -- completionProviderUtils
       -- definitionProvider
+      -- documentHighlightProvider
+      -- documentSymbolCollector.
+      -- documentSymbolProvider
       -- hoverProvider
-      -- local on_attach = function(client, bufnr)
-      --   if client.name == 'pyright' then
-      --     for k, _ in pairs(client.server_capabilities) do
-      --       client.server_capabilities[k] = false
-      --     end
-      --     -- client.server_capabilities.definitionProvider = true
-      --     -- client.server_capabilities.hoverProvider = true
-      --     -- client.server_capabilities.signatureHelpProvider = true
-      --   end
-      --   if client.name == 'jedi_language_server' then
-      --     client.server_capabilities.hoverProvider = false
-      --     client.server_capabilities.definitionProvider = true
-      --     client.server_capabilities.signatureHelpProvider = false
-      --     client.server_capabilities.referencesProvider = true
-      --     client.server_capabilities.documentHighlightProvider = true
-      --   end
-      -- end
+      -- importSorter
+      -- navigationUtils
+      -- quickActions
+      -- referencesProvider
+      -- renameProvider
+      -- signatureHelpProvider
+      -- symbolIndexer
+      -- tooltipUtils
+      -- workspaceSymbolProvider
+      -- }}}
+      local on_attach = function(client)
+        if client.name == 'pyright' then
+          for k, _ in pairs(client.server_capabilities) do
+            client.server_capabilities[k] = false
+          end
+          -- client.server_capabilities.signatureHelpProvider = true
+        end
+        -- if client.name == 'jedi_language_server' then
+        --   client.server_capabilities.signatureHelpProvider = false
+        -- end
+      end
       lspconfig.pyright.setup({
         on_attach = on_attach,
         settings = {
@@ -318,11 +324,6 @@ return {
       lspconfig.jedi_language_server.setup({
         on_attach = on_attach,
         settings = {
-          completion = {
-            disableSnippets = false,
-            resolveEagerly = false,
-            ignorePatterns = '[]',
-          },
           diagnostics = {
             enable = false,
             didOpen = false,
