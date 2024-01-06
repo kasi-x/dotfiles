@@ -195,13 +195,13 @@ task-tags = [
     "PHASE-OUT",
 ]
 extend-ignore = [
-    "ANN10",   # Missing type annotation for self.  WHYNOT: unproductive type puzzle.
+    "ANN10",   # Missing type annotation for self.  WHYNOT: unproductive puzzle.
     "ANN401",  # Dynamically typed expressions (typing.Any) are disallowed in {name}.  WHYNOT: false-positive.
-    "PLR6301", # Checks for the presence of unused self parameter in methods definitions. WHYNOT: false-positive
+    "PLR6301", # Checks for the presence of unused self parameter in methods definitions.  WHYNOT: false-positive
     "T20",     # flake8-print  WHYNOT: for fast debug.
-    "TRY003",  # Avoid specifying long messages outside the exception class. WHYNOT: for fast debug.
-    "D10",     # undocumented code WHYNOT: for small project.
-    "PLR0917", # Too many positional arguments ({c_pos}/{max_pos}) WHYNOT: PLR0913 is better.
+    "TRY003",  # Avoid specifying long messages outside the exception class.  WHYNOT: for fast debug.
+    "D10",     # undocumented code  WHYNOT: for small project.
+    "PLR0917", # Too many positional arguments ({c_pos}/{max_pos})  WHYNOT: PLR0913 is better.
     "PLW1641", # Checks for classes that implement __eq__ but not __hash__.  WHYNOT: rarely meaning hack
     # "TD",     # flake8-todos
     # "FIX",    # flake8-fixme     
@@ -237,7 +237,7 @@ fix = true
 unfixable = [
     "F401",   # unused-import
     "RET504", # unnecessary-assign
-    # "B",      # flake8-bugbear WHYNOT: little buggy.
+    # "B",      # flake8-bugbear  WHYNOT: little buggy.
 ]
 dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
 target-version = "py311"

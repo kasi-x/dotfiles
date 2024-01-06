@@ -1485,8 +1485,8 @@ return {
           diagnostic = "",
         },
         lightbulb = {
-          sigh = false,
-          enable = false,
+          sigh = true,
+          enable = true,
           virtual_text = true,
           enable_in_insert = true,
         },
@@ -1501,10 +1501,10 @@ return {
         },
         definition = {
           keys = {
-            edit = "<C-o>",
+            edit = "<C-g>",
             vsplit = "gu",
             split = "gy",
-            tabe = "<C-g>",
+            tabe = "<C-o>",
             quit = "q",
             close = "<C-q>",
           },
@@ -1564,12 +1564,12 @@ return {
         desc = "diagnostic_jump_prev",
         mode = { "n" },
       },
-      {
-        "<Leader>b",
-        "<cmd>Lspsaga show_line_diagnostics<CR>",
-        desc = "show_diagnostic",
-        mode = { "n" },
-      },
+      -- {
+      --   "<Leader>b",
+      --   "<cmd>Lspsaga show_line_diagnostics<CR>",
+      --   desc = "show_diagnostic",
+      --   mode = { "n" },
+      -- },
     },
   },
   {

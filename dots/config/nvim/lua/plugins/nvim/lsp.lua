@@ -258,7 +258,7 @@ return {
         "nimls",
         -- "ruby_ls",
         "pyright",
-        -- "jedi_language_server",
+        "jedi_language_server",
         "powershell_es",
         "rust_analyzer",
         "lua_ls",
@@ -273,44 +273,108 @@ return {
           capabilities = capabilities,
         })
       end
-      --{{{ all capabilities
-      -- analyzerServiceExecutor
-      -- autoImporter
-      -- callHierarchyProvider
-      -- codeActionProvider
-      -- completionProvider
-      -- completionProviderUtils
-      -- definitionProvider
-      -- documentHighlightProvider
-      -- documentSymbolCollector.
-      -- documentSymbolProvider
-      -- hoverProvider
-      -- importSorter
-      -- navigationUtils
-      -- quickActions
-      -- referencesProvider
-      -- renameProvider
-      -- signatureHelpProvider
-      -- symbolIndexer
-      -- tooltipUtils
-      -- workspaceSymbolProvider
-      -- }}}
-      local on_attach = function(client)
+      --[[ {{{ pyright capabilities
+      analyzerServiceExecutor
+      autoImporter
+      callHierarchyProvider
+      codeActionProvider
+      completionProvider
+      completionProviderUtils
+      definitionProvider
+      documentHighlightProvider
+      documentSymbolCollector
+      documentSymbolProvider
+      hoverProvider
+      importSorter
+      navigationUtils
+      quickActions
+      referencesProvider
+      renameProvider
+      signatureHelpProvider
+      symbolIndexer
+      tooltipUtils
+      workspaceSymbolProvider
+      -- }}} ]]
+      --[[ {{{ jedi capabilities
+      completionItem/resolve
+      textDocument/codeAction (refactor.inline, refactor.extract)
+      textDocument/completion
+      textDocument/definition
+      textDocument/documentHighlight
+      textDocument/documentSymbol
+      textDocument/typeDefinition
+      textDocument/hover
+      textDocument/publishDiagnostics
+      textDocument/references
+      textDocument/rename
+      textDocument/signatureHelp
+      workspace/symbol
+      Text Synchronization (for diagnostics)
+      textDocument/didChange
+      textDocument/didOpen
+      textDocument/didSave
+      -- }}} ]]
+      --[[ Compare {{{
+      Pyright Exclusive Features: {{{
+      analyzerServiceExecutor
+      importSorter
+      navigationUtils
+      ?quickActions
+      symbolIndexer
+      tooltipUtils }}}
+      Jedi Language Server Exclusive Features: {{{
+      completionItem/resolve
+      ?textDocument/codeAction (refactor.inline, refactor.extract)
+      textDocument/typeDefinition
+      textDocument/publishDiagnostics
+      Text Synchronization (for diagnostics)
+      textDocument/didChange
+      textDocument/didOpen
+      textDocument/didSave
+      }}}
+      -- }}}]]
+      local on_attach = function(client, buffer)
         if client.name == 'pyright' then
-          for k, _ in pairs(client.server_capabilities) do
-            client.server_capabilities[k] = false
-          end
+          client.server_capabilities.definitionProvider = true
+          client.server_capabilities.referencesProvider = true
+          client.server_capabilities.hoverProvider = true
+
+          -- for k, _ in pairs(client.server_capabilities) do
+          --   client.server_capabilities[k] = false
+          -- end
+          -- client.server_capabilities.definitionProvider = false
+          -- client.server_capabilities.analyzerServiceExecutor = true
+          -- client.server_capabilities.referencesProvider = true
+          -- client.server_capabilities.hoverProvider = true
+          -- client.server_capabilities.analyzerServiceExecutor = true
+          -- client.server_capabilities.callHierarchyProvider = true
           -- client.server_capabilities.signatureHelpProvider = true
+          -- client.server_capabilities.documentSymbolCollector = true
+          -- client.server_capabilities.documentSymbolProvider = true
+          -- client.server_capabilities.navigationUtils = true
+          -- navigationUtils
+          -- renameProvider
+          -- signatureHelpProvider
+          -- symbolIndexer
+          -- tooltipUtils
+          -- workspaceSymbolProvider
         end
-        -- if client.name == 'jedi_language_server' then
-        --   client.server_capabilities.signatureHelpProvider = false
-        -- end
+
+        if client.name == 'jedi_language_server' then
+          -- for k, _ in pairs(client.server_capabilities) do
+          --   client.server_capabilities[k] = true
+          -- end
+
+          client.server_capabilities.definitionProvider = false
+          client.server_capabilities.referencesProvider = false
+          client.server_capabilities.hoverProvider = false
+        end
       end
       lspconfig.pyright.setup({
         on_attach = on_attach,
         settings = {
-          disableLanguageServices = true,
-          disableOrganizeImports = false,
+          disableLanguageServices = false,
+          disableOrganizeImports = true,
           python = {
             analysis = {
               autoSearchPaths = true,
