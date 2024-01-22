@@ -109,6 +109,33 @@ ignore = ["src/old*", ".venv/*"]
 basic = ["**"]
 
 [tool.ruff]
+target-version = "py311"
+line-length = 99
+select = ["ALL"]
+fix = true
+unsafe-fixes = true
+logger-objects = ["logging_setup.logger"]
+respect-gitignore = true
+src = ["src", "test"]
+indent-width = 4
+ignore-init-module-imports = true
+extend-ignore = [
+    "PLR6301", # Checks for the presence of unused self parameter in methods definitions.  WHYNOT: false-positive
+    "T20",     # flake8-print  WHYNOT: for fast debug.
+    "TRY003",  # Avoid specifying long messages outside the exception class.  WHYNOT: for fast debug.
+    "D10",     # undocumented code  WHYNOT: for small project.
+    "PLR0917", # Too many positional arguments ({c_pos}/{max_pos})  WHYNOT: PLR0913 is better.
+    # "TD",     # flake8-todos
+    # "FIX",    # flake8-fixme
+    # "TCH",    # flake8-type-checking
+    # "ANN10",   # Missing type annotation for self.  WHYNOT: unproductive type puzzle.(suppressed by ignore-fully-untyped = true)
+    # "ANN401",  # Dynamically typed expressions (typing.Any) are disallowed in {name}.  WHYNOT: false-positive. (suppressed by ignore-fully-untyped = true)
+]
+unfixable = [
+    "RET504", # unnecessary-assign
+    # "F401",   # unused-import (ignore-init-module-imports = true)
+    # "B",      # flake8-bugbear  WHYNOT: buggy.
+]
 task-tags = [
     # General Purpose Tags
     "TODO",
@@ -122,6 +149,7 @@ task-tags = [
     "HOLD",
     "WARN",
     "PLAN",
+    "PROCESS",
 
     # More Hack
     "META",
@@ -171,7 +199,7 @@ task-tags = [
     "BENCHMARK",
     "EVALUATION",
     "SCALE",
-    "PERF",
+    "PERFORMANCE",
 
     # Code Enhancement,
     "CLARITY",
@@ -194,60 +222,10 @@ task-tags = [
     "UNKNOWN",
     "PHASE-OUT",
 ]
-extend-ignore = [
-    "ANN10",   # Missing type annotation for self.  WHYNOT: unproductive puzzle.
-    "ANN401",  # Dynamically typed expressions (typing.Any) are disallowed in {name}.  WHYNOT: false-positive.
-    "PLR6301", # Checks for the presence of unused self parameter in methods definitions.  WHYNOT: false-positive
-    "T20",     # flake8-print  WHYNOT: for fast debug.
-    "TRY003",  # Avoid specifying long messages outside the exception class.  WHYNOT: for fast debug.
-    "D10",     # undocumented code  WHYNOT: for small project.
-    "PLR0917", # Too many positional arguments ({c_pos}/{max_pos})  WHYNOT: PLR0913 is better.
-    "PLW1641", # Checks for classes that implement __eq__ but not __hash__.  WHYNOT: rarely meaning hack
-    # "TD",     # flake8-todos
-    # "FIX",    # flake8-fixme     
-    # "TCH",    # flake8-type-checking 
-]
-
-exclude = [
-    ".bzr",
-    ".direnv",
-    ".eggs",
-    ".git",
-    ".git-rewrite",
-    ".hg",
-    ".mypy_cache",
-    ".nox",
-    ".pants.d",
-    ".pytype",
-    ".ruff_cache",
-    ".svn",
-    ".tox",
-    ".venv",
-    "__pypackages__",
-    "_build",
-    "buck-out",
-    "build",
-    "dist",
-    "node_modules",
-    "venv",
-]
-line-length = 99
-select = ["ALL"]
-fix = true
-unfixable = [
-    "F401",   # unused-import
-    "RET504", # unnecessary-assign
-    # "B",      # flake8-bugbear  WHYNOT: little buggy.
-]
-dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
-target-version = "py311"
-src = ["src", "test"]
-indent-width = 4
 
 [tool.ruff.per-file-ignores]
 "__init__.py" = ["E402", "INP001"]
 "tests/*" = [
-    "ANN",     # flake8-annotations
     "ARG",     # flake8-unused-arguments
     "FBT",     # flake8-boolean-trap
     "S",       # flake8-bandit
@@ -269,6 +247,7 @@ max-complexity = 8
 
 [tool.ruff.lint.pydocstyle]
 convention = "google" # "google" | "numpy" | "pep257"
+ignore-decorators = ["typing.overload"]
 
 [tool.ruff.isort]
 force-single-line = true
@@ -284,11 +263,30 @@ max-doc-length = 120
 [tool.ruff.lint.flake8-import-conventions.extend-aliases]
 "dask.dataframe" = "dd"
 "xarray" = "xr"
+"scipy" = "sp"
+"skopt" = "sko"
+"skimage" = "ski"
+"bs4.BeautifulSoup" = "bs"
+"sklearn" = "sk"
+"returns" = "rt"
+"pandera" = "pa"
 
 [tool.ruff.lint.flake8-type-checking]
 exempt-modules = ["typing", "typing_extensions"]
 
+[tool.ruff.lint.flake8-annotations]
+ignore-fully-untyped = true
+allow-star-arg-any = false
+suppress-dummy-args = false
+suppress-none-returning = false
+
 [tool.codespell]
-skip = '*.po,*.ts,./src/3rdParty,./src/Test'
+skip = '*.po,*.ts,./src/3rdParty, /trial'
 count = ''
 quiet-level = 3
+
+[tool.ruff.lint.flake8-errmsg]
+max-string-length = 20
+
+[tool.ruff.lint.mccabe]
+max-complexity = 5  # default is 10
