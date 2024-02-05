@@ -7,94 +7,54 @@ return {
     "williamboman/mason.nvim", --{{{
     event = "VeryLazy",
     build = ":MasonUpdate",
-    config = function()
-      require("mason").setup()
-    end,
-  },                                     --}}}
-  {
-    "williamboman/mason-lspconfig.nvim", --{{{
-    event = "VeryLazy",
     opts = {
-      automatic_installation = true,
-      ensure_installed = {
-        "bashls",
-        "bufls",
-        "clangd",
-        "cssls",
-        "denols",
-        "diagnosticls",
-        "dockerls",
-        "gopls",
-        "html",
-        "jsonls",
-        "lua_ls",
-        "marksman",
-        "nimls",
-        "powershell_es",
-        -- "pyright"
-        "jedi_language_server",
-        "rust_analyzer",
-        "taplo",
-        "terraformls",
-        "tsserver",
-        "yamlls",
-        -- "ruby_ls",
+      max_concurrent_installers = 10,
+      log_level = vim.log.levels.DEBUG,
+      ui = {
+        icons = {
+          package_installed = "",
+          package_pending = "",
+          package_uninstalled = "",
+        },
       },
-      default_handler = function(server_name)
-        local lspconfig = require("lspconfig")
-        lspconfig[server_name].setup({})
-      end,
     },
+    config = true,
   }, --}}}
   {
-    "jay-babu/mason-nvim-dap.nvim",
-    opts = {
-      ensure_installed = { "python" },
-      automatic_installation = true,
-      automatic_setup = true,
-    },
-  },
-  {
-    "rshkarin/mason-nvim-lint", --{{{
+    "williamboman/mason-lspconfig.nvim", --{{{
+    dependencies = { "williamboman/mason.nvim" },
     event = "VeryLazy",
-    opts = {
-      DEFAULT_SETTINGS = {
-        ---@type string[]
-        ensure_installed = {
-          "golint",
-          "beautysh",
-          "clang_format",
-          "astyle",
-          "uncrustify",
-          "codespell",
-          "cspell",
-          "cpp_format",
-          "cpplint",
-          "gitlint",
-          "luacheck",
-          "ruff",
-          "selene",
-          "shellcheck",
-          "shfmt",
-          -- "vale",
-          "hadolint",
-          "commitlint",
-          "cspell",
-          "mypy",
-          "goimports",
-          "gofmt",
-          "gofumpt",
-          "golines",
-          "markdownlint",
-          "typos",
-          "actionlint"
-        },
-      }
-    },
-  },                          --}}}
+    config = function()
+      require("mason").setup()
+      require("mason-lspconfig").setup({
+        automatic_installation = true,
+      })
+    end,
+  }, --}}}
+  -- {
+  --   "jay-babu/mason-nvim-dap.nvim",
+  --   event = "VeryLazy",
+  --   dependencies = { "williamboman/mason.nvim" },
+  --   -- opts = {
+  --   --   ensure_installed = { "python" },
+  --   --   automatic_installation = true,
+  --   --   automatic_setup = true,
+  --   -- },
+  -- config =function()
+  --   require("mason").setup()
+  --   require("mason-nvim-dap").setup({
+  --   ensure_installed = { "python" },
+  --     automatic_installation = true,
+  --     automatic_setup = true,
+  --   })
+  -- end,
+  -- },
+  -- {"mfussenegger/nvim-dap"},
+  -- mfussenegger / nvim-dap-python
   {
     "mfussenegger/nvim-lint", --{{{
-    events = { "BufWritePost", "BufReadPost", "InsertLeave" },
+    dependencies = { "rshkarin/mason-nvim-lint" },
+    -- events = { "BufWritePost", "BufReadPost", "InsertLeave" },
     opts = {
       linters_by_ft = {
         sh = { "shellcheck" },
@@ -106,14 +66,14 @@ return {
         dockerfile = { "hadolint" },
         ghaction = { "actionlint" },
         git = { "gitlint", "cspell" },
-        go = { "golangci_lint", "golint" },
+        go = { "golangci_lint" },
         gitcommit = { "gitlint", "commitlint", "cspell" },
         -- java = {},
         javascript = { "eslint_d" },
         lua = { "luacheck" },
         markdown = { "markdownlint" },
         powershell = {},
-        python = { "ruff" },
+        python = { "ruff", "mypy" },
         -- rst = { "vale" },
         c = { "clang_format", "cpplint" },
         cpp = { "clang_format", "cpplint" },
@@ -136,11 +96,25 @@ return {
       vim.api.nvim_create_autocmd({ "BufWritePost", "BufEnter" }, {
         group = vim.api.nvim_create_augroup("lint", { clear = true }),
         callback = function()
-          require('lint').try_lint()
+          require("lint").try_lint()
         end,
       })
     end,
-  },                         --}}}
+  }, --}}}
+  {
+    "rshkarin/mason-nvim-lint", --{{{
+    -- event = "VeryLazy",
+    events = { "BufWritePost", "BufReadPost", "InsertLeave" },
+    dependencies = { "williamboman/mason.nvim", "mfussenegger/nvim-lint" },
+    -- opts = { automatic_installation = true },
+    config = function()
+      require("mason").setup()
+      require("mason-nvim-lint").setup({
+        automatic_installation = true,
+      })
+      require("nvim-lint").setup()
+    end,
+  }, --}}}
   {
     "stevearc/conform.nvim", --{{{
     -- event = { "VeryLazy" },
@@ -170,7 +144,7 @@ return {
         markdown = { "prettier", "textlint" },
         graphql = { "prettier" },
         lua = { "stylua", "selene" },
-        python = { "ruff_format", "ruff_fix" },
+        python = { "ruff_fix", "ruff_format" },
         zsh = { "shfmt", "beautysh", "shellcheck" },
         arduino = { "clang_format", "astyle", "uncrustify" },
         c = { "clang_format", "astyle", "uncrustify" },
@@ -178,12 +152,14 @@ return {
         cmake = { "cmake_format" },
         go = { "goimports", "gofmt", "gofumpt", "golines" },
         rust = { "rustfmt" },
-        -- ruby = { "rufo" },
         shell = { "shfmt", "beautysh", "shellcheck" },
         ini = { "shfmt", "beautysh", "shellcheck" },
-        ["_"] = { "trim_whitespace", "injected" },
+        ["*"] = { "codespell", "typos" },
+        ["_"] = {
+          "trim_whitespace", --[[ "injected" ]]
+        },
       },
-      format_on_save = { timeout_ms = 500, lsp_fallback = true },
+      format_on_save = { timeout_ms = 500, lsp_fallback = false },
       formatters = {
         shfmt = {
           prepend_args = { "-i", "2" },
@@ -236,7 +212,7 @@ return {
       capabilities = {
         workspace = {
           didChangeWatchedFiles = {
-            dynamicRegistration = false,
+            dynamicRegistration = true,
           },
         },
       },
@@ -244,6 +220,7 @@ return {
     config = function()
       local lspconfig = require("lspconfig")
       local servers = {
+        -- "arduino-language-server",
         "bashls",
         "bufls",
         "clangd",
@@ -333,38 +310,14 @@ return {
       textDocument/didSave
       }}}
       -- }}}]]
-      local on_attach = function(client, buffer)
-        if client.name == 'pyright' then
+      local on_attach = function(client)
+        if client.name == "pyright" then
           client.server_capabilities.definitionProvider = true
           client.server_capabilities.referencesProvider = true
           client.server_capabilities.hoverProvider = true
-
-          -- for k, _ in pairs(client.server_capabilities) do
-          --   client.server_capabilities[k] = false
-          -- end
-          -- client.server_capabilities.definitionProvider = false
-          -- client.server_capabilities.analyzerServiceExecutor = true
-          -- client.server_capabilities.referencesProvider = true
-          -- client.server_capabilities.hoverProvider = true
-          -- client.server_capabilities.analyzerServiceExecutor = true
-          -- client.server_capabilities.callHierarchyProvider = true
-          -- client.server_capabilities.signatureHelpProvider = true
-          -- client.server_capabilities.documentSymbolCollector = true
-          -- client.server_capabilities.documentSymbolProvider = true
-          -- client.server_capabilities.navigationUtils = true
-          -- navigationUtils
-          -- renameProvider
-          -- signatureHelpProvider
-          -- symbolIndexer
-          -- tooltipUtils
-          -- workspaceSymbolProvider
         end
 
-        if client.name == 'jedi_language_server' then
-          -- for k, _ in pairs(client.server_capabilities) do
-          --   client.server_capabilities[k] = true
-          -- end
-
+        if client.name == "jedi_language_server" then
           client.server_capabilities.definitionProvider = false
           client.server_capabilities.referencesProvider = false
           client.server_capabilities.hoverProvider = false
@@ -383,7 +336,7 @@ return {
               autoImportCompletions = false,
             },
           },
-        }
+        },
       })
       lspconfig.jedi_language_server.setup({
         on_attach = on_attach,
@@ -397,5 +350,5 @@ return {
         },
       })
     end,
-  }
+  },
 }

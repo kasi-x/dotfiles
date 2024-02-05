@@ -24,10 +24,11 @@ alias open='nautilus'
 alias vz='neovide ~/user.zsh'
 alias ez='code ~/user.zsh'
 alias vv='neovide ~/.config/nvim/lua'
+# alias y2s='yt-dlp -f bestaudio -x --audio-format mp3 -o "~/Music/Downloads/%(title)s.%(ext)s"'
 alias y2s='yt-dlp -f bestaudio -x --audio-format mp3 -o "~/Music/Downloads/%(title)s.%(ext)s"'
-alias y2v='yt-dlp -f "bestvideo+bestaudio" --merge-output-format mp4 -o "~/Videos/Downloads/%(title)s.%(ext)s"'
-alias y4k='yt-dlp -f "bestvideo[ext=mp4][height<=2160]+bestaudio[ext=m4a]/bestvideo[ext=mp4][height<=21160]+bestaudio[ext=m4a]/bestvideo[ext=mp4][height<=21160]+bestaudio[ext=m4a]"'
+alias y2v='yt-dlp -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/bestvideo[ext=mp4]+bestaudio[ext=m4a]/bestvideo[ext=mp4]+bestaudio[ext=m4a]" --merge-output-format "mp4" -o "~/Videos/Downloads/%(title)s.%(ext)s"'
 alias skk='yaskkserv2  --config-filename /home/user/.skk/linux_yaskkserv2.conf'
+alias M='mpv /home/user/Music'
 
 # Docker
 # https://github.com/webyneter/docker-aliases/blob/master/docker-aliases.plugin.zsh
