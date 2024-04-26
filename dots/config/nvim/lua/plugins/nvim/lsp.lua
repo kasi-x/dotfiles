@@ -156,13 +156,18 @@ return {
         ini = { "shfmt", "beautysh", "shellcheck" },
         ["*"] = { "codespell", "typos" },
         ["_"] = {
-          "trim_whitespace", --[[ "injected" ]]
+          "trim_whitespace",
+          "injected",
         },
       },
       format_on_save = { timeout_ms = 500, lsp_fallback = false },
       formatters = {
         shfmt = {
           prepend_args = { "-i", "2" },
+        },
+        codespell = {
+          cmd = "codespell",
+          args = { "--ignore-words-list=ans" },
         },
       },
     },
@@ -235,7 +240,7 @@ return {
         "nimls",
         -- "ruby_ls",
         "pyright",
-        "jedi_language_server",
+        -- "jedi_language_server",
         "powershell_es",
         "rust_analyzer",
         "lua_ls",
@@ -250,6 +255,7 @@ return {
           capabilities = capabilities,
         })
       end
+
       --[[ {{{ pyright capabilities
       analyzerServiceExecutor
       autoImporter
@@ -310,45 +316,55 @@ return {
       textDocument/didSave
       }}}
       -- }}}]]
-      local on_attach = function(client)
-        if client.name == "pyright" then
-          client.server_capabilities.definitionProvider = true
-          client.server_capabilities.referencesProvider = true
-          client.server_capabilities.hoverProvider = true
-        end
+      -- local on_attach = function(client)
+      --   if client.name == "pyright" then
+      --     client.server_capabilities.definitionProvider = true
+      --     client.server_capabilities.referencesProvider = true
+      --     client.server_capabilities.hoverProvider = true
+      --   end
+      --
+      --   if client.name == "jedi_language_server" then
+      --     client.server_capabilities.definitionProvider = false
+      --     client.server_capabilities.referencesProvider = false
+      --     client.server_capabilities.hoverProvider = false
+      --   end
+      -- end
+      -- local function setup_python_lsp()
+      -- local has_venv = vim.fn.isdirectory(".venv") == 1
+      -- local pythonPath = has_venv and "./.venv/bin/python" or "python"
 
-        if client.name == "jedi_language_server" then
-          client.server_capabilities.definitionProvider = false
-          client.server_capabilities.referencesProvider = false
-          client.server_capabilities.hoverProvider = false
-        end
-      end
-      lspconfig.pyright.setup({
-        on_attach = on_attach,
-        settings = {
-          disableLanguageServices = false,
-          disableOrganizeImports = true,
-          python = {
-            analysis = {
-              autoSearchPaths = true,
-              diagnosticMode = "workspace",
-              useLibraryCodeForTypes = true,
-              autoImportCompletions = false,
-            },
-          },
-        },
-      })
-      lspconfig.jedi_language_server.setup({
-        on_attach = on_attach,
-        settings = {
-          diagnostics = {
-            enable = false,
-            didOpen = false,
-            didChange = false,
-            didSave = false,
-          },
-        },
-      })
+      -- require("lspconfig").pyright.setup({
+      -- on_attach = on_attach,
+      -- settings = {
+      --   disableLanguageServices = false,
+      --   disableOrganizeImports = true,
+      --   python = {
+      --     analysis = {
+      --       autoSearchPaths = true,
+      --       diagnosticMode = "workspace",
+      --       useLibraryCodeForTypes = true,
+      --       autoImportCompletions = false,
+      --       extraPaths = { "." },
+      --     },
+      --     venvPath = ".",
+      --     pythonPath = pythonPath,
+      --   },
+      -- },
+      -- })
+
+      -- require("lspconfig").jedi_language_server.setup({
+      --   on_attach = on_attach,
+      --   settings = {
+      --     diagnostics = {
+      --       enable = false,
+      --       didOpen = false,
+      --       didChange = false,
+      --       didSave = false,
+      --     },
+      --   },
+      -- })
+      -- end
+      -- setup_python_lsp()
     end,
   },
 }

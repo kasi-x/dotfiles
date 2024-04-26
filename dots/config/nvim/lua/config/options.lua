@@ -1,6 +1,6 @@
 local options = {
-  guifont = "JetBrainsMono NFP:h24",
-  guifontwide = "UDEV Gothic 35NFLG:h24",
+  guifont = "JetBrainsMono NFP:h16",
+  guifontwide = "UDEV Gothic 35NFLG:h16",
   -- g:neovide_transparency should be 0 if you want to unify transparency of content and title bar.
 
   -- {{{ Visual
@@ -71,6 +71,8 @@ local options = {
   cmdwinheight = 1,
 }
 -- vim.g.node_host_prog = "/home/akizora/.nvm/versions/node/v18.16.0/bin/node"
+-- vim.g.python3_host_prog = "/home/user/dev/kasi-x/akizora/.venv/bin/python"
+
 for k, v in pairs(options) do
   vim.opt[k] = v
 end
@@ -84,7 +86,7 @@ end
 -- vim.g.neovide_background_color = "#0f1117" .. alpha()
 
 -- if os.getenv("VIRTUAL_ENV") ~= nil then
---     vim.g.python3_host_prog = string.gsub(io.popen("whicsages -a python3 | head -n2 | tail -n1"):read("*all"), "\n", "")
+--   vim.g.python3_host_prog = string.gsub(io.popen("whicsages -a python3 | head -n2 | tail -n1"):read("*all"), "\n", "")
 -- else
---     vim.g.python3_host_prog = string.gsub(io.popen("which python3"):read("*all"), "\n", "")
+--   vim.g.python3_host_prog = string.gsub(io.popen("which python3"):read("*all"), "\n", "")
 -- end

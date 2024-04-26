@@ -1,4 +1,6 @@
 return {
+  -- { "m-demare/hlargs.nvim" },
+
   --  {
   --     "kiyoon/jupynium.nvim",
   --     build = "pip3 install --user .",

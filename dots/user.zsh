@@ -1,7 +1,5 @@
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/go/bin:$PATH"
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.nimble/bin:$PATH"
 export DENO_INSTALL="/home/user/.deno"
@@ -9,12 +7,18 @@ export PATH="$DENO_INSTALL/bin:$PATH"
 export NVM_DIR="$HOME/.nvm"
 export XDG_CACHE_HOME="$HOME/.cache"
 export RUFF_CACHE_DIR="$XDG_CACHE_HOME/ruff"
+export PATH=${AQUA_ROOT_DIR:-${XDG_DATA_HOME:-$HOME/.local/share}/aquaproj-aqua}/bin:$PATH
 
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 [ -s "$HOME/sands.sh" ]
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
+
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
-eval "$(pyenv init --path)"
+source "$HOME/.rye/env"
+
 eval "$(sheldon source)"
 eval "$(gh completion -s zsh)"
 

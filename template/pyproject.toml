@@ -16,7 +16,7 @@ pandera = { extras = [
     "geopandas",
 ], version = "^0.18.0" }
 pydantic = "^2.5.3"
-python-dotenv = "^1.0.0"
+pydantic-settings = "^2.1.0"
 returns = "^0.22.0"
 rich = "^13.7.0"
 structlog = "^23.3.0"
@@ -30,6 +30,10 @@ pytest-cov = "^4.1.0"
 setuptools = "^69.0.3"
 tox = "^4.11.4"
 better-exceptions = "^0.3.3"
+cyclopts = "^2.2.0"
+interrogate = "^1.0.0"
+bump-my-version = "^0.17.3"
+taskipy = "^1.12.2"
 # jupyterlab = "^4.0.10"
 # pytest-datadir = "^1.5.0"
 # pytest-mock = "^3.12.0"
@@ -67,6 +71,7 @@ addopts = [
     "--strict-markers",
     "--picked",
     "--cov=src",
+    "--cov-report=term",
     "--no-cov-on-fail",
 ]
 asyncio_mode = "auto"
@@ -85,6 +90,15 @@ show_missing = true
 fail_under = 100
 skip_covered = true
 skip_empty = true
+omit = [
+    "*site-packages*",
+    "*tests*",
+    "*.tox*",
+]
+exclude_lines = [
+    "raise NotImplementedError",
+    "pragma: no-coverage",
+]
 
 [tool.pyright]
 pythonVersion = "3.11"
@@ -134,9 +148,8 @@ extend-ignore = [
 unfixable = [
     "RET504", # unnecessary-assign
     # "F401",   # unused-import (ignore-init-module-imports = true)
-    # "B",      # flake8-bugbear  WHYNOT: buggy.
 ]
-task-tags = [
+lint.task-tags = [
     # General Purpose Tags
     "TODO",
     "BUG",
@@ -150,6 +163,7 @@ task-tags = [
     "WARN",
     "PLAN",
     "PROCESS",
+    "TYPE",
 
     # More Hack
     "META",
@@ -158,6 +172,7 @@ task-tags = [
     "PILOT",
     "UNEXPLORED",
 
+
     # Decision Rationale
     "WHYNOT",
     "PURPOSE",
@@ -165,6 +180,8 @@ task-tags = [
     "RATIONAL",
     "EXAMPLE",
     "FOLLOW",
+    "POINTLESS",
+    "DESIGN", # New
 
     # Team Communication
     "WIP",
@@ -187,9 +204,9 @@ task-tags = [
     "BLUE",
     "RED",
     "GREEN",
-    "REFACTOR",
-    "DEPENDENT",
-    "OVERTEST",
+    "REFA",
+    "DEPEND",
+    "OVER",
     "UNCOVERED",
     "INTEGRATION",
     "EDGE-CASE",
@@ -208,12 +225,23 @@ task-tags = [
     "DOC-ENHANCE",
     "CLEANUP",
 
-    # Security and Compliance
+    # Compliance
     "SECURE",
     "PRIVACY",
     "ILLEGAL",
     "ACCESSIBILITY",
     "LOCALIZE",
+
+    # Security #RFC2119
+    "MUST",
+    "MUST_NOT",
+    "REQUIRED",
+    "SHALL",
+    "SHALL_NOT",
+    "SHOULD",
+    "SHOULD_NOT",
+    "RECOMMENDED",
+    "MAY",
 
     # Legacy Management
     "DEPRECATE",
@@ -280,13 +308,71 @@ allow-star-arg-any = false
 suppress-dummy-args = false
 suppress-none-returning = false
 
-[tool.codespell]
-skip = '*.po,*.ts,./src/3rdParty, /trial'
-count = ''
-quiet-level = 3
-
 [tool.ruff.lint.flake8-errmsg]
 max-string-length = 20
 
 [tool.ruff.lint.mccabe]
 max-complexity = 5  # default is 10
+
+[tool.interrogate]
+ignore-init-method = true
+ignore-init-module = false
+ignore-magic = true
+ignore-semiprivate = false
+ignore-private = false
+ignore-property-decorators = false
+ignore-module = false
+ignore-nested-functions = true
+ignore-nested-classes = true
+ignore-setters = false
+fail-under = 95
+exclude = ["setup.py", "docs", "build", "dist", "thirdParty/*", "old*"]
+verbose = 0
+quiet = false
+whitelist-regex = []
+color = true
+
+[tool.codespell]
+skip = "*.po,*.ts,*.lock,thirdParty/*,/trial"
+quiet-level = 3
+
+[tool.creosote]
+venvs=[".venv"]
+paths=["src"]
+deps-file="pyproject.toml"
+sections=["tool.poetry.dependencies"]
+exclude-deps =[
+    "rich",
+    "pydantic",
+    "pydantic-settings",
+    "returns",
+    "structlog",
+    "pandera"
+]
+
+[tool.taskipy.tasks]
+test = { cmd = "python -m pytest", help = "runs all tests" }
+lint_ruff = "ruff src"
+lint_mypy = "mypy src"
+
+# [tool.bumpversion]
+# current_version = "0.0.1"
+# commit = true
+# commit_args = "--no-verify"
+# tag = true
+# tag_name = "{new_version}"
+# allow_dirty = true
+# parse = "(?P<major>\\d+)\\.(?P<minor>\\d+)\\.(?P<patch>\\d+)(\\.(?P<dev>post)\\d+\\.dev\\d+)?"
+# serialize = [
+#     "{major}.{minor}.{patch}.{dev}{$PR_NUMBER}.dev{distance_to_latest_tag}",
+#     "{major}.{minor}.{patch}"
+# ]
+# message = "Version updated from {current_version} to {new_version}"
+#
+# [tool.bumpversion.parts.dev]
+# values = ["release", "post"]
+#
+# [[tool.bumpversion.files]]
+# filename = "CHANGELOG.md"
+# search = "{current_version}...HEAD"
+# replace = "{current_version}...{new_version}"

@@ -13,6 +13,10 @@ return {
     ft = "python",
   },
   {
+    "kiyoon/jupynium.nvim",
+    build = "pip3 install --user .",
+  },
+  {
     "nmac427/guess-indent.nvim", --{{{
     event = { "BufRead", "BufNewFile" },
     opts = {
@@ -32,7 +36,7 @@ return {
   }, --}}}
   -- {
   --   "MaximilianLloyd/tw-values.nvim",
-  --   ft = { "typescript", "typescriptreact", "vue", "html", "svelt", "astro", "css" },
+  --   ft = { "typescript", "typescriptreact", "vue", "html", "svelte", "astro", "css" },
   --   keys = {
   --     { "B", "<cmd>TWValues<cr>", desc = "Show tailwind CSS values" },
   --   },

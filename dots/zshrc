@@ -41,3 +41,5 @@ if [[ -f ~/secret.env ]]; then
     export $(grep -v '^#' ~/secret.env | xargs)
 fi
 eval "$(starship init zsh)"
+. "$HOME/.cargo/env"
+. "/home/user/.cargo/env"

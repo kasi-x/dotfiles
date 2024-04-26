@@ -2,8 +2,7 @@
 local function map(mode, lhs, rhs, opts)
   local keys = require("lazy.core.handler").handlers.keys
   if not keys.active[keys.parse({ lhs, mode = mode }).id] then
-    opts = vim.tbl_extend("force", { expr = false, silent = true, nowait = true, noremap = true },
-      opts or {})
+    opts = vim.tbl_extend("force", { expr = false, silent = true, nowait = true, noremap = true }, opts or {})
     vim.keymap.set(mode, lhs, rhs, opts)
   end
 end
@@ -17,11 +16,9 @@ map({ "n", "x", "o" }, "<Del>", "<Nop>", { desc = "Disable Del" })
 map({ "n", "x", "o" }, "<BS>", "<Nop>", { desc = "Disable bs" })
 
 if is_vscode then
-  map("n", "<leader><leader>", "<Cmd>call VSCodeNotify('workbench.action.files.save')<CR>",
-    { desc = "Save File" })
+  map("n", "<leader><leader>", "<Cmd>call VSCodeNotify('workbench.action.files.save')<CR>", { desc = "Save File" })
 else
-  map({ "n", "x" }, "<leader><leader>", '<CMD>w!<CR><CMD>lua vim.cmd("nohlsearch")<CR>',
-    { desc = "Save File" })
+  map({ "n", "x" }, "<leader><leader>", '<CMD>w!<CR><CMD>lua vim.cmd("nohlsearch")<CR>', { desc = "Save File" })
 end
 -- Space }}}
 -- TAB {{{
@@ -50,10 +47,8 @@ map({ "n", "x" }, "g,", "?", { desc = "Search backward" })
 -- map({ "n", "x" }, ",,", "<ESC>:nohlsearch<CR>", { desc = "Search forward" })
 
 if is_vscode then
-  map({ "n", "x" }, "<C-,>", "<Cmd>call VSCodeNotify('workbench.action.navigateBack')<CR>",
-    { desc = "move" })
-  map({ "n", "x" }, "<C-.>", "<Cmd>call VSCodeNotify('workbench.action.navigateForward')<CR>",
-    { desc = "move" })
+  map({ "n", "x" }, "<C-,>", "<Cmd>call VSCodeNotify('workbench.action.navigateBack')<CR>", { desc = "move" })
+  map({ "n", "x" }, "<C-.>", "<Cmd>call VSCodeNotify('workbench.action.navigateForward')<CR>", { desc = "move" })
 else
   map({ "n", "x" }, "<C-,>", "<C-o>", { desc = "Older cursor position in jump list" })
   map({ "n", "x" }, "<C-.>", "<C-i>", { desc = "Newer cursor position in jump list" })
@@ -140,11 +135,9 @@ n  yi          * <Cmd>lua require("which-key").show("yi", {mode = "n", auto = tr
 -- {{{ <Leader>
 -- {{{ Normal / Visual / Operator
 map({ "n", "x", "o" }, "<leader>n", '"}"', { expr = true, desc = "Navigate to the next paragraph" })
-map({ "n", "x", "o" }, "<leader>e", '"{"',
-  { expr = true, desc = "Navigate to the previous paragraph" })
+map({ "n", "x", "o" }, "<leader>e", '"{"', { expr = true, desc = "Navigate to the previous paragraph" })
 map({ "n", "x", "o" }, "<leader>N", '"]"', { expr = false, desc = "Navigate to the next sentence" })
-map({ "n", "x", "o" }, "<leader>E", '"["',
-  { expr = false, desc = "Navigate to the previous sentence" })
+map({ "n", "x", "o" }, "<leader>E", '"["', { expr = false, desc = "Navigate to the previous sentence" })
 -- }}} Normal / Visual / Operator
 -- }}} <Leader>
 -- {{{ <g>
@@ -174,6 +167,7 @@ map("n", "gE", "<C-w>K", { desc = "Move window Down", remap = false })
 -- }}} Normal
 -- }}} <m/M>
 -- }}} <N/E> Up/Down
+-- gjl
 
 -- {{{ <H/I> WordMotion:W/B (-12, g(8), m/M(4))
 -- {{{ Single / Shift (12/12)
@@ -197,12 +191,9 @@ map("i", "<C-h>", "<Left>", {})
 -- {{{ <Leader> (12/12)
 -- {{{ Normal / Visual / Operator (12/12)
 map({ "n", "x", "o" }, "<leader>h", '"^"', { expr = true, desc = "To the end of the line" })
-map({ "n", "x", "o" }, "<leader>i", '"$"',
-  { expr = true, desc = "To the first non-blank character of the line" })
-map({ "n", "x", "o" }, "<leader>H", '"0"',
-  { expr = true, desc = "To the first character of the line" })
-map({ "n", "x", "o" }, "<leader>I", '"+"',
-  { expr = true, desc = "Lines downward, on the first non-blank character" })
+map({ "n", "x", "o" }, "<leader>i", '"$"', { expr = true, desc = "To the first non-blank character of the line" })
+map({ "n", "x", "o" }, "<leader>H", '"0"', { expr = true, desc = "To the first character of the line" })
+map({ "n", "x", "o" }, "<leader>I", '"+"', { expr = true, desc = "Lines downward, on the first non-blank character" })
 -- }}} Normal / Visual / Operator
 -- }}} <Leader>
 -- {{{ <g> (4/12)
@@ -241,10 +232,8 @@ map("n", "gI", "<C-w>L", { desc = "Move window Right", remap = false })
 -- map({ "x", "o" }, "n", "gj", { expr = true, noremap = true })
 -- map({ "x", "o" }, "e", "gk", { expr = true, noremap = true })
 
-map({ "n", "x", "o" }, "n", "v:count == 0 ? 'gjzz' : 'jzz'",
-  { expr = true, desc = "Move cursor to next line" })
-map({ "n", "x", "o" }, "e", "v:count == 0 ? 'gkzz' : 'kzz'",
-  { expr = true, desc = "Move cursor to previous line" })
+map({ "n", "x", "o" }, "n", "v:count == 0 ? 'gjzz' : 'jzz'", { expr = true, desc = "Move cursor to next line" })
+map({ "n", "x", "o" }, "e", "v:count == 0 ? 'gkzz' : 'kzz'", { expr = true, desc = "Move cursor to previous line" })
 -- map({ "n", "x", "o" }, "n", "gjzz", { expr = true, desc = "Move cursor to next line" })
 -- map({ "n", "x", "o" }, "e", "gkzz", { expr = true, desc = "Move cursor to previous line" })
 
@@ -275,11 +264,9 @@ map({ "n", "x", "o" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { expr = true })
 -- {{{ <Leader> (12/12)
 -- {{{ Normal / Visual / Operator
 map({ "n", "x", "o" }, "<leader>n", '"}"', { expr = true, desc = "Navigate to the next paragraph" })
-map({ "n", "x", "o" }, "<leader>e", '"{"',
-  { expr = true, desc = "Navigate to the previous paragraph" })
+map({ "n", "x", "o" }, "<leader>e", '"{"', { expr = true, desc = "Navigate to the previous paragraph" })
 map({ "n", "x", "o" }, "<leader>N", '"]"', { expr = false, desc = "Navigate to the next sentence" })
-map({ "n", "x", "o" }, "<leader>E", '"["',
-  { expr = false, desc = "Navigate to the previous sentence" })
+map({ "n", "x", "o" }, "<leader>E", '"["', { expr = false, desc = "Navigate to the previous sentence" })
 -- }}} Normal / Visual / Operator
 -- }}} <Leader>
 -- {{{ <g> (4/12)
@@ -614,8 +601,7 @@ map("n", "gp", "<Nop>", { desc = "unused" })
 -- }}} Leader
 --{{{ g (1/2)
 if is_vscode then
-  map("n", "gD", "<Cmd>call VSCodeNotify('editor.action.revealDefinitionAside')<CR>",
-    { desc = "move" })
+  map("n", "gD", "<Cmd>call VSCodeNotify('editor.action.revealDefinitionAside')<CR>", { desc = "move" })
   map("n", "gd", "<Cmd>call VSCodeNotify('editor.action.revealDefinition')<CR>", { desc = "move" })
   -- map("n", "gf", "<Cmd>call VSCodeNotify('editor.action.peekDeclaration')<CR>", { desc = "move" })
   -- map("n", "gf", "<Cmd>call VSCodeNotify('editor.action.revealDeclaration')<CR>", { desc = "move" })
@@ -715,8 +701,7 @@ map({ "n", "x" }, "K", "'N'", { expr = true, noremap = true, desc = "Search oppo
 if is_vscode then
   map("n", "b", "<Cmd>call VSCodeNotify('editor.action.showHover')<CR>", { desc = "Hover" })
   map("n", "B", "<Cmd>call VSCodeNotify('editor.action.peekDefinition')<CR>", { desc = "move" })
-  map("n", "<C-b>", "<Cmd>call VSCodeNotify('editor.action.referenceSearch.trigger')<CR>",
-    { desc = "move" })
+  map("n", "<C-b>", "<Cmd>call VSCodeNotify('editor.action.referenceSearch.trigger')<CR>", { desc = "move" })
 else
   -- vim.lsp.buf.references()Lists all the references to the
   -- map("n", "b", "K", { desc = "keyworddrop" })
@@ -796,8 +781,7 @@ if is_vscode then
     "<Cmd>call VSCodeNotify('github.copilot.collectDiagnostics')<CR>",
     { desc = "Error Lens: Toggle (Enable/Disable) Everything" }
   )
-  map("n", "qq", "<Cmd>call VSCodeNotify('editor.action.formatDocument')<CR>",
-    { desc = "AutoFormat" })
+  map("n", "qq", "<Cmd>call VSCodeNotify('editor.action.formatDocument')<CR>", { desc = "AutoFormat" })
   -- {
   --   "key": "shift+alt+f",
   --   "command": "editor.action.formatDocument",
@@ -833,21 +817,15 @@ map(
 if is_vscode then
   -- map({"n", "x"}, "mn", "<Cmd>call VSCodeNotify('editor.foldNext')<CR>", { desc = "Move to next fold" })
   -- map({"n", "x"}, "me", "<Cmd>call VSCodeNotify('editor.foldPrev')<CR>", { desc = "Move to previous fold" })
-  map("n", "mE", "<Cmd>call VSCodeNotify('editor.unfoldRecursively')<CR>",
-    { desc = "Move to top of current fold" })
-  map("n", "mN", "<Cmd>call VSCodeNotify('editor.foldRecursively')<CR>",
-    { desc = "Move to bottom of current fold" })
+  map("n", "mE", "<Cmd>call VSCodeNotify('editor.unfoldRecursively')<CR>", { desc = "Move to top of current fold" })
+  map("n", "mN", "<Cmd>call VSCodeNotify('editor.foldRecursively')<CR>", { desc = "Move to bottom of current fold" })
   map("n", "mh", "<Cmd>call VSCodeNotify('editor.fold')<CR>", { desc = "Close current fold" })
-  map("n", "mH", "<Cmd>call VSCodeNotify('editor.foldAll')<CR>",
-    { desc = "Close all folds recursively" })
+  map("n", "mH", "<Cmd>call VSCodeNotify('editor.foldAll')<CR>", { desc = "Close all folds recursively" })
   map("n", "mi", "<Cmd>call VSCodeNotify('editor.unfold')<CR>", { desc = "Open current fold" })
-  map("n", "mI", "<Cmd>call VSCodeNotify('editor.unfoldAll')<CR>",
-    { desc = "Open all folds recursively" })
+  map("n", "mI", "<Cmd>call VSCodeNotify('editor.unfoldAll')<CR>", { desc = "Open all folds recursively" })
   map("n", "mm", "<Cmd>call VSCodeNotify('editor.foldAll')<CR>", { desc = "Fold current level" })
-  map("n", "mM", "<Cmd>call VSCodeNotify('editor.unfoldAll')<CR>",
-    { desc = "Unfold all levels recursively" })
-  map("n", "mx", "<Cmd>call VSCodeNotify('editor.foldRecursively')<CR>",
-    { desc = "Delete current fold" })
+  map("n", "mM", "<Cmd>call VSCodeNotify('editor.unfoldAll')<CR>", { desc = "Unfold all levels recursively" })
+  map("n", "mx", "<Cmd>call VSCodeNotify('editor.foldRecursively')<CR>", { desc = "Delete current fold" })
   map(
     "n",
     "mX",
@@ -889,6 +867,81 @@ end
 -- }}} Leader
 -- {{{ g (0/2)
 -- }}} g
+-- }}}
+
+-- {{{  <L> Comment
+-- {{{ Single / Shift
+-- {{{ Normal / saisual / Operator
+local function insert_fmt_skip()
+  local row, col = vim.api.nvim_win_get_cursor(0)
+  local line = vim.api.nvim_get_current_line()
+  local modified_line = line .. " # fmt: skip"
+  vim.api.nvim_set_current_line(modified_line)
+  vim.api.nvim_win_set_cursor(0, { row, col + 11 })
+end
+
+map({ "n", "x" }, "lz", insert_fmt_skip, { noremap = true, silent = true })
+-- map({ "n", "x", "o" }, "e", "v:count == 0 ? 'gkzz' : 'kzz'", { expr = true, silent = true })
+-- map({ "n", "x", "o" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+-- map({ "n", "x", "o" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+--
+--[[ N/E is used by "haya14busa/vim-edgemotion" for edge-jump, ]]
+-- }}} Normal / Visual / Operator
+-- }}} Single / Shift
+-- {{{ <Ctrl>
+-- {{{ Normal / Visual / Operator
+--[[ <C-n>, <C-e> is used by hop.nvim ]]
+-- }}} Normal / Visual / Operator
+-- {{{ Insert
+--[[ Insert Mode Action in nvim is defined at cmp.lua. ]]
+-- Maybe this latter setting should be done in vscode.json.
+-- if is_vscode() then  -- for vscode.
+--   map({"i", "c"}, "<C-n>", "<Cmd>call VSCodeNotify('selectNextSuggestion')<CR>", { desc = "" })
+-- end
+-- }}} Insert
+-- {{{ Command}
+-- {{{ <Ctrl>
+-- TODO: Add Command Action for search history.
+--
+-- FIX: Add Command Action for search history.
+
+-- }}} <Ctrl>
+-- }}} Command
+-- }}} <Ctrl>
+-- {{{ <Leader>
+-- {{{ Normal / Visual / Operator
+map({ "n", "x", "o" }, "<leader>n", '"}"', { expr = true, desc = "Navigate to the next paragraph" })
+map({ "n", "x", "o" }, "<leader>e", '"{"', { expr = true, desc = "Navigate to the previous paragraph" })
+map({ "n", "x", "o" }, "<leader>N", '"]"', { expr = false, desc = "Navigate to the next sentence" })
+map({ "n", "x", "o" }, "<leader>E", '"["', { expr = false, desc = "Navigate to the previous sentence" })
+-- }}} Normal / Visual / Operator
+-- }}} <Leader>
+-- {{{ <g>
+-- {{{ Normal
+map("n", "gn", "<C-w>j", { desc = "Go to lower window", remap = false })
+map("n", "ge", "<C-w>k", { desc = "Go to upper window", remap = false })
+map("n", "gN", "<C-w>J", { desc = "Move window Up", remap = false })
+map("n", "gE", "<C-w>K", { desc = "Move window Down", remap = false })
+-- }}} Normal
+-- {{{ Visual / Operator
+-- TODO: Add gn/ge/gN/gE in visual mode. Treesitter move may good.
+-- map({"v", "o"}, "gn", "G", { desc = "Go to Bottom", remap = false })
+-- map({"v", "o"}, "ge, "G", { desc = "Go to Bottom", remap = false })
+-- map({"v", "o"}, "gN", "G", { desc = "Go to Bottom", remap = false })
+-- map({"v", "o"}, "gE, "G", { desc = "Go to Bottom", remap = false })
+-- }}}  Visual / Operator
+-- }}} <g>
+-- {{{ <m/M>
+-- {{{ Normal
+--[[
+  mn/me is for junmp next/previous fold.
+  mN/mE is jump to top/bottom of current fold.
+  These are defined at <M>
+  Mn/Me is jump to next/previous mark by marks.nvim.
+  FIX: this map may error.
+ ]]
+-- }}} Normal
+-- }}} <m/M>
 -- }}}
 
 -- -- user object {{{
