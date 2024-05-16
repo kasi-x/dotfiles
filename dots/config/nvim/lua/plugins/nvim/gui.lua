@@ -1,8 +1,9 @@
 return {
   {
-    "simrat39/symbols-outline.nvim", --{{{
-    keys = { { "<C-s>", "<cmd>SymbolsOutline<cr>", desc = "Symbols Outline", mode = { "n", "x" } } },
-    cmd = "SymbolsOutline",
+    "hedyhli/outline.nvim", --{{{
+    lazy = true,
+    cmd = { "Outline", "OutlineOpen" },
+    keys = {{ "<C-s>", "<cmd>Outline<CR>", desc = "Toggle outline" }},
     opts = {
       keymaps = { -- These keymaps can be a string or a table for multiple keys
         close = { "<Esc>", "q" },
@@ -18,7 +19,13 @@ return {
         unfold_all = "mm",
         fold_reset = "R",
       },
-    },
+      symbols = {
+        filter = {
+            default = { 'String', exclude=true },
+            python = { 'Function', 'Class' },
+          },
+      },
+    }
   }, --}}}
   -- {
   --   "ecthelionvi/NeoComposer.nvim",
@@ -108,208 +115,208 @@ return {
       require("windows").setup()
     end,
   },                         --}}}
-  {
-    "jackMort/ChatGPT.nvim", --{{{
-    event = "VeryLazy",
-    config = function()
-      local home = vim.fn.expand("$HOME")
-      require("chatgpt").setup({
-        api_key_cmd = "gpg --decrypt " .. home .. "/open_ai.gpg",
-        yank_register = "+",
-        edit_with_instructions = {
-          diff = true,
-          keymaps = {
-            close = "<C-q>",
-            accept = "<CR>",
-            toggle_diff = "<C-d>",
-            toggle_settings = "<C-m>",
-            toggle_help = "<C-h>",
-            cycle_windows = "<C-g>",
-            use_output_as_input = "<C-o>",
-          },
-        },
-        chat = {
-          welcome_message = "WELCOME_MESSAGE",
-          loading_text = "Loading, please wait ...",
-          question_sign = "", -- 🙂
-          answer_sign = "ﮧ", -- 🤖
-          border_left_sign = "",
-          border_right_sign = "",
-          max_line_length = 120,
-          sessions_window = {
-            active_sign = "  ",
-            inactive_sign = "  ",
-            current_line_sign = "",
-            border = {
-              style = "rounded",
-              text = {
-                top = " Sessions ",
-              },
-            },
-            win_options = {
-              winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
-            },
-          },
-          keymaps = {
-            close = "<C-q>",
-            yank_last = "<C-v>",
-            yank_last_code = "<C-c>",
-            scroll_up = "<C-u>",
-            scroll_down = "<C-y>",
-            new_session = "<C-t>",
-            cycle_windows = "<Tab>",
-            cycle_modes = "<C-f>",
-            next_message = "<C-n>",
-            prev_message = "<C-e>",
-            select_session = "<Space>",
-            rename_session = "r",
-            delete_session = "d",
-            draft_message = "<C-r>",
-            edit_message = "e",
-            delete_message = "d",
-            toggle_settings = "<C-m>",
-            toggle_sessions = "<C-s>",
-            toggle_help = "<C-h>",
-            toggle_message_role = "<C-r>",
-            toggle_system_role_open = "<C-a>",
-            stop_generating = "<C-x>",
-          },
-        },
-        popup_layout = {
-          default = "center",
-          center = {
-            width = "80%",
-            height = "80%",
-          },
-          right = {
-            width = "30%",
-            width_settings_open = "50%",
-          },
-        },
-        popup_window = {
-          border = {
-            highlight = "FloatBorder",
-            style = "rounded",
-            text = {
-              top = " ChatGPT ",
-            },
-          },
-          win_options = {
-            wrap = true,
-            linebreak = true,
-            foldcolumn = "1",
-            winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
-          },
-          buf_options = {
-            filetype = "markdown",
-          },
-        },
-        system_window = {
-          border = {
-            highlight = "FloatBorder",
-            style = "rounded",
-            text = {
-              top = " SYSTEM ",
-            },
-          },
-          win_options = {
-            wrap = true,
-            linebreak = true,
-            foldcolumn = "2",
-            winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
-          },
-        },
-        popup_input = {
-          prompt = "  ",
-          border = {
-            highlight = "FloatBorder",
-            style = "rounded",
-            text = {
-              top_align = "center",
-              top = " Prompt ",
-            },
-          },
-          win_options = {
-            winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
-          },
-          submit = "<C-Enter>",
-          submit_n = "<Enter>",
-          max_visible_lines = 20,
-        },
-        settings_window = {
-          setting_sign = "  ",
-          border = {
-            style = "rounded",
-            text = {
-              top = " Settings ",
-            },
-          },
-          win_options = {
-            winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
-          },
-        },
-        help_window = {
-          setting_sign = "  ",
-          border = {
-            style = "rounded",
-            text = {
-              top = " Help ",
-            },
-          },
-          win_options = {
-            winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
-          },
-        },
-        openai_params = {
-          model = "gpt-3.5-turbo",
-          frequency_penalty = 0,
-          presence_penalty = 0,
-          max_tokens = 300,
-          temperature = 0,
-          top_p = 1,
-          n = 1,
-        },
-        openai_edit_params = {
-          model = "gpt-3.5-turbo",
-          frequency_penalty = 0,
-          presence_penalty = 0,
-          temperature = 0,
-          top_p = 1,
-          n = 1,
-        },
-        use_openai_functions_for_edits = false,
-        actions_paths = {},
-        show_quickfixes_cmd = "Trouble quickfix",
-        predefined_chat_gpt_prompts =
-        "https://raw.githubusercontent.com/f/awesome-chatgpt-prompts/main/prompts.csv",
-        highlights = {
-          help_key = "@symbol",
-          help_description = "@comment",
-        },
-      })
-    end,
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-      "nvim-lua/plenary.nvim",
-      "nvim-telescope/telescope.nvim",
-    },
-  }, --}}}
   -- {
-  --   "stevanmilic/nvim-lspimport", --{{{
-  --   ft = "python",
-  --   -- lazy = false,
-  --   -- opts = true,
-  --   keys = {
-  --     {
-  --       "<Leader>ri",
-  --       function()
-  --         require("lspimport").import()
-  --       end,
-  --       desc = "Import using LSP",
-  --       mode = { "n" }, -- Normal mode only
-  --     },
+  --   "jackMort/ChatGPT.nvim", --{{{
+  --   event = "VeryLazy",
+  --   config = function()
+  --     local home = vim.fn.expand("$HOME")
+  --     require("chatgpt").setup({
+  --       api_key_cmd = "gpg --decrypt " .. home .. "/open_ai.gpg",
+  --       yank_register = "+",
+  --       edit_with_instructions = {
+  --         diff = true,
+  --         keymaps = {
+  --           close = "<C-q>",
+  --           accept = "<CR>",
+  --           toggle_diff = "<C-d>",
+  --           toggle_settings = "<C-m>",
+  --           toggle_help = "<C-h>",
+  --           cycle_windows = "<C-g>",
+  --           use_output_as_input = "<C-o>",
+  --         },
+  --       },
+  --       chat = {
+  --         welcome_message = "WELCOME_MESSAGE",
+  --         loading_text = "Loading, please wait ...",
+  --         question_sign = "", -- 🙂
+  --         answer_sign = "ﮧ", -- 🤖
+  --         border_left_sign = "",
+  --         border_right_sign = "",
+  --         max_line_length = 120,
+  --         sessions_window = {
+  --           active_sign = "  ",
+  --           inactive_sign = "  ",
+  --           current_line_sign = "",
+  --           border = {
+  --             style = "rounded",
+  --             text = {
+  --               top = " Sessions ",
+  --             },
+  --           },
+  --           win_options = {
+  --             winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
+  --           },
+  --         },
+  --         keymaps = {
+  --           close = "<C-q>",
+  --           yank_last = "<C-v>",
+  --           yank_last_code = "<C-c>",
+  --           scroll_up = "<C-u>",
+  --           scroll_down = "<C-y>",
+  --           new_session = "<C-t>",
+  --           cycle_windows = "<Tab>",
+  --           cycle_modes = "<C-f>",
+  --           next_message = "<C-n>",
+  --           prev_message = "<C-e>",
+  --           select_session = "<Space>",
+  --           rename_session = "r",
+  --           delete_session = "d",
+  --           draft_message = "<C-r>",
+  --           edit_message = "e",
+  --           delete_message = "d",
+  --           toggle_settings = "<C-m>",
+  --           toggle_sessions = "<C-s>",
+  --           toggle_help = "<C-h>",
+  --           toggle_message_role = "<C-r>",
+  --           toggle_system_role_open = "<C-a>",
+  --           stop_generating = "<C-x>",
+  --         },
+  --       },
+  --       popup_layout = {
+  --         default = "center",
+  --         center = {
+  --           width = "80%",
+  --           height = "80%",
+  --         },
+  --         right = {
+  --           width = "30%",
+  --           width_settings_open = "50%",
+  --         },
+  --       },
+  --       popup_window = {
+  --         border = {
+  --           highlight = "FloatBorder",
+  --           style = "rounded",
+  --           text = {
+  --             top = " ChatGPT ",
+  --           },
+  --         },
+  --         win_options = {
+  --           wrap = true,
+  --           linebreak = true,
+  --           foldcolumn = "1",
+  --           winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
+  --         },
+  --         buf_options = {
+  --           filetype = "markdown",
+  --         },
+  --       },
+  --       system_window = {
+  --         border = {
+  --           highlight = "FloatBorder",
+  --           style = "rounded",
+  --           text = {
+  --             top = " SYSTEM ",
+  --           },
+  --         },
+  --         win_options = {
+  --           wrap = true,
+  --           linebreak = true,
+  --           foldcolumn = "2",
+  --           winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
+  --         },
+  --       },
+  --       popup_input = {
+  --         prompt = "  ",
+  --         border = {
+  --           highlight = "FloatBorder",
+  --           style = "rounded",
+  --           text = {
+  --             top_align = "center",
+  --             top = " Prompt ",
+  --           },
+  --         },
+  --         win_options = {
+  --           winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
+  --         },
+  --         submit = "<C-Enter>",
+  --         submit_n = "<Enter>",
+  --         max_visible_lines = 20,
+  --       },
+  --       settings_window = {
+  --         setting_sign = "  ",
+  --         border = {
+  --           style = "rounded",
+  --           text = {
+  --             top = " Settings ",
+  --           },
+  --         },
+  --         win_options = {
+  --           winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
+  --         },
+  --       },
+  --       help_window = {
+  --         setting_sign = "  ",
+  --         border = {
+  --           style = "rounded",
+  --           text = {
+  --             top = " Help ",
+  --           },
+  --         },
+  --         win_options = {
+  --           winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
+  --         },
+  --       },
+  --       openai_params = {
+  --         model = "gpt-3.5-turbo",
+  --         frequency_penalty = 0,
+  --         presence_penalty = 0,
+  --         max_tokens = 300,
+  --         temperature = 0,
+  --         top_p = 1,
+  --         n = 1,
+  --       },
+  --       openai_edit_params = {
+  --         model = "gpt-3.5-turbo",
+  --         frequency_penalty = 0,
+  --         presence_penalty = 0,
+  --         temperature = 0,
+  --         top_p = 1,
+  --         n = 1,
+  --       },
+  --       use_openai_functions_for_edits = false,
+  --       actions_paths = {},
+  --       show_quickfixes_cmd = "Trouble quickfix",
+  --       predefined_chat_gpt_prompts =
+  --       "https://raw.githubusercontent.com/f/awesome-chatgpt-prompts/main/prompts.csv",
+  --       highlights = {
+  --         help_key = "@symbol",
+  --         help_description = "@comment",
+  --       },
+  --     })
+  --   end,
+  --   dependencies = {
+  --     "MunifTanjim/nui.nvim",
+  --     "nvim-lua/plenary.nvim",
+  --     "nvim-telescope/telescope.nvim",
   --   },
-  -- },                     --}}}
+  -- }, --}}}
+  {
+    "stevanmilic/nvim-lspimport", --{{{
+    ft = "python",
+    -- lazy = false,
+    -- opts = true,
+    keys = {
+      {
+        "<Leader>ri",
+        function()
+          require("lspimport").import()
+        end,
+        desc = "Import using LSP",
+        mode = { "n" }, -- Normal mode only
+      },
+    },
+  },                     --}}}
   {
     "j-hui/fidget.nvim", --{{{
     branch = "legacy",
@@ -379,11 +386,10 @@ return {
           -- marks
           "`",
           "'",
-          "ga",
-          "gA",
           -- registers
           -- '"',
           "<c-r>",
+          "d",
           "c",
           -- spelling
         },
@@ -402,13 +408,13 @@ return {
       presets.operators["y"] = nil
       -- presets.operators["'"] = nil
       -- presets.operators['"'] = nil
-      -- presets.operators["`"] = nil
-      -- presets.operators["d"] = nil
+      presets.operators["`"] = nil
+      presets.operators["d"] = nil
       presets.operators["V"] = nil
       presets.operators["zf"] = nil
       presets.operators[">"] = nil
-      -- presets.operators["gu"] = nil
-      -- presets.operators["gU"] = nil
+      presets.operators["gu"] = nil
+      presets.operators["gU"] = nil
       --}}}
       --{{{ Mappings
       --{{{ test

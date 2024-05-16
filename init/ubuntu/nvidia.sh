@@ -13,14 +13,20 @@ sudo apt-get install cuda
 nvidia-smi
 
 cd Downloads/
-sudo dpkg -i cudnn-local-repo-ubuntu2004-8.9.6.50_1.0-1_amd64.deb 
-sudo cp /var/cudnn-local-repo-ubuntu2004-8.9.6.50/cudnn-local-5FA1A941-keyring.gpg /usr/share/keyrings/
-sudo reboot
+# sudo dpkg -i cudnn-local-repo-ubuntu2004-8.9.6.50_1.0-1_amd64.deb 
+# sudo cp /var/cudnn-local-repo-ubuntu2004-8.9.6.50/cudnn-local-5FA1A941-keyring.gpg /usr/share/keyrings/
+# sudo reboot
+# sudo apt-get update
+# sudo apt-get install libcudnn8=8.9.6.50-1+cuda11.8 
+# sudo apt-get install libcudnn8-dev=8.9.6.50-1+cuda11.8 
+# sudo apt-get install libcudnn8-samples=8.9.6.50-1+cuda11.8 
+#
+wget https://developer.download.nvidia.com/compute/cudnn/9.1.1/local_installers/cudnn-local-repo-ubuntu2204-9.1.1_1.0-1_amd64.deb
+sudo dpkg -i cudnn-local-repo-ubuntu2204-9.1.1_1.0-1_amd64.deb
+sudo cp /var/cudnn-local-repo-ubuntu2204-9.1.1/cudnn-*-keyring.gpg /usr/share/keyrings/
 sudo apt-get update
-sudo apt-get install libcudnn8=8.9.6.50-1+cuda11.8 
-sudo apt-get install libcudnn8-dev=8.9.6.50-1+cuda11.8 
-sudo apt-get install libcudnn8-samples=8.9.6.50-1+cuda11.8 
-
+sudo apt-get -y install cudnn
+#
 sudo reboot
 
 nvcc -V

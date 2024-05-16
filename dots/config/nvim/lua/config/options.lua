@@ -1,6 +1,6 @@
 local options = {
-  guifont = "JetBrainsMono NFP:h24",
-  guifontwide = "UDEV Gothic 35NFLG:h24",
+  guifont = "JetBrainsMono Nerd Font Propo:h12",
+  guifontwide = "IBM Plex Sans JP:h12",
   -- g:neovide_transparency should be 0 if you want to unify transparency of content and title bar.
 
   -- {{{ Visual

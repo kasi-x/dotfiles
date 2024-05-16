@@ -26,7 +26,6 @@ return {
         "Exafunction/codeium.nvim",
         build = ":Codeium Auth",
         cmd = "Codeium",
-        -- opts = true,
         config = function()
           require("codeium").setup({})
         end,
@@ -69,7 +68,6 @@ return {
       },
       {
         "zbirenbaum/copilot.lua",
-        -- event = "InsertEnter",
         cmd = "Copilot",
         keys = {
           {

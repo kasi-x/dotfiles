@@ -655,7 +655,12 @@ map({ "n", "x", "o" }, "<leader>V", "'\"+P'", { expr = true, desc = "paste from 
 -- map({ "n", "x", "o" }, "gc", "gp", { expr = true, desc = "paste and reselect visual" })
 -- map({ "n", "x", "o" }, "gC", "gP", { expr = true, desc = "paste before and reselect visual" })
 -- }}} g
+-- {{{ alt (terminal)
+-- gv/gV is used by yanky.
+  map('c', '<A-v>', '<C-R>+', { noremap = true, silent = true })
+  map('t', '<A-v>', '<C-R>+', { noremap = true, silent = true })
 -- }}}
+-- }}} g
 --
 -- {{{ <Z> Undo (-6 c(2), l(3))
 -- {{{ Normal / Shift (12/12)

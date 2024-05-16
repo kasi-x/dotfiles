@@ -26,6 +26,11 @@ if vim.g.os == 'windows' then
     vim.o.shellquote = ''
     vim.o.shellxquote = ''
 end
+
+if vim.g.os == 'linux' then
+  vim.g.python3_host_prog = "/home/user/dotfiles/dots/config/nvim/nvim_venv/bin/python3"
+end
+
 -- vim.loader = false
 if vim.loader then
     vim.loader.enable()

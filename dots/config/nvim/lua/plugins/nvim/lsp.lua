@@ -54,14 +54,13 @@ return {
   {
     "mfussenegger/nvim-lint", --{{{
     dependencies = { "rshkarin/mason-nvim-lint" },
-    -- events = { "BufWritePost", "BufReadPost", "InsertLeave" },
+    event = { "VeryLazy" },
     opts = {
       linters_by_ft = {
         sh = { "shellcheck" },
         bash = { "shellcheck" },
         zsh = { "shellcheck", "zsh" },
         ini = { "shellcheck", "shfmt" },
-        -- ["yaml.ansible"] = { "ansible_lint" },
         -- dotenv = { "dotenv_lint" },
         dockerfile = { "hadolint" },
         ghaction = { "actionlint" },
@@ -69,7 +68,7 @@ return {
         go = { "golangci_lint" },
         gitcommit = { "gitlint", "commitlint", "cspell" },
         -- java = {},
-        javascript = { "eslint_d" },
+        -- javascript = { "eslint_d" },
         lua = { "luacheck" },
         markdown = { "markdownlint" },
         powershell = {},
@@ -79,20 +78,14 @@ return {
         cpp = { "clang_format", "cpplint" },
         arduino = { "clang_format", "cpplint" },
         rust = { "clippy" },
-        typescript = { "eslint_d" },
-        typescriptreact = { "eslint_d" },
+        -- typescript = { "eslint_d" },
+        -- typescriptreact = { "eslint_d" },
         yaml = { "yamllint" },
         ["*"] = { "codespell", "typos" },
         ["_"] = { "trim_whitespace" },
       },
     },
     config = function()
-      -- vim.cmd [[
-      --   augroup lint
-      --     autocmd!
-      --     autocmd BufWritePost,BufEnter * lua require('lint').try_lint()
-      --   augroup END
-      -- ]]
       vim.api.nvim_create_autocmd({ "BufWritePost", "BufEnter" }, {
         group = vim.api.nvim_create_augroup("lint", { clear = true }),
         callback = function()
@@ -103,22 +96,21 @@ return {
   }, --}}}
   {
     "rshkarin/mason-nvim-lint", --{{{
-    -- event = "VeryLazy",
-    events = { "BufWritePost", "BufReadPost", "InsertLeave" },
+    event = { "VeryLazy" },
     dependencies = { "williamboman/mason.nvim", "mfussenegger/nvim-lint" },
-    -- opts = { automatic_installation = true },
+    opts = { automatic_installation = true },
     config = function()
       require("mason").setup()
       require("mason-nvim-lint").setup({
         automatic_installation = true,
       })
-      require("nvim-lint").setup()
+      -- require("nvim-lint").setup()
     end,
   }, --}}}
   {
     "stevearc/conform.nvim", --{{{
-    -- event = { "VeryLazy" },
-    event = { "BufWritePre" },
+    event = { "VeryLazy" },
+    -- event = { "BufWritePre" },
     cmd = { "ConformInfo" },
     keys = {
       {
@@ -159,7 +151,7 @@ return {
           "trim_whitespace", --[[ "injected" ]]
         },
       },
-      format_on_save = { timeout_ms = 500, lsp_fallback = false },
+      -- format_on_save = { timeout_ms = 500, lsp_fallback = false },
       formatters = {
         shfmt = {
           prepend_args = { "-i", "2" },
@@ -233,7 +225,6 @@ return {
         "jsonls",
         "marksman",
         "nimls",
-        -- "ruby_ls",
         "pyright",
         "jedi_language_server",
         "powershell_es",
@@ -250,105 +241,6 @@ return {
           capabilities = capabilities,
         })
       end
-      --[[ {{{ pyright capabilities
-      analyzerServiceExecutor
-      autoImporter
-      callHierarchyProvider
-      codeActionProvider
-      completionProvider
-      completionProviderUtils
-      definitionProvider
-      documentHighlightProvider
-      documentSymbolCollector
-      documentSymbolProvider
-      hoverProvider
-      importSorter
-      navigationUtils
-      quickActions
-      referencesProvider
-      renameProvider
-      signatureHelpProvider
-      symbolIndexer
-      tooltipUtils
-      workspaceSymbolProvider
-      -- }}} ]]
-      --[[ {{{ jedi capabilities
-      completionItem/resolve
-      textDocument/codeAction (refactor.inline, refactor.extract)
-      textDocument/completion
-      textDocument/definition
-      textDocument/documentHighlight
-      textDocument/documentSymbol
-      textDocument/typeDefinition
-      textDocument/hover
-      textDocument/publishDiagnostics
-      textDocument/references
-      textDocument/rename
-      textDocument/signatureHelp
-      workspace/symbol
-      Text Synchronization (for diagnostics)
-      textDocument/didChange
-      textDocument/didOpen
-      textDocument/didSave
-      -- }}} ]]
-      --[[ Compare {{{
-      Pyright Exclusive Features: {{{
-      analyzerServiceExecutor
-      importSorter
-      navigationUtils
-      ?quickActions
-      symbolIndexer
-      tooltipUtils }}}
-      Jedi Language Server Exclusive Features: {{{
-      completionItem/resolve
-      ?textDocument/codeAction (refactor.inline, refactor.extract)
-      textDocument/typeDefinition
-      textDocument/publishDiagnostics
-      Text Synchronization (for diagnostics)
-      textDocument/didChange
-      textDocument/didOpen
-      textDocument/didSave
-      }}}
-      -- }}}]]
-      local on_attach = function(client)
-        if client.name == "pyright" then
-          client.server_capabilities.definitionProvider = true
-          client.server_capabilities.referencesProvider = true
-          client.server_capabilities.hoverProvider = true
-        end
-
-        if client.name == "jedi_language_server" then
-          client.server_capabilities.definitionProvider = false
-          client.server_capabilities.referencesProvider = false
-          client.server_capabilities.hoverProvider = false
-        end
-      end
-      lspconfig.pyright.setup({
-        on_attach = on_attach,
-        settings = {
-          disableLanguageServices = false,
-          disableOrganizeImports = true,
-          python = {
-            analysis = {
-              autoSearchPaths = true,
-              diagnosticMode = "workspace",
-              useLibraryCodeForTypes = true,
-              autoImportCompletions = false,
-            },
-          },
-        },
-      })
-      lspconfig.jedi_language_server.setup({
-        on_attach = on_attach,
-        settings = {
-          diagnostics = {
-            enable = false,
-            didOpen = false,
-            didChange = false,
-            didSave = false,
-          },
-        },
-      })
     end,
   },
 }

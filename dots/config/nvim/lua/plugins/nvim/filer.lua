@@ -169,6 +169,8 @@ return {
                 --["/"] = "filter_as_you_type", -- this was the default until v1.28
                 ["#"] = "fuzzy_sorter", -- fuzzy sorting using the fzy algorithm
                 -- ["D"] = "fuzzy_sorter_directory",
+                ["g"] = "",
+
                 ["f"] = "filter_on_submit",
                 ["<C-x>"] = "clear_filter",
                 ["<bs>"] = "navigate_up",
@@ -320,12 +322,12 @@ return {
               mappings = {
                 ["e"] = "move_cursor_up",
                 ["A"] = "git_add_all",
-                ["gu"] = "git_unstage_file",
-                ["ga"] = "git_add_file",
-                ["gr"] = "git_revert_file",
-                ["gc"] = "git_commit",
-                ["gp"] = "git_push",
-                ["gg"] = "git_commit_and_push",
+                ["u"] = "git_unstage_file",
+                ["a"] = "git_add_file",
+                ["r"] = "git_revert_file",
+                ["c"] = "git_commit",
+                ["p"] = "git_push",
+                ["g"] = "git_commit_and_push",
                 ["i"] = "show_file_details",
                 ["o"] = { "show_help", nowait = false, config = { title = "Order by", prefix_key = "o" } },
                 ["oc"] = { "order_by_created", nowait = false },

@@ -9,6 +9,7 @@ export PATH="$DENO_INSTALL/bin:$PATH"
 export NVM_DIR="$HOME/.nvm"
 export XDG_CACHE_HOME="$HOME/.cache"
 export RUFF_CACHE_DIR="$XDG_CACHE_HOME/ruff"
+export EDITOR="neovide"
 
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 [ -s "$HOME/sands.sh" ]
@@ -196,8 +197,9 @@ cursor() {
     esac
 }
 alias e='cursor'
-alias v='neovide'
-
+function v() {
+    neovide "$@" &
+}
 function lr() {
     local exa_cmd="eza --icons --long --group-directories-first --blocks --no-user --no-permissions"
     # local exa_cmd="exa -lbghHmuSa --group-directories-first"

@@ -1,27 +1,13 @@
 #!/bin/bash
 
 declare -a fonts=(
-    # BitstreamVeraSansMono
-    # CodeNewRoman
-    # DroidSansMono
-    FiraCode
-    # FiraMono
-    # Go-Mono
-    Hack
-    # Hermit
+    CascadiaCode
     JetBrainsMono
-    # Meslo
-    Noto
-    # Overpass
-    # ProggyClean
-    # RobotoMono
-    # SourceCodePro
-    # SpaceMono
-    # Ubuntu
-    # UbuntuMono
-)
+    # Noto
+    # FiraCode
+    )
 
-version='3.1.1'
+version='3.2.1'
 fonts_dir="${HOME}/.local/share/fonts"
 
 if [[ ! -d "$fonts_dir" ]]; then
