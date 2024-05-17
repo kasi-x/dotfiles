@@ -33,9 +33,3 @@ github = 'olets/zsh-abbr'
 
 [plugins.zsh-bat]
 github = 'fdellwing/zsh-bat'
-
-[plugins.zsh-direnv]
-github = "ptavares/zsh-direnv"
-
-[plugins.zsh-pyenv]
-github = "mattberther/zsh-pyenv"
