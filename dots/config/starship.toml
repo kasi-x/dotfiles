@@ -6,9 +6,9 @@ $os\
 $username\
 [](bg:color_yellow fg:color_orange)\
 $directory\
-[](fg:color_yellow bg:color_blue)\
+[](bg:#2c324a fg:color_yellow)\
 $buf$bun$c$cmake$conda$container$crystal$daml$dart$deno$dotnet$elixir$elm$erlang$golang$haskell$helm$java$julia$kotlin$lua$nvim$nix_shell$nodejs$ocaml$openstack$package$perl$php$pulumi$purescript$python$rlang$raku$red$ruby$rust$scala$singularity$spack$swift$terraform$vagrant$vlang$vcsh$zig\
-[](fg:color_blue bg:color_bg3)\
+[](fg:#2c324a bg:color_bg3)\
 $kubernetes$docker_context$hostname$aws$azure$gcloud\
 [](fg:color_bg3 bg:color_bg1)\
 $time\
