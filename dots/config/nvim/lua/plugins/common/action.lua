@@ -13,52 +13,34 @@ return {
     end,
     keys = {
       {
-        "L",
-        "<plug>(matchup-%)",
-        desc = "matchup",
-        mode = { "n" },
-      },
-      {
         "W",
         "<plug>(matchup-%)",
         desc = "matchup",
-        mode = { "v", "o" },
+        mode = { "n", "v", "o" },
       },
       {
         "sw",
         "<plug>(matchup-i%)",
         desc = "matchup_inside",
-        mode = { "v", "o" },
+        mode = { "v" },
       },
       {
         "tw",
-        "<plug>(matchup-a%)",
+        "<plug>(matchuwp-a%)",
         desc = "matchup_around",
-        mode = { "v", "o" },
+        mode = { "v" },
       },
       {
-        "wv",
-        "<plug>(matchup-cs%)",
-        desc = "matchup_around",
-        mode = { "n" },
-      },
-      {
-        "gl",
+        "gw",
         "<plug>(matchup-g%)",
         desc = "matchup",
         mode = { "n", "v", "o" },
       },
-      {
-        "gw",
-        "<plug>(matchup-z%)",
-        desc = "matchup_nearby",
-        mode = { "n", "v", "o" },
-      },
     },
-  },
-  { --}}}
+  }, --}}}
+  {
     "mizlan/iswap.nvim", --{{{
-    cmd = "ISwap",
+    cmd = {"ISwap", "ISwapNode"},
     keys = {
       {
         "<leader>k",
@@ -74,61 +56,73 @@ return {
       },
     },
   },
-  { --}}}
-    "gbprod/yanky.nvim", --{{{
-    event = "VeryLazy",
-    config = function()
-      require("yanky").setup({
-        ring = {
-          history_length = 100,
-          storage = "shada",
-          sync_with_numbered_registers = true,
-          cancel_event = "update",
-        },
-        system_clipboard = {
-          sync_with_ring = true,
-        },
-      })
-    end,
-    keys = {
-      {
-        "v",
-        "<Plug>(YankyPutAfter)",
-        desc = "yankyAfter",
-        mode = { "n", "v" },
-      },
-      {
-        "V",
-        "<Plug>(YankyPutBefore)",
-        desc = "yankyBefore",
-        mode = { "n", "v" },
-      },
-      {
-        "<C-v>",
-        "<Plug>(YankyCycleForward)",
-        desc = "yankyCycleForward",
-        mode = { "n", "v" },
-      },
-      {
-        "<C-c>",
-        "<Plug>(YankyCycleBackward)",
-        desc = "yankyCycleBackward",
-        mode = { "n", "v" },
-      },
-      {
-        "gv",
-        "<Plug>(YankyGPutAfter)",
-        desc = "GyankyAfter",
-        mode = { "n", "v" },
-      },
-      {
-        "gV",
-        "<Plug>(YankyGPutBefore)",
-        desc = "GyankyBefore",
-        mode = { "n", "v" },
-      },
-    },
-  },
+  -- { --}}}
+  --   "gbprod/yanky.nvim", --{{{
+  --   event = "VeryLazy",
+  --   config = function()
+  --     require("yanky").setup({
+  --       ring = {
+  --         history_length = 100,
+  --         storage = "shada",
+  --         sync_with_numbered_registers = true,
+  --         cancel_event = "update",
+  --       },
+  --       system_clipboard = {
+  --         sync_with_ring = true,
+  --       },
+  --     })
+  --   end,
+  --   keys = {
+  --     {
+  --       "v",
+  --       "<Plug>(YankyPutAfter)",
+  --       desc = "yankyAfter",
+  --       mode = { "n", "v" },
+  --     },
+  --     {
+  --       "V",
+  --       "<Plug>(YankyPutBefore)",
+  --       desc = "yankyBefore",
+  --       mode = { "n", "v" },
+  --     },
+  --     {
+  --       "<C-v>",
+  --       "<Plug>(YankyCycleForward)",
+  --       desc = "yankyCycleForward",
+  --       mode = { "n", "v" },
+  --     },
+  --     {
+  --       "<C-c>",
+  --       "<Plug>(YankyCycleBackward)",
+  --       desc = "yankyCycleBackward",
+  --       mode = { "n", "v" },
+  --     },
+  --     {
+  --       "gv",
+  --       "<Plug>(YankyGPutAfter)",
+  --       desc = "GyankyAfter",
+  --       mode = { "n", "v" },
+  --     },
+  --     {
+  --       "gV",
+  --       "<Plug>(YankyGPutBefore)",
+  --       desc = "GyankyBefore",
+  --       mode = { "n", "v" },
+  --     },
+  --     {
+  --       "<A-v>",
+  --       "<Plug>(YankyPutAfterBlockwiseJoined)",
+  --       desc = "BlockwiseJoined",
+  --       mode = { "n", "v" },
+  --     },
+  --     {
+  --       "<A-c>",
+  --       "<Plug>(YankyPutAfterBlockwise)",
+  --       desc = "GyankyAfter",
+  --       mode = { "n", "v" },
+  --     },
+  --   },
+  -- },
   { --}}}
     "ThePrimeagen/refactoring.nvim", --{{{
     lazy = "VeryLazy",
@@ -230,7 +224,7 @@ return {
     }, --}}},
   },
   { --}}}
-    "Wansmer/treesj", --{{{
+    "WWansmer/treesj", --{{{
     keys = {
       {
         "<leader>j",

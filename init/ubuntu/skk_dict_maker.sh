@@ -12,11 +12,9 @@ declare -a dictUrls=(
     "https://raw.githubusercontent.com/tokuhirom/jawiki-kana-kanji-dict/master/SKK-JISYO.jawiki"
 )
 
-# ダウンロード用ディレクトリの作成
 downloadDir="/tmp/skk_dicts"
 mkdir -p "$downloadDir"
 
-# 各辞書ファイルのダウンロード
 for url in "${dictUrls[@]}"; do
     fileName=$(basename "$url")
     destPath="$downloadDir/$fileName"
@@ -25,11 +23,9 @@ for url in "${dictUrls[@]}"; do
     fi
 done
 
-# 出力ファイル名とコマンドの設定
 outputJisyoFilename="/home/user/.skk/linux_dictionary.yaskkserv2"
 command="/usr/local/bin/yaskkserv2_make_dictionary --dictionary-filename='$outputJisyoFilename'"
 
-# 各辞書ファイルをコマンドに追加
 for file in "$downloadDir"/*; do
     command+=" '$file'"
 done

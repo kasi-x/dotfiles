@@ -2,7 +2,6 @@
 sudo apt-get install ibus-skk
 sudo apt-get install gedit
 
-
 sudo gedit /usr/share/ibus/component/skk.xml
 
 # Update and Upgrade System
