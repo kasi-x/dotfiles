@@ -1,29 +1,22 @@
-# format = """\
-# [](fg:#161925)\
-# $username\
-# [](fg:#161925 bg:#1d2131)\
-# $directory\
-# [](fg:#1d2131 bg:#252a3e)\
-# $git_branch\
-# $git_status\
-# [](fg:#252a3e bg:#2c324a)\
-# $all\
-# $cmd_duration\
-# $jobs\
-# $battery\
-# $time\
-# $character"""
-# # [](fg:#2c324a bg:#333a56)\
-
-# Disable the blank line at the start of the prompt
 add_newline = true
 
+
+format = """
+$directory$git_branch$git_commit$git_state$git_matrics$git_status$aws$azure$buf$bun$c$cmake$conda$container$crystal$daml$dart$deno$docker_context$dotnet $elixir$elm$erlang$gcloud$golang$haskell$helm$java$julia$kotlin$kubernetes$lua$nvim$nix_shell$nodejs$ocaml$openstack$package$perl$php$pulumi$purescript$python$rlang$raku$red$ruby$rust$scala$singularity $spack$swift$terraform$vagrant$vlang$vcsh$zig$character"""
+
+right_format ="""$time$shlvl$cmd_duration$os"""
 
 scan_timeout = 10
 
 [character]
-error_symbol = "[❯](bold red)"
-success_symbol = "[❯](bold green)"
+# error_symbol = "[❯](bold red)"
+# success_symbol = "[❯](bold green)"
+success_symbol = '[](bold fg:color_green)'
+error_symbol = '[](bold fg:color_red)'
+vimcmd_symbol = '[](bold fg:color_green)'
+vimcmd_replace_one_symbol = '[](bold fg:color_purple)'
+vimcmd_replace_symbol = '[](bold fg:color_purple)'
+vimcmd_visual_symbol = '[](bold fg:color_yellow)'
 
 [directory]
 truncation_length = 100
@@ -41,13 +34,60 @@ ap-northeast-1 = "jp"
 # style = "bold yellow"
 # format = "[$output]($style)"
 #
-[username]
-style_user = "white bold"
-style_root = "black bold"
-# format = "[$user🌱]($style) "
-disabled = true
-show_always = false
-format = '[ ]($style)' # $user
+# [username]
+# style_user = "white bold"
+# style_root = "black bold"
+# # format = "[$user🌱]($style) "
+# disabled = true
+# show_always = false
+# format = '[ ]($style)' # $user
+
+
+[os]
+format = '[$symbol](bold blue)'
+disabled = false
+
+[os.symbols]
+Alpaquita = " "
+Alpine = " "
+Amazon = " "
+Android = " "
+Arch = " "
+Artix = " "
+CentOS = " "
+Debian = " "
+DragonFly = " "
+Emscripten = " "
+EndeavourOS = ""
+# EndeavourOS = ""
+Fedora = " "
+FreeBSD = " "
+Garuda = "󰛓 "
+Gentoo = " "
+HardenedBSD = "󰞌 "
+Illumos = "󰈸 "
+Linux = " "
+Mabox = " "
+Macos = " "
+Manjaro = " "
+Mariner = " "
+MidnightBSD = " "
+Mint = " "
+NetBSD = " "
+NixOS = " "
+OpenBSD = "󰈺 "
+openSUSE = " "
+OracleLinux = "󰌷 "
+Pop = " "
+Raspbian = " "
+Redhat = " "
+RedHatEnterprise = " "
+Redox = "󰀘 "
+Solus = "󰠳 "
+SUSE = " "
+Ubuntu = " "
+Unknown = " "
+Windows = "󰍲 "
 
 
 [line_break]
@@ -55,12 +95,15 @@ disabled = true
 
 
 [directory.substitutions]
-"~" = " ~"
+"~" = " "
+"work" = "󰈏 "
 "Documents" = " "
 "Downloads" = " "
 "Music" = "🎜 "
 "Pictures" = " "
 "Videos" = " "
+"dev" = ""
+"dotfiles" = "󰸓"
 # Keep in mind that the order matters. For example:
 # "Important Documents" = "  "
 # will not be replaced, because "Documents" was already substituted before.
@@ -186,6 +229,16 @@ symbol = "ﯣ"
 style = "fg:#cba6f7 bg:#2c324a"
 format = '[ $symbol ($version )]($style)'
 
+[zig]
+disabled = false
+symbol = "󰵁"
+style = "bold #f7a41d"
+format = "via [$symbol($version )]($style)"
+version_format = "v${raw}"
+detect_extensions = ["zig"]
+detect_files = []
+detect_folders = []
+
 [package]
 symbol = ""
 style = "fg:#cba6f7 bg:#2c324a"
@@ -226,7 +279,7 @@ threshold = 101
 style = "bold #a6e3a1"
 
 [time]
-disabled = true
+disabled = false
 time_format = "%R"
-style = "bg:#3b4363"
-format = '[](fg:#2c324a $style)[  $time ](fg:#94e2d5 $style)'
+style = "bg:color_bg1"
+format = '[[  $time ](fg:color_fg0 bg:color_bg1)]($style)'
