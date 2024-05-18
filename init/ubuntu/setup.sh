@@ -129,7 +129,8 @@ rm -fr Desktop Documents Documents Pictures Templates Videos Music
 # code .config/user-dirs.dirs
 sudo gedit /etc/fstab
 #sudo blkid
-# UUID=64FABA3AFABA0876 /media/user/Data ntfs-3g defaults,uid=1000,gid=1000 0 2
+#dev/disk/by-uuid/64FABA3AFABA0876 /media/user/Data ntfs-3g defaults,uid=1000,gid=1000 0 2
+#dev/disk/by-uuid/200A57640A5735CE /media/user/GAME ntfs-3g defaults,uid=1000,gid=1000 0 2
 sudo chown user:user /media/user/Data
 sudo chmod 755 /media/user/Data
 sudo umount /media/user/Data
