@@ -196,3 +196,47 @@ create_link "config/vlc/vlcrc" ".config/vlc/vlcrc"
 create_link "config/rofi" ".config/rofi"
 create_link "config/kitty/" ".config/kitty"
 '''
+
+'''
+curl https://nim-lang.org/choosenim/init.sh -sSf | sh
+sudo apt auto-install
+sudo ubuntu-drivers devices
+ai auto-install
+wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2404/x86_64/cuda-keyring_1.1-1_all.deb
+sudo dpkg -i cuda-keyring_1.1-1_all.deb
+sudo apt-get update
+sudo apt-get -y install cuda-toolkit-12-4
+sudo apt-get -y install nvidia-cuda-toolkit-gcc
+sudo apt-get install -y cuda-drivers-535
+sudo apt-get install -y cuda-drivers-fabricmanager-535
+ai nvidia-driver-535
+sudo apt-get install cuda\
+
+sudo ubuntu-drivers install --gpgpu nvidia:535
+nvidia-smi\
+wget https://developer.download.nvidia.com/compute/cudnn/9.1.1/local_installers/cudnn-local-repo-ubuntu2404-9.1.1_1.0-1_amd64.deb\
+sudo dpkg -i cudnn-local-repo-ubuntu2404-9.1.1_1.0-1_amd64.deb\
+sudo cp /var/cudnn-local-repo-ubuntu2404-9.1.1/cudnn-*-keyring.gpg /usr/share/keyrings/\
+sudo apt-get update\
+sudo apt-get -y install cudnn
+wget https://developer.download.nvidia.com/compute/cudnn/9.1.1/local_installers/cudnn-local-repo-ubuntu2204-9.1.1_1.0-1_amd64.deb\
+sudo dpkg -i cudnn-local-repo-ubuntu2204-9.1.1_1.0-1_amd64.deb\
+sudo cp /var/cudnn-local-repo-ubuntu2204-9.1.1/cudnn-*-keyring.gpg /usr/share/keyrings/\
+sudo apt-get update\
+sudo apt-get -y install cudnn
+
+ai fonts-noto-color-emoji
+sudo apt-get install fonts-noto-cjk lzip
+fc-cache -fv
+ai xclip
+ai xsel
+ai python-is-python3
+ai tldr
+ai mpv
+
+yarn global add diagnostic-languageserver
+npm
+ai npm
+mv IBM-Plex-Sans ~/.local/share/fonts/
+mv IBM-Plex-Sans-JP ~/.local/share/fonts/
+'''
