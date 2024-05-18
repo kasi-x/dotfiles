@@ -436,18 +436,18 @@ return {
       --   nowait = false, -- use `nowait` when creating keymaps
       -- })--}}}
       --{{{ SnipRun
-      wk.register({
-        ["<leader>s"] = {
-          name = "SnipRun", -- group name for the popup
-          s = { ":SnipRun<CR>", "Run SnipRun" },
-          -- o = {":'<,'>SnipRun<CR>", "Run SnipRunOperator (Visual Mode)"},
-          i = { ":SnipInfo<CR>", "SnipInfo" },
-          r = { ":SnipReset<CR>", "SnipReset" },
-          c = { ":SnipReplMemoryClean<CR>", "Clean SnipReplMemory" },
-          x = { ":SnipClose<CR>", "Close Snip" },
-          l = { ":SnipLive<CR>", "Toggle SnipLive" },
-        },
-      }, { mode = { "n" } }) --}}}
+      -- wk.register({
+      --   ["<leader>s"] = {
+      --     name = "SnipRun", -- group name for the popup
+      --     s = { ":SnipRun<CR>", "Run SnipRun" },
+      --     -- o = {":'<,'>SnipRun<CR>", "Run SnipRunOperator (Visual Mode)"},
+      --     i = { ":SnipInfo<CR>", "SnipInfo" },
+      --     r = { ":SnipReset<CR>", "SnipReset" },
+      --     c = { ":SnipReplMemoryClean<CR>", "Clean SnipReplMemory" },
+      --     x = { ":SnipClose<CR>", "Close Snip" },
+      --     l = { ":SnipLive<CR>", "Toggle SnipLive" },
+      --   },
+      -- }, { mode = { "n" } }) --}}}
       --{{{ TODO
       wk.register({
         ["<C-d>"] = {

@@ -59,69 +59,69 @@ return {
           require("luasnip").filetype_extend("sh", { "shelldoc" })
         end,
       },
-      {
-        "zbirenbaum/copilot-cmp",
-        after = { "copilot.lua" },
-        config = function()
-          require("copilot_cmp").setup()
-        end,
-      },
-      {
-        "zbirenbaum/copilot.lua",
-        cmd = "Copilot",
-        keys = {
-          {
-            "<C-o>",
-            function()
-              require("cmp").mapping.abort()
-              require("copilot.suggestion").accept()
-            end,
-            desc = "[copilot] accept suggestion",
-            silent = true,
-            mode = { "n", "i" },
-          },
-          {
-            "<C-'>",
-            function()
-              require("cmp").mapping.abort()
-              require("copilot.panel").open()
-            end,
-            desc = "[copilot] open panel",
-            silent = true,
-            mode = { "n", "i" },
-          },
-        },
-        config = function()
-          require("copilot").setup({
-            suggestion = {
-              auto_trigger = true,
-              keymap = {
-                -- accept = "<C-o>", defined above
-                accept_word = false,
-                accept_line = false,
-                next = "<C-u>",
-                prev = "<C-y>",
-                dismiss = "<C-h>",
-              },
-            },
-            panel = {
-              enabled = true,
-              auto_refresh = true,
-              keymap = {
-                jump_prev = "<C-u>",
-                jump_next = "<C-y>",
-                accept = "<CR>",
-                refresh = "<C-h>",
-                -- open = "<C-'>", defined above
-              },
-              layout = {
-                position = "bottom",
-                ratio = 0.5,
-              },
-            },
-          })
-        end,
-      },
+      -- {
+      --   "zbirenbaum/copilot-cmp",
+      --   after = { "copilot.lua" },
+      --   config = function()
+      --     require("copilot_cmp").setup()
+      --   end,
+      -- },
+      -- {
+      --   "zbirenbaum/copilot.lua",
+      --   cmd = "Copilot",
+      --   keys = {
+      --     {
+      --       "<C-o>",
+      --       function()
+      --         require("cmp").mapping.abort()
+      --         require("copilot.suggestion").accept()
+      --       end,
+      --       desc = "[copilot] accept suggestion",
+      --       silent = true,
+      --       mode = { "n", "i" },
+      --     },
+      --     {
+      --       "<C-'>",
+      --       function()
+      --         require("cmp").mapping.abort()
+      --         require("copilot.panel").open()
+      --       end,
+      --       desc = "[copilot] open panel",
+      --       silent = true,
+      --       mode = { "n", "i" },
+      --     },
+      --   },
+      --   config = function()
+      --     require("copilot").setup({
+      --       suggestion = {
+      --         auto_trigger = true,
+      --         keymap = {
+      --           -- accept = "<C-o>", defined above
+      --           accept_word = false,
+      --           accept_line = false,
+      --           next = "<C-u>",
+      --           prev = "<C-y>",
+      --           dismiss = "<C-h>",
+      --         },
+      --       },
+      --       panel = {
+      --         enabled = true,
+      --         auto_refresh = true,
+      --         keymap = {
+      --           jump_prev = "<C-u>",
+      --           jump_next = "<C-y>",
+      --           accept = "<CR>",
+      --           refresh = "<C-h>",
+      --           -- open = "<C-'>", defined above
+      --         },
+      --         layout = {
+      --           position = "bottom",
+      --           ratio = 0.5,
+      --         },
+      --       },
+      --     })
+      --   end,
+      -- },
     },
   },
 }

@@ -15,9 +15,9 @@ return {
   {
     "michaelb/sniprun", --{{{
     build = "sh ./install.sh",
-    cmd = { "SnipRun", "SnipRunOperator" },
+    cmd = { "SnipRun", "SnipRunOperator", "SnipLive", "SnipClose", "SnipInfo" },
     opts = {
-      display = { "Terminal" },
+      display = { "VirtualText" },
       live_display = { "VirtualTextOk", "TerminalOk" },
       selected_interpreters = { "Python3_fifo" },
       repl_enable = { "Python3_fifo" },
@@ -25,6 +25,7 @@ return {
     keys = {
       { "<Leader>s", "<Plug>SnipRunOperator", desc = "snip_run", mode = "o" },
       { "<Leader>s", "<esc><cmd>'<,'>SnipRun<cr>", desc = "snip_run", mode = "x" },
+      { "<Leader>sd", "<Plug>SnipClose", desc = "snip_run", mode = "x" },
     },
   }, --}}}
   {
@@ -145,13 +146,25 @@ return {
       {
         "<C-d>n",
         "<CMD>TroubleToggle workspace_diagnostics<CR>",
-        desc = "trouble_toggle",
+        desc = "workspace trouble_toggle",
+        mode = { "n" },
+      },
+      {
+        "<C-d>f",
+        "<CMD>TroubleToggle quickfix<CR>",
+        desc = "quickfix",
         mode = { "n" },
       },
       {
         "<C-d>e",
-        "<cmd>TodoTrouble  keywords=TODO,FIXME<CR>",
-        desc = "todo",
+        "<cmd>TodoTrouble keywords=TODO,FIXME<CR>",
+        desc = "todo list",
+        mode = { "n" },
+      },
+      {
+        "<C-d>y",
+        "<cmd>TroubleToggle document_diagnostics<cr>",
+        desc = "document_diagnostics",
         mode = { "n" },
       },
       {
@@ -163,12 +176,12 @@ return {
       {
         "<C-d>h",
         "<cmd>TodoTrouble  loclist<CR>",
-        desc = "Show error by Lsp",
+        desc = "loclist",
         mode = { "n" },
       },
       {
-          "<C-d>o",
-          "<cmd>TodoTrouble lsp_references<CR>",
+        "<C-d>r",
+        "<cmd>TodoTrouble lsp_references<CR>",
         desc = "Show error by Lsp",
         mode = { "n" },
       }
@@ -176,7 +189,6 @@ return {
     config = function() -- {{{
       require("trouble").setup({
         action_keys = {
-          -- key mappings for actions in the trouble list
           close = { "<C-d>", "q" }, -- close the list
           cancel = "<esc>", -- cancel the preview and get back to your last window / buffer / cursor
           refresh = "r", -- manually refresh
@@ -210,7 +222,12 @@ return {
   }, --}}}
   {
     "sindrets/diffview.nvim", --{{{
-    cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewToggleFiles", "DiffviewFocusFiles" },
+    cmd = {
+      "DiffviewOpen",
+      "DiffviewClose",
+      "DiffviewToggleFiles",
+      "DiffviewFocusFiles",
+    },
   }, --}}}
   -- {
   --   "lewis6991/gitsigns.nvim",
@@ -248,7 +265,7 @@ return {
   -- },
   {
     "lewis6991/gitsigns.nvim", --{{{
-    event = { "BufReadPre", "BufNewFile" },
+    event ="VeryLazy",
     dependencies = {
       "nvim-lua/plenary.nvim",
     },
@@ -318,57 +335,6 @@ return {
         return
       end
       local cmd = require("hydra.keymap-util").cmd
-      -- hydra({
-      --   name = "Search Commands",
-      --   mode = { "n", "v" },
-      --   hint = [[
-      --   Search Commands
-      --   ^
-      --   _d_: Search Directory           _w_: Search with highlighted word
-      --   _/_: Search File                _f_: Telescope Search
-      --   ^
-      --   ^ ^                              _q_/_<Esc>_: Exit Hydra
-      --   ]],
-      --   config = {
-      --     color = 'teal',
-      --     invoke_on_body = true,
-      --     hint = {
-      --       type = 'window',
-      --       position = 'bottom',
-      --       float_opts = { border = 'rounded', },
-      --       show_name = true
-      --     }
-      --   },
-      -- body = 'f',
-      -- heads = {
-      --   { "d", cmd 'lua require("spectre").open()<CR>', { desc = "Search", silent = true } },
-      --   { "w", cmd 'lua require("spectre").open_visual({select_word=true})<CR>',
-      --     {
-      --       desc = "Search word",
-      --       silent = true
-      --     } },
-      --   { "f", cmd 'Telescope live_grep', {
-      --     desc =
-      --     "Fuzzy Search with Telescope",
-      --     silent = true
-      --   } },
-      -- { "/", cmd 'lua require("spectre").open_file_search()<CR>', {
-      -- desc = "Search File",
-      -- silent = true
-      --   } },
-      --   { "q", nil, {
-      --     desc = "quit",
-      --     exit = true,
-      --     nowait = true
-      --   } },
-      --   { "<Esc>", nil, {
-      --     desc = "quit",
-      --     exit = true,
-      --     nowait = true
-      --   } }
-      -- }
-      -- })
-      --
       hydra({
         name = "window",
         mode = "n",
@@ -417,96 +383,89 @@ return {
           { "q", nil, { desc = "Exit", exit = true, silent = true } },
         },
       }) -- }}}      -- gitsigns {{{
-      local gitsigns = require("gitsigns")
-      local git_hint = [[
+      local Hydra = require("hydra")
+      local gitsigns = require('gitsigns')
+
+      local hint = [[
  _N_: next hunk   _s_: stage hunk        _d_: show deleted   _b_: blame line
  _E_: prev hunk   _u_: undo last stage   _p_: preview hunk   _B_: blame show full
  ^ ^              _S_: stage buffer      ^ ^                 _/_: show base file
  ^
- ^ ^              _<Enter>_: Neogit              _q_/_<Esc>_: quiet
-]]
-      hydra({
-        name = "Git",
-        hint = git_hint,
-        config = {
+ ^ ^              _<Enter>_: Neogit              _q_: exit
+      ]]
+      Hydra({
+      name = 'Git',
+       hint = hint,
+       config = {
           buffer = bufnr,
-          color = "pink",
+          color = 'red',
           invoke_on_body = true,
-          -- hint = {
-          --   float_opts = 'rounded'
-          -- },
+          hint = {
+              type = "window",
+              float_opts = {
+                    -- row, col, height, width, relative, and anchor should not be
+                    -- overridden
+                    style = "minimal",
+                    focusable = false,
+                    noautocmd = true,
+                },
+          },
+          on_key = function() vim.wait(50) end,
           on_enter = function()
-            vim.cmd("mkview")
-            vim.cmd("silent! %foldopen!")
-            vexitim.bo.modifiable = true
-            gitsigns.toggle_signs(true)
-            gitsigns.toggle_linehl(true)
+             vim.cmd 'mkview'
+             vim.cmd 'silent! %foldopen!'
+             gitsigns.toggle_signs(true)
+             gitsigns.toggle_linehl(true)
           end,
           on_exit = function()
-            local cursor_pos = vim.api.nvim_win_get_cursor(0)
-            vim.cmd("loadview")
-            vim.api.nvim_win_set_cursor(0, cursor_pos)
-            vim.cmd("normal zv")
-            gitsigns.toggle_signs(false)
-            gitsigns.toggle_linehl(false)
-            gitsigns.toggle_deleted(false)
+             local cursor_pos = vim.api.nvim_win_get_cursor(0)
+             vim.cmd 'loadview'
+             vim.api.nvim_win_set_cursor(0, cursor_pos)
+             vim.cmd 'normal zv'
+             gitsigns.toggle_signs(false)
+             gitsigns.toggle_linehl(false)
+             gitsigns.toggle_deleted(false)
           end,
-        },
-        mode = { "n", "x" },
-        body = "<leader>g",
-        heads = {
-          {
-            "N",
-            function()
-              if vim.wo.diff then
-                return "]c"
-              end
-              vim.schedule(function()
-                gitsigns.next_hunk()
-              end)
-              return "<Ignore>"
-            end,
-            { expr = true, desc = "next hunk" },
-          },
-          {
-            "E",
-            function()
-              if vim.wo.diff then
-                return "[c"
-              end
-              vim.schedule(function()
-                gitsigns.prev_hunk()
-              end)
-              return "<Ignore>"
-            end,
-            { expr = true, desc = "prev hunk" },
-          },
-          { "s", ":Gitsigns stage_hunk<CR>", { silent = true, desc = "stage hunk" } },
-          { "u", gitsigns.undo_stage_hunk, { desc = "undo last stage" } },
-          { "S", gitsigns.stage_buffer, { desc = "stage buffer" } },
-          { "p", gitsigns.preview_hunk, { desc = "preview hunk" } },
-          { "d", gitsigns.toggle_deleted, { nowait = true, desc = "toggle deleted" } },
-          { "b", gitsigns.blame_line, { desc = "blame" } },
-          {
-            "B",
-            function()
-              gitsigns.blame_line({ full = true })
-            end,
-            { desc = "blame show full" },
-          },
-          { "/", gitsigns.show, { exit = true, desc = "show base file" } }, -- show the base of the file
-          { "<Enter>", cmd(":Neogit<CR>"), { exit = true, desc = "Neogit" } },
-          {
-            "q",
-            nil,
-            { desc = "quit", exit = true, nowait = true },
-          },
-          {
-            "<Esc>",
-            nil,
-            { desc = "quit", exit = true, nowait = true },
-          },
-        },
+       },
+       mode = {'n','x'},
+       body = '<leader>g',
+       heads = {
+          { 'N',
+             function()
+                if vim.wo.diff then return ']c' end
+                vim.schedule(function() gitsigns.next_hunk() end)
+                return '<Ignore>'
+             end,
+             { expr = true, desc = 'next hunk' } },
+          { 'E',
+             function()
+                if vim.wo.diff then return '[c' end
+                vim.schedule(function() gitsigns.prev_hunk() end)
+                return '<Ignore>'
+             end,
+             { expr = true, desc = 'prev hunk' } },
+          { 's',
+             function()
+                local mode = vim.api.nvim_get_mode().mode:sub(1,1)
+                if mode == 'V' then -- visual-line mode
+                   local esc = vim.api.nvim_replace_termcodes('<Esc>', true, true, true)
+                   vim.api.nvim_feedkeys(esc, 'x', false) -- exit visual mode
+                   vim.cmd("'<,'>Gitsigns stage_hunk")
+                else
+                   vim.cmd("Gitsigns stage_hunk")
+                end
+             end,
+             { desc = 'stage hunk' } },
+          { 'u', gitsigns.undo_stage_hunk, { desc = 'undo last stage' } },
+          { 'S', gitsigns.stage_buffer, { desc = 'stage buffer' } },
+          { 'p', gitsigns.preview_hunk, { desc = 'preview hunk' } },
+          { 'd', gitsigns.toggle_deleted, { nowait = true, desc = 'toggle deleted' } },
+          { 'b', gitsigns.blame_line, { desc = 'blame' } },
+          { 'B', function() gitsigns.blame_line{ full = true } end, { desc = 'blame show full' } },
+          { '/', gitsigns.show, { exit = true, desc = 'show base file' } }, -- show the base of the file
+          { '<Enter>', function() vim.cmd('Neogit') end, { exit = true, desc = 'Neogit' } },
+          { 'q', nil, { exit = true, nowait = true, desc = 'exit' } },
+       }
       }) --}}}
     end,
   }, --}}}
@@ -538,6 +497,8 @@ return {
         desc = "telescope-undo",
       },
       "delphinus/telescope-memo.nvim",
+      cmd = "Telescope memo",
+
       -- :Telescope memo live_grep
       -- telescope.builtin.live_grep on memo_dir.
       -- piersolenski/telescope-import.nvim,
@@ -682,6 +643,7 @@ return {
   }, --}}}
   {
     "NeogitOrg/neogit", --{{{
+    even = "VeryLazy",
     cmd = "Neogit",
     dependencies = {
       "nvim-lua/plenary.nvim", -- required
@@ -1501,158 +1463,21 @@ return {
       })
     end, --}}}
   }, --}}}
-  -- {
-  --   "aznhe21/actions-preview.nvim",
-  --   keys = {
-  --     {
-  --       "<Leader>ra",
-  --       "<cmd>lua require('actions-preview').code_actions)<CR>",
-  --       desc = "code_actions",
-  --       mode = { "n", "v" },
-  --     },
-  --   },
-  -- },
   {
     "mbbill/undotree",
     cmd = "UndotreeToggle",
-    keys = { {
-      "<leader>Z",
-      "<cmd>UndotreeToggle<cr>",
-      desc = "undotree",
-      mode = "n",
-    } },
-  },
-  {
-    "nvimdev/lspsaga.nvim",
-    lazy = false,
-    cmd = "Lspsaga",
-    config = function()
-      require("lspsaga").setup({
-        ui = {
-          code_action = "󰌶",
-          diagnostic = "",
-        },
-        lightbulb = {
-          sigh = true,
-          enable = true,
-          virtual_text = true,
-          enable_in_insert = true,
-        },
-        finder = {
-          scroll_down = "<C-u>",
-          scroll_up = "<C-y>",
-          quit = { "q", "<ESC>" },
-        },
-        symbol_in_winbar = {
-          enable = false,
-          show_file = false,
-        },
-        definition = {
-          keys = {
-            edit = "<C-g>",
-            vsplit = "gu",
-            split = "gy",
-            table = "<C-o>",
-            quit = "q",
-            close = "<C-q>",
-          },
-        },
-      })
-    end,
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter", -- optional
-      "nvim-tree/nvim-web-devicons", -- optional
-    },
-    keys = {
-      {
-        "gR",
-        "<cmd>Lspsaga rename ++project<cr>",
-        desc = "rename",
-        mode = "n",
-      },
-      {
-        "b",
-        "<cmd>Lspsaga hover_doc<cr>",
-        desc = "hover_doc",
-        mode = "n",
-      },
-      {
-        "gD",
-        "<cmd>Lspsaga finder<CR>",
-        desc = "implementation of interface",
-        mode = { "n" },
-      },
-      {
-        "<C-b>",
-        "<cmd>Lspsaga peek_type_definition<CR>",
-        desc = "preview_type_definition",
-        mode = { "n" },
-      },
-      {
-        "<Leader>R",
-        "<cmd>Lspsaga code_action<cr>",
-        desc = "CodeAction",
-        mode = { "n" },
-      },
-      {
-        "<Leader>R",
-        "<cmd>Lspsaga range_code_action<cr>",
-        desc = "CodeAction",
-        mode = { "x" },
-      },
-      {
-        "<Leader>f",
-        "<cmd>Lspsaga diagnostic_jump_next<cr>",
-        desc = "diagnostic_jump_next",
-        mode = { "n" },
-      },
-      {
-        "<Leader>p",
-        "<cmd>Lspsaga diagnostic_jump_prev<cr>",
-        desc = "diagnostic_jump_prev",
-        mode = { "n" },
-      },
-      -- {
-      --   "<Leader>b",
-      --   "<cmd>Lspsaga show_line_diagnostics<CR>",
-      --   desc = "show_diagnostic",
-      --   mode = { "n" },
-      -- },
-    },
+    keys = { { "<C-z>", "<cmd>UndotreeToggle<cr>", desc = "undotree", mode = "n" } },
   },
   {
     "aznhe21/actions-preview.nvim",
     dependencies = { "nvim-telescope/telescope.nvim", "MunifTanjim/nui.nvim" },
     keys = {
       {
-        "<Laader>gf",
+        "<C-r>s",
         "<cmd>lua require('actions-preview').code_actions()<CR>",
         desc = "code_actions",
         mode = { "n", "v" },
       },
     },
   },
-  -- vim.keymap.set("n", "[_Lsp]r", "<cmd>Lspsaga rename ++project<cr>", { silent = true, noremap = true })
-  -- vim.keymap.set("n", "M", "<cmd>Lspsaga code_action<cr>", { silent = true, noremap = true })
-  -- vim.keymap.set("x", "M", ":<c-u>Lspsaga range_code_action<cr>", { silent = true, noremap = true })
-  -- vim.keymap.set("n", "?", "<cmd>Lspsaga hover_doc<cr>", { silent = true, noremap = true })
-  -- vim.keymap.set("n", "[_Lsp]j", "<cmd>Lspsaga diagnostic_jump_next<cr>", { silent = true, noremap = true })
-  -- vim.keymap.set("n", "[_Lsp]k", "<cmd>Lspsaga diagnostic_jump_prev<cr>", { silent = true, noremap = true })
-  -- vim.keymap.set("n", "[_Lsp]f", "<cmd>Lspsaga lsp_finder<CR>", { silent = true, noremap = true })
-  -- vim.keymap.set("n", "[_Lsp]s", "<Cmd>Lspsaga signature_help<CR>", { silent = true, noremap = true })
-  -- vim.keymap.set("n", "[_Lsp]d", "<cmd>Lspsaga preview_definition<CR>", { silent = true })
-  -- vim.keymap.set("n", "gd", "<cmd>Lspsaga peek_definition<CR>", { silent = true, noremap = true })
-  -- -- vim.keymap.set("n", "gd", "<cmd>Lspsaga goto_definition<CR>")
-  -- vim.keymap.set("n", "[_Lsp]l", "<cmd>Lspsaga show_line_diagnostics<CR>", { silent = true, noremap = true })
-  -- vim.keymap.set("n", "[_Lsp]c", "<cmd>Lspsaga show_cursor_diagnostics<CR>", { silent = true, noremap = true })
-  -- vim.keymap.set("n", "[_Lsp]b", "<cmd>Lspsaga show_buf_diagnostics<CR>", { silent = true, noremap = true })
-  -- vim.keymap.set("n", "[E", function()
-  -- 	require("lspsaga.diagnostic"):goto_prev({ severity = vim.diagnostic.severity.ERROR })
-  -- end, { silent = true, noremap = true })
-  -- vim.keymap.set("n", "]E", function()
-  -- 	require("lspsaga.diagnostic"):goto_next({ severity = vim.diagnostic.severity.ERROR })
-  -- end, { silent = true, noremap = true })
-  -- vim.keymap.set("n", "<leader>o", "<cmd>Lspsaga outline<CR>", { silent = true, noremap = true })
-  -- vim.keymap.set("n", "[_Lsp]I", "<cmd>Lspsaga incoming_calls<CR>", { silent = true, noremap = true })
-  -- vim.keymap.set("n", "[_Lsp]O", "<cmd>Lspsaga outgoing_calls<CR>", { silent = true, noremap = true })
 }
