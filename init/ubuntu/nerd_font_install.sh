@@ -3,7 +3,7 @@
 declare -a fonts=(
     CascadiaCode
     JetBrainsMono
-    # Noto
+    Noto
     # FiraCode
     )
 
