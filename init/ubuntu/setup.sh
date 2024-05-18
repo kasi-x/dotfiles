@@ -1,8 +1,33 @@
+sudo apt-get install -y apt-fast
+
+# echo debconf apt-fast/maxdownloads string 16 | debconf-set-selections
+# echo debconf apt-fast/dlflag boolean true | debconf-set-selections
+# echo debconf apt-fast/aptmanager string apt-get | debconf-set-selections
+#
+#
+DEBIAN_FRONTEND=noninteractive 
+
+sudo apt-get install git curl
+sudo ap-get install gh
+
 
 sudo apt-get install ibus-skk
 sudo apt-get install gedit
 
-sudo gedit /usr/share/ibus/component/skk.xml
+udo apt install cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev python3 -y
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+source $HOME/.cargo/env
+rustup override set stable
+rustup update stable
+
+# Install Vivaldi Browser
+wget -qO- http://repo.vivaldi.com/stable/linux_signing_key.pub | sudo gpg --dearmor -o /usr/share/keyrings/vivaldi-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/vivaldi-archive-keyring.gpg arch=i386,amd64] http://repo.vivaldi.com/stable/deb/ stable main" | sudo tee /etc/apt/sources.list.d/vivaldi.list > /dev/null
+sudo apt-get update
+sudo apt install vivaldi-stable -y
+
+
+# sudo gedit /usr/share/ibus/component/skk.xml
 
 # Update and Upgrade System
 sudo apt-get update
@@ -36,31 +61,23 @@ echo "deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome-keyring.gpg] h
 sudo apt-get update
 sudo apt-get install google-chrome-stable chromium-browser -y
 
-sudo apt install cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev python3 -y
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-source $HOME/.cargo/env
-rustup override set stable
-rustup update stable
+sudo add-apt-repository ppa:neovim-ppa/stable
+sudo apt-get update
+sudo apt-get install neovim
 
-'''
-# --- Alacritty Terminal Installation ---
-# Cloning and building Alacritty
-git clone https://github.com/alacritty/alacritty.git
-cd alacritty
-~/.cargo/bin/cargo build --release
+#pyenv install  anaconda3-2023.09-0
 
-# Deploying Alacritty
-sudo cp target/release/alacritty /usr/local/bin
-sudo cp extra/logo/alacritty-term.svg /usr/share/pixmaps/Alacritty.svg
-sudo desktop-file-install extra/linux/Alacritty.desktop
-sudo update-desktop-database
-cd ..
-rm -rf alacritty/
-echo "Alacritty Terminal ready to launch!"
-'''
+sudo apt install -y curl \\
+gnupg ca-certificates git \\
+gcc-multilib g++-multilib cmake libssl-dev pkg-config \\
+libfreetype6-dev libasound2-dev libexpat1-dev libxcb-composite0-dev \\
+libbz2-dev libsndio-dev freeglut3-dev libxmu-dev libxi-dev libfontconfig1-dev \\
+libxcursor-dev
+cargo install --git https://github.com/neovide/neovide
 
 # --- Yaskkserv2 Installation ---
 # Preparing the environment for Yaskkserv2
+sudo apt-get install libssl-dev
 echo "Setting up Yaskkserv2..."
 git clone https://github.com/wachikun/yaskkserv2.git
 cd yaskkserv2
