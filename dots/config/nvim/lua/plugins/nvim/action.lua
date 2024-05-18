@@ -30,6 +30,9 @@ return {
   {
     "folke/zen-mode.nvim", --{{{
     cmd = { "ZenMode" },
+    keys = {
+      { "<A-,>", "<CMD>ZenMode<CR>", desc = "zen-mode", mode = "n" },
+    },
     config = function()
       require("zen-mode").setup({
         window = {
@@ -47,8 +50,6 @@ return {
           },
         },
         plugins = {
-          -- disable some global vim options (vim.o...)
-          -- comment the lines to not apply the options
           options = {
             enabled = true,
             ruler = false, -- disables the ruler text in the cmd line area
@@ -63,27 +64,9 @@ return {
           tmux = {
             enabled = false,
           }, -- disables the tmux statusline
-          -- this will change the font size on kitty when in zen mode
-          -- to make this work, you need to set the following kitty options:
-          -- - allow_remote_control socket-only
-          -- - listen_on unix:/tmp/kitty
           kitty = {
             enabled = false,
             font = "+4", -- font size increment
-          },
-          -- this will change the font size on alacritty when in zen mode
-          -- requires  Alacritty Version 0.10.0 or higher
-          -- uses `alacritty msg` subcommand to change font size
-          alacritty = {
-            enabled = false,
-            font = "14", -- font size
-          },
-          -- this will change the font size on wezterm when in zen mode
-          -- See aalso the Plugins/Wezterm section in this projects README
-          wezterm = {
-            enabled = false,
-            -- can be either an absolute font size or the number of incremental steps
-            font = "+4", -- (10% increase per step)
           },
         },
         on_open = function()
@@ -112,10 +95,14 @@ return {
     },
   }, --}}}
   {
-    "folke/todo-comments.nvim",
+    "folke/todo-comments.nvim", --{{{
     event = "VimEnter",
     dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope.nvim" },
     cmd = { "TodoTrouble", "TodoTelesocpe" },
+    keys = {
+      { "<C-d>t", "<CMD>TodoTrouble<CR>", desc = "trouble list", mode = "n" },
+      { "<C-d>T", "<CMD>TodoTelescope<CR>", desc = "trouble scope", mode = "n" },
+    },
     opts = {
       keywords = {
         FIXME = { icon = "󱏛", color = "error", alt = { "BUG", "MISSING" } },
@@ -140,7 +127,7 @@ return {
       },
     },
     config = true,
-  },
+  }, --}}}
   {
     "chikko80/error-lens.nvim",
     event = "BufRead",
@@ -154,25 +141,38 @@ return {
       "nvim-lua/plenary.nvim",
     },
     cmd = { "TroubleToggle" },
-    -- keys = {
-    --   {
-    --     "<C-d>",
-    --     "<CMD>TroubleToggle workspace_diagnostics<CR>",
-    --     desc = "trouble_toggle",
-    --     mode = { "n" },
-    --   },
-    -- {
-    --   "<leader>d",
-    --   "<cmd>TodoTrouble  keywords=TODO,FIXME<CR>",
-    --   desc = "todo",
-    --   mode = { "n" },
-    -- },
-    -- 	["<C-o>o"] = { "<cmd>TroubleToggle snipfix <CR>", "Show Error by LSPs" },
-    -- 	["<C-o>d"] = { "<cmd>TroubleToggle workspace_diagnostics<CR>", "diagnostics" },
-    -- 	["<C-o>r"] = { "<cmd>TroubleToggle loclist<CR>", "diagnostics" },
-    -- 	["<C-o>a"] = { "<cmd>TroubleToggle snipfix<CR>", "diagnostics" },
-    -- 	["<C-o>o"] = { "<cmd>TroubleToggle lsp_references<CR>", "diagnostics" },
-    -- },
+    keys = {
+      {
+        "<C-d>n",
+        "<CMD>TroubleToggle workspace_diagnostics<CR>",
+        desc = "trouble_toggle",
+        mode = { "n" },
+      },
+      {
+        "<C-d>e",
+        "<cmd>TodoTrouble  keywords=TODO,FIXME<CR>",
+        desc = "todo",
+        mode = { "n" },
+      },
+      {
+        "<C-d>i",
+        "<cmd>TodoTrouble  snipfix<CR>",
+        desc = "Show error by Lsp",
+        mode = { "n" },
+      },
+      {
+        "<C-d>h",
+        "<cmd>TodoTrouble  loclist<CR>",
+        desc = "Show error by Lsp",
+        mode = { "n" },
+      },
+      {
+          "<C-d>o",
+          "<cmd>TodoTrouble lsp_references<CR>",
+        desc = "Show error by Lsp",
+        mode = { "n" },
+      }
+    },
     config = function() -- {{{
       require("trouble").setup({
         action_keys = {
