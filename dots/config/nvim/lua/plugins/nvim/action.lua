@@ -430,7 +430,8 @@ return {
        mode = {'n','x'},
        body = '<leader>g',
        heads = {
-          { 'N',
+          { 'n',
+
              function()
                 if vim.wo.diff then return ']c' end
                 vim.schedule(function() gitsigns.next_hunk() end)
@@ -665,6 +666,7 @@ return {
     event = "VeryLazy",
     config = function() --{{{
       require("nvim-web-devicons").setup({
+        -- yes, this is all the icons w/ an extra space
         -- yes, this is all the icons w/ an extra space
         override = {
           ["default_icon"] = {

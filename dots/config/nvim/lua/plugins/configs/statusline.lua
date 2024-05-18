@@ -145,8 +145,8 @@ require("lualine").setup({
       },
     },
     lualine_c = {
-      { require("dr-lsp").lspCount },
-      { require("dr-lsp").lspProgress },
+      -- { require("dr-lsp").lspCount },
+      -- { require("dr-lsp").lspProgress },
       "filename",
       {
         ime_state,

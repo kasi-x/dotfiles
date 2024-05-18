@@ -45,7 +45,10 @@ return {
   {
     "nvim-lualine/lualine.nvim", --{{{
     event = "VeryLazy",
-    dependencies = { "nvim-tree/nvim-web-devicons", "chrisgrieser/nvim-dr-lsp" },
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
+      -- "chrisgrieser/nvim-dr-lsp",
+    },
     config = function()
       require("plugins.configs.statusline")
     end,
@@ -58,7 +61,7 @@ return {
         render = "simple",
         stages = "fade_in_slide_out",
         level = 2,
-        time_out = 3,
+        time_out = 2,
         top_down = false,
         background_colour = "#121212",
         max_width = 50,
@@ -319,7 +322,7 @@ return {
   },                     --}}}
   {
     "j-hui/fidget.nvim", --{{{
-    branch = "legacy",
+    -- branch = "legacy",
     ft = { "lua", "go", "python" },
     config = true,
   },                        --}}}
@@ -417,51 +420,7 @@ return {
       presets.operators["gU"] = nil
       --}}}
       --{{{ Mappings
-      --{{{ test
-      -- wk.register({
-      --   j = {
-      --     name = "Jest",
-      --     f = { '<cmd>lua require("neotest").run.run(vim.fn.expand("%"))<CR>', 'run current file' },
-      --     i = { '<cmd>lua require("neotest").summary.toggle()<CR>', 'toggle info panel' },
-      --     j = { '<cmd>lua require("neotest").run.run()<CR>', 'run nearest test' },
-      --     l = { '<cmd>lua require("neotest").run.run_last()<CR>', 'run last test' },
-      --     o = { '<cmd>lua require("neotest").output.open({ enter = true })<CR>', 'open test output'},
-      --     s = { '<cmd>lua require("neotest").run.stop()<CR>', 'stop' },
-      --   }
-      -- }, {
-      --   mode = "n", -- NORMAL mode
-      --   prefix = "<leader>",
-      --   silent = true, -- use `silent` when creating keymaps
-      --   noremap = true, -- use `noremap` when creating keymaps
-      --   nowait = false, -- use `nowait` when creating keymaps
-      -- })--}}}
-      --{{{ SnipRun
-      -- wk.register({
-      --   ["<leader>s"] = {
-      --     name = "SnipRun", -- group name for the popup
-      --     s = { ":SnipRun<CR>", "Run SnipRun" },
-      --     -- o = {":'<,'>SnipRun<CR>", "Run SnipRunOperator (Visual Mode)"},
-      --     i = { ":SnipInfo<CR>", "SnipInfo" },
-      --     r = { ":SnipReset<CR>", "SnipReset" },
-      --     c = { ":SnipReplMemoryClean<CR>", "Clean SnipReplMemory" },
-      --     x = { ":SnipClose<CR>", "Close Snip" },
-      --     l = { ":SnipLive<CR>", "Toggle SnipLive" },
-      --   },
-      -- }, { mode = { "n" } }) --}}}
       --{{{ TODO
-      wk.register({
-        ["<C-d>"] = {
-          name = "Comments", -- group name for the popup
-          d = { "<CMD>TroubleToggle workspace_diagnostics<CR>", "trouble" },
-          -- o = {":'<,'>SnipRun<CR>", "Run SnipRunOperator (Visual Mode)"},
-          -- i = { ":SnipInfo<CR>", "SnipInfo" },
-          -- r = { ":SnipReset<CR>", "SnipReset" },
-          -- c = { ":SnipReplMemoryClean<CR>", "Clean SnipReplMemory" },
-          -- x = { ":SnipClose<CR>", "Close Snip" },
-          -- l = { ":SnipLive<CR>", "Toggle SnipLive" },
-        },
-      }, { mode = { "n" } }) --}}}
-
       -- {{{ Git
       -- wk.register({
       --   ["<leader>g"] = {
@@ -499,7 +458,7 @@ return {
           b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
           c = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
           f = { "<cmd>Telescope find_files<cr>", "Find File" },
-          t = { "<cmd>Telescope live_grep theme=ivy<cr>", "Find with theme" },
+          j = { "<cmd>Telescope live_grep theme=ivy<cr>", "Finder " },
           g = { "<cmd>Telescope live_grep<CR>", "Find Text" },
           s = { "<cmd>Telescope grep_string theme=ivy<cr>", "Find String" },
           [","] = { "<cmd>Telescope current_buffer_fuzzy_find<CR>", "search in file" },
@@ -565,33 +524,33 @@ return {
       --   }
       -- ) --}}}
       -- {{{ Refactor
-      wk.register({
-        ["<leader>r"] = {
-          name = "refactoring",
-          F = "ex_Func",
-          t = "ex_Func_to_File",
-          V = "ex_Var",
-          v = "inline_Var",
-          p = "Print_Function",
-          -- a = "Code_Actions",
-          r = "Telescope",
-        },
-      }, { mode = "x" })
-      wk.register({
-        ["<leader>r"] = {
-          name = "refactoring",
-          f = "inline_Func",
-          v = "inline_Var",
-          b = "ex_Block",
-          B = "ex_Block_to_File",
-          p = "Print Function",
-          P = "Print Variable",
-          c = "Cleanup Refactoring",
-          i = "Auto_Import",
-          -- a = "Code_Actions",
-          r = "Telescope",
-        },
-      }, { mode = "n" }) --}}}
+      -- wk.register({
+      --   ["<leader>r"] = {
+      --     name = "refactoring",
+      --     F = "ex_Func",
+      --     t = "ex_Func_to_File",
+      --     V = "ex_Var",
+      --     v = "inline_Var",
+      --     p = "Print_Function",
+      --     -- a = "Code_Actions",
+      --     r = "Telescope",
+      --   },
+      -- }, { mode = "x" })
+      -- wk.register({
+      --   ["<leader>r"] = {
+      --     name = "refactoring",
+      --     f = "inline_Func",
+      --     v = "inline_Var",
+      --     b = "ex_Block",
+      --     B = "ex_Block_to_File",
+      --     p = "Print Function",
+      --     P = "Print Variable",
+      --     c = "Cleanup Refactoring",
+      --     i = "Auto_Import",
+      --     -- a = "Code_Actions",
+      --     r = "Telescope",
+      --   },
+      -- }, { mode = "n" }) --}}}
       -- {{{ Align
       wk.register({
         ["gA"] = {
