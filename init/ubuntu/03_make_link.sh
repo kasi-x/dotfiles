@@ -59,4 +59,3 @@ link "config/waybar"
 link "config/wlogout"
 link "config/zathura/zathurarc"
 link "config/Kvantum"
-
