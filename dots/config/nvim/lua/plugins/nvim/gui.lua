@@ -453,23 +453,42 @@ return {
         ["l"] = {
           name = "comment",
         },
-      }, { mode = { "n", "x", "o" } }) --}}}
+      }, { mode = { "n" } }) --}}}
       wk.register({
         ["<C-l>"] = {
           name = "comment",
         },
-      }, { mode = { "n", "x", "o" } }) --}}}
-
+      }, { mode = { "x", "o" } }) --}}}
       wk.register({
-        ["b"] = {
-          name = "help",
+        ["<leader>s"] = {
+          name = "code_runnner",
         },
       }, { mode = { "n", "x", "o" } }) --}}}
       wk.register({
-        ["w"] = {
-          name = "surround",
+        ["<leader>r"] = {
+          name = "refactoring",
         },
       }, { mode = { "n", "x", "o" } }) --}}}
+      wk.register({
+        ["<C-r>"] = {
+          name = "code_actions",
+        },
+      }, { mode = { "n", "x", "o" } }) --}}}
+      -- wk.register({
+      --   ["b"] = {
+      --     name = "help",
+      --   },
+      -- }, { mode = { "n", "x", "o" } }) --}}}
+      -- wk.register({
+      --   ["B"] = {
+      --     name = "help",
+      --   },
+      -- }, { mode = { "n", "x", "o" } }) --}}}
+      -- wk.register({
+      --   ["<C-b>"] = {
+      --     name = "help",
+      --   },
+      -- }, { mode = { "n", "x", "o" } }) --}}}
       -- {{{ Telescope
       wk.register({
         ["j"] = {

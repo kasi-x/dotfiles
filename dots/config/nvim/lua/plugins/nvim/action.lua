@@ -157,7 +157,7 @@ return {
       },
       {
         "<C-d>e",
-        "<cmd>TodoTrouble keywords=TODO,FIXME<CR>",
+        "<cmd>TroubleToggle keywords=TODO,FIXME<CR>",
         desc = "todo list",
         mode = { "n" },
       },
@@ -169,19 +169,19 @@ return {
       },
       {
         "<C-d>i",
-        "<cmd>TodoTrouble  snipfix<CR>",
+        "<cmd>TroubleToggle snipfix<CR>",
         desc = "Show error by Lsp",
         mode = { "n" },
       },
       {
         "<C-d>h",
-        "<cmd>TodoTrouble  loclist<CR>",
+        "<cmd>TroubleToggle  loclist<CR>",
         desc = "loclist",
         mode = { "n" },
       },
       {
         "<C-d>r",
-        "<cmd>TodoTrouble lsp_references<CR>",
+        "<cmd>TroubleToggle lsp_references<CR>",
         desc = "Show error by Lsp",
         mode = { "n" },
       }
@@ -212,6 +212,19 @@ return {
         use_diagnostic_signs = true,
       })
     end, -- }}}
+    -- local actions = require("telescope.actions")
+    -- local trouble = require("trouble.providers.telescope")
+    --
+    -- local telescope = require("telescope")
+    --
+    -- telescope.setup {
+    --   defaults = {
+    --     mappings = {
+    --       i = { ["<c-t>"] = trouble.open_with_trouble },
+    --       n = { ["<c-t>"] = trouble.open_with_trouble },
+    --     },
+    --   },
+    -- }
   }, --}}}
   {
     "dstein64/vim-startuptime", --{{{
@@ -430,8 +443,7 @@ return {
        mode = {'n','x'},
        body = '<leader>g',
        heads = {
-          { 'n',
-
+          { 'N',
              function()
                 if vim.wo.diff then return ']c' end
                 vim.schedule(function() gitsigns.next_hunk() end)
@@ -666,7 +678,6 @@ return {
     event = "VeryLazy",
     config = function() --{{{
       require("nvim-web-devicons").setup({
-        -- yes, this is all the icons w/ an extra space
         -- yes, this is all the icons w/ an extra space
         override = {
           ["default_icon"] = {
@@ -1468,18 +1479,132 @@ return {
   {
     "mbbill/undotree",
     cmd = "UndotreeToggle",
-    keys = { { "<C-z>", "<cmd>UndotreeToggle<cr>", desc = "undotree", mode = "n" } },
+    keys = { { "gz", "<cmd>UndotreeToggle<cr>", desc = "undotree", mode = "n" } },
   },
   {
     "aznhe21/actions-preview.nvim",
     dependencies = { "nvim-telescope/telescope.nvim", "MunifTanjim/nui.nvim" },
+    keys = { { "<C-r>s", "<cmd>lua require('actions-preview').code_actions()<CR>", desc = "code_actions", mode = { "n", "v" } } },
+  },
+  {
+    "smjonas/inc-rename.nvim",
+    cmd = "IncRename",
+    config = function()
+      require("inc_rename").setup()
+    end,
+    keys = { { "<C-r>i", function() return ":IncRename " .. vim.fn.expand("<cword>") end, expr=true, desc = "increname", mode = "n" } }
+  },
+--   {
+--     'rmagatti/goto-preview',
+--     event="VeryLazy",
+--     config = true,
+--     keys = {
+--      { "<C-b>", "<cmd>lua require('goto-preview').goto_preview_definition()<CR>", mode="n", desc="goto_preview_definition"} ,
+--      -- { "B", "<cmd>lua require('goto-preview').goto_preview_implementation()<CR>", mode="n", desc="goto_preview_implementation"} ,
+--     }
+-- }
+  {
+    "nvimdev/lspsaga.nvim",
+    lazy = false,
+    cmd = "Lspsaga",
+    config = function()
+      require("lspsaga").setup({
+        ui = {
+          code_action = "󰌶",
+          diagnostic = "",
+        },
+        lightbulb = {
+          sigh = true,
+          enable = true,
+          virtual_text = true,
+          enable_in_insert = true,
+        },
+        finder = {
+          scroll_down = "<C-u>",
+          scroll_up = "<C-y>",
+          quit = { "q", "<ESC>" },
+        },
+        symbol_in_winbar = {
+          enable = false,
+          show_file = false,
+        },
+        definition = {
+          keys = {
+            edit = "<CR>",
+            vsplit = "gu",
+            split = "gy",
+            table = "<C-o>",
+            quit = "q",
+            close = "<C-q>",
+          },
+        },
+      })
+    end,
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter", -- optional
+      "nvim-tree/nvim-web-devicons", -- optional
+    },
     keys = {
       {
-        "<C-r>s",
-        "<cmd>lua require('actions-preview').code_actions()<CR>",
-        desc = "code_actions",
-        mode = { "n", "v" },
+        "<C-r>r",
+        "<cmd>Lspsaga rename ++project<cr>",
+        desc = "rename",
+        mode = "n",
       },
+      {
+        "b",
+        "<cmd>Lspsaga hover_doc<cr>",
+        desc = "hover_doc",
+        mode = "n",
+      },
+      -- {
+      --   "gD",
+      --   "<cmd>Lspsaga finder<CR>",
+      --   desc = "implementation of interface",
+      --   mode = { "n" },
+      -- },
+      {
+        "<C-b>",
+        "<cmd>Lspsaga peek_type_definition<CR>",
+        desc = "preview_type_definition",
+        mode = { "n" },
+      },
+      {
+        "<C-r>s",
+        "<cmd>Lspsaga code_action<cr>",
+        desc = "CodeAction",
+        mode = { "n" },
+      },
+      { "<Leader>R", "<cmd>Lspsaga range_code_action<cr>", desc = "CodeAction", mode = { "x" } },
+      -- {
+      --   "<Leader>f",
+      --   "<cmd>Lspsaga diagnostic_jump_next<cr>",
+      --   desc = "diagnostic_jump_next",
+      --   mode = { "n" },
+      -- },
+      -- {
+      --   "<Leader>p",
+      --   "<cmd>Lspsaga diagnostic_jump_prev<cr>",
+      --   desc = "diagnostic_jump_prev",
+      --   mode = { "n" },
+      -- },
+      -- {
+      --   "<Leader>b",
+      --   "<cmd>Lspsaga show_line_diagnostics<CR>",
+      --   desc = "show_diagnostic",
+      --   mode = { "n" },
+      -- },
     },
   },
+  {"KostkaBrukowa/definition-or-references.nvim",
+  keys={{
+    "gd",
+    require("definition-or-references").definition_or_references,
+    desc = "definition_or_ref",
+    mode = { "n" },
+  }}
+  },
+  --    vim.keymap.set('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<cr>', opts)
+  --    vim.keymap.set('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<cr>', opts)
+    -- vim.keymap.set('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<cr>',
 }

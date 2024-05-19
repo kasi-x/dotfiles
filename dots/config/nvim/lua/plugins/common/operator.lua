@@ -1,43 +1,43 @@
 return {
   "nvim-lua/plenary.nvim",
-  -- {
-  --   "monaqa/dial.nvim", --{{{
-  --   dependencies = "plenary.nvim",
-  --   event = { "BufRead", "BufNewFile" },
-  --   keys = {
-  --     {
-  --       "<C-z>",
-  --       "<Plug>(dial-increment)",
-  --       desc = "increment",
-  --       mode = { "n", "x" },
-  --     },
-  --     {
-  --       "<C-x>",
-  --       "<Plug>(dial-decrement)",
-  --       desc = "decrement",
-  --       mode = { "n", "x" },
-  --     },
-  --   },
-  --   config = function()
-  --     local augend = require("dial.augend")
-  --     require("dial.config").augends:register_group({
-  --       default = {
-  --         augend.constant.alias.bool,
-  --         augend.constant.alias.ja_weekday,
-  --         augend.constant.alias.ja_weekday_full,
-  --         augend.date.alias["%H:%M"],
-  --         augend.date.alias["%Y-%m-%d"],
-  --         augend.date.alias["%Y/%m/%d"],
-  --         augend.date.alias["%Y年%-m月%-d日"],
-  --         augend.date.alias["%Y年%-m月%-d日(%ja)"],
-  --         augend.date.alias["%m/%d"],
-  --         augend.integer.alias.decimal,
-  --         augend.integer.alias.hex,
-  --         augend.semver.alias.semver,
-  --       },
-  --     })
-  --   end,
-  -- }, --}}}
+  {
+    "monaqa/dial.nvim", --{{{
+    dependencies = "plenary.nvim",
+    event = { "BufRead", "BufNewFile" },
+    keys = {
+      {
+        "<C-z>",
+        "<Plug>(dial-increment)",
+        desc = "increment",
+        mode = { "n", "x" },
+      },
+      {
+        "<C-x>",
+        "<Plug>(dial-decrement)",
+        desc = "decrement",
+        mode = { "n", "x" },
+      },
+    },
+    config = function()
+      local augend = require("dial.augend")
+      require("dial.config").augends:register_group({
+        default = {
+          augend.constant.alias.bool,
+          augend.constant.alias.ja_weekday,
+          augend.constant.alias.ja_weekday_full,
+          augend.date.alias["%H:%M"],
+          augend.date.alias["%Y-%m-%d"],
+          augend.date.alias["%Y/%m/%d"],
+          augend.date.alias["%Y年%-m月%-d日"],
+          augend.date.alias["%Y年%-m月%-d日(%ja)"],
+          augend.date.alias["%m/%d"],
+          augend.integer.alias.decimal,
+          augend.integer.alias.hex,
+          augend.semver.alias.semver,
+        },
+      })
+    end,
+  }, --}}}
   {
     "gbprod/substitute.nvim", --{{{
     keys = {

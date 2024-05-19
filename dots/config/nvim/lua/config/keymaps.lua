@@ -1,6 +1,6 @@
 -- map func {{{
 local function map(mode, lhs, rhs, opts)
-  local keys = require("lazy.core.handler").handlers.keys
+local keys = require("lazy.core.handler").handlers.keys
   if not keys.active[keys.parse({ lhs, mode = mode }).id] then
     opts = vim.tbl_extend("force", { expr = false, silent = true, nowait = true, noremap = true },
       opts or {})
@@ -514,20 +514,25 @@ R is for Replace paste.
 -- }}} Single / Shift
 -- {{{ <Ctrl> (3/5)
 -- {{{ Normal / Visual (2/2)
-if is_vscode then
-  map(
-    "n",
-    "<C-r>",
-    "<Cmd>call VSCodeNotify('editor.action.rename', { 'query': expand('<cword>')})<CR>",
-    { desc = "remap below word" }
-  )
-end
+-- if is_vscode then
+--   map(
+--     "n",
+--     "<C-r>",
+--     "<Cmd>call VSCodeNotify('editor.action.rename', { 'query': expand('<cword>')})<CR>",
+--     { desc = "remap below word" }
+--   )
+-- end
 -- smart rename of treesitter.
 map("x", "<C-r>", "c", { desc = "change key" })
 -- }}} Normal / Visual
 -- {{{ Insert / Command (2/2)
 -- Default is paset select. But it is <C-v>
 map("i", "<C-r>", "<ESC>R", { desc = "enter Replace mode" })
+map('n', '<C-r>r', "<Cmd>lua vim.lsp.buf.rename()<CR>", {desc = "Renamer"})
+map('n', '<C-r>a', "<Cmd>lua vim.lsp.buf.code_action()<CR>", {desc = "Action"})
+map('n', '<C-r>q', "<Cmd>lua vim.lsp.buf.uf.format({async = true})<cr>", {desc = "Formater"})
+
+
 --MEMO:  <C-r> is paste. ( i thonk <C-v> is better but which-key force to use <C-r>)
 -- }}} Insert / Command
 -- }}} <Ctrl>
@@ -539,16 +544,16 @@ map("i", "<C-r>", "<ESC>R", { desc = "enter Replace mode" })
 -- }}} <Leader>
 -- {{{ <g> (2/4)
 -- {{{ Normal / Visual (2/4)
-if is_vscode then
-  map(
-    "n",
-    "gr",
-    "<Cmd>call VSCodeNotify('workbench.action.replaceInFiles', { 'query': expand('<cword>')})<CR>",
-    { desc = "remap below word" }
-  )
-else
+-- if is_vscode then
+--   map(
+--     "n",
+--     "gr",
+--     "<Cmd>call VSCodeNotify('workbench.action.replaceInFiles', { 'query': expand('<cword>')})<CR>",
+--     { desc = "remap below word" }
+--   )
+-- else
   -- smart rename of treesitter.
-end -- }}} Norma / Visual
+-- end -- }}} Norma / Visual
 -- }}} <g>
 -- {{{ <m/M> (0/0)
 --[[ Nothing ]]
@@ -719,19 +724,29 @@ map({ "n", "x" }, "k", "'n'", { expr = true, noremap = true, desc = "Repeat the 
 map({ "n", "x" }, "K", "'N'", { expr = true, noremap = true, desc = "Search opposite direction" })
 if is_vscode then
   map("n", "b", "<Cmd>call VSCodeNotify('editor.action.showHover')<CR>", { desc = "Hover" })
-  map("n", "B", "<Cmd>call VSCodeNotify('editor.action.peekDefinition')<CR>", { desc = "move" })
-  map("n", "<C-b>", "<Cmd>call VSCodeNotify('editor.action.referenceSearch.trigger')<CR>",
-    { desc = "move" })
+  -- map("n", "B", "<Cmd>call VSCodeNotify('editor.action.peekDefinition')<CR>", { desc = "move" })
+  -- map("n", "<C-b>", "<Cmd>call VSCodeNotify('editor.action.referenceSearch.trigger')<CR>",
+    -- { desc = "move" })
 else
   -- vim.lsp.buf.references()Lists all the references to the
   -- map("n", "b", "K", { desc = "keyworddrop" })
+  map("n", "b", "<Cmd>lua vim.lsp.buf.hover()<CR>", { desc = "type definition" })
+  -- map("n", "<C-b>", "<Cmd>lua vim.lsp.buf.type_definition()<CR>", { desc = "type definition" })
+
   -- map("n", "b", "<Cmd>lua vim.lsp.buf.type_definition()<CR>", { desc = "type definition" })
   -- map("n", "B", "<Cmd>lua vim.lsp.buf.references()<CR>", { desc = "Hover" })
+  -- map("n", "B", "<Cmd>lua vim.lsp.buf.signature_help()<CR>", { desc = "Hover" })
+
+-- vim.lsp.buf.signature_help().
+        -- d = { vim.lsp.buf.definition, "Go to definition" },
+        -- r = { require("telescope.builtin").lsp_references,
+          -- "Open a telescope window with references" },
+        -- r = { require("telescope.builtin").lsp_references,
   -- map("n", "<leader>k", "<Cmd>lua vim.lsp.buf.implementation()<CR>", { desc = "move" })
   -- "B", "<CMD>lua require('goto-preview').goto_preview_declaration()<CR>", desc = "Goto Preview Declaration",
   -- <C-b> is treesitter
   -- map("n", "<C-b>", "<Cmd>lua vim.lsp.buf.signature_help()<CR>", { desc = "Show signature help" })
-  -- { "<C-k>", "<CMD>lua require('goto-preview').goto_preview_references()<CR>", desc = "Goto Preview References",
+  -- { "<C-k>", "<CMD>lua require('goto-preview').goto_.preview_references()<CR>", desc = "Goto Preview References",
 end
 -- }}} Normal / Shift
 -- {{{ Leader/ g (6/6)
@@ -794,23 +809,23 @@ map("n", "<C-w>", "<cmd>wincmd w<CR>", { desc = "Move window" })
 -- {{{ Normal (2/4)
 map("n", "q", "@", { expr = false, desc = "MacroPlay" })
 map("n", "Q", "q", { expr = false, desc = "MacroRecord" })
-if is_vscode then
-  map(
-    "n",
-    "<C-q>",
-    "<Cmd>call VSCodeNotify('github.copilot.collectDiagnostics')<CR>",
-    { desc = "Error Lens: Toggle (Enable/Disable) Everything" }
-  )
-  map("n", "qq", "<Cmd>call VSCodeNotify('editor.action.formatDocument')<CR>",
-    { desc = "AutoFormat" })
+-- if is_vscode then
+--   map(
+--     "n",
+--     "<C-q>",
+--     "<Cmd>call VSCodeNotify('github.copilot.collectDiagnostics')<CR>",
+--     { desc = "Error Lens: Toggle (Enable/Disable) Everything" }
+--   )
+--   map("n", "qq", "<Cmd>call VSCodeNotify('editor.action.formatDocument')<CR>",
+--     { desc = "AutoFormat" })
   -- {
   --   "key": "shift+alt+f",
   --   "command": "editor.action.formatDocument",
   --   "when": "editorHasDocumentFormattingProvider && editorTextFocus && !editorReadonly && !inCompositeEditor"
   -- }
-else
-  map("n", "<C-q>", "<Nop>", { expr = false, desc = "Nop" })
-end
+-- else
+  -- map("n", "<C-q>", "<Nop>", { expr = false, desc = "Nop" })
+-- end
 -- }}} Normal
 -- {{{ Visual (0/2)
 -- }}} Visual
@@ -944,5 +959,20 @@ end
 -- map("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
 -- map("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 -- }}}
+
+-- {{{ <L> comment ()
+-- {{{ Normal / Shift (0/0)
+-- }}} Normal / Shift
+-- -- {{{ Normal(1/2)
+-- map("n", "l", "<Nop>", {expr=true})
+-- map({ "n", "x", "o" }, "<Space>", "<Nop>", { desc = "Disable Space" })
+--map("o", "<Nop>", "<left>", { noremap = true })
+
+
+--map("n", "<C-q>", "<Nop>", { expr = false, desc = "Nop" })
+
+-- -- }}} Normal
+-- }}}
+
 
 -- vim: ts=2 et sw=2 fdm=marker fmr={{{,}}}
