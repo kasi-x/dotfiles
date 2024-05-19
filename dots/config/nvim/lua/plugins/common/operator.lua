@@ -60,11 +60,13 @@ return {
   }, --}}}
   {
     "numToStr/Comment.nvim", --{{{
+    event="VeryLazy",
+    -- lazy = false,
     config = function()
       require("Comment").setup({
         {
-          padding = true,
-          sticky = true,
+          padding = false,
+          sticky = false,
           opleader = {
             line = "l",
             block = "<C-l>",
@@ -75,15 +77,15 @@ return {
             eol = "li",
           },
           mappings = {
-            basic = true,
+            basic = false,
             extra = false,
           },
           pre_hook = nil,
           post_hook = nil,
           ignore = "^$",
           toggler = {
-            line = "ll",
-            block = "lL",
+            line = false,
+            block = false,
           },
         },
       })
@@ -98,7 +100,7 @@ return {
         mode = "n",
       },
       {
-        "lb",
+        "lL",
         function()
           require("Comment.api").toggle.blockwise.current()
         end,
@@ -130,7 +132,7 @@ return {
         mode = "n",
       },
       {
-        "lB",
+        "lb",
         function()
           require("Comment.api").insert.blockwise.eol()
         end,
@@ -171,17 +173,52 @@ return {
     "LudoPinelli/comment-box.nvim", --{{{
     keys = {
       {
-        "<leader>l",
-        "<Cmd>lua require('comment-box').lbox()<CR>",
+        "lB",
+        "<Cmd>CBccbox<CR>",
         desc = "left aligned fixed size box with left aligned text",
-        mode = { "n", "v" },
+        mode = { "n" },
       },
       {
-        "<leader>L",
-        "<Cmd>lua require('comment-box').cbox()<CR>",
-        desc = "centered adapted box with centered text",
-        mode = { "n", "v" },
+        "<C-l>b",
+        "<Cmd>CBccbox<CR>",
+        desc = "left aligned fixed size box with left aligned text",
+        mode = { "v" },
       },
+      {
+        "lr",
+        "<Cmd>CBllline<CR>",
+        desc = "centered adapted box with centered text",
+        mode = { "n"},
+      },
+      {
+        "<C-l>r",
+        "<Cmd>CBllline<CR>",
+        desc = "centered adapted box with centered text",
+        mode = {"v" },
+      },
+      {
+        "ls",
+        "<Cmd>CBllline<CR>",
+        desc = "centered adapted box with centered text",
+        mode = { "n" },
+      },
+      {
+        "<C-l>s",
+        "<Cmd>CBllline<CR>",
+        desc = "centered adapted box with centered text",
+        mode = { "v" },
+      },
+
+      -- {
+      --   "ls",
+      --   "<Cmd>CBllline<CR>",
+      --   desc = "centered adapted box with centered text",
+      --   mode = { "n", "v" },
+      -- },
+    -- b = { "<Cmd>CBccbox<CR>", "Box Title" },
+    --   t = { "<Cmd>CBllline<CR>", "Titled Line" },
+    --   l = { "<Cmd>CBline<CR>", "Simple Line" },
+    --   m = { "<Cmd>CBllbox14<CR>", "Marked" },
     },
   }, --}}}
 }

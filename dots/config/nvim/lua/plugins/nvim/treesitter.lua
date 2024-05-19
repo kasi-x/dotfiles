@@ -161,7 +161,7 @@ return {
         mode = { "o" },
       },
       {
-        "<C-l>",
+        "<C-l>l",
         "<cmd>lua require('various-textobjs').multiCommentedLines()<CR>",
         desc = "Multi Commented Lines",
         mode = { "x", "o" },
@@ -261,7 +261,7 @@ return {
         mode = { "o", "x" },
       },
       {
-        "!",
+        "<C-d",
         "<cmd>lua require('various-textobjs').diagnostic()<CR>",
         desc = "LSP Diagnostic",
         mode = { "o", "x" },
@@ -291,13 +291,13 @@ return {
         mode = { "o", "x" },
       },
       {
-        "tq",
+        "tQ",
         "<cmd>lua require('various-textobjs').pyTripleQuotes('outer')<CR>",
         desc = "Outer Quote",
         mode = { "o", "x" },
       },
       {
-        "sq",
+        "sQ",
         "<cmd>lua require('various-textobjs').pyTripleQuotes('inner')<CR>",
         desc = "Inner Quote",
         mode = { "o", "x" },

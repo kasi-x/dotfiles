@@ -449,6 +449,27 @@ return {
       --     },
       --   },
       -- }, { mode = { "n" } }) --}}}
+      wk.register({
+        ["l"] = {
+          name = "comment",
+        },
+      }, { mode = { "n", "x", "o" } }) --}}}
+      wk.register({
+        ["<C-l>"] = {
+          name = "comment",
+        },
+      }, { mode = { "n", "x", "o" } }) --}}}
+
+      wk.register({
+        ["b"] = {
+          name = "help",
+        },
+      }, { mode = { "n", "x", "o" } }) --}}}
+      wk.register({
+        ["w"] = {
+          name = "surround",
+        },
+      }, { mode = { "n", "x", "o" } }) --}}}
       -- {{{ Telescope
       wk.register({
         ["j"] = {
