@@ -48,5 +48,9 @@ if [ ! -f ~/.config/hypr/.initial_startup_done ]; then
     # Create a marker file to indicate that the script has been executed.
     touch ~/.config/hypr/.initial_startup_done
 
+    export GTK_IM_MODULE=ibus
+    export XMODIFIERS=@im=ibus
+    export QT_IM_MODULE=ibus
+
     exit
 fi

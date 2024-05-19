@@ -145,6 +145,8 @@ map({ "n", "x", "o" }, "<leader>e", '"{"',
 map({ "n", "x", "o" }, "<leader>N", '"]"', { expr = false, desc = "Navigate to the next sentence" })
 map({ "n", "x", "o" }, "<leader>E", '"["',
   { expr = false, desc = "Navigate to the previous sentence" })
+map('t', '<esc>', "<C-\\><C-n>", {desc="exit from term" })
+-- map('t', '<C-w>', [[<C-\><C-n><C-w>]], {desc="move from term"})
 -- }}} Normal / Visual / Operator
 -- }}} <Leader>
 -- {{{ <g>

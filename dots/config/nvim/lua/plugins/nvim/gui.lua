@@ -1,9 +1,35 @@
 return {
   {
+    'akinsho/toggleterm.nvim',
+    version = "*",
+    config = true,
+    event="VeryLazy",
+    keys = {
+       {
+         "<leader>rm",
+         "<cmd>ToggleTermSendCurrentLine<CR>",
+         mode = { "n" },
+         desc = "Toggle outline",
+       },
+       {
+         "<leader>rm",
+         function() require("toggleterm").send_lines_to_terminal("single_line", trim_spaces, { args = vim.v.count }) end,
+        mode = {  "v" },
+         desc="line2term",
+       },
+       {
+         "<leader>rM",
+         "<cmd>ToggleTermSendVisualSelection<CR>",
+         mode = { "v" },
+         desc = "Toggle outline",
+       }
+    },
+  },
+  {
     "hedyhli/outline.nvim", --{{{
     lazy = true,
     cmd = { "Outline", "OutlineOpen" },
-    keys = {{ "<C-s>", "<cmd>Outline<CR>", desc = "Toggle outline" }},
+    keys = {{ "<C-s>", "<cmd>Outline<CR>",  mode = { "n" , "v" }, desc = "Toggle outline" }},
     opts = {
       keymaps = { -- These keymaps can be a string or a table for multiple keys
         close = { "<Esc>", "q" },
