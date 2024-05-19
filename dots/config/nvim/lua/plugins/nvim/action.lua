@@ -240,6 +240,7 @@ return {
       "DiffviewClose",
       "DiffviewToggleFiles",
       "DiffviewFocusFiles",
+      "DiffviewFileHistory",
     },
   }, --}}}
   -- {
@@ -404,7 +405,7 @@ return {
  _E_: prev hunk   _u_: undo last stage   _p_: preview hunk   _B_: blame show full
  ^ ^              _S_: stage buffer      ^ ^                 _/_: show base file
  ^
- ^ ^              _<Enter>_: Neogit              _q_: exit
+ ^ ^       _<Enter>_: Neogit   _z_:DiffviewToggleFiles   _q_: exit
       ]]
       Hydra({
       name = 'Git',
@@ -477,6 +478,7 @@ return {
           { 'B', function() gitsigns.blame_line{ full = true } end, { desc = 'blame show full' } },
           { '/', gitsigns.show, { exit = true, desc = 'show base file' } }, -- show the base of the file
           { '<Enter>', function() vim.cmd('Neogit') end, { exit = true, desc = 'Neogit' } },
+          { 'z', function() vim.cmd('DiffviewOpen') end, { exit = true, desc = 'Neogit' } },
           { 'q', nil, { exit = true, nowait = true, desc = 'exit' } },
        }
       }) --}}}
@@ -1595,58 +1597,6 @@ return {
       --   mode = { "n" },
       -- },
     },
-  },
-   {
-    "andrewferrier/debugprint.nvim",
-    dependencies = {
-      "echasnovski/mini.nvim" -- Needed to enable :ToggleCommentDebugPrints for NeoVim 0.9
-    },
-    opts = {
-        keymaps = {
-            normal = {
-              plain_below = "<Leader>b",
-              plain_above = "<leader>B",
-              variable_below = "<leader>rb",
-              variable_above = "<leader>rB",
-              textobj_below = "<leader>rv",
-              textobj_above = "<leader>rV",
-              toggle_comment_debug_prints = "lb",
-              delete_debug_prints = "<leader>rd",
-            },
-            visual = {
-              variable_below = "b",
-              variable_above = "B",
-            },
-        },
-        commands = {
-            toggle_comment_debug_prints = "ToggleCommentDebugPrints",
-            delete_debug_prints = "DeleteDebugPrints",
-        },
-    },
-    keys = {
-        { "lb", mode = 'n' },
-        { "<leaeder>rd", mode = 'n' },
-        { "<leaeder>b", mode = 'n' },
-        { "<leaeder>B", mode = 'n' },
-        { "<leaeder>rb", mode = 'n' },
-        { "<leaeder>rB", mode = 'n' },
-        { "<leaeder>rv", mode = 'n' },
-        { "<leaeder>rV", mode = 'n' },
-        { "b", mode = 'x' },
-        { "B", mode = 'x' },
-    },
-    cmd = {
-        "ToggleCommentDebugPrints",
-        "DeleteDebugPrints",
-    },
-  },
-  {"KostkaBrukowa/definition-or-references.nvim",
-  keys={{
-    "gd",
-    require("definition-or-references").definition_or_references,
-    desc = "definition_or_ref",
-    mode = { "n" },
-  }}
   },
   --    vim.keymap.set('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<cr>', opts)
   --    vim.keymap.set('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<cr>', opts)
