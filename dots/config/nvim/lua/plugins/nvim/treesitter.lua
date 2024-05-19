@@ -57,30 +57,6 @@ return {
           enable = true,
           disable = { "python" },
         },
-        -- refactor = {
-        --   highlight_definitions = {
-        --     enable = false, -- very very slow
-        --   },
-        --   highlight_current_scope = {
-        --     enable = false,
-        --   },
-        --   -- smart_rename = {
-        --   --   enable = false,
-        --   --   keymaps = {
-        --   --     smart_rename = "<C-r>", -- mapping to rename reference under cursor
-        --   --   },
-        --   -- },
-        --   navigation = {
-        --     enable = true,
-        --     keymaps = {
-        --       goto_definition = "gt",
-        --       list_definitions = "gT",
-        --       list_definitions_toc = "gS",
-        --       goto_next_usage = "wu",
-        --       goto_previous_usage = "wy",
-        --     },
-        --   },
-        -- },
         textobjects = {
           select = {
             enable = true,
@@ -137,7 +113,6 @@ return {
     dependencies = {
       { "nvim-treesitter/nvim-treesitter-context", config = true },
       { "HiPhish/rainbow-delimiters.nvim" },
-      -- { "nvim-treesitter/nvim-treesitter-refactor" },
       { "nvim-treesitter/nvim-tree-docs" },
       { "nvim-treesitter/nvim-treesitter-textobjects" },
     },

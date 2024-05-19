@@ -1,4 +1,8 @@
 return {
+  -- {
+  --   "ixru/nvim-markdown",
+  --   on_ft="markdown",
+  -- },
   --  {
   --     "kiyoon/jupynium.nvim",
   --     build = "pip3 install --user .",
