@@ -1,4 +1,5 @@
 return {
+-- https://github.com/benlubas/molten-nvim?tab=readme-ov-file
 --   {'kevinhwang91/nvim-hlslens',
 --   keys = {
 --       {
@@ -55,6 +56,10 @@ return {
       { "<Leader>sd", "<Plug>SnipClose", desc = "snip_run", mode = "x" },
     },
   }, --}}}
+  {
+    'stevearc/overseer.nvim',
+    opts = {},
+  },
   {
     "folke/zen-mode.nvim", --{{{
     cmd = { "ZenMode" },

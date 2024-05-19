@@ -455,6 +455,11 @@ return {
         },
       }, { mode = { "n" } }) --}}}
       wk.register({
+        ["L"] = {
+          name = "comment_with_dialog",
+        },
+      }, { mode = { "n" } }) --}}}
+      wk.register({
         ["<C-l>"] = {
           name = "comment",
         },
