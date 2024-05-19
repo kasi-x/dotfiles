@@ -123,106 +123,106 @@ return {
       },
     },
   },
-  -- { --}}}
-  --   "ThePrimeagen/refactoring.nvim", --{{{
-  --   lazy = "VeryLazy",
-  --   dependencies = {
-  --     "nvim-lua/plenary.nvim",
-  --     "nvim-treesitter/nvim-treesitter",
-  --   },
-  --   config = function()
-  --     require("refactoring").setup()
-  --     require("telescope").load_extension("refactoring")
-  --   end,
-  --   keys = { --{{{
-  --     {
-  --       "<leader>rr",
-  --       "<CMD>lua require'telescope'.extensions.refactoring.refactors()<CR>",
-  --       desc = "refactoring",
-  --       mode = { "n", "x" },
-  --     },
-  --     {
-  --       "<leader>rF",
-  --       function()
-  --         require("refactoring").refactor("Extract Function")
-  --       end,
-  --       desc = "Extract Function",
-  --       mode = { "x" },
-  --     },
-  --     {
-  --       "<leader>rt",
-  --       function()
-  --         require("refactoring").refactor("Extract Function To File")
-  --       end,
-  --       desc = "Extract Function To File",
-  --       mode = { "x" },
-  --     },
-  --     {
-  --       "<leader>rV",
-  --       function()
-  --         require("refactoring").refactor("Extract Variable")
-  --       end,
-  --       desc = "Extract Variable",
-  --       mode = { "x" },
-  --     },
-  --     {
-  --       "<leader>rf",
-  --       function()
-  --         require("refactoring").refactor("Inline Function")
-  --       end,
-  --       desc = "Inline Function",
-  --       mode = { "n" },
-  --     },
-  --     {
-  --       "<leader>rv",
-  --       function()
-  --         require("refactoring").refactor("Inline Variable")
-  --       end,
-  --       desc = "Inline Variable",
-  --       mode = { "n", "x" },
-  --     },
-  --     {
-  --       "<leader>rb",
-  --       function()
-  --         require("refactoring").refactor("Extract Block")
-  --       end,
-  --       desc = "Extract Block",
-  --       mode = { "n" },
-  --     },
-  --     {
-  --       "<leader>rB",
-  --       function()
-  --         require("refactoring").refactor("Extract Block To File")
-  --       end,
-  --       desc = "Extract Block To File",
-  --       mode = { "n" },
-  --     },
-  --     {
-  --       "<leader>rp",
-  --       function()
-  --         require("refactoring").debug.printf({ below = false })
-  --       end,
-  --       desc = "Print Function",
-  --       mode = { "n" }, -- This remap must be made in normal mode
-  --     },
-  --     {
-  --       "<leader>rP",
-  --       function()
-  --         require("refactoring").debug.print_var()
-  --       end,
-  --       desc = "Print Variable",
-  --       mode = { "n", "x" }, -- Supports both visual and normal mode
-  --     },
-  --     {
-  --       "<leader>rc",
-  --       function()
-  --         require("refactoring").debug.cleanup({})
-  --       end,
-  --       desc = "Cleanup Refactoring",
-  --       mode = { "n" }, -- Supports only normal mode
-  --     },
-  --   }, --}}},
-  -- },
+  { --}}}
+    "ThePrimeagen/refactoring.nvim", --{{{
+    lazy = "VeryLazy",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+    },
+    config = function()
+      require("refactoring").setup()
+      require("telescope").load_extension("refactoring")
+    end,
+    keys = { --{{{
+      {
+        "<leader>rr",
+        "<CMD>lua require'telescope'.extensions.refactoring.refactors()<CR>",
+        desc = "refactoring",
+        mode = { "n", "x" },
+      },
+      {
+        "<leader>rF",
+        function()
+          require("refactoring").refactor("Extract Function")
+        end,
+        desc = "Extract Function",
+        mode = { "x" },
+      },
+      {
+        "<leader>rt",
+        function()
+          require("refactoring").refactor("Extract Function To File")
+        end,
+        desc = "Extract Function To File",
+        mode = { "x" },
+      },
+      {
+        "<leader>rV",
+        function()
+          require("refactoring").refactor("Extract Variable")
+        end,
+        desc = "Extract Variable",
+        mode = { "x" },
+      },
+      {
+        "<leader>rf",
+        function()
+          require("refactoring").refactor("Inline Function")
+        end,
+        desc = "Inline Function",
+        mode = { "n" },
+      },
+      {
+        "<leader>rv",
+        function()
+          require("refactoring").refactor("Inline Variable")
+        end,
+        desc = "Inline Variable",
+        mode = { "n", "x" },
+      },
+      {
+        "<leader>rb",
+        function()
+          require("refactoring").refactor("Extract Block")
+        end,
+        desc = "Extract Block",
+        mode = { "n" },
+      },
+      {
+        "<leader>rB",
+        function()
+          require("refactoring").refactor("Extract Block To File")
+        end,
+        desc = "Extract Block To File",
+        mode = { "n" },
+      },
+      {
+        "<leader>rp",
+        function()
+          require("refactoring").debug.printf({ below = false })
+        end,
+        desc = "Print Function",
+        mode = { "n" }, -- This remap must be made in normal mode
+      },
+      {
+        "<leader>rP",
+        function()
+          require("refactoring").debug.print_var()
+        end,
+        desc = "Print Variable",
+        mode = { "n", "x" }, -- Supports both visual and normal mode
+      },
+      {
+        "<leader>rc",
+        function()
+          require("refactoring").debug.cleanup({})
+        end,
+        desc = "Cleanup Refactoring",
+        mode = { "n" }, -- Supports only normal mode
+      },
+    }, --}}},
+  },
   { --}}}
     "Wansmer/treesj", --{{{
     keys = {

@@ -6,14 +6,42 @@ return {
     config = function()
       local configs = require("nvim-treesitter.configs")
       configs.setup({
-        ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "elixir", "heex", "javascript", "html" },
+        ensure_installed = {
+          "arduino",
+          "c",
+          "cmake",
+          "comment",
+          "csv",
+          "diff",
+          "dockerfile",
+          "dot",
+          "go",
+          "haskell",
+          "html",
+          "javascript",
+          "json",
+          "lua",
+          "markdown",
+          "markdown_inline",
+          "nim",
+          "nim_format_string",
+          "python",
+          "query",
+          "regex",
+          "rust",
+          "sql",
+          "toml",
+          "xml",
+          "yaml",
+          "zathurarc"
+        },
         sync_install = true,
         highlight = {
           enable = true,
           additional_vim_regex_highlighting = false,
           use_languagetree = false,
           disable = function(lang, bufnr)
-            return vim.api.nvim_buf_line_count(bufnr) > 4000
+            return vim.api.nvim_buf_line_count(bufnr) > 5000
           end,
         },
         incremental_selection = {
@@ -154,18 +182,19 @@ return {
         desc = "To Next Quotation Mark",
         mode = { "o" },
       },
-      {
-        "L",
-        "<cmd>lua require('various-textobjs').multiCommentedLines()<CR>",
-        desc = "Multi Commented Lines",
-        mode = { "o" },
-      },
-      {
-        "<C-l>l",
-        "<cmd>lua require('various-textobjs').multiCommentedLines()<CR>",
-        desc = "Multi Commented Lines",
-        mode = { "x", "o" },
-      },
+      # FIX: Error
+      -- {
+      --   "L",
+      --   "<cmd>lua require('various-textobjs').multiCommentedLines()<CR>",
+      --   desc = "Multi Commented Lines",
+      --   mode = { "o" },
+      -- },
+      -- {
+      --   "<C-l>l",
+      --   "<cmd>lua require('various-textobjs').multiCommentedLines()<CR>",
+      --   desc = "Multi Commented Lines",
+      --   mode = { "x", "o" },
+      -- },
       {
         "gG",
         "<cmd>lua require('various-textobjs').entireBuffer()<CR>",
@@ -261,7 +290,7 @@ return {
         mode = { "o", "x" },
       },
       {
-        "<C-d",
+        "<C-d>",
         "<cmd>lua require('various-textobjs').diagnostic()<CR>",
         desc = "LSP Diagnostic",
         mode = { "o", "x" },

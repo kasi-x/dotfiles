@@ -1596,6 +1596,50 @@ return {
       -- },
     },
   },
+   {
+    "andrewferrier/debugprint.nvim",
+    dependencies = {
+      "echasnovski/mini.nvim" -- Needed to enable :ToggleCommentDebugPrints for NeoVim 0.9
+    },
+    opts = {
+        keymaps = {
+            normal = {
+              plain_below = "<Leader>b",
+              plain_above = "<leader>B",
+              variable_below = "<leader>rb",
+              variable_above = "<leader>rB",
+              textobj_below = "<leader>rv",
+              textobj_above = "<leader>rV",
+              toggle_comment_debug_prints = "lb",
+              delete_debug_prints = "<leader>rd",
+            },
+            visual = {
+              variable_below = "b",
+              variable_above = "B",
+            },
+        },
+        commands = {
+            toggle_comment_debug_prints = "ToggleCommentDebugPrints",
+            delete_debug_prints = "DeleteDebugPrints",
+        },
+    },
+    keys = {
+        { "lb", mode = 'n' },
+        { "<leaeder>rd", mode = 'n' },
+        { "<leaeder>b", mode = 'n' },
+        { "<leaeder>B", mode = 'n' },
+        { "<leaeder>rb", mode = 'n' },
+        { "<leaeder>rB", mode = 'n' },
+        { "<leaeder>rv", mode = 'n' },
+        { "<leaeder>rV", mode = 'n' },
+        { "b", mode = 'x' },
+        { "B", mode = 'x' },
+    },
+    cmd = {
+        "ToggleCommentDebugPrints",
+        "DeleteDebugPrints",
+    },
+  },
   {"KostkaBrukowa/definition-or-references.nvim",
   keys={{
     "gd",

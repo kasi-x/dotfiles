@@ -132,7 +132,7 @@ return {
         mode = "n",
       },
       {
-        "lb",
+        "l;",
         function()
           require("Comment.api").insert.blockwise.eol()
         end,
@@ -173,7 +173,7 @@ return {
     "LudoPinelli/comment-box.nvim", --{{{
     keys = {
       {
-        "lB",
+        "l;",
         "<Cmd>CBccbox<CR>",
         desc = "left aligned fixed size box with left aligned text",
         mode = { "n" },

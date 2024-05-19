@@ -5,10 +5,6 @@ return {
     config = true,
   },
   {
-    "chrisgrieser/nvim-puppeteer",
-    ft = "python",
-  },
-  {
     "tmhedberg/SimpylFold",
     ft = "python",
   },
