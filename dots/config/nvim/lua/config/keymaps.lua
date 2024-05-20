@@ -737,7 +737,7 @@ else
 
   -- map("n", "b", "<Cmd>lua vim.lsp.buf.type_definition()<CR>", { desc = "type definition" })
   -- map("n", "B", "<Cmd>lua vim.lsp.buf.references()<CR>", { desc = "Hover" })
-  -- map("n", "B", "<Cmd>lua vim.lsp.buf.signature_help()<CR>", { desc = "Hover" })
+  map("n", "B", "<Cmd>lua vim.lsp.buf.signature_help()<CR>", { desc = "Hover" })
 
 -- vim.lsp.buf.signature_help().
         -- d = { vim.lsp.buf.definition, "Go to definition" },

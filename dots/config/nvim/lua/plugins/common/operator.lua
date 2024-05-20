@@ -61,7 +61,7 @@ return {
   {
     "numToStr/Comment.nvim", --{{{
     event="VeryLazy",
-    -- lazy = false,
+  -- lazy = false,
     config = function()
       require("Comment").setup({
         {
@@ -171,6 +171,7 @@ return {
   }, --}}}
   {
     "LudoPinelli/comment-box.nvim", --{{{
+    lazy = false,
     keys = {
       {
         "Lff",

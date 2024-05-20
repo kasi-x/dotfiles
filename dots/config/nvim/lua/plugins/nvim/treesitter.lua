@@ -205,6 +205,13 @@ return {
         mode = { "o", "x" },
       },
       {
+        "v",
+        "<cmd>lua require('various-textobjs').value('inner')<CR>",
+        desc = "Inner Value",
+        mode = { "o", "x" },
+      },
+
+      {
         "sv",
         "<cmd>lua require('various-textobjs').value('inner')<CR>",
         desc = "Inner Value",
@@ -214,6 +221,12 @@ return {
         "tv",
         "<cmd>lua require('various-textobjs').value('outer')<CR>",
         desc = "Outer Value",
+        mode = { "o", "x" },
+      },
+      {
+        "k",
+        "<cmd>lua require('various-textobjs').key('inner')<CR>",
+        desc = "Inner Key",
         mode = { "o", "x" },
       },
       {
@@ -240,6 +253,13 @@ return {
         desc = "Inner URL",
         mode = { "o" },
       },
+      {
+        "C",
+        "<cmd>lua require('various-textobjs').mdFencedCodeBlock('inner')<CR>",
+        desc = "Inner link",
+        mode = { "o", "x" },
+      },
+
       {
         "sC",
         "<cmd>lua require('various-textobjs').mdFencedCodeBlock('inner')<CR>",
@@ -271,6 +291,13 @@ return {
         mode = { "o", "x" },
       },
       {
+        "m",
+        "<cmd>lua require('various-textobjs').closedFold('inner')<CR>",
+        desc = "Inner Fold",
+        mode = { "o", "x" },
+      },
+
+      {
         "sm",
         "<cmd>lua require('various-textobjs').closedFold('inner')<CR>",
         desc = "Inner Fold",
@@ -294,6 +321,25 @@ return {
         desc = "Inner Quote",
         mode = { "o", "x" },
       },
+      {
+        "q",
+        "<cmd>lua require('various-textobjs').anyQuote('inner')<CR>",
+        desc = "Inner Quote",
+        mode = { "o", "x" },
+      },
+      {
+        "tQ",
+        "<cmd>lua require('various-textobjs').pyTripleQuotes('outer')<CR>",
+        desc = "Outer Quote",
+        mode = { "o", "x" },
+      },
+      {
+        "Q",
+        "<cmd>lua require('various-textobjs').pyTripleQuotes('inner')<CR>",
+        desc = "Inner Quote",
+        mode = { "o", "x" },
+      },
+
       {
         "tQ",
         "<cmd>lua require('various-textobjs').pyTripleQuotes('outer')<CR>",

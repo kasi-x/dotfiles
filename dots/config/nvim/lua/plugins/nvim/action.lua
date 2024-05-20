@@ -1,5 +1,6 @@
 return {
 -- https://github.com/benlubas/molten-nvim?tab=readme-ov-file
+-- https://github.com/ray-x/navigator.lua?tab=readme-ov-file
 --   {'kevinhwang91/nvim-hlslens',
 --   keys = {
 --       {
