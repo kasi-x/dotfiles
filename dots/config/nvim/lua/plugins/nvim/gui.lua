@@ -25,7 +25,9 @@ return {
        }
     },
   },
-  {"calebsmith/ vim-lambdify"},
+  {"calebsmith/vim-lambdify",
+    event = "VeryLazy",
+  },
   {
     "hedyhli/outline.nvim", --{{{
     lazy = true,
