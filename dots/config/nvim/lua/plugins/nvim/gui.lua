@@ -25,6 +25,7 @@ return {
        }
     },
   },
+  {"calebsmith/ vim-lambdify"},
   {
     "hedyhli/outline.nvim", --{{{
     lazy = true,
