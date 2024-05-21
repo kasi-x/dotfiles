@@ -529,6 +529,19 @@ map("x", "<C-r>", "c", { desc = "change key" })
 -- }}} Normal / Visual
 -- {{{ Insert / Command (2/2)
 -- Default is paset select. But it is <C-v>
+-- vim.opt.conceallevel = 3
+-- vim.opt.concealcursor = 'nc'
+-- map( "n", "<leader>rc",
+--   function()
+--     vim.schedule(function()
+--       if vim.opt.conceallevel:get() == 3 then
+--         vim.opt.conceallevel = 0
+--       elseif vim.opt.conceallevel:get() == 0 then
+--         vim.opt.conceallevel = 3
+--       end
+--     end)
+--   end, {desc="toggle conceal"})
+--
 map("i", "<C-r>", "<ESC>R", { desc = "enter Replace mode" })
 map('n', '<C-r>r', "<Cmd>lua vim.lsp.buf.rename()<CR>", {desc = "Renamer"})
 map('n', '<C-r>a', "<Cmd>lua vim.lsp.buf.code_action()<CR>", {desc = "Action"})

@@ -9,6 +9,10 @@ return {
     ft = "python",
   },
   {
+    "twanh/nvim-pydoc",
+    ft ="python",
+  },
+  {
     "nmac427/guess-indent.nvim", --{{{
     event = { "BufRead", "BufNewFile" },
     opts = {

@@ -25,37 +25,46 @@ return {
        }
     },
   },
-  {"calebsmith/vim-lambdify",
-    event = "VeryLazy",
-  },
   {
-    "hedyhli/outline.nvim", --{{{
-    lazy = true,
-    cmd = { "Outline", "OutlineOpen" },
-    keys = {{ "<C-s>", "<cmd>Outline<CR>",  mode = { "n" , "v" }, desc = "Toggle outline" }},
+    "Jxstxs/conceal.nvim",
+    dependencies = "nvim-treesitter/nvim-treesitter" ,
+    lazy = false,
     opts = {
-      keymaps = { -- These keymaps can be a string or a table for multiple keys
-        close = { "<Esc>", "q" },
-        goto_location = "<Cr>",
-        focus_location = "o",
-        hover_symbol = "b",
-        toggle_preview = "B",
-        rename_symbol = "r",
-        code_actions = "a",
-        fold = "mh",
-        unfold = "mi",
-        fold_all = "M",
-        unfold_all = "mm",
-        fold_reset = "R",
-      },
-      symbols = {
-        filter = {
-            default = { 'String', exclude=true },
-            python = { 'Function', 'Class' },
-          },
-      },
+            --[[ ["language"] = {
+                enabled = bool,
+                keywords = {
+                  ["keyword"] = {
+                      enabled     = bool,
+                      conceal     = string,
+                      highlight   = string
+                  }
+                }
+            } ]]
+            ["lua"] = {
+              enabled = true,
+              keywords = {
+                ["local"] = {
+                  enabled = false -- to disable concealing for "local"
+                },
+                ["return"] = {
+                  conceal = "R" -- to set the concealing to "R"
+                },
+                ["for"] = {
+                  highlight = "keyword" -- to set the Highlight group to "@keyword"
+                }
+              }
+            },
+            -- ["language"] = {
+            --   enabled = false -- to disable the whole language
+            -- }
+        },
+    config = function()
+      require('conceal').generate_conceals()
+    end,
+    keys =
+      {"n", "<C-r>c", function() require("conceal").toggle_conceal() end, { dect="conceal",silent = true},}
     }
-  }, --}}}
+
   -- {
   --   "ecthelionvi/NeoComposer.nvim",
   --   dependencies = { "kkharji/sqlite.lua" },
@@ -71,6 +80,7 @@ return {
   --     },
   --   }
   -- },
+    },
   {
     "nvim-lualine/lualine.nvim", --{{{
     event = "VeryLazy",
@@ -336,7 +346,7 @@ return {
   {
     "stevanmilic/nvim-lspimport", --{{{
     ft = "python",
-    -- lazy = false,
+  -- lazy = false,
     -- opts = true,
     keys = {
       {

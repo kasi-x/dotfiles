@@ -68,6 +68,9 @@ local options = {
   scrolloff = 5,
   cmdheight = 0,
   cmdwinheight = 1,
+  -- conceallevel=3,
+
+  concealcursor='nvc'
 }
 -- vim.g.node_host_prog = "/home/akizora/.nvm/versions/node/v18.16.0/bin/node"
 for k, v in pairs(options) do
@@ -75,6 +78,8 @@ for k, v in pairs(options) do
 end
 
 vim.cmd('set ignorecase')
+
+vim.wo.conceallevel = 3
 -- local alpha = function()
 -- return string.format("%x", math.floor(255 * vim.g.transparency or 0.9))
 -- end

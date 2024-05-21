@@ -81,7 +81,7 @@ ftplugin.extend_all({
   },
   markdown = {
     opt = {
-      conceallevel = 2,
+      conceallevel = 3,
       shiftwidth = 2,
       tabstop = 2,
       softtabstop = 2,
@@ -130,6 +130,7 @@ ftplugin.extend_all({
       tabstop = 4,
       softtabstop = 4,
       textwidth = 100,
+      keywordprg = ":Pydoc",
     },
     callback = function(bufnr)
       -- if vim.fn.executable("autoimport") == 1 then
@@ -140,12 +141,28 @@ ftplugin.extend_all({
       --     vim.lsp.buf.formatting({})
       --   end, { buffer = bufnr })
       -- end
-      vim.keymap.set(
-        "n",
-        "<leader>s",
-        function() run_file({ "python", vim.api.nvim_buf_get_name(0) }) end,
-        { buffer = bufnr }
-      )
+--       vim.keymap.set(
+--         "n",
+--         "<leader>s",
+--         function() run_file({ "python", vim.api.nvim_buf_get_name(0) }) end,
+--
+-- -- カーソル位置の単語をPydocコマンドに送るキー設定
+--         { buffer = bufnr }
+--
+--       )
+      -- vim.api.nvim_set_keymap('n', 'B', [[:let @/="\<".expand("<cword>")."\>"<CR>:Pydoc <C-r>=expand("<cword>")<CR><CR>]], { noremap = true, silent = true }
+      -- vim.keymap.set(
+      --   "n",
+      --   "B",
+      --   [[:<C-u>let @/='\<'.expand('<cword>').'\>'<CR>:<C-r>=expand('<cword>')<CR>]],
+      --   { noremap = true, silent = true, expr=true },
+      -- )
+
+      -- `iskeyword` にドットを追加
+      vim.opt.iskeyword:append('.')
+
+      -- カーソル位置の単語をPydocコマンドに送るキー設定
+      vim.api.nvim_set_keymap('n', 'B', [[:execute 'Pydoc ' . expand('<cword>')<CR>]], { noremap = true, silent = true })
     end,
   },
   qf = {
