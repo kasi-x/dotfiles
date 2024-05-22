@@ -1,31 +1,27 @@
 # Set environment variables for various paths
-# Set-Path 
 $Env:Path += ";${Env:LOCALAPPDATA}\yarn\bin"
 $Env:Path += ";${Env:ProgramFiles}\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\Roslyn"
 $Env:Path += ";${Env:ProgramFiles}\Microsoft Visual Studio\2022\Community\VC\vcpkg"
 $Env:Path += ";${Env:USERPROFILE}\.nimble\bin"
-$Env:Path += ";${Env:LOCALAPPDATA}\Android\SDK\platform-tools"
-$Env:Path += ";${Env:LOCALAPPDATA}\Programs\Python\Python311"
-$Env:Path += ";${Env:LOCALAPPDATA}\Programs\Python\Python311\Scripts"
-$Env:Path += ";${Env:ProgramFiles}\AutoHotkey"
-$Env:Path += ";${Env:ProgramFiles}\NVIDIA GPU Computing Toolkit\CUDA\v12.0\bin"
-$Env:Path += ";${Env:ProgramFiles}\Neovim\bin"
-$Env:Path += ";${Env:ProgramFiles}\arduino-ide"
-$Env:Path += ";${Env:SystemDrive}\msys64\usr\bin"
-# $Env:Path += ";${Env:USERPROFILE}\.pyenv\pyenv-win\bin"
 # $Env:Path += ";${Env:ProgramFiles(x86)}\Android\android-sdk\platform-tools"
-# $Env:Path += ";${Env:ProgramFiles}\Sublime Text 3"
-# $Env:Path += ";${Env:ProgramFiles}\Tailscale"
-# $Env:Path += ";${ENV:ProgramFiles(x86)}\CaboCha\bin"
-# $Env:Path += ";${Env:ProgramFiles(x86)}\Mecab\bin"
+$env:Path += ";${Env:ProgramFiles}\arduino-ide"
+#$env:Path += ";${Env:ProgramFiles(x86)}\Mecab\bin"
+#$env:Path += ";${ENV:ProgramFiles(x86)}\CaboCha\bin"
+$env:Path += ";${Env:ProgramFiles}\NVIDIA GPU Computing Toolkit\CUDA\v12.0\bin"
+$env:Path += ";${Env:LOCALAPPDATA}\Android\SDK\platform-tools"
+$env:Path += ";${Env:ProgramFiles}\AutoHotkey"
+# $env:Path += ";${Env:ProgramFiles}\Tailscale"
+$env:Path += ";${Env:SystemDrive}\msys64\usr\bin"
+$env:Path += ";${Env:ProgramFiles}\Neovide"
+$env:Path += ";${Env:ProgramFiles}\Neovim\bin"
 
 # Set the default text editor to Visual Studio Code
-$Env:EDITOR = "code"
+$Env:EDITOR = "neovide"
 $Env:VIM = "neovide"
+$Env:CODE = "code"
 
 # Set XDG_CONFIG_HOME to the user's profile .config directory
 $Env:XDG_CONFIG_HOME = "$Env:USERPROFILE\.config"
-$Env:RUFF_CACHE_DIR="$Env:LOCALAPPDATA\ruff"
 
 # Define custom environment variables
 $Env:DEV = "$Env:USERPROFILE\dev"
@@ -57,18 +53,17 @@ Set-Alias c clear
 Set-Alias open Explorer
 Set-Alias o Explorer
 Set-Alias e $Env:EDITOR
-Set-Alias v $Env:VIM
-
 Set-Alias n notepad
-Set-Alias subl "${Env:ProgramFiles}\'Sublime Text'\sublime_text.exe"
-Set-Alias s "${Env:ProgramFiles}\'Sublime Text'\sublime_text.exe"
+Set-Alias subl '${Env:ProgramFiles}\"Sublime Text"\sublime_text.exe'
+Set-Alias s '${Env:ProgramFiles}\"Sublime Text"\sublime_text.exe'
 Set-Alias g git
+Set-Alias ai "winget install "
 Set-Alias chrome "${Env:ProgramFiles(x86)}\Google\Chrome\Application\chrome.exe"
 Set-Alias vbox "${Env:ProgramFiles}\Oracle\VirtualBox\virtualbox.exe"
 Set-Alias vlc "${Env:ProgramFiles}\VideoLAN\VLC\vlc.exe"
 Set-Alias pdf "${Env:LOCALAPPDATA}\SumatraPDF\sumatrapdf.exe"
-Set-Alias pic "${Env:ProgramFiles}\ImageGlass\imageglass.exe"
-Set-Alias who $Env:username
+# Set-Alias pic "${Env:ProgramFiles}\ImageGlass\imageglass.exe"
+Set-Alias who $env:username
 Set-Alias hn whoami
 Set-Alias ll Get-ChildItem
 Set-Alias la Get-ChildItem
@@ -259,7 +254,12 @@ function Reload-PowerShellProfile {
 # Package Management {{{
 # Backup installed packages for package managers (Scoop, Chocolatey, Winget)
 function Backup-InstalledPackages {
-    $backupPath = "$Env:USERPROFILE\dotfiles\dots\windows"
+    $backupPath = Join-Path $Env:USERPROFILE "dotfiles\dots\windows"
+
+    # Ensure the backup directory exists
+    if (-not (Test-Path $backupPath)) {
+        New-Item -ItemType Directory -Path $backupPath
+    }
 
     Write-Host "Start Scoop Backup."
     $scoopExportPath = Join-Path $backupPath "scoop-packages-list.txt"
@@ -267,7 +267,7 @@ function Backup-InstalledPackages {
 
     Write-Host "Start Chocolatey Backup."
     $chocoExportPath = Join-Path $backupPath "choco-packages-list.config"
-    choco export --output-file=$chocoExportPath
+    choco export --output-file $chocoExportPath
 
     Write-Host "Start Winget Backup."
     $wingetExportPath = Join-Path $backupPath "winget-packages-list.json"
@@ -302,6 +302,21 @@ function Import-InstalledPackages {
     }
     Write-Host "Import of installed packages completed successfully."
 }
+
+ function Update-InstalledPackages {
+    Write-Host "Starting update process for installed packages..."
+    # Scoop: Update all installed packages
+    Write-Host "Updating Scoop packages..."
+    scoop update *
+    # Chocolatey: Upgrade all installed packages
+    Write-Host "Upgrading Chocolatey packages..."
+    choco upgrade all -y
+    # Winget: Upgrade all installed packages
+    Write-Host "Upgrading Winget packages..."
+    winget upgrade --all
+    Write-Host "Update of installed packages completed successfully."
+}
+
 # Package Management }}}
 
 # PowerShell Profile Management {{{
@@ -349,8 +364,9 @@ Set-Alias size Get-DirectorySize
 Set-Alias debug Toggle-DebugMode
 Set-Alias reflect Export-PowerShellProfile
 Set-Alias backup Backup-PowerShellProfile
-Set-Alias pexp Backup-InstalledPackages
-Set-Alias pback Import-InstalledPackages
+Set-Alias pup Update-InstalledPackages
+Set-Alias pback Backup-InstalledPackages
+Set-Alias pimp Import-InstalledPackages
 Set-Alias reload Reload-PowerShellProfile
 Set-Alias r Reload-PowerShellProfile
 Set-Alias yt Download-YoutubeVideo
