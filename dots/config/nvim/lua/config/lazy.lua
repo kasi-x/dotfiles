@@ -55,6 +55,5 @@ local plugins = {
   { import = (not in_vscode and is_jp_file) and "plugins.nvim_jp" or nil },
   { import = (not in_vscode and is_en_file) and "plugins.nvim_en" or nil },
 }
--- end
 
 require("lazy").setup(plugins, opts)

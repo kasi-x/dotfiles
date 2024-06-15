@@ -33,13 +33,14 @@ return {
           "toml",
           "xml",
           "yaml",
-          "zathurarc"
+          "zathurarc",
         },
         sync_install = true,
         highlight = {
           enable = true,
           additional_vim_regex_highlighting = false,
           use_languagetree = false,
+          ---@diagnostic disable-next-line: unused-local
           disable = function(lang, bufnr)
             return vim.api.nvim_buf_line_count(bufnr) > 5000
           end,
@@ -66,8 +67,8 @@ return {
               ["sf"] = "@function.inner",
               ["tc"] = "@class.outer",
               ["sc"] = "@class.inner",
-              ["sB"] = "@block.inner",
-              ["tB"] = "@block.outer",
+              ["sb"] = "@block.inner",
+              ["tb"] = "@block.outer",
               ["si"] = "@conditional.inner",
               ["ti"] = "@conditional.outer",
               ["sl"] = "@loop.inner",

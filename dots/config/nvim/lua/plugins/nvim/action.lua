@@ -1,32 +1,32 @@
 return {
--- https://github.com/benlubas/molten-nvim?tab=readme-ov-file
--- https://github.com/ray-x/navigator.lua?tab=readme-ov-file
---   {'kevinhwang91/nvim-hlslens',
---   keys = {
---       {
---         "gr",
---         function()
---           require("ssr").open()
---         end,
---         mode = { "n", "x" },
---         desc = "Structural Replace",
---       },
---     },
--- --{{{
---
--- vim.api.nvim_set_keymap('n', 'n', [[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]],
---     kopts)
--- vim.api.nvim_set_keymap('n', 'N',
---     [[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]],
---     kopts)
--- vim.api.nvim_set_keymap('n', '*', [[*<Cmd>lua require('hlslens').start()<CR>]], kopts)
--- vim.api.nvim_set_keymap('n', '#', [[#<Cmd>lua require('hlslens').start()<CR>]], kopts)
--- vim.api.nvim_set_keymap('n', 'g*', [[g*<Cmd>lua require('hlslens').start()<CR>]], kopts)
--- vim.api.nvim_set_keymap('n', 'g#', [[g#<Cmd>lua require('hlslens').start()<CR>]], kopts)
---
--- vim.api.nvim_set_keymap('n', '<Leader>l', '<Cmd>noh<CR>', kopts)
---
---}}}
+  -- https://github.com/benlubas/molten-nvim?tab=readme-ov-file
+  -- https://github.com/ray-x/navigator.lua?tab=readme-ov-file
+  --   {'kevinhwang91/nvim-hlslens',
+  --   keys = {
+  --       {
+  --         "gr",
+  --         function()
+  --           require("ssr").open()
+  --         end,
+  --         mode = { "n", "x" },
+  --         desc = "Structural Replace",
+  --       },
+  --     },
+  -- --{{{
+  --
+  -- vim.api.nvim_set_keymap('n', 'n', [[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]],
+  --     kopts)
+  -- vim.api.nvim_set_keymap('n', 'N',
+  --     [[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]],
+  --     kopts)
+  -- vim.api.nvim_set_keymap('n', '*', [[*<Cmd>lua require('hlslens').start()<CR>]], kopts)
+  -- vim.api.nvim_set_keymap('n', '#', [[#<Cmd>lua require('hlslens').start()<CR>]], kopts)
+  -- vim.api.nvim_set_keymap('n', 'g*', [[g*<Cmd>lua require('hlslens').start()<CR>]], kopts)
+  -- vim.api.nvim_set_keymap('n', 'g#', [[g#<Cmd>lua require('hlslens').start()<CR>]], kopts)
+  --
+  -- vim.api.nvim_set_keymap('n', '<Leader>l', '<Cmd>noh<CR>', kopts)
+  --
+  --}}}
   -- },
   {
     "cshuaimin/ssr.nvim", --{{{
@@ -58,7 +58,7 @@ return {
     },
   }, --}}}
   {
-    'stevearc/overseer.nvim',
+    "stevearc/overseer.nvim",
     opts = {},
   },
   {
@@ -217,7 +217,7 @@ return {
         "<cmd>TroubleToggle lsp_references<CR>",
         desc = "Show error by Lsp",
         mode = { "n" },
-      }
+      },
     },
     config = function() -- {{{
       require("trouble").setup({
@@ -266,6 +266,29 @@ return {
       vim.g.startuptime_tries = 10
     end,
   }, --}}}
+  { --{{{
+    "zbirenbaum/neodim",
+    event = "LspAttach",
+    config = function()
+      require("neodim").setup({
+        refresh_delay = 75,
+        alpha = 0.75,
+        blend_color = "#000000",
+        hide = {
+          underline = true,
+          virtual_text = true,
+          signs = true,
+        },
+        regex = {
+          "[uU]nused",
+          "[nN]ever [rR]ead",
+          "[nN]ot [rR]ead",
+        },
+        priority = 128,
+        disable = {},
+      })
+    end,
+  }, --}}}
   {
     "sindrets/diffview.nvim", --{{{
     cmd = {
@@ -312,7 +335,7 @@ return {
   -- },
   {
     "lewis6991/gitsigns.nvim", --{{{
-    event ="VeryLazy",
+    event = "VeryLazy",
     dependencies = {
       "nvim-lua/plenary.nvim",
     },
@@ -431,7 +454,7 @@ return {
         },
       }) -- }}}      -- gitsigns {{{
       local Hydra = require("hydra")
-      local gitsigns = require('gitsigns')
+      local gitsigns = require("gitsigns")
 
       local hint = [[
  _N_: next hunk   _s_: stage hunk        _d_: show deleted   _b_: blame line
@@ -441,79 +464,117 @@ return {
  ^ ^       _<Enter>_: Neogit   _z_:DiffviewToggleFiles   _q_: exit
       ]]
       Hydra({
-      name = 'Git',
-       hint = hint,
-       config = {
+        name = "Git",
+        hint = hint,
+        config = {
           buffer = bufnr,
-          color = 'red',
+          color = "red",
           invoke_on_body = true,
           hint = {
-              type = "window",
-              float_opts = {
-                    -- row, col, height, width, relative, and anchor should not be
-                    -- overridden
-                    style = "minimal",
-                    focusable = false,
-                    noautocmd = true,
-                },
+            type = "window",
+            float_opts = {
+              -- row, col, height, width, relative, and anchor should not be
+              -- overridden
+              style = "minimal",
+              focusable = false,
+              noautocmd = true,
+            },
           },
-          on_key = function() vim.wait(50) end,
+          on_key = function()
+            vim.wait(50)
+          end,
           on_enter = function()
-             vim.cmd 'mkview'
-             vim.cmd 'silent! %foldopen!'
-             gitsigns.toggle_signs(true)
-             gitsigns.toggle_linehl(true)
+            vim.cmd("mkview")
+            vim.cmd("silent! %foldopen!")
+            gitsigns.toggle_signs(true)
+            gitsigns.toggle_linehl(true)
           end,
           on_exit = function()
-             local cursor_pos = vim.api.nvim_win_get_cursor(0)
-             vim.cmd 'loadview'
-             vim.api.nvim_win_set_cursor(0, cursor_pos)
-             vim.cmd 'normal zv'
-             gitsigns.toggle_signs(false)
-             gitsigns.toggle_linehl(false)
-             gitsigns.toggle_deleted(false)
+            local cursor_pos = vim.api.nvim_win_get_cursor(0)
+            vim.cmd("loadview")
+            vim.api.nvim_win_set_cursor(0, cursor_pos)
+            vim.cmd("normal zv")
+            gitsigns.toggle_signs(false)
+            gitsigns.toggle_linehl(false)
+            gitsigns.toggle_deleted(false)
           end,
-       },
-       mode = {'n','x'},
-       body = '<leader>g',
-       heads = {
-          { 'N',
-             function()
-                if vim.wo.diff then return ']c' end
-                vim.schedule(function() gitsigns.next_hunk() end)
-                return '<Ignore>'
-             end,
-             { expr = true, desc = 'next hunk' } },
-          { 'E',
-             function()
-                if vim.wo.diff then return '[c' end
-                vim.schedule(function() gitsigns.prev_hunk() end)
-                return '<Ignore>'
-             end,
-             { expr = true, desc = 'prev hunk' } },
-          { 's',
-             function()
-                local mode = vim.api.nvim_get_mode().mode:sub(1,1)
-                if mode == 'V' then -- visual-line mode
-                   local esc = vim.api.nvim_replace_termcodes('<Esc>', true, true, true)
-                   vim.api.nvim_feedkeys(esc, 'x', false) -- exit visual mode
-                   vim.cmd("'<,'>Gitsigns stage_hunk")
-                else
-                   vim.cmd("Gitsigns stage_hunk")
-                end
-             end,
-             { desc = 'stage hunk' } },
-          { 'u', gitsigns.undo_stage_hunk, { desc = 'undo last stage' } },
-          { 'S', gitsigns.stage_buffer, { desc = 'stage buffer' } },
-          { 'p', gitsigns.preview_hunk, { desc = 'preview hunk' } },
-          { 'd', gitsigns.toggle_deleted, { nowait = true, desc = 'toggle deleted' } },
-          { 'b', gitsigns.blame_line, { desc = 'blame' } },
-          { 'B', function() gitsigns.blame_line{ full = true } end, { desc = 'blame show full' } },
-          { '/', gitsigns.show, { exit = true, desc = 'show base file' } }, -- show the base of the file
-          { '<Enter>', function() vim.cmd('Neogit') end, { exit = true, desc = 'Neogit' } },
-          { 'z', function() vim.cmd('DiffviewOpen') end, { exit = true, desc = 'Neogit' } },
-          { 'q', nil, { exit = true, nowait = true, desc = 'exit' } },
-       }
+        },
+        mode = { "n", "x" },
+        body = "<leader>g",
+        heads = {
+          {
+            "N",
+            function()
+              if vim.wo.diff then
+                return "]c"
+              end
+              vim.schedule(function()
+                gitsigns.next_hunk()
+              end)
+              return "<Ignore>"
+            end,
+            { expr = true, desc = "next hunk" },
+          },
+          {
+            "E",
+            function()
+              if vim.wo.diff then
+                return "[c"
+              end
+              vim.schedule(function()
+                gitsigns.prev_hunk()
+              end)
+              return "<Ignore>"
+            end,
+            { expr = true, desc = "prev hunk" },
+          },
+          {
+            "s",
+            function()
+              local mode = vim.api.nvim_get_mode().mode:sub(1, 1)
+              if mode == "V" then -- visual-line mode
+                local esc = vim.api.nvim_replace_termcodes("<Esc>", true, true, true)
+                vim.api.nvim_feedkeys(esc, "x", false) -- exit visual mode
+                vim.cmd("'<,'>Gitsigns stage_hunk")
+              else
+                vim.cmd("Gitsigns stage_hunk")
+              end
+            end,
+            { desc = "stage hunk" },
+          },
+          { "u", gitsigns.undo_stage_hunk, { desc = "undo last stage" } },
+          { "S", gitsigns.stage_buffer, { desc = "stage buffer" } },
+          { "p", gitsigns.preview_hunk, { desc = "preview hunk" } },
+          { "d", gitsigns.toggle_deleted, { nowait = true, desc = "toggle deleted" } },
+          { "b", gitsigns.blame_line, { desc = "blame" } },
+          {
+            "B",
+            function()
+              gitsigns.blame_line({ full = true })
+            end,
+            { desc = "blame show full" },
+          },
+          { "/", gitsigns.show, { exit = true, desc = "show base file" } }, -- show the base of the file
+          {
+            "<Enter>",
+            function()
+              vim.cmd("Neogit")
+            end,
+            { exit = true, desc = "Neogit" },
+          },
+          {
+            "z",
+            function()
+              vim.cmd("DiffviewOpen")
+            end,
+            { exit = true, desc = "Neogit" },
+          },
+          {
+            "q",
+            nil,
+            { exit = true, nowait = true, desc = "exit" },
+          },
+        },
       }) --}}}
     end,
   }, --}}}
@@ -1519,25 +1580,189 @@ return {
   {
     "aznhe21/actions-preview.nvim",
     dependencies = { "nvim-telescope/telescope.nvim", "MunifTanjim/nui.nvim" },
-    keys = { { "<C-r>s", "<cmd>lua require('actions-preview').code_actions()<CR>", desc = "code_actions", mode = { "n", "v" } } },
+    keys = {
+      {
+        "<C-r>s",
+        "<cmd>lua require('actions-preview').code_actions()<CR>",
+        desc = "code_actions",
+        mode = { "n", "v" },
+      },
+    },
   },
   {
-    "smjonas/inc-rename.nvim",
-    cmd = "IncRename",
-    config = function()
-      require("inc_rename").setup()
-    end,
-    keys = { { "<C-r>i", function() return ":IncRename " .. vim.fn.expand("<cword>") end, expr=true, desc = "increname", mode = "n" } }
+    "chrisgrieser/nvim-rulebook",
+    keys = {
+      {
+        "<C-r>g",
+        function()
+          require("rulebook").ignoreRule()
+        end,
+        desc = "ignoreRule",
+        mode = { "n", "v" },
+      },
+      {
+        "<C-r>l",
+        function()
+          require("rulebook").lookupRule()
+        end,
+        desc = "lookupRule",
+        mode = { "n", "v" },
+      },
+      {
+        "<C-r>y",
+        function()
+          require("rulebook").yankDiagnosticCode()
+        end,
+        desc = "yankDiagnosticCode",
+        mode = { "n", "v" },
+      },
+      {
+        "<C-r>f",
+        function()
+          require("rulebook").suppressFormatter()
+        end,
+        desc = "suppressFormatter",
+        mode = { "n", "x" },
+      },
+    },
   },
---   {
---     'rmagatti/goto-preview',
---     event="VeryLazy",
---     config = true,
---     keys = {
---      { "<C-b>", "<cmd>lua require('goto-preview').goto_preview_definition()<CR>", mode="n", desc="goto_preview_definition"} ,
---      -- { "B", "<cmd>lua require('goto-preview').goto_preview_implementation()<CR>", mode="n", desc="goto_preview_implementation"} ,
---     }
--- }
+  {
+    "mfussenegger/nvim-dap",
+    keys = {
+      {
+        "<leader>sc",
+        function()
+          require("dap").continue()
+        end,
+        desc = "Start/Continue Debugger",
+      },
+      {
+        "<leader>sb",
+        function()
+          require("dap").toggle_breakpoint()
+        end,
+        desc = "Add Breakpoint",
+      },
+      {
+        "<leader>st",
+        function()
+          require("dap").terminate()
+        end,
+        desc = "Terminate Debugger",
+      },
+    },
+  },
+  -- UI for the debugger
+  -- - the debugger UI is also automatically opened when starting/stopping the debugger
+  -- - toggle debugger UI manually with `<leader>du`
+  --
+  {
+    "rcarriga/nvim-dap-ui",
+    dependencies = "mfussenegger/nvim-dap",
+    keys = {
+      {
+        "<leader>su",
+        function()
+          require("dapui").toggle()
+        end,
+        desc = "Toggle Debugger UI",
+      },
+    },
+    config = function()
+      local listener = require("dap").listeners
+      listener.after.event_initialized["dapui_config"] = function()
+        require("dapui").open()
+      end
+      listener.before.event_terminated["dapui_config"] = function()
+        require("dapui").close()
+      end
+      listener.before.event_exited["dapui_config"] = function()
+        require("dapui").close()
+      end
+    end,
+  },
+  {
+    "mfussenegger/nvim-dap-python",
+    dependencies = "mfussenegger/nvim-dap",
+    config = function()
+      -- uses the debugypy installation by mason
+      local debugpyPythonPath = require("mason-registry").get_package("debugpy"):get_install_path()
+        .. "/venv/bin/python3"
+      require("dap-python").setup(debugpyPythonPath, {})
+    end,
+  },
+  {
+    "Vigemus/iron.nvim",
+    keys = {
+      { "<leader>si", vim.cmd.IronRepl, desc = "󱠤 Toggle REPL" },
+      { "<leader>sI", vim.cmd.IronRestart, desc = "󱠤 Restart REPL" },
+      -- these keymaps need no right-hand-side, since that is defined by the
+      -- plugin config further below
+      { "+", mode = { "n", "x" }, desc = "󱠤 Send-to-REPL Operator" },
+      { "++", desc = "󱠤 Send Line to REPL" },
+    },
+
+    -- since irons's setup call is `require("iron.core").setup`, instead of
+    -- `require("iron").setup` like other plugins would do, we need to tell
+    -- lazy.nvim which module to via the `main` key
+    main = "iron.core",
+
+    opts = {
+      keymaps = {
+        send_line = "++",
+        visual_send = "+",
+        send_motion = "+",
+      },
+      config = {
+        -- this defined how the repl is opened. Here we set the REPL window
+        -- to open in a horizontal split to a bottom, with a height of 10
+        -- cells.
+        repl_open_cmd = "horizontal bot 10 split",
+
+        -- This defines which binary to use for the REPL. If `ipython` is
+        -- available, it will use `ipython`, otherwise it will use `python3`.
+        -- since the python repl does not play well with indents, it's
+        -- preferable to use `ipython` or `bypython` here.
+        -- (see: https://github.com/Vigemus/iron.nvim/issues/348)
+        repl_definition = {
+          python = {
+            command = function()
+              local ipythonAvailable = vim.fn.executable("ipython") == 1
+              local binary = ipythonAvailable and "ipython" or "python3"
+              return { binary }
+            end,
+          },
+        },
+      },
+    },
+  },
+  -- {
+  --   "smjonas/inc-rename.nvim",
+  --   cmd = "IncRename",
+  --   config = function()
+  --     require("inc_rename").setup()
+  --   end,
+  --   keys = {
+  --     {
+  --       "<C-r>i",
+  --       function()
+  --         return ":IncRename " .. vim.fn.expand("<cword>")
+  --       end,
+  --       expr = true,
+  --       desc = "increname",
+  --       mode = "n",
+  --     },
+  --   },
+  -- },
+  --   {
+  --     'rmagatti/goto-preview',
+  --     event="VeryLazy",
+  --     config = true,
+  --     keys = {
+  --      { "<C-b>", "<cmd>lua require('goto-preview').goto_preview_definition()<CR>", mode="n", desc="goto_preview_definition"} ,
+  --      -- { "B", "<cmd>lua require('goto-preview').goto_preview_implementation()<CR>", mode="n", desc="goto_preview_implementation"} ,
+  --     }
+  -- }
   {
     "nvimdev/lspsaga.nvim",
     lazy = false,
@@ -1633,5 +1858,5 @@ return {
   },
   --    vim.keymap.set('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<cr>', opts)
   --    vim.keymap.set('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<cr>', opts)
-    -- vim.keymap.set('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<cr>',
+  -- vim.keymap.set('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<cr>',
 }

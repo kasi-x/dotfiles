@@ -120,16 +120,47 @@ return {
   },
   {
     "vim-skk/skkeleton",
-    -- lazy = false,
-    -- event = "Insert",
-    -- event = "VimEnter",
+    -- event = "InsertEnter", --,"CursorHold"],
     dependencies = {
-      "vim-denops/denops.vim",
+      {
+        "vim-denops/denops.vim",
+        -- init = function()
+        --   vim.fn["denops#plugin#load"]("skkeleton")
+        -- end,
+      },
+
       "delphinus/skkeleton_indicator.nvim",
     },
-    init = function()
+    config = function()
       require("skkeleton_indicator").setup({})
-      vim.fn["denops#plugin#register"]("skkeleton")
+      -- vim.cmd([[ call skkeleton#config({
+      --   \ 'eggLikeNewline': v:true,
+      --   \ 'immediatelyCancel' : v:true,
+      --   \ 'keepMode' : v:true,
+      --   \ 'keepState' : v:true,
+      --   \ 'registerConvertResult' : v:true,
+      --   \ 'selectCandidateKeys' :"hneirstdwfpluyj",
+      --   \ 'showCandidatesCount' : 4,
+      --   \ 'useSkkServer': v:true,
+      --   \ })]])
+      --
+      -- " \ 'userJisyo': "/home/user/.config/ibus-skk/user.dict",
+      -- vim.fn["skkeleton#register_kanatable"]("rom", {
+      --   ["("] = { "（", "" },
+      --   [")"] = { "）", "" },
+      --   ["z "] = { "　", "" },
+      --   ["z1"] = { "①", "" },
+      --   ["z2"] = { "②", "" },
+      --   ["z3"] = { "③", "" },
+      --   ["z4"] = { "④", "" },
+      --   ["z5"] = { "⑤", "" },
+      --   ["z6"] = { "⑥", "" },
+      --   ["z7"] = { "⑦", "" },
+      --   ["z8"] = { "⑧", "" },
+      --   ["z9"] = { "⑨", "" },
+      --   ["<s-q>"] = "henkanPoint",
+      -- })
+
       vim.fn["skkeleton#config"]({
         -- globalDictionaries = {
         --   "/home/user/.skk/SKK-JISYO.L",
@@ -139,26 +170,13 @@ return {
         immediatelyCancel = true,
         keepMode = true,
         keepState = true,
+        sources = { "skk_server" },
         registerConvertResult = true,
         selectCandidateKeys = "hneirstdwfpluyj",
         showCandidatesCount = 4,
-        useSkkServer = true,
-        userJisyo = "/home/user/.config/ibus-skk/user.dict",
-      })
-      vim.fn["skkeleton#register_kanatable"]("rom", {
-        ["("] = { "（", "" },
-        [")"] = { "）", "" },
-        ["z "] = { "　", "" },
-        ["z1"] = { "①", "" },
-        ["z2"] = { "②", "" },
-        ["z3"] = { "③", "" },
-        ["z4"] = { "④", "" },
-        ["z5"] = { "⑤", "" },
-        ["z6"] = { "⑥", "" },
-        ["z7"] = { "⑦", "" },
-        ["z8"] = { "⑧", "" },
-        ["z9"] = { "⑨", "" },
-        ["<s-q>"] = "henkanPoint",
+        -- useSkkServer = true,
+        -- sources = ["skk_server", "skk_dicsitory"]
+        userDictionary = "/home/user/.config/ibus-skk/user.dict",
       })
     end,
     keys = {
@@ -174,9 +192,9 @@ return {
     "delphinus/skkeleton_indicator.nvim",
     opts = { alwaysShown = false, fadeOutMs = 0 },
   },
-  {
-    "vim-denops/denops.vim",
-    -- lazy = false,
-    -- event = "VimEnter",
-  },
+  -- {
+  --   "vim-denops/denops.vim",
+  --   lazy = false,
+  --   -- event = "VimEnter",
+  -- },
 }

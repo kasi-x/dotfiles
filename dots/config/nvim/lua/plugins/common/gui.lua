@@ -32,25 +32,42 @@ return {
     },
     -- keys = {
     --   {
-    --     "<C-m>",
+    --     "dm",
     --     "<cmd>MarksListAll<CR>",
     --     desc = "Marks from all opened buffers",
     --     mode = "n",
     --   },
-    -- {
-    --   "MX",
-    --   "<Plug>(Marks-delete)",
-    --   desc = "marks-delete",
-    --   mode = "n",
-    -- },
-    -- {
-    --   "Mx",
-    --   "<Plug>(Marks-deletebuf)",
-    --   desc = "marks-deletebuf",
-    --   mode = "n",
-    -- },
+    --   {
+    --     "MX",
+    --     "<Plug>(Marks-delete)",
+    --     desc = "marks-delete",
+    --     mode = "n",
+    --   },
+    --   {
+    --     "Mx",
+    --     "<Plug>(Marks-deletebuf)",
+    --     desc = "marks-deletebuf",
+    --     mode = "n",
+    --   },
     -- },
   }, --}}}
+  {
+    'shadmansaleh/IRC.nvim',
+    rocks = 'openssl',
+    cmd = "IRCConnect",
+    opts = {
+      servers = {
+        libera = {
+          nick = 'kashimiya',
+          username = 'kashimiya',
+          server = 'irc.libera.chat',
+          port = 6667,
+          use_ssl = true,
+        },
+      },
+      statusline = true,
+    }
+  },
   {
     "windwp/nvim-autopairs", --{{{,
     event = "InsertEnter",
@@ -69,10 +86,10 @@ return {
         highlight_grey = "Comment",
       },
     },
-  }, --}}}
+  },                             --}}}
   {
     "Wansmer/symbol-usage.nvim", --{{{
-    event = "BufReadPre", -- need run before LspAttach if you use nvim 0.9. On 0.10 use 'LspAttach'
+    event = "BufReadPre",        -- need run before LspAttach if you use nvim 0.9. On 0.10 use 'LspAttach'
     config = function()
       local function h(name)
         return vim.api.nvim_get_hl(0, { name = name })
@@ -80,10 +97,14 @@ return {
 
       -- hl-groups can have any name
       vim.api.nvim_set_hl(0, "SymbolUsageRounding", { fg = h("CursorLine").bg, italic = true })
-      vim.api.nvim_set_hl(0, "SymbolUsageContent", { bg = h("CursorLine").bg, fg = h("Comment").fg, italic = true })
-      vim.api.nvim_set_hl(0, "SymbolUsageRef", { fg = h("Function").fg, bg = h("CursorLine").bg, italic = true })
-      vim.api.nvim_set_hl(0, "SymbolUsageDef", { fg = h("Type").fg, bg = h("CursorLine").bg, italic = true })
-      vim.api.nvim_set_hl(0, "SymbolUsageImpl", { fg = h("@keyword").fg, bg = h("CursorLine").bg, italic = true })
+      vim.api.nvim_set_hl(0, "SymbolUsageContent",
+        { bg = h("CursorLine").bg, fg = h("Comment").fg, italic = true })
+      vim.api.nvim_set_hl(0, "SymbolUsageRef",
+        { fg = h("Function").fg, bg = h("CursorLine").bg, italic = true })
+      vim.api.nvim_set_hl(0, "SymbolUsageDef",
+        { fg = h("Type").fg, bg = h("CursorLine").bg, italic = true })
+      vim.api.nvim_set_hl(0, "SymbolUsageImpl",
+        { fg = h("@keyword").fg, bg = h("CursorLine").bg, italic = true })
 
       local function text_format(symbol)
         local res = {}

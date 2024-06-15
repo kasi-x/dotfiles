@@ -1,0 +1,8 @@
+https://github.com/luckasRanarison/clear-action.nvim
+https://github.com/niuiic/typst-preview.nvim
+https://github.com/roobert/f-string-toggle.nvim
+https://github.com/ThePrimeagen/harpoon/tree/harpoon2
+https://github.com/Abstract-IDE/penvim
+https://github.com/Mr-LLLLL/lualine-ext.nvim?tab=readme-ov-file
+https://github.com/niuiic/code-shot.nvim
+https://github.com/piersolenski/telescope-import.nvim

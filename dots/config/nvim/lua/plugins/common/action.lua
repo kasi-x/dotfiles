@@ -40,7 +40,7 @@ return {
   }, --}}}
   {
     "mizlan/iswap.nvim", --{{{
-    cmd = {"ISwap", "ISwapNode"},
+    cmd = { "ISwap", "ISwapNode" },
     keys = {
       {
         "<leader>k",
@@ -261,7 +261,9 @@ return {
       },
       {
         "lG",
-        function() require("neogen").generate({ type = "class" }) end,
+        function()
+          require("neogen").generate({ type = "class" })
+        end,
         mode = "n",
         desc = "Neogen Class Comment",
       },
@@ -283,51 +285,55 @@ return {
     "andrewferrier/debugprint.nvim",
     dependencies = { "echasnovski/mini.nvim" },
     opts = {
-        keymaps = {
-            normal = {
-              plain_below = "<Leader>b",
-              plain_above = "<leader>B",
-              variable_below = "<leader>rb",
-              variable_above = "<leader>rB",
-              textobj_below = "<leader>rv",
-              textobj_above = "<leader>rV",
-              toggle_comment_debug_prints = "lb",
-              delete_debug_prints = "<leader>rd",
-            },
-            visual = {
-              variable_below = "b",
-              variable_above = "B",
-            },
+      keymaps = {
+        normal = {
+          plain_below = "<Leader>b",
+          plain_above = "<leader>B",
+          variable_below = "<leader>rb",
+          variable_above = "<leader>rB",
+          textobj_below = "<leader>rv",
+          textobj_above = "<leader>rV",
+          toggle_comment_debug_prints = "lb",
+          delete_debug_prints = "<leader>rd",
         },
-        commands = {
-            toggle_comment_debug_prints = "ToggleCommentDebugPrints",
-            delete_debug_prints = "DeleteDebugPrints",
+        visual = {
+          variable_below = "b",
+          variable_above = "B",
         },
+      },
+      commands = {
+        toggle_comment_debug_prints = "ToggleCommentDebugPrints",
+        delete_debug_prints = "DeleteDebugPrints",
+      },
     },
     keys = {
-        { "lb", mode = 'n', desc="debug_comment" },
-        { "<leader>rd", mode = 'n', desc="delete_debugs"},
-        { "<leader>b", mode = 'n',desc="debug_below"},
-        { "<leader>B", mode = 'n' ,desc="debug_up"},
-        { "<leader>rb", mode = 'n' ,desc="variable_below"},
-        { "<leader>rB", mode = 'n' ,desc="variable_up"},
-        { "<leader>rv", mode = 'n' ,desc="textobj_below"},
-        { "<leader>rV", mode = 'n' ,desc="textobj_above"},
-        { "b", mode = 'x', desc="variable_below"},
-        { "B", mode = 'x', desc="variable_up"},
+      { "lb", mode = "n", desc = "debug_comment" },
+      { "<leader>rd", mode = "n", desc = "delete_debugs" },
+      { "<leader>b", mode = "n", desc = "debug_below" },
+      { "<leader>B", mode = "n", desc = "debug_up" },
+      { "<leader>rb", mode = "n", desc = "variable_below" },
+      { "<leader>rB", mode = "n", desc = "variable_up" },
+      { "<leader>rv", mode = "n", desc = "textobj_below" },
+      { "<leader>rV", mode = "n", desc = "textobj_above" },
+      { "b", mode = "x", desc = "variable_below" },
+      { "B", mode = "x", desc = "variable_up" },
     },
     cmd = {
-        "ToggleCommentDebugPrints",
-        "DeleteDebugPrints",
+      "ToggleCommentDebugPrints",
+      "DeleteDebugPrints",
     },
   },
   {
     "KostkaBrukowa/definition-or-references.nvim",
-    keys={{
-      "gd",
-      function() require("definition-or-references").definition_or_references() end,
-      desc = "definition_or_ref",
-      mode = { "n" },
-    }}
-  }
+    keys = {
+      {
+        "gd",
+        function()
+          require("definition-or-references").definition_or_references()
+        end,
+        desc = "definition_or_ref",
+        mode = { "n" },
+      },
+    },
+  },
 }

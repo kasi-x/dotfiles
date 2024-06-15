@@ -1,6 +1,6 @@
 -- map func {{{
 local function map(mode, lhs, rhs, opts)
-local keys = require("lazy.core.handler").handlers.keys
+  local keys = require("lazy.core.handler").handlers.keys
   if not keys.active[keys.parse({ lhs, mode = mode }).id] then
     opts = vim.tbl_extend("force", { expr = false, silent = true, nowait = true, noremap = true },
       opts or {})
@@ -145,7 +145,7 @@ map({ "n", "x", "o" }, "<leader>e", '"{"',
 map({ "n", "x", "o" }, "<leader>N", '"]"', { expr = false, desc = "Navigate to the next sentence" })
 map({ "n", "x", "o" }, "<leader>E", '"["',
   { expr = false, desc = "Navigate to the previous sentence" })
-map('t', '<esc>', "<C-\\><C-n>", {desc="exit from term" })
+map('t', '<esc>', "<C-\\><C-n>", { desc = "exit from term" })
 -- map('t', '<C-w>', [[<C-\><C-n><C-w>]], {desc="move from term"})
 -- }}} Normal / Visual / Operator
 -- }}} <Leader>
@@ -543,9 +543,9 @@ map("x", "<C-r>", "c", { desc = "change key" })
 --   end, {desc="toggle conceal"})
 --
 map("i", "<C-r>", "<ESC>R", { desc = "enter Replace mode" })
-map('n', '<C-r>r', "<Cmd>lua vim.lsp.buf.rename()<CR>", {desc = "Renamer"})
-map('n', '<C-r>a', "<Cmd>lua vim.lsp.buf.code_action()<CR>", {desc = "Action"})
-map('n', '<C-r>q', "<Cmd>lua vim.lsp.buf.uf.format({async = true})<cr>", {desc = "Formater"})
+map('n', '<C-r>r', "<Cmd>lua vim.lsp.buf.rename()<CR>", { desc = "Renamer" })
+map('n', '<C-r>a', "<Cmd>lua vim.lsp.buf.code_action()<CR>", { desc = "Action" })
+map('n', '<C-r>q', "<Cmd>lua vim.lsp.buf.uf.format({async = true})<cr>", { desc = "Formater" })
 
 
 --MEMO:  <C-r> is paste. ( i thonk <C-v> is better but which-key force to use <C-r>)
@@ -567,7 +567,7 @@ map('n', '<C-r>q', "<Cmd>lua vim.lsp.buf.uf.format({async = true})<cr>", {desc =
 --     { desc = "remap below word" }
 --   )
 -- else
-  -- smart rename of treesitter.
+-- smart rename of treesitter.
 -- end -- }}} Norma / Visual
 -- }}} <g>
 -- {{{ <m/M> (0/0)
@@ -655,6 +655,9 @@ map({ "n", "o" }, "C", "'y$'", { expr = true, desc = "copy to end of line" })
 map({ "n", "o" }, "V", "']P'", { expr = true, desc = "paste before cursor" })
 map("x", "v", "'\"_dp'", { expr = true, desc = "delete and paste" })
 map("x", "V", "'\"_dP'", { expr = true, desc = "delete and paste before cursor" })
+-- map({ "c","t" }, "c", "'y'", { expr = true, desc = "copy" })
+
+
 -- }}} Normal / Shift
 -- {{{ Ctrl (2/4)
 -- {{{ Normal(2/2)
@@ -664,6 +667,8 @@ map("x", "V", "'\"_dP'", { expr = true, desc = "delete and paste before cursor" 
 -- }}} Visual
 -- }}} Ctrl
 -- {{{ Leader (4/4)
+-- map({ "c", "t" }, "<leader>v", "<C-R>", { desc = "paste from clipboard" })
+-- map({ "c", "t" }, "<leader>v", "<C-R>", { desc = "paste from clipboard" })
 map({ "n", "x", "o" }, "<leader>c", "'\"+y'", { expr = true, desc = "copy to clipboard" })
 map({ "n", "x", "o" }, "<leader>v", "'\"+p'", { expr = true, desc = "paste from clipboard" })
 map({ "n", "x", "o" }, "<leader>C", "'\"+Y'", { expr = true, desc = "copy to clipboard" })
@@ -677,8 +682,8 @@ map({ "n", "x", "o" }, "<leader>V", "'\"+P'", { expr = true, desc = "paste from 
 -- }}} g
 -- {{{ alt (terminal)
 -- gv/gV is used by yanky.
-  map('c', '<A-v>', '<C-R>+', { noremap = true, silent = true })
-  map('t', '<A-v>', '<C-R>+', { noremap = true, silent = true })
+-- map('c', '<A-v>', '<C-R>+', { noremap = true, silent = true })
+-- map('t', '<A-v>', '<C-R>+', { noremap = true, silent = true })
 -- }}}
 -- }}} g
 --
@@ -741,7 +746,7 @@ if is_vscode then
   map("n", "b", "<Cmd>call VSCodeNotify('editor.action.showHover')<CR>", { desc = "Hover" })
   -- map("n", "B", "<Cmd>call VSCodeNotify('editor.action.peekDefinition')<CR>", { desc = "move" })
   -- map("n", "<C-b>", "<Cmd>call VSCodeNotify('editor.action.referenceSearch.trigger')<CR>",
-    -- { desc = "move" })
+  -- { desc = "move" })
 else
   -- vim.lsp.buf.references()Lists all the references to the
   -- map("n", "b", "K", { desc = "keyworddrop" })
@@ -752,11 +757,11 @@ else
   -- map("n", "B", "<Cmd>lua vim.lsp.buf.references()<CR>", { desc = "Hover" })
   map("n", "B", "<Cmd>lua vim.lsp.buf.signature_help()<CR>", { desc = "Hover" })
 
--- vim.lsp.buf.signature_help().
-        -- d = { vim.lsp.buf.definition, "Go to definition" },
-        -- r = { require("telescope.builtin").lsp_references,
-          -- "Open a telescope window with references" },
-        -- r = { require("telescope.builtin").lsp_references,
+  -- vim.lsp.buf.signature_help().
+  -- d = { vim.lsp.buf.definition, "Go to definition" },
+  -- r = { require("telescope.builtin").lsp_references,
+  -- "Open a telescope window with references" },
+  -- r = { require("telescope.builtin").lsp_references,
   -- map("n", "<leader>k", "<Cmd>lua vim.lsp.buf.implementation()<CR>", { desc = "move" })
   -- "B", "<CMD>lua require('goto-preview').goto_preview_declaration()<CR>", desc = "Goto Preview Declaration",
   -- <C-b> is treesitter
@@ -833,13 +838,13 @@ map("n", "Q", "q", { expr = false, desc = "MacroRecord" })
 --   )
 --   map("n", "qq", "<Cmd>call VSCodeNotify('editor.action.formatDocument')<CR>",
 --     { desc = "AutoFormat" })
-  -- {
-  --   "key": "shift+alt+f",
-  --   "command": "editor.action.formatDocument",
-  --   "when": "editorHasDocumentFormattingProvider && editorTextFocus && !editorReadonly && !inCompositeEditor"
-  -- }
+-- {
+--   "key": "shift+alt+f",
+--   "command": "editor.action.formatDocument",
+--   "when": "editorHasDocumentFormattingProvider && editorTextFocus && !editorReadonly && !inCompositeEditor"
+-- }
 -- else
-  -- map("n", "<C-q>", "<Nop>", { expr = false, desc = "Nop" })
+-- map("n", "<C-q>", "<Nop>", { expr = false, desc = "Nop" })
 -- end
 -- }}} Normal
 -- {{{ Visual (0/2)

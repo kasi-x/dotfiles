@@ -88,7 +88,7 @@ set guioptions ""
 
 # set font "noto sans 20"
 # set font "UDEV Gothic 35NFLG 15"
-set font "UDEV Gothic 20"
+# set font "UDEV Gothic 20"
 
 
 # {{{
@@ -179,5 +179,5 @@ set recolor                     "true"
 # }}}
 
 set page-cache-size 50
-set smooth-scroll true
+# set smooth-scroll true
 set window-title-page true

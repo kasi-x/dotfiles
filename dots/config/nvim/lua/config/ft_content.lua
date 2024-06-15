@@ -64,7 +64,7 @@ ftplugin.extend_all({
   lua = {
     abbr = {
       ["!="] = "~=",
-      locla = "local",
+      -- local = "local",
       vll = "vim.log.levels",
     },
     keys = {
@@ -79,32 +79,32 @@ ftplugin.extend_all({
       expandtab = false,
     },
   },
-  markdown = {
-    opt = {
-      conceallevel = 3,
-      shiftwidth = 2,
-      tabstop = 2,
-      softtabstop = 2,
-      formatoptions = "jqlnr",
-      comments = "sb:- [x],mb:- [ ],b:-,b:*,b:>",
-      linebreak = true,
-      wrap = true,
-      suffixesadd = ".md",
-    },
-    -- keys = {
-    --   { "<leader>td", require("markdown").task_mark_done },
-    --   { "<leader>tu", require("markdown").task_mark_undone },
-    -- },
-    callback = function(bufnr)
-      require("markdown").update_code_highlights(bufnr)
-      local aug = vim.api.nvim_create_augroup("MarkdownStyling", {})
-      vim.api.nvim_clear_autocmds({ buffer = bufnr, group = aug })
-      vim.api.nvim_create_autocmd({ "TextChanged", "InsertLeave" }, {
-        buffer = bufnr,
-        callback = vim.schedule_wrap(function(args) require("markdown").update_code_highlights(bufnr) end),
-      })
-    end,
-  },
+  -- markdown = {
+  --   opt = {
+  --     conceallevel = 3,
+  --     shiftwidth = 2,
+  --     tabstop = 2,
+  --     softtabstop = 2,
+  --     formatoptions = "jqlnr",
+  --     comments = "sb:- [x],mb:- [ ],b:-,b:*,b:>",
+  --     linebreak = true,
+  --     wrap = true,
+  --     suffixesadd = ".md",
+  --   },
+  --   -- keys = {
+  --   --   { "<leader>td", require("markdown").task_mark_done },
+  --   --   { "<leader>tu", require("markdown").task_mark_undone },
+  --   -- },
+  --   callback = function(bufnr)
+  --     require("markdown").update_code_highlights(bufnr)
+  --     local aug = vim.api.nvim_create_augroup("MarkdownStyling", {})
+  --     vim.api.nvim_clear_autocmds({ buffer = bufnr, group = aug })
+  --     vim.api.nvim_create_autocmd({ "TextChanged", "InsertLeave" }, {
+  --       buffer = bufnr,
+  --       callback = vim.schedule_wrap(function(args) require("markdown").update_code_highlights(bufnr) end),
+  --     })
+  --   end,
+  -- },
   -- ["neotest-summary"] = {
   --   opt = {
   --     wrap = false,
@@ -123,7 +123,7 @@ ftplugin.extend_all({
     abbr = {
       inn = "is not None",
       ipmort = "import",
-      improt = "import",
+      import = "import",
     },
     opt = {
       shiftwidth = 4,
@@ -141,15 +141,15 @@ ftplugin.extend_all({
       --     vim.lsp.buf.formatting({})
       --   end, { buffer = bufnr })
       -- end
---       vim.keymap.set(
---         "n",
---         "<leader>s",
---         function() run_file({ "python", vim.api.nvim_buf_get_name(0) }) end,
---
--- -- カーソル位置の単語をPydocコマンドに送るキー設定
---         { buffer = bufnr }
---
---       )
+      --       vim.keymap.set(
+      --         "n",
+      --         "<leader>s",
+      --         function() run_file({ "python", vim.api.nvim_buf_get_name(0) }) end,
+      --
+      -- -- カーソル位置の単語をPydocコマンドに送るキー設定
+      --         { buffer = bufnr }
+      --
+      --       )
       -- vim.api.nvim_set_keymap('n', 'B', [[:let @/="\<".expand("<cword>")."\>"<CR>:Pydoc <C-r>=expand("<cword>")<CR><CR>]], { noremap = true, silent = true }
       -- vim.keymap.set(
       --   "n",
@@ -159,10 +159,15 @@ ftplugin.extend_all({
       -- )
 
       -- `iskeyword` にドットを追加
-      vim.opt.iskeyword:append('.')
+      vim.opt.iskeyword:append(".")
 
       -- カーソル位置の単語をPydocコマンドに送るキー設定
-      vim.api.nvim_set_keymap('n', 'B', [[:execute 'Pydoc ' . expand('<cword>')<CR>]], { noremap = true, silent = true })
+      vim.api.nvim_set_keymap(
+        "n",
+        "B",
+        [[:execute 'Pydoc ' . expand('<cword>')<CR>]],
+        { noremap = true, silent = true }
+      )
     end,
   },
   qf = {
@@ -180,12 +185,9 @@ ftplugin.extend_all({
   },
   sh = {
     callback = function(bufnr)
-      vim.keymap.set(
-        "n",
-        "<leader>s",
-        function() run_file({ "bash", vim.api.nvim_buf_get_name(0) }) end,
-        { buffer = bufnr }
-      )
+      vim.keymap.set("n", "<leader>s", function()
+        run_file({ "bash", vim.api.nvim_buf_get_name(0) })
+      end, { buffer = bufnr })
     end,
   },
   -- supercollider = {

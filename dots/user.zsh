@@ -4,6 +4,7 @@ export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.nimble/bin:$PATH"
+export PATH="$HOME/.pixi/bin:$PATH"
 export DENO_INSTALL="/home/user/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
 export NVM_DIR="$HOME/.nvm"
@@ -18,6 +19,7 @@ eval "$(pyenv virtualenv-init -)"
 eval "$(pyenv init --path)"
 eval "$(sheldon source)"
 eval "$(gh completion -s zsh)"
+eval "$(pixi completion --shell zsh)"
 
 alias rmd='rmdir'
 alias c='clear'
@@ -40,13 +42,13 @@ alias drmi_all='docker rmi $* $(docker images -a -q)'
 alias drmi_dang='docker rmi $* $(docker images -q -f "dangling=true")'
 alias dhi='docker history $*'
 dhi_neat() {
-    docker history "${1}" \
-        --format "{{ .Size }}\t{{ .CreatedBy }}" \
-        ${2:-} |
+  docker history "${1}" \
+    --format "{{ .Size }}\t{{ .CreatedBy }}" \
+    "${2:-}" |
     sort \
-        --key=1 \
-        --human-numeric-sort \
-        --reverse
+      --key=1 \
+      --human-numeric-sort \
+      --reverse
 }
 alias dps='docker ps'
 alias drit='docker run -it'
@@ -158,104 +160,95 @@ alias aun='sudo apt-get uninstall -y'
 # abbr erase rcat
 
 cursor() {
-    run_app() {
-        /opt/cursor/cursor.appimage "$@" </dev/null &>/dev/null &
-    }
+  run_app() {
+    /opt/cursor/cursor.appimage "$@" </dev/null &>/dev/null &
+  }
 
-    case "$1" in
-        -d | --diff)
-            run_app --diff "$2" "$3"
-            ;;
-        -a | --add)
-            run_app --add "$2"
-            ;;
-        -g | --goto)
-            run_app --goto "$2"
-            ;;
-        -n | --new-window)
-            run_app --new-window
-            ;;
-        -r | --reuse-window)
-            run_app --reuse-window
-            ;;
-        -w | --wait)
-            run_app --wait
-            ;;
-        --locale)
-            run_app --locale "$2"
-            ;;
-        --user-data-dir)
-            run_app --user-data-dir "$2"
-            ;;
-        *)
-            if [ -z "$1" ]; then
-                run_app
-            else
-                run_app "$@"
-            fi
-            ;;
-    esac
+  case "$1" in
+  -d | --diff)
+    run_app --diff "$2" "$3"
+    ;;
+  -a | --add)
+    run_app --add "$2"
+    ;;
+  -g | --goto)
+    run_app --goto "$2"
+    ;;
+  -n | --new-window)
+    run_app --new-window
+    ;;
+  -r | --reuse-window)
+    run_app --reuse-window
+    ;;
+  -w | --wait)
+    run_app --wait
+    ;;
+  --locale)
+    run_app --locale "$2"
+    ;;
+  --user-data-dir)
+    run_app --user-data-dir "$2"
+    ;;
+  *)
+    if [ -z "$1" ]; then
+      run_app
+    else
+      run_app "$@"
+    fi
+    ;;
+  esac
 }
 alias e='cursor'
 function v() {
-    neovide "$@" &
+  neovide "$@" &
 }
 function lr() {
-    local exa_cmd="eza --icons --long --group-directories-first --blocks --no-user --no-permissions"
-    # local exa_cmd="exa -lbghHmuSa --group-directories-first"
-    # 引数がある場合は exa | grep を実行
-    if [ $# -gt 0 ]; then
-        eval "$exa_cmd" | grep "$@"
-    else
-        # 引数がない場合は exa | peco を実行
-        local selected_line=$(eval "$exa_cmd" | peco)
-
-        if [ -z "$selected_line" ] || [ $(echo "$selected_line" | wc -l) -ne 1 ]; then
-            return
-        fi
-
-        # 選択された行からファイル名のみを抽出
-        local selected_file=$(echo "$selected_line" | awk '{print $NF}')
-
-        if [ -d "$selected_file" ]; then
-            cd "$selected_file"
-        elif [ -L "$selected_file" ]; then
-            cd "$(dirname "$(readlink "$selected_file")")"
-        elif file "$selected_file" | grep -q text; then
-            cat "$selected_file"
-        else
-            xdg-open "$selected_file"
-        fi
+  local exa_cmd="eza --icons --long --group-directories-first --blocks --no-user --no-permissions"
+  # local exa_cmd="exa -lbghHmuSa --group-directories-first"
+  if [ $# -gt 0 ]; then
+    eval "$exa_cmd" | grep "$@"
+  else
+    local selected_line=$(eval "$exa_cmd" | peco)
+    if [ -z "$selected_line" ] || [ $(echo "$selected_line" | wc -l) -ne 1 ]; then
+      return
     fi
+    local selected_file=$(echo "$selected_line" | awk '{print $NF}')
+    if [ -d "$selected_file" ]; then
+      cd "$selected_file" || exit
+    elif [ -L "$selected_file" ]; then
+      cd "$(dirname "$(readlink "$selected_file")")" || exit
+    elif file "$selected_file" | grep -q text; then
+      cat "$selected_file"
+    else
+      xdg-open "$selected_file"
+    fi
+  fi
 }
 ### ARCHIVE EXTRACTION
 # usage: ex <file>
-ex ()
-{
-  if [ -f "$1" ] ; then
+ex() {
+  if [ -f "$1" ]; then
     case $1 in
-      *.tar.bz2)   tar xjf $1   ;;
-      *.tar.gz)    tar xzf $1   ;;
-      *.bz2)       bunzip2 $1   ;;
-      *.rar)       unrar x $1   ;;
-      *.gz)        gunzip $1    ;;
-      *.tar)       tar xf $1    ;;
-      *.tbz2)      tar xjf $1   ;;
-      *.tgz)       tar xzf $1   ;;
-      *.zip)       unzip $1     ;;
-      *.Z)         uncompress $1;;
-      *.7z)        7z x $1      ;;
-      *.deb)       ar x $1      ;;
-      *.tar.xz)    tar xf $1    ;;
-      *.tar.zst)   unzstd $1    ;;
-      *)           echo "'$1' cannot be extracted via ex()" ;;
+    *.tar.bz2) tar xjf "$1" ;;
+    *.tar.gz) tar xzf "$1" ;;
+    *.bz2) bunzip2 "$1" ;;
+    *.rar) unrar x "$1" ;;
+    *.gz) gunzip "$1" ;;
+    *.tar) tar xf "$1" ;;
+    *.tbz2) tar xjf "$1" ;;
+    *.tgz) tar xzf "$1" ;;
+    *.zip) unzip "$1" ;;
+    *.Z) uncompress "$1" ;;
+    *.7z) 7z x "$1" ;;
+    *.deb) ar x "$1" ;;
+    *.tar.xz) tar xf "$1" ;;
+    *.tar.zst) unzstd "$1" ;;
+    *) echo "'$1' cannot be extracted via ex()" ;;
     esac
   else
     echo "'$1' is not a valid file"
   fi
 }
-
-
 
 # function ghcr() {
 #     gh repo create $1 --private

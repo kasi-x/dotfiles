@@ -1,0 +1,275 @@
+[project]
+name = ""
+version = "0.1.0"
+description = "Add a short description here"
+authors = [{ name = "kashi-x", email = "kashimiya.exe@gmail.com" }]
+requires-python = ">= 3.12"
+dependencies = []
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.pixi.project]
+channels = ["conda-forge"]
+platforms = ["linux-64"]
+
+[tool.pixi.pypi-dependencies]
+connpass_scraper = { path = "src", editable = true }
+
+[tool.pixi.tasks]
+
+[tool.mypy]
+python_version = "3.12"
+plugins = [
+	"returns.contrib.mypy.returns_plugin",
+	"numpy.typing.mypy_plugin",
+	"pandera.mypy",
+	"pydantic.mypy",
+]
+exclude = ['venv', '.venv']
+namespace_packages = true
+strict = true
+disallow_any_decorated = true
+disallow_any_explicit = true
+disallow_any_unimported = true
+warn_unreachable = true
+allow_redefinition = true
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+xfail_strict = true
+addopts = [
+	"-v",
+	"--strict-config",
+	"--strict-markers",
+	"--picked",
+	"--cov=src",
+	"--no-cov-on-fail",
+]
+asyncio_mode = "auto"
+
+[tool.coverage.paths]
+source = ["src", "*/site-packages"]
+
+[tool.coverage.run]
+branch = true
+omit = ["tests/*"]
+parallel = true
+source = ["src"]
+
+[tool.coverage.report]
+show_missing = true
+fail_under = 100
+skip_covered = true
+skip_empty = true
+
+[tool.pyright]
+pythonVersion = "3.12"
+include = ["src"]
+exclude = [
+	"**/node_modules",
+	"**/__pycache__",
+	"**/typestubs",
+	"**/stubs",
+	"**/.pyenv",
+	"build",
+	"dist",
+	".venv",
+]
+venvPath = ".pixi/envs/default/"
+venv = "."
+stubPath = "src/stubs"
+typeCheckingMode = "basic"
+reportMissingImports = true
+reportMissingTypeStubs = false
+ignore = ["src/old*", ".venv/*"]
+basic = ["**"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 120
+fix = true
+unsafe-fixes = true
+respect-gitignore = true
+src = ["src", "test"]
+indent-width = 4
+
+[tool.ruff.lint]
+extend-ignore = [
+	"D10",     # undocumented code  WHYNOT: for small project.
+	"PLR2004", # WHYNOT: for fast dev
+	"PLR0917", # Too many positional arguments ({c_pos}/{max_pos})  WHYNOT: PLR0913 is better.
+	"PLR6301", # Checks for the presence of unused self parameter in methods definitions.  WHYNOT: false-positive
+	"T20",     # flake8-print  WHYNOT: for fast debug.
+	"TD",      # flake8-todos
+	"FIX",     # flake8-fixme
+	"TRY002",  # WHYNOT: for small project.
+	"TRY003",  # Avoid specifying long messages outside the exception class.  WHYNOT: for fast debug.
+	# "COM812",  # Derived from the flake8-commas linter. WHYNOT: Not in compliance with Fixer.
+	"TCH", # flake8-type-checking  WHYNOT: for fast dev.
+	# "ANN10",  # Missing type annotation for self.  WHYNOT: unproductive type puzzle.(suppressed by ignore-fully-untyped = true)
+	# "ANN401", # Dynamically typed expressions (typing.Any) are disallowed in {name}.  WHYNOT: false-positive. (suppressed by ignore-fully-untyped = true)
+]
+unfixable = [
+	"RET504", # unnecessary-assign
+	"F401",   # unused-import (ignore-init-module-imports = true)
+	"F841",   # unused-variable  WHYNOT: for debug
+	"TCH002", # typing-only-third-party-import  WHYNOT: for fast dev.
+	# "B",      # flake8-bugbear  WHYNOT: buggy.
+]
+logger-objects = ["logging_setup.logger"]
+select = ["ALL"]
+task-tags = [
+	# General Purpose Tags
+	"TODO",
+	"BUG",
+	"FIXME",
+	"DOCME",
+	"HACK",
+	"MEMO",
+	"ISSUE",
+	"MISSING",
+	"HOLD",
+	"WARN",
+	"PLAN",
+	"PROCESS",
+
+	# More Hack
+	"META",
+	"INNOVATE",
+	"OUTSIDE-BOX",
+	"PILOT",
+	"UNEXPLORED",
+
+	# Decision Rationale
+	"WHYNOT",
+	"PURPOSE",
+	"CONTEXT",
+	"RATIONAL",
+	"EXAMPLE",
+	"FOLLOW",
+
+	# Team Communication
+	"WIP",
+	"BLOCKER",
+	"NOTION",
+	"REVIEW",
+	"DISCUSS",
+	"QUESTION",
+	"REQUEST",
+
+	# Production, Assumption
+	"STRATEGY",
+	"FUTURE",
+	"MVP",
+	"RISK",
+	"STAKEHOLDER",
+	"STORY",
+
+	# Test-Driven Development
+	"BLUE",
+	"RED",
+	"GREEN",
+	"REFACTOR",
+	"DEPENDENT",
+	"OVERTEST",
+	"UNCOVERED",
+	"INTEGRATION",
+	"EDGE-CASE",
+	"SLOW",
+
+	# Optimize and Evaluation
+	"BENCHMARK",
+	"EVALUATION",
+	"SCALE",
+	"PERFORMANCE",
+
+	# Code Enhancement,
+	"CLARITY",
+	"LOGIC",
+	"UPGRADE",
+	"DOC-ENHANCE",
+	"CLEANUP",
+
+	# Security and Compliance
+	"SECURE",
+	"PRIVACY",
+	"ILLEGAL",
+	"ACCESSIBILITY",
+	"LOCALIZE",
+
+	# Legacy Management
+	"DEPRECATE",
+	"MAINTAIN",
+	"DEBT",
+	"UNKNOWN",
+	"PHASE-OUT",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["E402", "INP001"]
+"tests/*" = [
+	"ARG",     # flake8-unused-arguments
+	"FBT",     # flake8-boolean-trap
+	"S",       # flake8-bandit
+	"E402",    # Module level import not at top of cell
+	"E501",    # Line too long ({width} > {limit})
+	"INP001",  # File {filename} is part of an implicit namespace package. Add an __init__.py.
+	"PLR2004", # Magic value used in comparison, consider replacing {value} with a constant variable
+	"D10",     # Missing docstring
+]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+docstring-code-format = true
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"                   # "google" | "numpy" | "pep257"
+ignore-decorators = ["typing.overload"]
+
+[tool.ruff.lint.pycodestyle]
+ignore-overlong-task-comments = true
+max-line-length = 120
+max-doc-length = 150
+
+[tool.ruff.lint.isort]
+force-single-line = true
+
+[tool.ruff.lint.flake8-tidy-imports]
+ban-relative-imports = "parents"
+
+[tool.ruff.lint.flake8-import-conventions.extend-aliases]
+"dask.dataframe" = "dd"
+"xarray" = "xr"
+"scipy" = "sp"
+"skopt" = "sko"
+"skimage" = "ski"
+"sklearn" = "sk"
+"returns" = "rt"
+"pandera" = "pa"
+
+[tool.ruff.lint.flake8-type-checking]
+exempt-modules = ["typing", "typing_extensions"]
+quote-annotations = true
+
+[tool.ruff.lint.flake8-errmsg]
+max-string-length = 20
+
+[tool.ruff.lint.mccabe]
+max-complexity = 4 # default is 10
+
+[tool.ruff.lint.flake8-annotations]
+ignore-fully-untyped = true
+allow-star-arg-any = false
+suppress-dummy-args = false
+suppress-none-returning = false
+
+[tool.codespell]
+skip = '*.po,*.ts,./src/3rdParty, /trial'
+count = ''
+quiet-level = 3

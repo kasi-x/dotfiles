@@ -17,7 +17,7 @@ download_fonts() {
         echo "Downloading ${download_url}"
         wget "${download_url}" -P "${fonts_dir}"
         unzip "${fonts_dir}/${zip_file}" -d "${fonts_dir}"
-        find ${fonts_dir} -type f ! -name "*.ttf" -exec rm {} \;
+        find "${fonts_dir} -type f ! -name '*.ttf' -exec rm {} \;"
         rm "$fonts_dir/$zip_file"
         echo "${font} is done"
     done

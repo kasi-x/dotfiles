@@ -28,12 +28,12 @@ return {
   {
     "Jxstxs/conceal.nvim",
     dependencies = "nvim-treesitter/nvim-treesitter" ,
-    lazy = false,
+    lazy = 'VeryLazy',
     opts = {
             --[[ ["language"] = {
                 enabled = bool,
                 keywords = {
-                  ["keyword"] = {
+                  [":keyword:"] = {
                       enabled     = bool,
                       conceal     = string,
                       highlight   = string
@@ -43,28 +43,45 @@ return {
             ["lua"] = {
               enabled = true,
               keywords = {
-                ["local"] = {
-                  enabled = false -- to disable concealing for "local"
-                },
-                ["return"] = {
-                  conceal = "R" -- to set the concealing to "R"
-                },
-                ["for"] = {
-                  highlight = "keyword" -- to set the Highlight group to "@keyword"
+                ["<Leader>"] = {
+                  enabled = true,
+                  conceal = "L",
+                  highlight = "keyword",
                 }
-              }
+              },
             },
-            -- ["language"] = {
-            --   enabled = false -- to disable the whole language
-            -- }
+      ["python"] = {
+              enabled = false,
+              keywords = {
+                ["def"] = {
+                  enabled = true,
+                  conceal = "󰊕",
+                  highlight = "keyword",
+                -- },
+                -- ["class"] = {
+                --   enabled = true,
+                --   conceal = "",
+                --   highlight = "keyword",
+                -- }
+              },
+
+
+            },
+
         },
+    },
     config = function()
       require('conceal').generate_conceals()
     end,
-    keys =
-      {"n", "<C-r>c", function() require("conceal").toggle_conceal() end, { dect="conceal",silent = true},}
-    }
-
+      keys = {
+        {
+          "<Leader>rc",
+          function() require("conceal").toggle_conceal() end,
+          desc = "conceal",
+          mode = { "n" }, -- Normal mode only
+        },
+      },
+    },
   -- {
   --   "ecthelionvi/NeoComposer.nvim",
   --   dependencies = { "kkharji/sqlite.lua" },
@@ -80,7 +97,6 @@ return {
   --     },
   --   }
   -- },
-    },
   {
     "nvim-lualine/lualine.nvim", --{{{
     event = "VeryLazy",
