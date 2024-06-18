@@ -30,27 +30,26 @@ return {
       },
     },
   }, --}}}
-  {
-    "chrisgrieser/nvim-puppeteer",
-    ft = "python",
-    dependencies = "nvim-treesitter/nvim-treesitter",
-  },
-
+  -- {
+  --   "chrisgrieser/nvim-puppeteer",
+  --   ft = "python",
+  --   dependencies = "nvim-treesitter/nvim-treesitter",
+  -- },
   -- select virtual environments
   -- - makes pyright and debugpy aware of the selected virtual environment
   -- - Select a virtual environment with `:VenvSelect`
-  {
-    "linux-cultist/venv-selector.nvim",
-    ft = "python",
-    dependencies = {
-      "neovim/nvim-lspconfig",
-      "nvim-telescope/telescope.nvim",
-      "mfussenegger/nvim-dap-python",
-    },
-    opts = {
-      dap_enabled = true, -- makes the debugger work with venv
-    },
-  },
+  -- {
+  --   "linux-cultist/venv-selector.nvim",
+  --   ft = "python",
+  --   dependencies = {
+  --     "neovim/nvim-lspconfig",
+  --     "nvim-telescope/telescope.nvim",
+  --     "mfussenegger/nvim-dap-python",
+  --   },
+  --   opts = {
+  --     dap_enabled = true, -- makes the debugger work with venv
+  --   },
+  -- },
   {
     "wookayin/semshi", -- maintained fork
     ft = "python",

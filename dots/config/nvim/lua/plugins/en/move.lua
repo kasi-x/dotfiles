@@ -81,7 +81,7 @@ return {
   --         before = false, ---@type boolean|number[]
   --         -- position of the label extmark
   --         style = "overlay", ---@type "eol" | "overlay" | "right_align" | "inline"
-  --         -- flash tries to re-use labels that were already assigned to a position,
+  --         -- flash tries to reuse labels that were already assigned to a position,
   --         -- when typing more characters. By default only lower-case labels are re-used.
   --         reuse = "lowercase", ---@type "lowercase" | "all" | "none"
   --         -- for the current window, label targets closer to the cursor first
@@ -281,9 +281,9 @@ return {
     end,
     keys = {
       --{{{
-      { "ww",        "<cmd>HopWord<cr>",                          desc = "Hop to word",             mode = "n" },
-      { "<leader>w", "<cmd>lua require'hop'.hint_patterns()<cr>", desc = "search last",             mode = "n" },
-      { "g,",        "<cmd>HopChar1<cr>",                         desc = "Hop to single character", mode = "n" },
+      { "ww", "<cmd>HopWord<cr>", desc = "Hop to word", mode = "n" },
+      { "<leader>w", "<cmd>lua require'hop'.hint_patterns()<cr>", desc = "search last", mode = "n" },
+      { "g,", "<cmd>HopChar1<cr>", desc = "Hop to single character", mode = "n" },
       {
         "<c-p>",
         "<cmd>lua require'hop'.hint_words({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR })<CR>",
@@ -362,26 +362,50 @@ return {
         desc = "Hop to character after cursor on current line",
         mode = { "n", "x", "o" },
       },
-    },                             --}}}
-  },                               --}}}
-  {
-    "anuvyklack/pretty-fold.nvim", --{{{
-    event = { "BufRead", "BufNewFile" },
-    config = function()
-      require("pretty-fold").setup({
-        global = { "{{{", "}}}" },
-      })
-    end,
-  },                            --}}}
+    }, --}}}
+  }, --}}}
+  -- {
+  --   "anuvyklack/pretty-fold.nvim", --{{{
+  --   event = { "BufRead", "BufNewFile" },
+  --   config = function()
+  --     require("pretty-fold").setup({
+  --       global = { "{{{", "}}}" },
+  --     })
+  --   end,
+  -- }, --}}}
   {
     "chrisgrieser/nvim-spider", --{{{
     event = { "BufRead", "BufNewFile" },
     keys = {
       --{{{
-      { "i", function() require('spider').motion('w') end,  mode = { "n", "x", "o" }, },
-      { "I", function() require('spider').motion('e') end,  mode = { "n", "x", "o" }, },
-      { "h", function() require('spider').motion('b') end,  mode = { "n", "x", "o" }, },
-      { "H", function() require('spider').motion('ge') end, mode = { "n", "x", "o" }, },
+      {
+        "i",
+        function()
+          require("spider").motion("w")
+        end,
+        mode = { "n", "x", "o" },
+      },
+      {
+        "I",
+        function()
+          require("spider").motion("e")
+        end,
+        mode = { "n", "x", "o" },
+      },
+      {
+        "h",
+        function()
+          require("spider").motion("b")
+        end,
+        mode = { "n", "x", "o" },
+      },
+      {
+        "H",
+        function()
+          require("spider").motion("ge")
+        end,
+        mode = { "n", "x", "o" },
+      },
     }, --}}}
-  },   --}}}
+  }, --}}}
 }

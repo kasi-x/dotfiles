@@ -1,36 +1,39 @@
 return {
   {
-    'akinsho/toggleterm.nvim',
+    "akinsho/toggleterm.nvim", --{{{
     version = "*",
     config = true,
-    event="VeryLazy",
+    event = "VeryLazy",
     keys = {
-       {
-         "<leader>rm",
-         "<cmd>ToggleTermSendCurrentLine<CR>",
-         mode = { "n" },
-         desc = "Toggle outline",
-       },
-       {
-         "<leader>rm",
-         function() require("toggleterm").send_lines_to_terminal("single_line", trim_spaces, { args = vim.v.count }) end,
-        mode = {  "v" },
-         desc="line2term",
-       },
-       {
-         "<leader>rM",
-         "<cmd>ToggleTermSendVisualSelection<CR>",
-         mode = { "v" },
-         desc = "Toggle outline",
-       }
+      {
+        "<leader>rm",
+        "<cmd>ToggleTermSendCurrentLine<CR>",
+        mode = { "n" },
+        desc = "Toggle outline",
+      },
+      {
+        "<leader>rm",
+        function()
+          require("toggleterm").send_lines_to_terminal("single_line", trim_spaces, { args = vim.v.count })
+        end,
+        mode = { "v" },
+        desc = "line2term",
+      },
+      {
+        "<leader>rM",
+        "<cmd>ToggleTermSendVisualSelection<CR>",
+        mode = { "v" },
+        desc = "Toggle outline",
+      },
     },
-  },
+  }, --}}}
+  { "kevinhwang91/nvim-ufo", requires = "kevinhwang91/promise-async" },
   {
-    "Jxstxs/conceal.nvim",
-    dependencies = "nvim-treesitter/nvim-treesitter" ,
-    lazy = 'VeryLazy',
+    "Jxstxs/conceal.nvim", --{{{
+    dependencies = "nvim-treesitter/nvim-treesitter",
+    lazy = "VeryLazy",
     opts = {
-            --[[ ["language"] = {
+      --[[ ["language"] = {
                 enabled = bool,
                 keywords = {
                   [":keyword:"] = {
@@ -40,50 +43,49 @@ return {
                   }
                 }
             } ]]
-            ["lua"] = {
-              enabled = true,
-              keywords = {
-                ["<Leader>"] = {
-                  enabled = true,
-                  conceal = "L",
-                  highlight = "keyword",
-                }
-              },
-            },
-      ["python"] = {
-              enabled = false,
-              keywords = {
-                ["def"] = {
-                  enabled = true,
-                  conceal = "󰊕",
-                  highlight = "keyword",
-                -- },
-                -- ["class"] = {
-                --   enabled = true,
-                --   conceal = "",
-                --   highlight = "keyword",
-                -- }
-              },
-
-
-            },
-
+      ["lua"] = {
+        enabled = true,
+        keywords = {
+          ["<Leader>"] = {
+            enabled = true,
+            conceal = "L",
+            highlight = "keyword",
+          },
         },
-    },
-    config = function()
-      require('conceal').generate_conceals()
-    end,
-      keys = {
-        {
-          "<Leader>rc",
-          function() require("conceal").toggle_conceal() end,
-          desc = "conceal",
-          mode = { "n" }, -- Normal mode only
+      },
+      ["python"] = {
+        enabled = false,
+        keywords = {
+          ["def"] = {
+            enabled = true,
+            conceal = "󰊕",
+            highlight = "keyword",
+            -- },
+            -- ["class"] = {
+            --   enabled = true,
+            --   conceal = "",
+            --   highlight = "keyword",
+            -- }
+          },
         },
       },
     },
+    config = function()
+      require("conceal").generate_conceals()
+    end,
+    keys = {
+      {
+        "<Leader>rc",
+        function()
+          require("conceal").toggle_conceal()
+        end,
+        desc = "conceal",
+        mode = { "n" }, -- Normal mode only
+      },
+    },
+  }, --}}}
   -- {
-  --   "ecthelionvi/NeoComposer.nvim",
+  --   "ecthelionvi/NeoComposer.nvim",--{{{
   --   dependencies = { "kkharji/sqlite.lua" },
   --   opts = {
   --     keymaps = {
@@ -96,7 +98,35 @@ return {
   --       toggle_macro_menu = "<m-q>",
   --     },
   --   }
-  -- },
+  -- },--}}}
+  {
+    "hedyhli/outline.nvim", --{{{
+    lazy = true,
+    cmd = { "Outline", "OutlineOpen" },
+    keys = { { "<C-s>", "<cmd>Outline<CR>", desc = "Toggle outline" } },
+    opts = {
+      keymaps = { -- These keymaps can be a string or a table for multiple keys
+        close = { "<Esc>", "q" },
+        goto_location = "<Cr>",
+        focus_location = "o",
+        hover_symbol = "b",
+        toggle_preview = "B",
+        rename_symbol = "r",
+        code_actions = "a",
+        fold = "mh",
+        unfold = "mi",
+        fold_all = "M",
+        unfold_all = "mm",
+        fold_reset = "R",
+      },
+      symbols = {
+        filter = {
+          default = { "String", exclude = true },
+          python = { "Function", "Class" },
+        },
+      },
+    },
+  }, --}}}
   {
     "nvim-lualine/lualine.nvim", --{{{
     event = "VeryLazy",
@@ -107,7 +137,7 @@ return {
     config = function()
       require("plugins.configs.statusline")
     end,
-  },                    --}}}
+  }, --}}}
   {
     "folke/noice.nvim", --{{{
     event = "VeryLazy",
@@ -144,16 +174,16 @@ return {
           },
         },
         presets = {
-          bottom_search = true,         -- use a classic bottom cmdline for search
-          command_palette = true,       -- position the cmdline and popupmenu together
+          bottom_search = true, -- use a classic bottom cmdline for search
+          command_palette = true, -- position the cmdline and popupmenu together
           long_message_to_split = true, -- long messages will be sent to a split
-          inc_rename = true,            -- enables an input dialog for inc-rename.nvim
-          lsp_doc_border = true,        -- add a border to hover docs and signature help
+          inc_rename = true, -- enables an input dialog for inc-rename.nvim
+          lsp_doc_border = true, -- add a border to hover docs and signature help
         },
       })
     end,
     dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
-  },                           --}}}
+  }, --}}}
   {
     "anuvyklack/windows.nvim", --{{{
     requires = {
@@ -172,7 +202,7 @@ return {
       vim.o.equalalways = false
       require("windows").setup()
     end,
-  },                         --}}}
+  }, --}}}
   -- {
   --   "jackMort/ChatGPT.nvim", --{{{
   --   event = "VeryLazy",
@@ -362,7 +392,7 @@ return {
   {
     "stevanmilic/nvim-lspimport", --{{{
     ft = "python",
-  -- lazy = false,
+    -- lazy = false,
     -- opts = true,
     keys = {
       {
@@ -374,13 +404,13 @@ return {
         mode = { "n" }, -- Normal mode only
       },
     },
-  },                     --}}}
+  }, --}}}
   {
     "j-hui/fidget.nvim", --{{{
     -- branch = "legacy",
     ft = { "lua", "go", "python" },
     config = true,
-  },                        --}}}
+  }, --}}}
   {
     "folke/which-key.nvim", --{{{
     event = "VeryLazy",
@@ -408,22 +438,22 @@ return {
           padding = { 1, 1, 1, 1 },
         },
         plugins = {
-          marks = true,      -- shows a list of your marks on ' and `
+          marks = true, -- shows a list of your marks on ' and `
           registers = false, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
           -- the presets plugin, adds help for a bunch of default keybindings in Neovim
           -- No actual key bindings are created
           spelling = {
-            enabled = true,   -- enabling this will show WhichKey when pressing z= to select spelling suggestions
+            enabled = true, -- enabling this will show WhichKey when pressing z= to select spelling suggestions
             suggestions = 20, -- how many suggestions should be shown in the list?
           },
           presets = {
-            operators = true,    -- adds help for operators like d, y, ...
-            motions = true,      -- adds help for motions
+            operators = true, -- adds help for operators like d, y, ...
+            motions = true, -- adds help for motions
             text_objects = true, -- help for text objects triggered after entering an operator
-            windows = false,     -- default bindings on <c-w>
-            nav = true,          -- misc bindings to work with windows
-            z = false,           -- bindings for folds, spelling and others prefixed with z
-            g = false,           -- bindings for prefixed with g
+            windows = false, -- default bindings on <c-w>
+            nav = true, -- misc bindings to work with windows
+            z = false, -- bindings for folds, spelling and others prefixed with z
+            g = false, -- bindings for prefixed with g
           },
         },
         -- triggers_blacklist = {
@@ -452,10 +482,10 @@ return {
           -- spelling
         },
         layout = {
-          height = { min = 2, max = 5 },  -- min and max height of the columns
+          height = { min = 2, max = 5 }, -- min and max height of the columns
           width = { min = 20, max = 60 }, -- min and max width of the columns
-          spacing = 3,                    -- spacing between columns
-          align = "center",               -- align columns left, center or right
+          spacing = 3, -- spacing between columns
+          align = "center", -- align columns left, center or right
         },
       })
       --{{{ presets fix
@@ -504,31 +534,40 @@ return {
       --     },
       --   },
       -- }, { mode = { "n" } }) --}}}
+      -- {{{
       wk.register({
         ["l"] = {
           name = "comment",
         },
       }, { mode = { "n" } }) --}}}
+      -- {{{
       wk.register({
         ["L"] = {
           name = "comment_with_dialog",
         },
       }, { mode = { "n" } }) --}}}
+      -- {{{
+
       wk.register({
         ["<C-l>"] = {
           name = "comment",
         },
       }, { mode = { "x", "o" } }) --}}}
+      -- {{{
       wk.register({
         ["<leader>s"] = {
           name = "code_runnner",
         },
       }, { mode = { "n", "x", "o" } }) --}}}
+      -- {{{
+
       wk.register({
         ["<leader>r"] = {
           name = "refactoring",
         },
       }, { mode = { "n", "x", "o" } }) --}}}
+      -- {{{
+
       wk.register({
         ["<C-r>"] = {
           name = "code_actions",
@@ -548,7 +587,7 @@ return {
       --   ["<C-b>"] = {
       --     name = "help",
       --   },
-      -- }, { mode = { "n", "x", "o" } }) --}}}
+      -- }, { mode = { "n", "x", "o" } })
       -- {{{ Telescope
       wk.register({
         ["j"] = {
@@ -735,9 +774,8 @@ return {
       --    "<C-s>"  = 'Spelling suggestions',
       --    "<C-z>"  = 'stop completion',
       --  }}, { mode = "i", prefix = "<C-x>" })--}}}
-      ----}}}
     end,
-  },                                 --}}}
+  }, --}}}
   {
     "yuki-yano/highlight-undo.nvim", --{{{
     dependencies = { "vim-denops/denops.vim" },
@@ -762,7 +800,7 @@ return {
         duration = 200,
       })
     end,
-  },                             --}}}
+  }, --}}}
   {
     "shellRaining/hlchunk.nvim", --{{{
     event = { "UIEnter" },

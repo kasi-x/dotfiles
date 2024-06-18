@@ -73,6 +73,7 @@ ftplugin.extend_all({
     opt = {
       comments = ":---,:--",
     },
+    foldmarker = "{{{,}}}",
   },
   make = {
     opt = {

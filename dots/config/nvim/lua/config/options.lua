@@ -70,14 +70,16 @@ local options = {
   cmdwinheight = 1,
   -- conceallevel=3,
   -- concealcursor='nvc'
+  --
+  -- foldtext = "",
 }
 -- vim.g.node_host_prog = "/home/akizora/.nvm/versions/node/v18.16.0/bin/node"
 for k, v in pairs(options) do
   vim.opt[k] = v
 end
 
-vim.cmd('setlocal ignorecase')
-vim.cmd('setlocal conceallevel=0')
+vim.cmd("setlocal ignorecase")
+vim.cmd("setlocal conceallevel=0")
 -- local alpha = function()
 -- return string.format("%x", math.floor(255 * vim.g.transparency or 0.9))
 -- end
