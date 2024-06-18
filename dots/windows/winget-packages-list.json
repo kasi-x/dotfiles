@@ -1,6 +1,6 @@
 {
 	"$schema" : "https://aka.ms/winget-packages.schema.2.0.json",
-	"CreationDate" : "2023-11-14T10:20:19.389-00:00",
+	"CreationDate" : "2024-05-16T06:28:25.430-00:00",
 	"Sources" : 
 	[
 		{
@@ -8,9 +8,6 @@
 			[
 				{
 					"PackageIdentifier" : "Bitwarden.Bitwarden"
-				},
-				{
-					"PackageIdentifier" : "Tutanota.Tutanota"
 				},
 				{
 					"PackageIdentifier" : "DMM.GamePlayer"
@@ -22,10 +19,13 @@
 					"PackageIdentifier" : "Amazon.Kindle"
 				},
 				{
-					"PackageIdentifier" : "BurntSushi.ripgrep.MSVC"
+					"PackageIdentifier" : "Anaconda.Anaconda3"
 				},
 				{
-					"PackageIdentifier" : "CPUID.CPU-Z"
+					"PackageIdentifier" : "AutoHotkey.AutoHotkey"
+				},
+				{
+					"PackageIdentifier" : "BurntSushi.ripgrep.MSVC"
 				},
 				{
 					"PackageIdentifier" : "Canonical.Ubuntu.2204"
@@ -52,7 +52,7 @@
 					"PackageIdentifier" : "Gyan.FFmpeg"
 				},
 				{
-					"PackageIdentifier" : "REALiX.HWiNFO"
+					"PackageIdentifier" : "commercialhaskell.stack"
 				},
 				{
 					"PackageIdentifier" : "Microsoft.Edge"
@@ -61,13 +61,31 @@
 					"PackageIdentifier" : "Microsoft.EdgeWebView2Runtime"
 				},
 				{
+					"PackageIdentifier" : "Microsoft.AppInstaller"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.UI.Xaml.2.7"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.UI.Xaml.2.8"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.VCLibs.Desktop.14"
+				},
+				{
 					"PackageIdentifier" : "Microsoft.DevHome"
 				},
 				{
 					"PackageIdentifier" : "Microsoft.WindowsTerminal"
 				},
 				{
+					"PackageIdentifier" : "Nvidia.CUDA"
+				},
+				{
 					"PackageIdentifier" : "OBSProject.OBSStudio"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.OneDrive"
 				},
 				{
 					"PackageIdentifier" : "Rufus.Rufus"
@@ -76,25 +94,31 @@
 					"PackageIdentifier" : "Valve.Steam"
 				},
 				{
-					"PackageIdentifier" : "SublimeHQ.SublimeText.4"
+					"PackageIdentifier" : "SumatraPDF.SumatraPDF"
 				},
 				{
-					"PackageIdentifier" : "SumatraPDF.SumatraPDF"
+					"PackageIdentifier" : "Vivaldi.Vivaldi"
 				},
 				{
 					"PackageIdentifier" : "Wox.Wox"
 				},
 				{
-					"PackageIdentifier" : "Zoom.Zoom"
+					"PackageIdentifier" : "ajeetdsouza.zoxide"
 				},
 				{
-					"PackageIdentifier" : "ajeetdsouza.zoxide"
+					"PackageIdentifier" : "zxch3n.PomodoroLogger"
+				},
+				{
+					"PackageIdentifier" : "Levitsky.FontBase"
 				},
 				{
 					"PackageIdentifier" : "Axosoft.GitKraken"
 				},
 				{
 					"PackageIdentifier" : "junegunn.fzf"
+				},
+				{
+					"PackageIdentifier" : "nim.nim"
 				},
 				{
 					"PackageIdentifier" : "peco.peco"
@@ -106,109 +130,76 @@
 					"PackageIdentifier" : "yt-dlp.yt-dlp"
 				},
 				{
-					"PackageIdentifier" : "KhronosGroup.VulkanSDK"
-				},
-				{
-					"PackageIdentifier" : "OpenJS.NodeJS.LTS"
-				},
-				{
-					"PackageIdentifier" : "DuongDieuPhap.ImageGlass"
-				},
-				{
-					"PackageIdentifier" : "Microsoft.DotNet.Runtime.7"
-				},
-				{
-					"PackageIdentifier" : "Neovim.Neovim"
-				},
-				{
-					"PackageIdentifier" : "Chocolatey.Chocolatey"
-				},
-				{
-					"PackageIdentifier" : "GitHub.cli"
-				},
-				{
-					"PackageIdentifier" : "7zip.7zip"
-				},
-				{
-					"PackageIdentifier" : "Python.Launcher"
-				},
-				{
-					"PackageIdentifier" : "Microsoft.VCRedist.2012.x86"
-				},
-				{
-					"PackageIdentifier" : "OlegDanilov.RapidEnvironmentEditor"
-				},
-				{
-					"PackageIdentifier" : "Microsoft.CLRTypesSQLServer.2019"
-				},
-				{
-					"PackageIdentifier" : "nathancorvussolis.corvusskk"
-				},
-				{
-					"PackageIdentifier" : "Oracle.VirtualBox"
-				},
-				{
-					"PackageIdentifier" : "Microsoft.VCRedist.2015+.x86"
-				},
-				{
-					"PackageIdentifier" : "Oracle.JavaRuntimeEnvironment"
-				},
-				{
-					"PackageIdentifier" : "Starship.Starship"
-				},
-				{
-					"PackageIdentifier" : "Microsoft.VisualStudioCode"
-				},
-				{
-					"PackageIdentifier" : "Oracle.JDK.17"
-				},
-				{
-					"PackageIdentifier" : "MSYS2.MSYS2"
-				},
-				{
-					"PackageIdentifier" : "TechPowerUp.GPU-Z"
-				},
-				{
-					"PackageIdentifier" : "Microsoft.PowerShell"
-				},
-				{
-					"PackageIdentifier" : "VideoLAN.VLC"
-				},
-				{
-					"PackageIdentifier" : "Microsoft.VCRedist.2015+.x64"
-				},
-				{
-					"PackageIdentifier" : "voidtools.Everything"
+					"PackageIdentifier" : "LGUG2Z.komorebi"
 				},
 				{
 					"PackageIdentifier" : "Neovide.Neovide"
 				},
 				{
-					"PackageIdentifier" : "Python.Launcher"
+					"PackageIdentifier" : "Chocolatey.Chocolatey"
 				},
 				{
-					"PackageIdentifier" : "Nvidia.CUDA"
+					"PackageIdentifier" : "7zip.7zip"
 				},
 				{
-					"PackageIdentifier" : "Nvidia.GeForceExperience"
+					"PackageIdentifier" : "OlegDanilov.RapidEnvironmentEditor"
 				},
 				{
-					"PackageIdentifier" : "Nvidia.PhysX"
+					"PackageIdentifier" : "nathancorvussolis.corvusskk"
 				},
 				{
-					"PackageIdentifier" : "Google.Chrome"
+					"PackageIdentifier" : "GoLang.Go"
+				},
+				{
+					"PackageIdentifier" : "Starship.Starship"
 				},
 				{
 					"PackageIdentifier" : "Microsoft.PowerToys"
 				},
 				{
-					"PackageIdentifier" : "Microsoft.VCRedist.2012.x64"
+					"PackageIdentifier" : "Microsoft.VCRedist.2015+.x64"
 				},
 				{
-					"PackageIdentifier" : "Microsoft.DotNet.SDK.7"
+					"PackageIdentifier" : "Python.Launcher"
 				},
 				{
-					"PackageIdentifier" : "Python.Python.3.11"
+					"PackageIdentifier" : "Zoom.Zoom"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.CLRTypesSQLServer.2019"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.VCRedist.2015+.x64"
+				},
+				{
+					"PackageIdentifier" : "Python.Python.3.12"
+				},
+				{
+					"PackageIdentifier" : "Neovim.Neovim"
+				},
+				{
+					"PackageIdentifier" : "MacType.MacType"
+				},
+				{
+					"PackageIdentifier" : "Oracle.VirtualBox"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.VisualStudioCode"
+				},
+				{
+					"PackageIdentifier" : "Oracle.JavaRuntimeEnvironment"
+				},
+				{
+					"PackageIdentifier" : "Google.Chrome"
+				},
+				{
+					"PackageIdentifier" : "sylikc.JPEGView"
+				},
+				{
+					"PackageIdentifier" : "voidtools.Everything"
+				},
+				{
+					"PackageIdentifier" : "GitHub.cli"
 				}
 			],
 			"SourceDetails" : 
@@ -223,13 +214,7 @@
 			"Packages" : 
 			[
 				{
-					"PackageIdentifier" : "9N3SQK8PDS8G"
-				},
-				{
-					"PackageIdentifier" : "9NBLGGH516XP"
-				},
-				{
-					"PackageIdentifier" : "XP99GVQDX7JPR4"
+					"PackageIdentifier" : "9P3JFR0CLLL6"
 				}
 			],
 			"SourceDetails" : 
@@ -241,5 +226,5 @@
 			}
 		}
 	],
-	"WinGetVersion" : "1.6.2771"
+	"WinGetVersion" : "1.7.11261"
 }
