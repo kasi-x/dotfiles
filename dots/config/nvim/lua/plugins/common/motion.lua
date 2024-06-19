@@ -54,58 +54,58 @@ return {
       require("neoscroll.config").set_mappings(t)
     end,
   }, --}}}
-  {
-    "fedepujol/move.nvim", --{{{
-    event = { "BufRead", "BufNewFile" },
-    keys = {
-      {
-        "<A-n>",
-        "<CMD>MoveLine(1)<CR>",
-        desc = "move",
-        mode = "n",
-      },
-      {
-        "<A-e>",
-        "<CMD>MoveLine(-1)<CR>",
-        desc = "move",
-        mode = "n",
-      },
-      {
-        "<A-i>",
-        "<CMD>MoveChar(1)<CR>",
-        desc = "move",
-        mode = "n",
-      },
-      {
-        "<A-h>",
-        "<CMD>MoveChar(-1)<CR>",
-        desc = "move",
-        mode = "n",
-      },
-      {
-        "<A-n>",
-        "<CMD>MoveBlock(1)<CR>",
-        desc = "move",
-        mode = "v",
-      },
-      {
-        "<A-e>",
-        "<CMD>MoveBlock(-1)<CR>",
-        desc = "move",
-        mode = "v",
-      },
-      {
-        "<A-i>",
-        "<CMD>MoveHBlock(1)<CR>",
-        desc = "move",
-        mode = "v",
-      },
-      {
-        "<A-h>",
-        "<CMD>MoveHBlock(-1)<CR>",
-        desc = "move",
-        mode = "v",
-      },
-    },
-  }, --}}}
+  -- { # I use Alt for window move key.
+  --   "fedepujol/move.nvim", --{{{
+  --   event = { "BufRead", "BufNewFile" },
+  --   keys = {
+  --     {
+  --       "<A-n>",
+  --       "<CMD>MoveLine(1)<CR>",
+  --       desc = "Aove",
+  --       mode = "n",
+  --     },
+  --     {
+  --       "<A-e>",
+  --       "<CMD>MoveLine(-1)<CR>",
+  --       desc = "Aove",
+  --       mode = "n",
+  --     },
+  --     {
+  --       "<A-i>",
+  --       "<CMD>MoveChar(1)<CR>",
+  --       desc = "Aove",
+  --       mode = "n",
+  --     },
+  --     {
+  --       "<A-h>",
+  --       "<CMD>MoveChar(-1)<CR>",
+  --       desc = "Aove",
+  --       mode = "n",
+  --     },
+  --     {
+  --       "<A-n>",
+  --       "<CMD>MoveBlock(1)<CR>",
+  --       desc = "Aove",
+  --       mode = "v",
+  --     },
+  --     {
+  --       "<A-e>",
+  --       "<CMD>MoveBlock(-1)<CR>",
+  --       desc = "Aove",
+  --       mode = "v",
+  --     },
+  --     {
+  --       "<A-i>",
+  --       "<CMD>MoveHBlock(1)<CR>",
+  --       desc = "Aove",
+  --       mode = "v",
+  --     },
+  --     {
+  --       "<A-h>",
+  --       "<CMD>MoveHBlock(-1)<CR>",
+  --       desc = "Aove",
+  --       mode = "v",
+  --     },
+  --   },
+  -- }, --}}}
 }

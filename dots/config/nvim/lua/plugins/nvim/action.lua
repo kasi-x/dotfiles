@@ -29,6 +29,71 @@ return {
   --}}}
   -- },
   {
+    "glidenote/memolist.vim",
+    init = function()
+      vim.g.memolist_memo_suffix = "md"
+    end,
+    keys = {
+      {
+        "Mn",
+        "<Cmd>MemoNew<CR>",
+        desc = "memo new",
+        mode = { "n" },
+      },
+      {
+        "MN",
+        "<Cmd>MemoList<CR>",
+        desc = "memo list",
+        mode = { "n" },
+      },
+    },
+  },
+  {
+    "kevinhwang91/nvim-hlslens",
+    dependencies = {
+      { "petertriho/nvim-scrollbar" },
+      { "haya14busa/vim-asterisk" },
+    },
+    keys = {
+      {
+        ",",
+        "<Cmd>lua require('hlslens').enable()<CR>/",
+        desc = "hlslens",
+        mode = { "n" },
+      },
+      {
+        "/",
+        "<Cmd>lua require('hlslens').enable()<CR>?",
+        desc = "hlslens",
+        mode = { "n" },
+      },
+      {
+        "k",
+        "<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').enable()<CR><Cmd>lua require('hlslens').start()<CR>zzzv",
+        desc = "search-next",
+        mode = { "n" },
+      },
+      {
+        "K",
+        '<Cmd>execute("normal! " . v:count1 . "N")<CR><Cmd>lua require("hlslens").enable()<CR><Cmd>lua require("hlslens").start()<CR>zzzv',
+        desc = "search-next",
+        mode = { "n" },
+      },
+      {
+        "*",
+        '<Cmd>lua require("hlslens").enable()<CR><Plug>(asterisk-z*)<Cmd>lua require("hlslens").start()<CR>',
+        desc = "asterisk",
+        mode = { "n", "x" },
+      },
+      {
+        "#",
+        '<Cmd>lua require("hlslens").enable()<CR><Plug>(asterisk-z#)<Cmd>lua require("hlslens").start()<CR>',
+        desc = "sharp",
+        mode = { "n", "x" },
+      },
+    },
+  },
+  {
     "cshuaimin/ssr.nvim", --{{{
     keys = {
       {
@@ -608,7 +673,6 @@ return {
       },
       "delphinus/telescope-memo.nvim",
       cmd = "Telescope memo",
-
       -- :Telescope memo live_grep
       -- telescope.builtin.live_grep on memo_dir.
       -- piersolenski/telescope-import.nvim,

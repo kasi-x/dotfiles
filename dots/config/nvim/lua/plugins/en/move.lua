@@ -284,9 +284,10 @@ return {
       { "ww", "<cmd>HopWord<cr>", desc = "Hop to word", mode = "n" },
       { "<leader>w", "<cmd>lua require'hop'.hint_patterns()<cr>", desc = "search last", mode = "n" },
       { "g,", "<cmd>HopChar1<cr>", desc = "Hop to single character", mode = "n" },
+      { "g.", "<cmd>HopChar2<cr>", desc = "Hop to two character", mode = "n" },
       {
         "<c-p>",
-        "<cmd>lua require'hop'.hint_words({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR })<CR>",
+        "<cmd>lua require'hop'.hint_words({hint_position = require'hop.hint'.HintPosition.END})<CR>",
         desc = "Hop to start of line",
         mode = { "n", "x", "o" },
       },
@@ -297,13 +298,13 @@ return {
         mode = { "n", "x", "o" },
       },
       {
-        "<C-u>",
+        "U",
         "<cmd>lua require'hop'.hint_words({ current_line_only = true })<cr>",
         desc = "Hop to word with offset at end",
         mode = { "n", "x", "o" },
       },
       {
-        "<C-y>",
+        "Y",
         "<cmd>lua require'hop'.hint_words({ current_line_only = true, hint_position = require'hop.hint'.HintPosition.END })<cr>",
         desc = "Hop to word with offset at end",
         mode = { "n", "x", "o" },

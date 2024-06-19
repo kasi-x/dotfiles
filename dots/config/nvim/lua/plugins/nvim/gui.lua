@@ -607,6 +607,7 @@ return {
           v = { "<cmd>Telescope yank_history<CR>", "Yank His" },
           i = { "<cmd>lua require('telescope').extensions.media_files.media_files()<cr>", "Media" },
           l = { "<cmd>Telescope resume<cr>", "Last Search" },
+          m = { "<cmd>Telescope memo list<cr>", "Memolist" },
           M = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
           r = { "<cmd>Telescope oldfiles<cr>", "Recent File" },
           R = { "<cmd>Telescope registers<cr>", "Registers" },
@@ -776,31 +777,31 @@ return {
       --  }}, { mode = "i", prefix = "<C-x>" })--}}}
     end,
   }, --}}}
-  {
-    "yuki-yano/highlight-undo.nvim", --{{{
-    dependencies = { "vim-denops/denops.vim" },
-    config = function()
-      require("highlight-undo").setup({
-        mappings = {
-          undo = "z",
-          redo = "Z",
-        },
-        enabled = {
-          added = true,
-          removed = true,
-        },
-        highlight = {
-          added = "DiffAdd",
-          removed = "DiffDelete",
-        },
-        threshold = {
-          line = 50,
-          char = 1500,
-        },
-        duration = 200,
-      })
-    end,
-  }, --}}}
+  -- {
+  --   "yuki-yano/highlight-undo.nvim", --{{{
+  --   dependencies = { "vim-denops/denops.vim" },
+  --   config = function()
+  --     require("highlight-undo").setup({
+  --       mappings = {
+  --         undo = "z",
+  --         redo = "Z",
+  --       },
+  --       enabled = {
+  --         added = true,
+  --         removed = true,
+  --       },
+  --       highlight = {
+  --         added = "DiffAdd",
+  --         removed = "DiffDelete",
+  --       },
+  --       threshold = {
+  --         line = 50,
+  --         char = 1500,
+  --       },
+  --       duration = 200,
+  --     })
+  --   end,
+  -- }, --}}}
   {
     "shellRaining/hlchunk.nvim", --{{{
     event = { "UIEnter" },

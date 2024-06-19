@@ -284,4 +284,15 @@ return {
       })
     end,
   },
+  {
+    "stevearc/dressing.nvim",
+    event = "BufEnter *.*",
+    config = function()
+      require("dressing").setup()
+    end,
+  },
+  {
+    "folke/lsp-colors.nvim",
+    event = "BufEnter *.*",
+  },
 }

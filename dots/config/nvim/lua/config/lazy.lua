@@ -47,7 +47,7 @@ local opts = {
 
 local plugins = {
   { import = "plugins.common" },
-  -- { import = is_large_file and "plugins.large" or (in_vscode and "plugins.vscode" or "plugins.nvim") },
+  { import = is_large_file and "plugins.large" or (in_vscode and "plugins.vscode" or "plugins.nvim") },
   { import = in_vscode and "plugins.vscode" or "plugins.nvim" },
   { import = is_jp_file and "plugins.jp" or "plugins.en" },
   { import = (in_vscode and is_jp_file) and "plugins.vscode_jp" or nil },

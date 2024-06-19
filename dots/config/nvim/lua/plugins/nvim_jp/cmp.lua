@@ -1,8 +1,9 @@
 return {
   {
-    "hrsh7th/nvim-cmp",
+    "hrsh7th/nvim-cmp", --{{{
     -- event = "VimEnter",
-    event = "InsertEnter",
+    lazy = false,
+    -- event = "InsertEnter",
     config = function()
       require("plugins.configs.cmp_jp")
     end,
@@ -15,27 +16,9 @@ return {
       { "hrsh7th/cmp-nvim-lsp-document-symbol" },
       { "hrsh7th/cmp-buffer" },
       { "hrsh7th/cmp-path" },
-      -- { "hrsh7th/cmp-nvim-lua" },
       { "hrsh7th/cmp-emoji" },
-      -- { "hrsh7th/cmp-calc" },
-      -- { "f3fora/cmp-spell" },
-      -- { "yutkat/cmp-mocword" },
-      -- { "ray-x/cmp-treesitter" },
-      -- { "lukas-reineke/cmp-rg" },
-      -- { "lukas-reineke/cmp-under-comparator" },
-      -- { "saadparwaiz1/cmp_luasnip" },
+      { "f3fora/cmp-spell" },
       { "onsails/lspkind-nvim" },
-      -- { "hrsh7th/cmp-cmdline" },
-      -- { "tzachar/cmp-tabnine", build = "./install.sh" },
-      -- {
-      --   "Exafunction/codeium.nvim",
-      --   build = ":Codeium Auth",
-      --   cmd = "Codeium",
-      --   -- opts = true,
-      --   config = function()
-      --     require("codeium").setup({})
-      --   end,
-      -- },
       {
         "L3MON4D3/LuaSnip",
         build = vim.fn.has("win32") ~= 0 and "make install_jsregexp" or nil,
@@ -60,7 +43,6 @@ return {
       },
       {
         "zbirenbaum/copilot.lua",
-        -- event = "InsertEnter",
         cmd = "Copilot",
         keys = {
           {
@@ -117,84 +99,110 @@ return {
         end,
       },
     },
-  },
+  }, --}}}
   {
-    "vim-skk/skkeleton",
-    -- event = "InsertEnter", --,"CursorHold"],
+    "vim-denops/denops.vim", --{{{
+    event = "VeryLazy",
     dependencies = {
-      {
-        "vim-denops/denops.vim",
-        -- init = function()
-        --   vim.fn["denops#plugin#load"]("skkeleton")
-        -- end,
-      },
-
+      "vim-denops/denops-shared-server.vim",
+    },
+    -- init = function()
+    -- vim.g.denops_server_addr = "127.0.0.1:32123"
+    -- vim.g["denops#debug"] = 1
+    -- setting DenopsInstallSharedServer command
+    -- vim.api.nvim_create_user_command("DenopsInstallSharedServer", "call denops_shared_server#install()", {})
+    -- end,
+  }, --}}}
+  {
+    "vim-skk/skkeleton", --{{{
+    event = { "VeryLazy", "InsertEnter", "CmdlineEnter", "CmdwinEnter" },
+    commit = "60866fe",
+    dependencies = {
+      "vim-denops/denops.vim",
+      "yuki-yano/denops-lazy.nvim",
       "delphinus/skkeleton_indicator.nvim",
     },
+    keys = {
+      {
+        "<C-j>",
+        "<Plug>(skkeleton-toggle)",
+        desc = "skkeleton-toggle",
+        mode = { "i", "c" },
+      },
+    },
+    init = function()
+      vim.api.nvim_create_autocmd({ "User" }, {
+        pattern = { "skkeleton-initialize-pre" },
+        callback = function()
+          vim.fn["skkeleton#config"]({
+            eggLikeNewline = true,
+            immediatelyCancel = true,
+            keepMode = true,
+            keepState = true,
+            sources = { "skk_server" },
+            showCandidatesCount = 3,
+            registerConvertResult = true,
+            selectCandidateKeys = "hneirst",
+            userDictionary = "/home/user/.config/ibus-skk/user.dict",
+          })
+          vim.fn["skkeleton#register_kanatable"]("rom", {
+            ["("] = { "（", "" },
+            [")"] = { "）", "" },
+            ["z "] = { "　", "" },
+            ["z1"] = { "①", "" },
+            ["z2"] = { "②", "" },
+            ["z3"] = { "③", "" },
+            ["z4"] = { "④", "" },
+            ["z5"] = { "⑤", "" },
+            ["z6"] = { "⑥", "" },
+            ["z7"] = { "⑦", "" },
+            ["z8"] = { "⑧", "" },
+            ["z9"] = { "⑨", "" },
+            -- ["ne"] = { "escape" },
+            ["z,"] = { "，" },
+            ["z."] = { "．" },
+            -- 。
+            ["<s-q>"] = "henkanPoint",
+          })
+        end,
+      })
+      vim.api.nvim_create_autocmd({ "User" }, {
+        pattern = { "DenopsPluginPost:skkeleton" },
+        callback = function()
+          vim.fn["skkeleton#initialize"]()
+        end,
+      })
+    end,
     config = function()
-      require("skkeleton_indicator").setup({})
-      -- vim.cmd([[ call skkeleton#config({
-      --   \ 'eggLikeNewline': v:true,
-      --   \ 'immediatelyCancel' : v:true,
-      --   \ 'keepMode' : v:true,
-      --   \ 'keepState' : v:true,
-      --   \ 'registerConvertResult' : v:true,
-      --   \ 'selectCandidateKeys' :"hneirstdwfpluyj",
-      --   \ 'showCandidatesCount' : 4,
-      --   \ 'useSkkServer': v:true,
-      --   \ })]])
-      --
-      -- " \ 'userJisyo': "/home/user/.config/ibus-skk/user.dict",
-      -- vim.fn["skkeleton#register_kanatable"]("rom", {
+      require("denops-lazy").load("skkeleton", { wait_load = false })
+      -- require("skkeleton_indicator").setup({
+      -- fadeOutMs = 5,
+      -- })
+      -- require("skkeleton").setup({
+      --   eggLikeNewline = true,
+      --   immediatelyCancel = true,
+      --   keepMode = true,
+      --   keepState = true,
+      --   sources = { "skk_server" },
+      --   showCandidatesCount = 3,
+      --   registerConvertResult = true,
+      --   selectCandidateKeys = "hneirst",
+      --   userDictionary = "/home/user/.config/ibus-skk/user.dict",
+      -- })
+      -- require("skkeleton#register_kanatable")("rom", {
       --   ["("] = { "（", "" },
       --   [")"] = { "）", "" },
       --   ["z "] = { "　", "" },
       --   ["z1"] = { "①", "" },
       --   ["z2"] = { "②", "" },
       --   ["z3"] = { "③", "" },
-      --   ["z4"] = { "④", "" },
-      --   ["z5"] = { "⑤", "" },
-      --   ["z6"] = { "⑥", "" },
-      --   ["z7"] = { "⑦", "" },
-      --   ["z8"] = { "⑧", "" },
-      --   ["z9"] = { "⑨", "" },
-      --   ["<s-q>"] = "henkanPoint",
+      --   border = "rounded",
+      --   eijiHlName = "LineNr",
+      --   hiraHlName = "String",
+      --   kataHlName = "Todo",
+      --   hankataHlName = "Special",
+      --   zenkakuHlName = "LineNr",
       -- })
-
-      vim.fn["skkeleton#config"]({
-        -- globalDictionaries = {
-        --   "/home/user/.skk/SKK-JISYO.L",
-        -- },
-        eggLikeNewline = true,
-        -- globalJisyo = "/home/user/.skk/SKK-JISYO.L",
-        immediatelyCancel = true,
-        keepMode = true,
-        keepState = true,
-        sources = { "skk_server" },
-        registerConvertResult = true,
-        selectCandidateKeys = "hneirstdwfpluyj",
-        showCandidatesCount = 4,
-        -- useSkkServer = true,
-        -- sources = ["skk_server", "skk_dicsitory"]
-        userDictionary = "/home/user/.config/ibus-skk/user.dict",
-      })
     end,
-    keys = {
-      {
-        "<C-j>",
-        "<Plug>(skkeleton-toggle)",
-        desc = "skkeleton-toggle",
-        mode = { "i", "c", "t" },
-      },
-    },
-  },
-  {
-    "delphinus/skkeleton_indicator.nvim",
-    opts = { alwaysShown = false, fadeOutMs = 0 },
-  },
-  -- {
-  --   "vim-denops/denops.vim",
-  --   lazy = false,
-  --   -- event = "VimEnter",
-  -- },
+  }, --}}}
 }

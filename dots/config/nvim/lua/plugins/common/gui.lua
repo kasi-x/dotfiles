@@ -52,21 +52,21 @@ return {
     -- },
   }, --}}}
   {
-    'shadmansaleh/IRC.nvim',
-    rocks = 'openssl',
+    "shadmansaleh/IRC.nvim",
+    rocks = "openssl",
     cmd = "IRCConnect",
     opts = {
       servers = {
         libera = {
-          nick = 'kashimiya',
-          username = 'kashimiya',
-          server = 'irc.libera.chat',
+          nick = "kashimiya",
+          username = "kashimiya",
+          server = "irc.libera.chat",
           port = 6667,
           use_ssl = true,
         },
       },
       statusline = true,
-    }
+    },
   },
   {
     "windwp/nvim-autopairs", --{{{,
@@ -86,10 +86,10 @@ return {
         highlight_grey = "Comment",
       },
     },
-  },                             --}}}
+  }, --}}}
   {
     "Wansmer/symbol-usage.nvim", --{{{
-    event = "BufReadPre",        -- need run before LspAttach if you use nvim 0.9. On 0.10 use 'LspAttach'
+    event = "BufReadPre", -- need run before LspAttach if you use nvim 0.9. On 0.10 use 'LspAttach'
     config = function()
       local function h(name)
         return vim.api.nvim_get_hl(0, { name = name })
@@ -97,14 +97,10 @@ return {
 
       -- hl-groups can have any name
       vim.api.nvim_set_hl(0, "SymbolUsageRounding", { fg = h("CursorLine").bg, italic = true })
-      vim.api.nvim_set_hl(0, "SymbolUsageContent",
-        { bg = h("CursorLine").bg, fg = h("Comment").fg, italic = true })
-      vim.api.nvim_set_hl(0, "SymbolUsageRef",
-        { fg = h("Function").fg, bg = h("CursorLine").bg, italic = true })
-      vim.api.nvim_set_hl(0, "SymbolUsageDef",
-        { fg = h("Type").fg, bg = h("CursorLine").bg, italic = true })
-      vim.api.nvim_set_hl(0, "SymbolUsageImpl",
-        { fg = h("@keyword").fg, bg = h("CursorLine").bg, italic = true })
+      vim.api.nvim_set_hl(0, "SymbolUsageContent", { bg = h("CursorLine").bg, fg = h("Comment").fg, italic = true })
+      vim.api.nvim_set_hl(0, "SymbolUsageRef", { fg = h("Function").fg, bg = h("CursorLine").bg, italic = true })
+      vim.api.nvim_set_hl(0, "SymbolUsageDef", { fg = h("Type").fg, bg = h("CursorLine").bg, italic = true })
+      vim.api.nvim_set_hl(0, "SymbolUsageImpl", { fg = h("@keyword").fg, bg = h("CursorLine").bg, italic = true })
 
       local function text_format(symbol)
         local res = {}
@@ -149,7 +145,7 @@ return {
         ---@type 'above'|'end_of_line'|'textwidth' above by default
         vt_position = "end_of_line",
         ---@type 'start'|'end' At which position of `symbol.selectionRange` the request to the lsp server should start. Default is `end` (try changing it to `start` if the symbol counting is not correct).
-        symbol_request_pos = "start", -- Recommended redifine only in `filetypes` override table
+        symbol_request_pos = "start", -- Recommended redefine only in `filetypes` override table
       })
     end,
   }, --}}}
