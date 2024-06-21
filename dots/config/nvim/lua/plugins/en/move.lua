@@ -271,8 +271,7 @@ return {
   -- },--}}}
   {
     "phaazon/hop.nvim", --{{{
-    event = "VeryLazy",
-    branch = "v2",
+    -- event = "VeryLazy",
     config = function()
       require("hop").setup({
         keys = "heniarstd,./muyl;j[xcvzbkqwfpg",
@@ -281,7 +280,7 @@ return {
     end,
     keys = {
       --{{{
-      { "ww", "<cmd>HopWord<cr>", desc = "Hop to word", mode = "n" },
+      -- { "ww", "<cmd>HopWord<cr>", desc = "Hop to word", mode = "n" },
       { "<leader>w", "<cmd>lua require'hop'.hint_patterns()<cr>", desc = "search last", mode = "n" },
       { "g,", "<cmd>HopChar1<cr>", desc = "Hop to single character", mode = "n" },
       { "g.", "<cmd>HopChar2<cr>", desc = "Hop to two character", mode = "n" },
@@ -293,7 +292,7 @@ return {
       },
       {
         "<c-f>",
-        "<cmd>lua require'hop'.hint_words({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR })<CR>",
+        "<cmd>lua require'hop'.hint_words()<CR>",
         desc = "Hop to start of line",
         mode = { "n", "x", "o" },
       },
@@ -322,7 +321,7 @@ return {
         mode = { "n", "x", "o" },
       },
       {
-        "w,",
+        "ww",
         "<cmd>HopPattern<cr>",
         desc = "Hop to pattern",
         mode = "n",
@@ -365,15 +364,6 @@ return {
       },
     }, --}}}
   }, --}}}
-  -- {
-  --   "anuvyklack/pretty-fold.nvim", --{{{
-  --   event = { "BufRead", "BufNewFile" },
-  --   config = function()
-  --     require("pretty-fold").setup({
-  --       global = { "{{{", "}}}" },
-  --     })
-  --   end,
-  -- }, --}}}
   {
     "chrisgrieser/nvim-spider", --{{{
     event = { "BufRead", "BufNewFile" },

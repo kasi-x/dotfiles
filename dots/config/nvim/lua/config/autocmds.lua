@@ -16,6 +16,25 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   end,
 })
 
+-- show cursor line only in active window
+vim.api.nvim_create_autocmd({ "InsertLeave", "WinEnter" }, {
+  callback = function()
+    if vim.w.auto_cursorline then
+      vim.wo.cursorline = true
+      vim.w.auto_cursorline = nil
+    end
+  end,
+})
+
+vim.api.nvim_create_autocmd({ "InsertEnter", "WinLeave" }, {
+  callback = function()
+    if vim.wo.cursorline then
+      vim.w.auto_cursorline = true
+      vim.wo.cursorline = false
+    end
+  end,
+})
+
 vim.api.nvim_create_autocmd("BufWritePre", {
   desc = "Add timestamp to backup extension",
   pattern = "*",
@@ -28,12 +47,10 @@ vim.api.nvim_create_autocmd("FileType", {
   group = vim.api.nvim_create_augroup("QuickFixMappings", { clear = true }),
   pattern = "qf",
   callback = function()
-    vim.api.nvim_buf_set_keymap(0, "n", "<Enter>", "<CR>:cclose<CR>",
-      { noremap = true, silent = true })
+    vim.api.nvim_buf_set_keymap(0, "n", "<Enter>", "<CR>:cclose<CR>", { noremap = true, silent = true })
     vim.api.nvim_buf_set_keymap(0, "n", "q", ":cclose<CR>", { noremap = true, silent = true })
   end,
 })
-
 
 -- function _G.show_pydoc()
 --   local word = vim.fn.expand("<cword>")

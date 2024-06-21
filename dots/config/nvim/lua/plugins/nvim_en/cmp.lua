@@ -1,7 +1,7 @@
 return {
   {
     "hrsh7th/nvim-cmp",
-    event = "VimEnter",
+    event = "InsertEnter",
     config = function()
       require("plugins.configs.cmp")
     end,

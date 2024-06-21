@@ -132,6 +132,8 @@ return {
     event = "VeryLazy",
     dependencies = {
       "nvim-tree/nvim-web-devicons",
+      "nvim-telescope/telescope.nvim",
+      "folke/trouble.nvim",
       -- "chrisgrieser/nvim-dr-lsp",
     },
     config = function()
@@ -186,6 +188,7 @@ return {
   }, --}}}
   {
     "anuvyklack/windows.nvim", --{{{
+    lazy = "VeryLazy",
     requires = {
       "anuvyklack/middleclass",
       "anuvyklack/animation.nvim",
@@ -588,6 +591,16 @@ return {
       --     name = "help",
       --   },
       -- }, { mode = { "n", "x", "o" } })
+      --
+      wk.register({
+        ["<leader>q"] = {
+          name = "options",
+          l = { "<CMD>set cursorline<CR>", "line" },
+          -- k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
+          -- C = { "<cmd>Telescope commands<cr>", "Commands" },
+        },
+      }, { mode = { "n" } }) --}}}
+
       -- {{{ Telescope
       wk.register({
         ["j"] = {

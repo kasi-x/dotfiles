@@ -24,7 +24,7 @@ return {
         excluded_filetypes = { "nerdtree" },
         current_only = true,
         base = "buffer",
-        column = 135,
+        -- column = 135,
         -- column = 'colorcolumn',
         scrollview_base = "right",
         scrollview_mode = "auto",

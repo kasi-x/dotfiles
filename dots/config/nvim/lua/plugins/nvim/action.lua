@@ -130,7 +130,7 @@ return {
     "folke/zen-mode.nvim", --{{{
     cmd = { "ZenMode" },
     keys = {
-      { "<A-,>", "<CMD>ZenMode<CR>", desc = "zen-mode", mode = "n" },
+      { "<leader>q,", "<CMD>ZenMode<CR>", desc = "zen-mode", mode = "n" },
     },
     config = function()
       require("zen-mode").setup({
@@ -188,20 +188,44 @@ return {
         config = function()
           require("twilight").setup({})
         end,
-        -- keys = {
-        --   { "<C-s>", "<CMD>Twilight<CR>", desc = "zen", mode = { "n" } },
-        -- },
+        keys = {
+          { "<leader>qt", "<CMD>Twilight<CR>", desc = "twilight syntax", mode = { "n" } },
+        },
       },
     },
   }, --}}}
   {
+    "2kabhishek/nerdy.nvim",
+    dependencies = {
+      "stevearc/dressing.nvim",
+      "nvim-telescope/telescope.nvim",
+    },
+    cmd = "Nerdy",
+    keys = {
+      { "<leader>q-", "<CMD>Telescope nerdy<CR>", desc = "find playphs", mode = "n" },
+    },
+  },
+  {
     "folke/todo-comments.nvim", --{{{
-    event = "VimEnter",
-    dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope.nvim" },
+    -- event = "VimEnter",
+    -- lazy = false,
+    dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope.nvim", "folke/trouble.nvim" },
     cmd = { "TodoTrouble", "TodoTelesocpe" },
     keys = {
       { "<C-d>t", "<CMD>TodoTrouble<CR>", desc = "trouble list", mode = "n" },
       { "<C-d>T", "<CMD>TodoTelescope<CR>", desc = "trouble scope", mode = "n" },
+      -- {
+      --   "<C-d>d",
+      --   "<CMD>TodoTelesocpe keywords=TODO,FIX<CR>",
+      --   desc = "todo list",
+      --   mode = "n",
+      -- },
+      -- {
+      --   "<C-d>D",
+      --   "<CMD>TodoTelesocpe<CR>",
+      --   desc = "todo telescope",
+      --   mode = { "n" },
+      -- },
     },
     opts = {
       keywords = {
@@ -226,7 +250,6 @@ return {
         LEGACY = { icon = "󱦟", alt = { "DEPRECATE", "MAINTAIN", "DEBT", "UNKNOWN", "PHASE-OUT" } },
       },
     },
-    config = true,
   }, --}}}
   {
     "chikko80/error-lens.nvim",
@@ -240,48 +263,80 @@ return {
       "nvim-tree/nvim-web-devicons",
       "nvim-lua/plenary.nvim",
     },
-    cmd = { "TroubleToggle" },
+    cmd = { "Trouble" },
     keys = {
       {
         "<C-d>n",
-        "<CMD>TroubleToggle workspace_diagnostics<CR>",
+        "<CMD>Trouble diagnostics toggle  filter.buf=0<CR>",
+        desc = "workspace trouble_toggle",
+        mode = { "n" },
+      },
+      {
+        "<C-d>w",
+        "<CMD>Trouble diagnostics  filter.severity=vim.diagnostic.severity.ERROR<CR>",
+        desc = "Errors",
+        mode = { "n" },
+      },
+      {
+        "<C-d>N",
+        "<CMD>Trouble diagnostics toggle<CR>",
         desc = "workspace trouble_toggle",
         mode = { "n" },
       },
       {
         "<C-d>f",
-        "<CMD>TroubleToggle quickfix<CR>",
+        "<CMD>Trouble qflist toggle<CR>",
         desc = "quickfix",
         mode = { "n" },
       },
       {
-        "<C-d>e",
-        "<cmd>TroubleToggle keywords=TODO,FIXME<CR>",
+        "<C-d>F",
+        "<CMD>Trouble qflist toggle filter.buf=0<CR>",
+        desc = "quickfix",
+        mode = { "n" },
+      },
+      {
+        "<C-d>E",
+        "<cmd>Trouble todo toggle filter.buf=0<CR>",
         desc = "todo list",
         mode = { "n" },
       },
-      {
-        "<C-d>y",
-        "<cmd>TroubleToggle document_diagnostics<cr>",
-        desc = "document_diagnostics",
-        mode = { "n" },
-      },
-      {
-        "<C-d>i",
-        "<cmd>TroubleToggle snipfix<CR>",
-        desc = "Show error by Lsp",
-        mode = { "n" },
-      },
+
+      -- {
+      --   "<C-d>Y",
+      --   "<cmd>Trouble document_diagnostics toggle<cr>",
+      --   desc = "document_diagnostics",
+      --   mode = { "n" },
+      -- },
+
+      -- {
+      --   "<C-d>y",
+      --   "<cmd>Trouble document_diagnostics toggle<cr>",
+      --   desc = "document_diagnostics",
+      --   mode = { "n" },
+      -- },
+      -- {
+      --   "<C-d>i",
+      --   "<cmd>Trouble snipfix toggle<CR>",
+      --   desc = "Show error by Lsp",
+      --   mode = { "n" },
+      -- },
       {
         "<C-d>h",
-        "<cmd>TroubleToggle  loclist<CR>",
+        "<cmd>Trouble loclist toggle filter.buf=0<CR>",
         desc = "loclist",
         mode = { "n" },
       },
       {
+        "<C-d>s",
+        "<cmd>Trouble symbols toggle focus=false<cr>",
+        desc = "Symbols (Trouble)",
+        mode = { "n" },
+      },
+      {
         "<C-d>r",
-        "<cmd>TroubleToggle lsp_references<CR>",
-        desc = "Show error by Lsp",
+        "<cmd>Trouble lsp toggle focus=false win.position=right<CR>",
+        desc = "LSP Def/Ref",
         mode = { "n" },
       },
     },
@@ -310,20 +365,20 @@ return {
         auto_close = false,
         use_diagnostic_signs = true,
       })
+
+      local open_with_trouble = require("trouble.sources.telescope").open
+      -- local trouble = require("trouble.soursces.telescope")
+      local telescope = require("telescope")
+
+      telescope.setup({
+        defaults = {
+          mappings = {
+            i = { ["<c-d>"] = open_with_trouble },
+            n = { ["<c-d>"] = open_with_trouble },
+          },
+        },
+      })
     end, -- }}}
-    -- local actions = require("telescope.actions")
-    -- local trouble = require("trouble.providers.telescope")
-    --
-    -- local telescope = require("telescope")
-    --
-    -- telescope.setup {
-    --   defaults = {
-    --     mappings = {
-    --       i = { ["<c-t>"] = trouble.open_with_trouble },
-    --       n = { ["<c-t>"] = trouble.open_with_trouble },
-    --     },
-    --   },
-    -- }
   }, --}}}
   {
     "dstein64/vim-startuptime", --{{{
@@ -399,55 +454,55 @@ return {
   --     end,
   --   },
   -- },
-  {
-    "lewis6991/gitsigns.nvim", --{{{
-    event = "VeryLazy",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-    },
-    opts = {
-      signs = {
-        add = { hl = "GitSignsAdd", text = "▎", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
-        change = { hl = "GitSignsChange", text = "▎", numhl = "GitSignsChangeNr", linehl = "GitSignsChangeLn" },
-        delete = { hl = "GitSignsDelete", text = "契", numhl = "GitSignsDeleteNr", linehl = "GitSignsDeleteLn" },
-        topdelete = { hl = "GitSignsDelete", text = "契", numhl = "GitSignsDeleteNr", linehl = "GitSignsDeleteLn" },
-        changedelete = { hl = "GitSignsChange", text = "▎", numhl = "GitSignsChangeNr", linehl = "GitSignsChangeLn" },
-      },
-      signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
-      numhl = false, -- Toggle with `:Gitsigns toggle_numhl`
-      linehl = false, -- Toggle with `:Gitsigns toggle_linehl`
-      word_diff = false, -- Toggle with `:Gitsigns toggle_word_diff`
-      watch_gitdir = {
-        interval = 1000,
-        follow_files = true,
-      },
-      attach_to_untracked = true,
-      current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
-      current_line_blame_opts = {
-        virt_text = true,
-        virt_text_pos = "right_align", -- 'eol' | 'overlay' | 'right_align'
-        delay = 100,
-        ignore_whitespace = false,
-      },
-      current_line_blame_formatter_opts = {
-        relative_time = false,
-      },
-      sign_priority = 6,
-      update_debounce = 100,
-      status_formatter = nil, -- Use default
-      max_file_length = 40000,
-      preview_config = {
-        border = "rounded",
-        style = "minimal",
-        relative = "cursor",
-        row = 0,
-        col = 1,
-      },
-      yadm = {
-        enable = false,
-      },
-    },
-  }, --}}}
+  -- {
+  --   "lewis6991/gitsigns.nvim", --{{{
+  --   event = "VeryLazy",
+  --   dependencies = {
+  --     "nvim-lua/plenary.nvim",
+  --   },
+  --   opts = {
+  --     signs = {
+  --       add = { hl = "GitSignsAdd", text = "▎", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
+  --       change = { hl = "GitSignsChange", text = "▎", numhl = "GitSignsChangeNr", linehl = "GitSignsChangeLn" },
+  --       delete = { hl = "GitSignsDelete", text = "契", numhl = "GitSignsDeleteNr", linehl = "GitSignsDeleteLn" },
+  --       topdelete = { hl = "GitSignsDelete", text = "契", numhl = "GitSignsDeleteNr", linehl = "GitSignsDeleteLn" },
+  --       changedelete = { hl = "GitSignsChange", text = "▎", numhl = "GitSignsChangeNr", linehl = "GitSignsChangeLn" },
+  --     },
+  --     signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
+  --     numhl = false, -- Toggle with `:Gitsigns toggle_numhl`
+  --     linehl = false, -- Toggle with `:Gitsigns toggle_linehl`
+  --     word_diff = false, -- Toggle with `:Gitsigns toggle_word_diff`
+  --     watch_gitdir = {
+  --       interval = 1000,
+  --       follow_files = true,
+  --     },
+  --     attach_to_untracked = true,
+  --     current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
+  --     current_line_blame_opts = {
+  --       virt_text = true,
+  --       virt_text_pos = "right_align", -- 'eol' | 'overlay' | 'right_align'
+  --       delay = 100,
+  --       ignore_whitespace = false,
+  --     },
+  --     current_line_blame_formatter_opts = {
+  --       relative_time = false,
+  --     },
+  --     sign_priority = 6,
+  --     update_debounce = 100,
+  --     status_formatter = nil, -- Use default
+  --     max_file_length = 40000,
+  --     preview_config = {
+  --       border = "rounded",
+  --       style = "minimal",
+  --       relative = "cursor",
+  --       row = 0,
+  --       col = 1,
+  --     },
+  --     yadm = {
+  --       enable = false,
+  --     },
+  --   },
+  -- }, --}}}
   {
     "mrjones2014/smart-splits.nvim", --{{{
     event = "VeryLazy",

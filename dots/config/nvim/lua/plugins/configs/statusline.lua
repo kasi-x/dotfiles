@@ -18,8 +18,8 @@ local function ime_state()
 
     -- We can use `xkbswitch -g` on the command line to get current mode.
     -- mode for macOS builtin pinyin IME: com.apple.inputmethod.SCIM.ITABC
-    -- mode for Rime: im.rime.inputmethod.Squirrel.Rime
-    local res = fn.match(layout, [[\v(Squirrel\.Rime|SCIM.ITABC)]])
+    -- mode for Rhyme: im.rhyme.inputmethod.Squirrel.Rhyme
+    local res = fn.match(layout, [[\v(Squirrel\.Rhyme|SCIM.ITABC)]])
     if res ~= -1 then
       return "[CN]"
     end
@@ -82,6 +82,21 @@ local function mixed_indent()
   else
     return "MI:" .. space_indent
   end
+end
+
+local function trouble_conf()
+  local trouble = require("trouble")
+  local symbols = trouble.statusline({
+    mode = "lsp_document_symbols",
+    groups = {},
+    title = false,
+    filter = { range = true },
+    format = "{kind_icon}{symbol.name:Normal}",
+    -- The following line is needed to fix the background color
+    -- Set it to the lualine section you want to use
+    hl_group = "lualine_c_normal",
+  })
+  return symbols.get, symbols.has
 end
 
 local diff = function()
@@ -162,6 +177,10 @@ require("lualine").setup({
         sources = { "nvim_diagnostic" },
         symbols = { error = "🆇 ", warn = "⚠️ ", info = "ℹ️ ", hint = " " },
       },
+      --{
+      --  trouble_conf,
+      --  color = { fg = "black", bg = "#f46868" },
+      -- },
     },
     lualine_x = {
       "encoding",
