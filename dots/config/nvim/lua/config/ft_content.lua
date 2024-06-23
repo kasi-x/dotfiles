@@ -134,41 +134,7 @@ ftplugin.extend_all({
       keywordprg = ":Pydoc",
     },
     callback = function(bufnr)
-      -- if vim.fn.executable("autoimport") == 1 then
-      --   vim.keymap.set("n", "<leader>o", function()
-      --     vim.cmd.write()
-      --     vim.cmd("silent !autoimport " .. vim.api.nvim_buf_get_name(0))
-      --     vim.cmd.edit()
-      --     vim.lsp.buf.formatting({})
-      --   end, { buffer = bufnr })
-      -- end
-      --       vim.keymap.set(
-      --         "n",
-      --         "<leader>s",
-      --         function() run_file({ "python", vim.api.nvim_buf_get_name(0) }) end,
-      --
-      -- -- カーソル位置の単語をPydocコマンドに送るキー設定
-      --         { buffer = bufnr }
-      --
-      --       )
-      -- vim.api.nvim_set_keymap('n', 'B', [[:let @/="\<".expand("<cword>")."\>"<CR>:Pydoc <C-r>=expand("<cword>")<CR><CR>]], { noremap = true, silent = true }
-      -- vim.keymap.set(
-      --   "n",
-      --   "B",
-      --   [[:<C-u>let @/='\<'.expand('<cword>').'\>'<CR>:<C-r>=expand('<cword>')<CR>]],
-      --   { noremap = true, silent = true, expr=true },
-      -- )
-
-      -- `iskeyword` にドットを追加
       vim.opt.iskeyword:append(".")
-
-      -- カーソル位置の単語をPydocコマンドに送るキー設定
-      vim.api.nvim_set_keymap(
-        "n",
-        "B",
-        [[:execute 'Pydoc ' . expand('<cword>')<CR>]],
-        { noremap = true, silent = true }
-      )
     end,
   },
   qf = {
@@ -186,8 +152,8 @@ ftplugin.extend_all({
   },
   sh = {
     callback = function(bufnr)
-      vim.keymap.set("n", "<leader>s", function()
-        run_file({ "bash", vim.api.nvim_buf_get_name(0) })
+      vim.keymap.set("n", "<leader>ss", function()
+        run_file({ "bash_man", vim.api.nvim_buf_get_name(0) })
       end, { buffer = bufnr })
     end,
   },

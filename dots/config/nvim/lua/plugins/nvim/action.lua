@@ -1,5 +1,5 @@
 return {
-  -- https://github.com/benlubas/molten-nvim?tab=readme-ov-file
+  -- https://github.com/benlubas/molten-nvim?tab=readme-ov-Whichkey nfile
   -- https://github.com/ray-x/navigator.lua?tab=readme-ov-file
   --   {'kevinhwang91/nvim-hlslens',
   --   keys = {
@@ -454,55 +454,103 @@ return {
   --     end,
   --   },
   -- },
+  {
+    "lewis6991/gitsigns.nvim", --{{{
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+    keys = {
+      {
+        "<leader>u",
+        function()
+          require("gitsigns").prev_hunk()
+        end,
+        desc = "git move prev",
+        mode = { "n", "x" },
+      },
+      {
+        "<leader>y",
+        function()
+          require("gitsigns").next_hunk()
+        end,
+        desc = "git move next",
+        mode = { "n", "x" },
+      },
+      {
+        "<leader>qg",
+        function()
+          require("gitsigns").stage_hunk()
+        end,
+        desc = "git stage",
+        mode = { "n" },
+      },
+      {
+        "<leader>qs",
+        function()
+          require("gitsigns").stage_hunk()
+        end,
+        desc = "git stage",
+        mode = { "n" },
+      },
+
+      {
+        "<leader>gS",
+        function()
+          require("gitsigns").stage_buffer()
+        end,
+        desc = "git buffer",
+        mode = { "n" },
+      },
+      {
+        "<leader>qb",
+        function()
+          require("gitsigns").toggle_current_line_blame()
+        end,
+        desc = "line blame",
+        mode = { "n" },
+      },
+      {
+        "<leader>qB",
+        function()
+          require("gitsigns").blame_line({ full = true })
+        end,
+        desc = "blame full",
+        mode = { "n" },
+      },
+
+      -- map('n', '<leader>hb', function() gitsigns.blame_line{full=true} end)
+      -- map('n', '<leader>tb', gitsigns.toggle_current_line_blame)
+      -- map({ "n", "v" }, "<leader>ghs", ":Gitsigns stage_hunk<CR>", "Stage Hunk")
+      -- map({ "n", "v" }, "<leader>ghr", ":Gitsigns reset_hunk<CR>", "Reset Hunk")
+      -- map('v', '<leader>hs', function() gitsigns.stage_hunk {vim.fn.line('.'), vim.fn.line('v')} end)
+      -- map('v', '<leader>hr', function() gitsigns.reset_hunk {vim.fn.line('.'), vim.fn.line('v')} end)
+      -- map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
+      {
+        "<leader>gd",
+        function()
+          require("gitsigns").diffthis()
+        end,
+        desc = "git buffer",
+        mode = { "n" },
+      },
+      -- map('n', '<leader>tb', gitsigns.toggle_current_line_blame)
+      -- map('n', '<leader>hd', gitsigns.diffthis)
+    },
+    opts = {
+      signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
+      numhl = false, -- Toggle with `:Gitsigns toggle_numhl`
+      linehl = true, -- Toggle with `:Gitsigns toggle_linehl`
+      word_diff = false, -- Toggle with `:Gitsigns toggle_word_diff`
+    },
+  }, --}}}
   -- {
-  --   "lewis6991/gitsigns.nvim", --{{{
-  --   event = "VeryLazy",
-  --   dependencies = {
-  --     "nvim-lua/plenary.nvim",
-  --   },
-  --   opts = {
-  --     signs = {
-  --       add = { hl = "GitSignsAdd", text = "▎", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
-  --       change = { hl = "GitSignsChange", text = "▎", numhl = "GitSignsChangeNr", linehl = "GitSignsChangeLn" },
-  --       delete = { hl = "GitSignsDelete", text = "契", numhl = "GitSignsDeleteNr", linehl = "GitSignsDeleteLn" },
-  --       topdelete = { hl = "GitSignsDelete", text = "契", numhl = "GitSignsDeleteNr", linehl = "GitSignsDeleteLn" },
-  --       changedelete = { hl = "GitSignsChange", text = "▎", numhl = "GitSignsChangeNr", linehl = "GitSignsChangeLn" },
-  --     },
-  --     signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
-  --     numhl = false, -- Toggle with `:Gitsigns toggle_numhl`
-  --     linehl = false, -- Toggle with `:Gitsigns toggle_linehl`
-  --     word_diff = false, -- Toggle with `:Gitsigns toggle_word_diff`
-  --     watch_gitdir = {
-  --       interval = 1000,
-  --       follow_files = true,
-  --     },
-  --     attach_to_untracked = true,
-  --     current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
-  --     current_line_blame_opts = {
-  --       virt_text = true,
-  --       virt_text_pos = "right_align", -- 'eol' | 'overlay' | 'right_align'
-  --       delay = 100,
-  --       ignore_whitespace = false,
-  --     },
-  --     current_line_blame_formatter_opts = {
-  --       relative_time = false,
-  --     },
-  --     sign_priority = 6,
-  --     update_debounce = 100,
-  --     status_formatter = nil, -- Use default
-  --     max_file_length = 40000,
-  --     preview_config = {
-  --       border = "rounded",
-  --       style = "minimal",
-  --       relative = "cursor",
-  --       row = 0,
-  --       col = 1,
-  --     },
-  --     yadm = {
-  --       enable = false,
-  --     },
-  --   },
-  -- }, --}}}
+  --   "lambdalisue/vim-gin",
+  --   event = { "User DenopsReady" },
+  --   dependencies = { "vim-denops/denops.vim" },
+  --   config = function(spec)
+  --     require("denops-lazy").load(spec.name)
+  --   end,
+  -- },
   {
     "mrjones2014/smart-splits.nvim", --{{{
     event = "VeryLazy",
@@ -542,8 +590,6 @@ return {
           { "<M-n>", cmd(":lua require('smart-splits').move_cursor_down()"), { desc = "↓m", silent = true } },
           { "<M-e>", cmd(":lua require('smart-splits').move_cursor_up()"), { desc = "↑m", silent = true } },
           { "<M-i>", cmd(":lua require('smart-splits').move_cursor_right()"), { desc = "→m", silent = true } },
-
-          -- Swap buffers
           { "<C-h>", cmd(":lua require('smart-splits').swap_buf_left()"), { desc = "←w", silent = true } },
           { "<C-n>", cmd(":lua require('smart-splits').swap_buf_down()"), { desc = "↓w", silent = true } },
           { "<C-e>", cmd(":lua require('smart-splits').swap_buf_up()"), { desc = "↑w", silent = true } },
@@ -574,129 +620,132 @@ return {
           { "q", nil, { desc = "Exit", exit = true, silent = true } },
         },
       }) -- }}}      -- gitsigns {{{
-      local Hydra = require("hydra")
-      local gitsigns = require("gitsigns")
-
-      local hint = [[
- _N_: next hunk   _s_: stage hunk        _d_: show deleted   _b_: blame line
- _E_: prev hunk   _u_: undo last stage   _p_: preview hunk   _B_: blame show full
- ^ ^              _S_: stage buffer      ^ ^                 _/_: show base file
- ^
- ^ ^       _<Enter>_: Neogit   _z_:DiffviewToggleFiles   _q_: exit
-      ]]
-      Hydra({
-        name = "Git",
-        hint = hint,
-        config = {
-          buffer = bufnr,
-          color = "red",
-          invoke_on_body = true,
-          hint = {
-            type = "window",
-            float_opts = {
-              -- row, col, height, width, relative, and anchor should not be
-              -- overridden
-              style = "minimal",
-              focusable = false,
-              noautocmd = true,
-            },
-          },
-          on_key = function()
-            vim.wait(50)
-          end,
-          on_enter = function()
-            vim.cmd("mkview")
-            vim.cmd("silent! %foldopen!")
-            gitsigns.toggle_signs(true)
-            gitsigns.toggle_linehl(true)
-          end,
-          on_exit = function()
-            local cursor_pos = vim.api.nvim_win_get_cursor(0)
-            vim.cmd("loadview")
-            vim.api.nvim_win_set_cursor(0, cursor_pos)
-            vim.cmd("normal zv")
-            gitsigns.toggle_signs(false)
-            gitsigns.toggle_linehl(false)
-            gitsigns.toggle_deleted(false)
-          end,
-        },
-        mode = { "n", "x" },
-        body = "<leader>g",
-        heads = {
-          {
-            "N",
-            function()
-              if vim.wo.diff then
-                return "]c"
-              end
-              vim.schedule(function()
-                gitsigns.next_hunk()
-              end)
-              return "<Ignore>"
-            end,
-            { expr = true, desc = "next hunk" },
-          },
-          {
-            "E",
-            function()
-              if vim.wo.diff then
-                return "[c"
-              end
-              vim.schedule(function()
-                gitsigns.prev_hunk()
-              end)
-              return "<Ignore>"
-            end,
-            { expr = true, desc = "prev hunk" },
-          },
-          {
-            "s",
-            function()
-              local mode = vim.api.nvim_get_mode().mode:sub(1, 1)
-              if mode == "V" then -- visual-line mode
-                local esc = vim.api.nvim_replace_termcodes("<Esc>", true, true, true)
-                vim.api.nvim_feedkeys(esc, "x", false) -- exit visual mode
-                vim.cmd("'<,'>Gitsigns stage_hunk")
-              else
-                vim.cmd("Gitsigns stage_hunk")
-              end
-            end,
-            { desc = "stage hunk" },
-          },
-          { "u", gitsigns.undo_stage_hunk, { desc = "undo last stage" } },
-          { "S", gitsigns.stage_buffer, { desc = "stage buffer" } },
-          { "p", gitsigns.preview_hunk, { desc = "preview hunk" } },
-          { "d", gitsigns.toggle_deleted, { nowait = true, desc = "toggle deleted" } },
-          { "b", gitsigns.blame_line, { desc = "blame" } },
-          {
-            "B",
-            function()
-              gitsigns.blame_line({ full = true })
-            end,
-            { desc = "blame show full" },
-          },
-          { "/", gitsigns.show, { exit = true, desc = "show base file" } }, -- show the base of the file
-          {
-            "<Enter>",
-            function()
-              vim.cmd("Neogit")
-            end,
-            { exit = true, desc = "Neogit" },
-          },
-          {
-            "z",
-            function()
-              vim.cmd("DiffviewOpen")
-            end,
-            { exit = true, desc = "Neogit" },
-          },
-          {
-            "q",
-            nil,
-            { exit = true, nowait = true, desc = "exit" },
-          },
-        },
-      }) --}}}
+      --      local Hydra = require("hydra")
+      --      local gitsigns = require("gitsigns")
+      --
+      --      local hint = [[
+      -- _N_: next hunk   _s_: stage hunk        _d_: show deleted   _b_: blame line
+      -- _E_: prev hunk   _u_: undo last stage   _p_: preview hunk   _B_: blame show full
+      -- ^ ^              _S_: stage buffer      ^ ^                 _/_: show base file
+      -- ^
+      -- ^ ^       _<Enter>_: Neogit   _z_:DiffviewToggleFiles   _q_: exit
+      --      ]]
+      --       local Hydra = require("hydra")
+      --       local gitsigns = require("gitsigns")
+      --
+      -- Hydra({
+      --   name = "Git",
+      --   hint = hint,
+      --   config = {
+      --     buffer = bufnr,
+      --     color = "red",
+      --     invoke_on_body = true,
+      --     hint = {
+      --       type = "window",
+      --       float_opts = {
+      --         -- row, col, height, width, relative, and anchor should not be
+      --         -- overridden
+      --         style = "minimal",
+      --         focusable = false,
+      --         noautocmd = true,
+      --       },
+      --     },
+      --     on_key = function()
+      --       vim.wait(50)
+      --     end,
+      --     on_enter = function()
+      --       vim.cmd("mkview")
+      --       vim.cmd("silent! %foldopen!")
+      --       gitsigns.toggle_signs(true)
+      --       gitsigns.toggle_linehl(true)
+      --     end,
+      --     on_exit = function()
+      --       local cursor_pos = vim.api.nvim_win_get_cursor(0)
+      --       vim.cmd("loadview")
+      --       vim.api.nvim_win_set_cursor(0, cursor_pos)
+      --       vim.cmd("normal zv")
+      --       gitsigns.toggle_signs(false)
+      --       gitsigns.toggle_linehl(false)
+      --       gitsigns.toggle_deleted(false)
+      --     end,
+      --   },
+      --   mode = { "n", "x" },
+      --   body = "<leader>g",
+      --   heads = {
+      --     {
+      --       "N",
+      --       function()
+      --         if vim.wo.diff then
+      --           return "]c"
+      --         end
+      --         vim.schedule(function()
+      --           gitsigns.next_hunk()
+      --         end)
+      --         return "<Ignore>"
+      --       end,
+      --       { expr = true, desc = "next hunk" },
+      --     },
+      --     {
+      --       "E",
+      --       function()
+      --         if vim.wo.diff then
+      --           return "[c"
+      --         end
+      --         vim.schedule(function()
+      --           gitsigns.prev_hunk()
+      --         end)
+      --         return "<Ignore>"
+      --       end,
+      --       { expr = true, desc = "prev hunk" },
+      --     },
+      --     {
+      --       "s",
+      --       function()
+      --         local mode = vim.api.nvim_get_mode().mode:sub(1, 1)
+      --         if mode == "V" then -- visual-line mode
+      --           local esc = vim.api.nvim_replace_termcodes("<Esc>", true, true, true)
+      --           vim.api.nvim_feedkeys(esc, "x", false) -- exit visual mode
+      --           vim.cmd("'<,'>Gitsigns stage_hunk")
+      --         else
+      --           vim.cmd("Gitsigns stage_hunk")
+      --         end
+      --       end,
+      --       { desc = "stage hunk" },
+      --     },
+      --     { "u", gitsigns.undo_stage_hunk, { desc = "undo last stage" } },
+      --     { "S", gitsigns.stage_buffer, { desc = "stage buffer" } },
+      --     { "p", gitsigns.preview_hunk, { desc = "preview hunk" } },
+      --     { "d", gitsigns.toggle_deleted, { nowait = true, desc = "toggle deleted" } },
+      --     { "b", gitsigns.blame_line, { desc = "blame" } },
+      --     {
+      --       "B",
+      --       function()
+      --         gitsigns.blame_line({ full = true })
+      --       end,
+      --       { desc = "blame show full" },
+      --     },
+      --     { "/", gitsigns.show, { exit = true, desc = "show base file" } }, -- show the base of the file
+      --     {
+      --       "<Enter>",
+      --       function()
+      --         vim.cmd("Neogit")
+      --       end,
+      --       { exit = true, desc = "Neogit" },
+      --     },
+      --     {
+      --       "z",
+      --       function()
+      --         vim.cmd("DiffviewOpen")
+      --       end,
+      --       { exit = true, desc = "Neogit" },
+      --     },
+      --     {
+      --       "q",
+      --       nil,
+      --       { exit = true, nowait = true, desc = "exit" },
+      --     },
+      --   },
+      -- }) --}}}
     end,
   }, --}}}
   {
@@ -704,9 +753,9 @@ return {
     cmd = "Telescope",
     keys = {
       {
-        "<C-k>",
-        "<CMD>lua require('telescope.builtin').current_buffer_fuzzy_find({ sorter = require('telescope.sorters').get_substr_matcher({})})<CR>",
-        desc = "buffer_fuzzy_find",
+        "<leader>m",
+        "<CMD>Telescope marks<CR>",
+        desc = "telescope-marks",
         mode = { "n" },
       },
       {
@@ -793,7 +842,8 @@ return {
 
               ["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
               ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
-              ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
+              ["<C-d>"] = actions.send_to_qflist + actions.open_qflist,
+              ["<C-q>"] = actions.close,
               ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
               ["<C-o>"] = actions.complete_tag,
               ["<C-b>"] = actions.which_key,
@@ -811,7 +861,7 @@ return {
               ["q"] = actions.close,
               ["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
               ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
-              ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
+              ["<C-d>"] = actions.send_to_qflist + actions.open_qflist,
               ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
 
               -- TODO: This would be weird if we switch the ordering.
@@ -1750,25 +1800,41 @@ return {
     "mfussenegger/nvim-dap",
     keys = {
       {
-        "<leader>sc",
+        "<leader>dc",
         function()
           require("dap").continue()
         end,
-        desc = "Start/Continue Debugger",
+        desc = "start_debug",
       },
       {
-        "<leader>sb",
+        "<leader>db",
         function()
           require("dap").toggle_breakpoint()
         end,
-        desc = "Add Breakpoint",
+        desc = "Breakpoint",
       },
       {
-        "<leader>st",
+        "<leader>dt",
         function()
           require("dap").terminate()
         end,
         desc = "Terminate Debugger",
+      },
+    },
+    dependencies = {
+      {
+        "mfussenegger/nvim-dap-python",
+        on_ft = "python",
+        dependencies = "mfussenegger/nvim-dap",
+        config = function()
+          local python_path = table
+            .concat({ vim.fn.stdpath("data"), "mason", "packages", "debugpy", "venv", "bin", "python" }, "/")
+            :gsub("//+", "/")
+          require("dap-python").setup(python_path)
+          local debugpyPythonPath = require("mason-registry").get_package("debugpy"):get_install_path()
+            .. "/venv/bin/python3"
+          require("dap-python").setup(debugpyPythonPath, {})
+        end,
       },
     },
   },
@@ -1781,7 +1847,7 @@ return {
     dependencies = "mfussenegger/nvim-dap",
     keys = {
       {
-        "<leader>su",
+        "<leader>du",
         function()
           require("dapui").toggle()
         end,
@@ -1799,16 +1865,6 @@ return {
       listener.before.event_exited["dapui_config"] = function()
         require("dapui").close()
       end
-    end,
-  },
-  {
-    "mfussenegger/nvim-dap-python",
-    dependencies = "mfussenegger/nvim-dap",
-    config = function()
-      -- uses the debugypy installation by mason
-      local debugpyPythonPath = require("mason-registry").get_package("debugpy"):get_install_path()
-        .. "/venv/bin/python3"
-      require("dap-python").setup(debugpyPythonPath, {})
     end,
   },
   {
@@ -1889,15 +1945,15 @@ return {
     cmd = "Lspsaga",
     config = function()
       require("lspsaga").setup({
-        ui = {
-          code_action = "󰌶",
-          diagnostic = "",
-        },
+        -- ui = {
+        --   code_action = "󰌶",
+        --   diagnostic = "",
+        -- },
         lightbulb = {
-          sigh = true,
-          enable = true,
-          virtual_text = true,
-          enable_in_insert = true,
+          sigh = false,
+          enable = false,
+          virtual_text = false,
+          enable_in_insert = false,
         },
         finder = {
           scroll_down = "<C-u>",
@@ -1956,18 +2012,18 @@ return {
         mode = { "n" },
       },
       { "<Leader>R", "<cmd>Lspsaga range_code_action<cr>", desc = "CodeAction", mode = { "x" } },
-      -- {
-      --   "<Leader>f",
-      --   "<cmd>Lspsaga diagnostic_jump_next<cr>",
-      --   desc = "diagnostic_jump_next",
-      --   mode = { "n" },
-      -- },
-      -- {
-      --   "<Leader>p",
-      --   "<cmd>Lspsaga diagnostic_jump_prev<cr>",
-      --   desc = "diagnostic_jump_prev",
-      --   mode = { "n" },
-      -- },
+      {
+        "<C-y>",
+        "<cmd>Lspsaga diagnostic_jump_next<cr>",
+        desc = "diagnostic_jump_next",
+        mode = { "n", "x" },
+      },
+      {
+        "<C-u>",
+        "<cmd>Lspsaga diagnostic_jump_prev<cr>",
+        desc = "diagnostic_jump_prev",
+        mode = { "n", "x" },
+      },
       -- {
       --   "<Leader>b",
       --   "<cmd>Lspsaga show_line_diagnostics<CR>",

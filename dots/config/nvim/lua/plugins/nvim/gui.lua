@@ -56,17 +56,57 @@ return {
       ["python"] = {
         enabled = false,
         keywords = {
-          ["def"] = {
+          ["and"] = {
             enabled = true,
-            conceal = "󰊕",
-            highlight = "keyword",
-            -- },
-            -- ["class"] = {
-            --   enabled = true,
-            --   conceal = "",
-            --   highlight = "keyword",
-            -- }
+            conceal = "∧",
+            highlight = "keyword.operator",
           },
+          -- ["False"] = {
+          --   enabled = true,
+          --   conceal = "⊥ ",
+          --   highlight = "keyword.operator",
+          -- },
+          -- ["True"] = {
+          --   enabled = true,
+          --   conceal = "⊤",
+          --   highlight = "keyword.operator",
+          -- },
+          -- √∅¬
+          ["not"] = {
+            enabled = true,
+            conceal = "¬",
+            highlight = "keyword.operator",
+          },
+          ["or"] = {
+            enabled = true,
+            conceal = "∨",
+            highlight = "keyword.operator",
+          },
+          ["all"] = {
+            enabled = true,
+            conceal = "∀",
+            highlight = "keyword.operator",
+          },
+          ["import"] = {
+            enabled = true,
+            conceal = "󰋺",
+            highlight = "keyword",
+          },
+          ["lambda"] = {
+            enabled = true,
+            conceal = "󰘧",
+            highlight = "keyword",
+          },
+          -- ["def"] = {
+          --   enabled = true,
+          --   conceal = "󰊕",
+          --   highlight = "keyword",
+          -- },
+          -- ["class"] = {
+          --   enabled = true,
+          --   conceal = "",
+          --   highlight = "keyword",
+          -- },
         },
       },
     },
@@ -75,7 +115,7 @@ return {
     end,
     keys = {
       {
-        "<Leader>rc",
+        "<Leader>qc",
         function()
           require("conceal").toggle_conceal()
         end,

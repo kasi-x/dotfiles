@@ -173,6 +173,7 @@ cmp.setup({
     -- { name = "jupynium", priority = 1000 },
     { name = "copilot", priority = 90 },
     { name = "codeium", priority = 84 },
+    { name = "nvim_lsp_signature_help", priority = 70 },
     {
       name = "luasnip",
       option = { use_show_condition = false, show_autosnippets = true },

@@ -8,9 +8,14 @@ return {
     "tmhedberg/SimpylFold",
     ft = "python",
   },
+  -- {
+  --   "twanh/nvim-pydoc",
+  --   ft = "python",
+  --   keys = { { "B", "<cmd>lua vim.cmd('Pydoc ' .. vim.fn.expand('<cword>'))<cr>", desc = "vim ref", mode = "n" } },
+  -- },
   {
-    "twanh/nvim-pydoc",
-    ft = "python",
+    "thinca/vim-ref",
+    keys = { { "B", "<Plug>(ref-keyword)", desc = "vim ref", mode = "n" } },
   },
   {
     "nmac427/guess-indent.nvim", --{{{

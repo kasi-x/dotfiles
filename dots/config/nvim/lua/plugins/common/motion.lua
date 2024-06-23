@@ -19,6 +19,20 @@ return {
   {
     "dstein64/nvim-scrollview", --{{{
     event = "VeryLazy",
+    keys = {
+      {
+        "<leader>qk",
+        "<CMD>ScrollViewToggle<CR>",
+        desc = "scroll view",
+        mode = { "n" },
+      },
+      {
+        "<leader>qK",
+        "<CMD>ScrollViewRefresh<CR>",
+        desc = "scroll reflesh",
+        mode = { "n" },
+      },
+    },
     config = function()
       require("scrollview").setup({
         excluded_filetypes = { "nerdtree" },
@@ -26,7 +40,7 @@ return {
         base = "buffer",
         -- column = 135,
         -- column = 'colorcolumn',
-        scrollview_base = "right",
+        scrollview_base = "left",
         scrollview_mode = "auto",
         signs_on_startup = { "all" },
         diagnostics_severities = { vim.diagnostic.severity.ERROR },

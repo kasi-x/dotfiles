@@ -281,9 +281,7 @@ return {
     keys = {
       --{{{
       -- { "ww", "<cmd>HopWord<cr>", desc = "Hop to word", mode = "n" },
-      { "<leader>w", "<cmd>lua require'hop'.hint_patterns()<cr>", desc = "search last", mode = "n" },
-      { "g,", "<cmd>HopChar1<cr>", desc = "Hop to single character", mode = "n" },
-      { "g.", "<cmd>HopChar2<cr>", desc = "Hop to two character", mode = "n" },
+      -- { "<leader>w", "<cmd>lua require'hop'.hint_patterns()<cr>", desc = "search last", mode = "n" },
       {
         "<c-p>",
         "<cmd>lua require'hop'.hint_words({hint_position = require'hop.hint'.HintPosition.END})<CR>",
@@ -322,22 +320,10 @@ return {
       },
       {
         "ww",
-        "<cmd>HopPattern<cr>",
+        "<cmd>HopPatternMW<cr>",
         desc = "Hop to pattern",
-        mode = "n",
-      }, -- { 'wh', '<cmd>HopPatternMW<cr>', desc = 'Hop to pattern (multi-window)', mode = 'n' },
-      -- {
-      --   "wn",
-      --   "<cmd>HopChar1<cr>",
-      --   desc = "Hop to single character",
-      --   mode = "n",
-      -- },
-      -- {
-      --   "we",
-      --   "<cmd>HopChar2<cr>",
-      --   desc = "Hop to single character",
-      --   mode = "n",
-      -- }, -- { 'wn', '<cmd>HopChar1MW<cr>', desc = 'Hop to single character (multi-window)', mode = 'n' },
+        mode = { "n", "x" },
+      },
       {
         "f",
         "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>",
@@ -366,7 +352,7 @@ return {
   }, --}}}
   {
     "chrisgrieser/nvim-spider", --{{{
-    event = { "BufRead", "BufNewFile" },
+    -- event = { "BufRead", "BufNewFile" },
     keys = {
       --{{{
       {

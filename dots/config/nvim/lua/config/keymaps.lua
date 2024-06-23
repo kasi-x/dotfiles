@@ -330,7 +330,7 @@ map("o", "<Nop>", "<right>", { noremap = true })
 --
 -- map('n', '<leader>u', "<cmd>lua if vim.api.nvim_list_tabpages() == 1 then vim.cmd('tabnew') else vim.cmd('tabprev') end<CR>", opts)
 -- map('n', '<leader>y', "<cmd>lua if vim.api.nvim_list_tabpages() == 1 then vim.cmd('tabnew') else vim.cmd('tabnext') end<CR>", opts)
-map("n", "<leader>u", function()
+map("n", "gu", function()
   if vim.api.nvim_list_tabpages() == 1 then
     vim.cmd("tabnew")
   else
@@ -338,7 +338,7 @@ map("n", "<leader>u", function()
   end
 end, {})
 
-map("n", "<leader>y", function()
+map("n", "gy", function()
   if #vim.api.nvim_list_tabpages() == 1 then
     vim.cmd("tabnew")
   else
@@ -363,12 +363,12 @@ map("n", "<leader>U", "<C-w>T", { expr = true, desc = "Move window to tab" })
 -- else
 -- map("n", "gu", "<Cmd>sp<CR>", { desc = "side split" })
 -- map("n", "gy", "<CMD>vs<CR>", { desc = "vertical split" })
-map("n", "gu", "<cmd>lua require 'gitsigns'.prev_hunk()<cr>")
-map("n", "gy", "<cmd>lua require 'gitsigns'.prev_hunk()<cr>")
-
+-- map("n", "<leader>u", "<cmd>lua require 'gitsigns'.prev_hunk()<cr>")
+-- map("n", "<leader>y", "<cmd>lua require 'gitsigns'.prev_hunk()<cr>")
+--
 map("n", "gU", "<Cmd>sp<CR>", { desc = "side split" })
 map("n", "gY", "<CMD>vs<CR>", { desc = "vertical split" })
-
+--
 -- end
 -- TODO: gU/gY
 -- map("n", "gU", "", { desc = "", remap = false })

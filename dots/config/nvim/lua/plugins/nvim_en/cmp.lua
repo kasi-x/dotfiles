@@ -22,6 +22,7 @@ return {
       { "onsails/lspkind-nvim" },
       { "hrsh7th/cmp-cmdline" },
       { "tzachar/cmp-tabnine", build = "./install.sh" },
+      { "hrsh7th/cmp-nvim-lsp-signature-help" },
       {
         "Exafunction/codeium.nvim",
         build = ":Codeium Auth",

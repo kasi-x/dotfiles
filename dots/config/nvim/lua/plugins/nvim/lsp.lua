@@ -263,23 +263,20 @@ return {
           capabilities = capabilities,
         })
       end
-      lspconfig.ruff_lsp.setup({
-        on_attach = on_attach,
-      })
       lspconfig.pyright.setup({
         settings = {
           pyright = {
             disableOrganizeImports = true,
-            disableTaggedHints = true,
+            disableTaggedHints = false,
           },
-          python = {
-            analysis = {
-              ignore = { "*" },
-              diagnosticSeverityOverrides = {
-                reportUndefinedVariable = "none",
-              },
-            },
-          },
+          -- python = {
+          --   analysis = {
+          --     ignore = { "*" },
+          --     diagnosticSeverityOverrides = {
+          --       reportUndefinedVariable = "none",
+          --     },
+          --   },
+          -- },
         },
       })
     end,

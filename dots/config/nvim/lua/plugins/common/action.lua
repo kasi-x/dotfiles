@@ -43,13 +43,13 @@ return {
     cmd = { "ISwap", "ISwapNode" },
     keys = {
       {
-        "<leader>k",
+        "<C-k>",
         "<cmd>ISwap<cr>",
         desc = "iswap",
         mode = { "n" },
       },
       {
-        "<leader>m",
+        "<leader>k",
         "<cmd>ISwapNode<cr>",
         desc = "iswapNode",
         mode = { "n" },
