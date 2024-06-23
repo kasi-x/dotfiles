@@ -28,102 +28,121 @@ return {
     },
   }, --}}}
   { "kevinhwang91/nvim-ufo", requires = "kevinhwang91/promise-async" },
+  -- {
+  --   "Jxstxs/conceal.nvim", --{{{
+  --   dependencies = "nvim-treesitter/nvim-treesitter",
+  --   -- lazy = "VeryLazy",
+  --   lazy = false,
+  --   config = function()
+  --     local conceal = require("conceal")
+  --     conceal.setup({
+  --       ["lua"] = {
+  --         enabled = true,
+  --         keywords = {
+  --           ["<Leader>"] = {
+  --             enabled = true,
+  --             conceal = "L",
+  --             highlight = "keyword",
+  --           },
+  --         },
+  --       },
+  --       ["python"] = {
+  --         enabled = true,
+  --         keywords = {
+  --           ["and"] = {
+  --             enabled = true,
+  --             conceal = "∧",
+  --             highlight = "keyword.operator",
+  --           },
+  --           ["not"] = {
+  --             enabled = true,
+  --             conceal = "¬",
+  --             highlight = "keyword.operator",
+  --           },
+  --           ["or"] = {
+  --             enabled = true,
+  --             conceal = "∨",
+  --             highlight = "keyword.operator",
+  --           },
+  --           ["all"] = {
+  --             enabled = true,
+  --             conceal = "∀",
+  --             highlight = "keyword.operator",
+  --           },
+  --           ["lambda"] = {
+  --             enabled = true,
+  --             conceal = "󰘧",
+  --             highlight = "keyword",
+  --           },
+  --           -- ["def"] = {
+  --           --   enabled = true,
+  --           --   conceal = "󰊕",
+  --           --   highlight = "keyword",
+  --           -- },
+  --           -- ["class"] = {
+  --           --   enabled = true,
+  --           --   conceal = "",
+  --           --   highlight = "keyword",
+  --           -- },
+  --           ---- ["False"] = {
+  --           --   enabled = true,
+  --           --   conceal = "⊥ ",
+  --           --   highlight = "keyword.operator",
+  --           -- },
+  --           -- ["True"] = {
+  --           --   enabled = true,
+  --           --   conceal = "⊤",
+  --           --   highlight = "keyword.operator",
+  --           -- },
+  --           -- √∅¬
+  --         },
+  --       },
+  --     })
+  --     -- conceal.generate_conceals()
+  --   end,
+  --   -- config = true,
+  --   keys = {
+  --     {
+  --       "<Leader>qC",
+  --       function()
+  --         require("conceal").toggle_conceal()
+  --       end,
+  --       desc = "conceal",
+  --       mode = { "n" }, -- Normal mode only
+  --     },
+  --   },
+  -- }, --}}}
   {
-    "Jxstxs/conceal.nvim", --{{{
-    dependencies = "nvim-treesitter/nvim-treesitter",
-    lazy = "VeryLazy",
-    opts = {
-      --[[ ["language"] = {
-                enabled = bool,
-                keywords = {
-                  [":keyword:"] = {
-                      enabled     = bool,
-                      conceal     = string,
-                      highlight   = string
-                  }
-                }
-            } ]]
-      ["lua"] = {
-        enabled = true,
-        keywords = {
-          ["<Leader>"] = {
-            enabled = true,
-            conceal = "L",
-            highlight = "keyword",
-          },
-        },
-      },
-      ["python"] = {
-        enabled = false,
-        keywords = {
-          ["and"] = {
-            enabled = true,
-            conceal = "∧",
-            highlight = "keyword.operator",
-          },
-          -- ["False"] = {
-          --   enabled = true,
-          --   conceal = "⊥ ",
-          --   highlight = "keyword.operator",
-          -- },
-          -- ["True"] = {
-          --   enabled = true,
-          --   conceal = "⊤",
-          --   highlight = "keyword.operator",
-          -- },
-          -- √∅¬
-          ["not"] = {
-            enabled = true,
-            conceal = "¬",
-            highlight = "keyword.operator",
-          },
-          ["or"] = {
-            enabled = true,
-            conceal = "∨",
-            highlight = "keyword.operator",
-          },
-          ["all"] = {
-            enabled = true,
-            conceal = "∀",
-            highlight = "keyword.operator",
-          },
-          ["import"] = {
-            enabled = true,
-            conceal = "󰋺",
-            highlight = "keyword",
-          },
-          ["lambda"] = {
-            enabled = true,
-            conceal = "󰘧",
-            highlight = "keyword",
-          },
-          -- ["def"] = {
-          --   enabled = true,
-          --   conceal = "󰊕",
-          --   highlight = "keyword",
-          -- },
-          -- ["class"] = {
-          --   enabled = true,
-          --   conceal = "",
-          --   highlight = "keyword",
-          -- },
-        },
-      },
-    },
+    "consoleaf/conceal.nvim",
+    event = "BufRead",
     config = function()
-      require("conceal").generate_conceals()
+      local conceal = require("conceal")
+      conceal.setup({
+        ["python"] = {
+          enabled = true,
+          keywords = {
+            ["and"] = {
+              conceal = "∧",
+            },
+            ["not"] = {
+              conceal = "¬",
+            },
+            ["or"] = {
+              conceal = "∨",
+            },
+            ["lambda"] = {
+              conceal = "󰘧",
+              highlight = "keyword",
+            },
+          },
+        },
+        ["language"] = {
+          enabled = false, -- to disable the whole language
+        },
+      })
+      -- conceal.generate_conceals()
     end,
-    keys = {
-      {
-        "<Leader>qc",
-        function()
-          require("conceal").toggle_conceal()
-        end,
-        desc = "conceal",
-        mode = { "n" }, -- Normal mode only
-      },
-    },
-  }, --}}}
+  },
   -- {
   --   "ecthelionvi/NeoComposer.nvim",--{{{
   --   dependencies = { "kkharji/sqlite.lua" },
@@ -635,7 +654,6 @@ return {
       wk.register({
         ["<leader>q"] = {
           name = "options",
-          l = { "<CMD>set cursorline<CR>", "line" },
           -- k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
           -- C = { "<cmd>Telescope commands<cr>", "Commands" },
         },

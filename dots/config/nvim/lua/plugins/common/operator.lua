@@ -60,9 +60,8 @@ return {
   }, --}}}
   {
     "numToStr/Comment.nvim", --{{{
-    event="VeryLazy",
-  -- lazy = false,
-    config = function()
+    event = "VeryLazy",
+    init = function()
       require("Comment").setup({
         {
           padding = false,
@@ -76,10 +75,7 @@ return {
             below = "ln",
             eol = "li",
           },
-          mappings = {
-            basic = false,
-            extra = false,
-          },
+          mappings = false,
           pre_hook = nil,
           post_hook = nil,
           ignore = "^$",
@@ -170,6 +166,21 @@ return {
     },
   }, --}}}
   {
+    "leon-richardt/comment-highlights.nvim",
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    opts = {},
+    cmd = "CHToggle",
+    keys = {
+      {
+        "<leader>qL",
+        function()
+          require("comment-highlights").toggle()
+        end,
+        desc = "Toggle comment highlighting",
+      },
+    },
+  },
+  {
     "LudoPinelli/comment-box.nvim", --{{{
     lazy = false,
     keys = {
@@ -249,49 +260,49 @@ return {
         "Lrff",
         "<Cmd>CBllline<CR>",
         desc = "Left titled line with Left text",
-        mode = { "n"},
+        mode = { "n" },
       },
       {
         "Lrfw",
         "<Cmd>CBlcline<CR>",
-        desc = "Left titled line with Centerd text",
-        mode = { "n"},
+        desc = "Left titled line with Centered text",
+        mode = { "n" },
       },
       {
         "Lrfp",
         "<Cmd>CBlrline<CR>",
         desc = "Left titled line with Right text",
-        mode = { "n"},
+        mode = { "n" },
       },
       {
         "Lrwf",
         "<Cmd>CBclline<CR>",
         desc = "Center titled line with Left text",
-        mode = { "n"},
+        mode = { "n" },
       },
       {
         "Lrww",
         "<Cmd>CBccline<CR>",
-        desc = "Center titled line with Centerd text",
-        mode = { "n"},
+        desc = "Center titled line with Centered text",
+        mode = { "n" },
       },
       {
         "Lrwp",
         "<Cmd>CBcrline<CR>",
         desc = "Center titled line with Right text",
-        mode = { "n"},
+        mode = { "n" },
       },
       {
         "Lrpf",
         "<Cmd>CBrlline<CR>",
         desc = "Right titled line with Left text",
-        mode = { "n"},
+        mode = { "n" },
       },
       {
         "Lrpw",
         "<Cmd>CBrcline<CR>",
-        desc = "Right titled line with Centerd text",
-        mode = { "n"},
+        desc = "Right titled line with Centered text",
+        mode = { "n" },
       },
       {
         "Lrpp",
@@ -387,49 +398,49 @@ return {
         "<C-l>rff",
         "<Cmd>CBllline<CR>",
         desc = "Left titled line with Left text",
-        mode = { "v"},
+        mode = { "v" },
       },
       {
         "<C-l>rfw",
         "<Cmd>CBlcline<CR>",
-        desc = "Left titled line with Centerd text",
-        mode = { "v"},
+        desc = "Left titled line with Centered text",
+        mode = { "v" },
       },
       {
         "<C-l>rfp",
         "<Cmd>CBlrline<CR>",
         desc = "Left titled line with Right text",
-        mode = { "v"},
+        mode = { "v" },
       },
       {
         "<C-l>rwf",
         "<Cmd>CBclline<CR>",
         desc = "Center titled line with Left text",
-        mode = { "v"},
+        mode = { "v" },
       },
       {
         "<C-l>rww",
         "<Cmd>CBccline<CR>",
-        desc = "Center titled line with Centerd text",
-        mode = { "v"},
+        desc = "Center titled line with Centered text",
+        mode = { "v" },
       },
       {
         "<C-l>rwp",
         "<Cmd>CBcrline<CR>",
         desc = "Center titled line with Right text",
-        mode = { "v"},
+        mode = { "v" },
       },
       {
         "<C-l>rpf",
         "<Cmd>CBrlline<CR>",
         desc = "Right titled line with Left text",
-        mode = { "v"},
+        mode = { "v" },
       },
       {
         "<C-l>rpw",
         "<Cmd>CBrcline<CR>",
-        desc = "Right titled line with Centerd text",
-        mode = { "v"},
+        desc = "Right titled line with Centered text",
+        mode = { "v" },
       },
       {
         "<C-l>rpp",

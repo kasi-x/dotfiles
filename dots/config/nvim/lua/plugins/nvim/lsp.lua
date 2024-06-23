@@ -131,7 +131,7 @@ return {
     cmd = { "ConformInfo" },
     keys = {
       {
-        "<C-q>",
+        "qq",
         function()
           require("conform").format({ async = true, lsp_fallback = true })
         end,
@@ -169,7 +169,7 @@ return {
           "trim_whitespace", --[[ "injected" ]]
         },
       },
-      format_on_save = { timeout_ms = 500, lsp_fallback = true },
+      -- format_on_save = { timeout_ms = 500, lsp_fallback = true },
       -- format_after_save = { lsp_fallback = true, timeout_ms = 500 },
       formatters = {
         shfmt = {

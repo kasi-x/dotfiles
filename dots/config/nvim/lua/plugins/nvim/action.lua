@@ -477,32 +477,47 @@ return {
         mode = { "n", "x" },
       },
       {
-        "<leader>qg",
+        "gf",
         function()
           require("gitsigns").stage_hunk()
         end,
-        desc = "git stage",
+        desc = "stage_hunk",
         mode = { "n" },
       },
       {
-        "<leader>qs",
+        "gz",
         function()
-          require("gitsigns").stage_hunk()
+          require("gitsigns").undo_stage_hunk()
         end,
-        desc = "git stage",
+        desc = "un_stage_hunk",
         mode = { "n" },
       },
-
       {
-        "<leader>gS",
+        "gp",
+        function()
+          require("gitsigns").reset_hunk()
+        end,
+        desc = "reset_hunk",
+        mode = { "n" },
+      },
+      {
+        "gP",
+        function()
+          require("gitsigns").reset_buffer()
+        end,
+        desc = "reset_buffer",
+        mode = { "n" },
+      },
+      {
+        "gF",
         function()
           require("gitsigns").stage_buffer()
         end,
-        desc = "git buffer",
+        desc = "stage_buffer",
         mode = { "n" },
       },
       {
-        "<leader>qb",
+        "gb",
         function()
           require("gitsigns").toggle_current_line_blame()
         end,
@@ -510,14 +525,22 @@ return {
         mode = { "n" },
       },
       {
-        "<leader>qB",
+        "<leader>g",
         function()
           require("gitsigns").blame_line({ full = true })
         end,
         desc = "blame full",
         mode = { "n" },
       },
-
+      {
+        "<C-q>",
+        function()
+          require("gitsigns").toggle_linehl()
+          require("gitsigns").toggle_deleted()
+        end,
+        desc = "switch git",
+        mode = { "n" },
+      },
       -- map('n', '<leader>hb', function() gitsigns.blame_line{full=true} end)
       -- map('n', '<leader>tb', gitsigns.toggle_current_line_blame)
       -- map({ "n", "v" }, "<leader>ghs", ":Gitsigns stage_hunk<CR>", "Stage Hunk")
@@ -526,7 +549,7 @@ return {
       -- map('v', '<leader>hr', function() gitsigns.reset_hunk {vim.fn.line('.'), vim.fn.line('v')} end)
       -- map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
       {
-        "<leader>gd",
+        "gt",
         function()
           require("gitsigns").diffthis()
         end,
@@ -541,6 +564,15 @@ return {
       numhl = false, -- Toggle with `:Gitsigns toggle_numhl`
       linehl = true, -- Toggle with `:Gitsigns toggle_linehl`
       word_diff = false, -- Toggle with `:Gitsigns toggle_word_diff`
+      current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
+      current_line_blame_opts = {
+        virt_text = true,
+        virt_text_pos = "eol", -- 'eol' | 'overlay' | 'right_align'
+        delay = 200,
+        ignore_whitespace = false,
+        virt_text_priority = 100,
+      },
+      show_deleted = true,
     },
   }, --}}}
   -- {
