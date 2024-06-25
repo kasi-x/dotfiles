@@ -565,6 +565,7 @@ return {
       presets.operators[">"] = nil
       presets.operators["gu"] = nil
       presets.operators["gU"] = nil
+      presets.operators["g"] = nil
       --}}}
       --{{{ Mappings
       --{{{ TODO
@@ -703,37 +704,6 @@ return {
           v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
         },
       }, { mode = { "n" } }) --}}}
-      --{{{ Fold (not yet)
-      -- wk.register({
-      --     ["m"] = {
-      --       name = "fold", -- group name for the popup
-      --       o = "Open fold under cursor",
-      --       O = "Open all folds under cursor",
-      --       c = "Close fold under cursor",
-      --       C = "Close all folds under cursor",
-      --       a = "Toggle fold under cursor",
-      --       A = "Toggle all folds under cursor",
-      --       v = "Show cursor line",
-      --       M = "Close all folds",
-      --       R = "Open all folds",
-      --       m = "Fold more",
-      --       r = "Fold less",
-      --       x = "Update folds",
-      --       z = "Center this line",
-      --       t = "Top this line",
-      --       ["<CR>"] = "Top this line, 1st non-blank col",
-      --       b = "Bottom this line",
-      --       g = "Add word to spell list",
-      --       w = "Mark word as bad/misspelling",
-      --       e = "Right this line",
-      --       s = "Left this line",
-      --       H = "Half screen to the left",
-      --       L = "Half screen to the right",
-      --       i = "Toggle folding",
-      --       ["="] = "Spelling suggestions",
-      --     },
-      --   }
-      -- ) --}}}
       -- {{{ Refactor
       -- wk.register({
       --   ["<leader>r"] = {
@@ -809,6 +779,25 @@ return {
           [" "] = "Enhanced Setup for Space",
         },
       }, { mode = { "v" }, nowait = true, noremap = true }) --}}}
+      wk.register({
+        ["g"] = {
+          name = "Git",
+          -- c = { "<cmd>ChatGPT<CR>", "ChatGPT" },
+          -- e = { "<cmd>ChatGPTEditWithInstruction<CR>", "Edit with instruction" },
+          -- g = { "<cmd>ChatGPTRun grammar_correction<CR>", "Grammar Correction" },
+          -- t = { "<cmd>ChatGPTRun translate<CR>", "Translate" },
+          -- k = { "<cmd>ChatGPTRun keywords<CR>", "Keywords" },
+          -- d = { "<cmd>ChatGPTRun docstring<CR>", "Docstring" },
+          -- a = { "<cmd>ChatGPTRun add_tests<CR>", "Add Tests" },
+          -- o = { "<cmd>ChatGPTRun optimize_code<CR>", "Optimize Code" },
+          -- s = { "<cmd>ChatGPTRun summarize<CR>", "Summarize" },
+          -- f = { "<cmd>ChatGPTRun fix_bugs<CR>", "Fix Bugs" },
+          -- x = { "<cmd>ChatGPTRun explain_code<CR>", "Explain Code" },
+          -- r = { "<cmd>ChatGPTRun roxygen_edit<CR>", "Roxygen Edit" },
+          -- l = { "<cmd>ChatGPTRun code_readability_analysis<CR>", "Code Readability Analysis" },
+        },
+      }, { mode = { "n", "x" } }) --}}}
+
       --{{{  ChatGPT
       wk.register({
         ["<BS>"] = {

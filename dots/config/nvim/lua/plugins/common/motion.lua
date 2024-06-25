@@ -33,19 +33,17 @@ return {
         mode = { "n" },
       },
     },
-    config = function()
-      require("scrollview").setup({
-        excluded_filetypes = { "nerdtree" },
-        current_only = true,
-        base = "buffer",
-        -- column = 135,
-        -- column = 'colorcolumn',
-        scrollview_base = "left",
-        scrollview_mode = "auto",
-        signs_on_startup = { "all" },
-        diagnostics_severities = { vim.diagnostic.severity.ERROR },
-      })
-    end,
+    opts = {
+      -- excluded_filetypes = { "nerdtree" },
+      current_only = true,
+      base = "buffer",
+      -- column = 135,
+      -- column = 'colorcolumn',
+      scrollview_base = "right",
+      scrollview_mode = "auto",
+      signs_on_startup = { "all" },
+      diagnostics_severities = { vim.diagnostic.severity.ERROR },
+    },
   }, --}}}
   {
     "karb94/neoscroll.nvim", --{{{

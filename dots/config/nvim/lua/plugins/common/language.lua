@@ -84,6 +84,7 @@ return {
       })
     end,
   },
+  { "dccsillag/magma-nvim", run = ":UpdateRemotePlugins" },
   -- {
   --   "MaximilianLloyd/tw-values.nvim",
   --   ft = { "typescript", "typescriptreact", "vue", "html", "svelte", "astro", "css" },

@@ -49,6 +49,7 @@ vim.api.nvim_create_autocmd("User", {
   end,
 })
 
+
 require("config.lazy")
 require("config.options")
 require("config.autocmds")

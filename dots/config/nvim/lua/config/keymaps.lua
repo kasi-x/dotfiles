@@ -835,6 +835,11 @@ map("n", "Q", "q", { expr = false, desc = "MacroRecord" })
 -- }}} Single / Shift / <Ctrl>
 -- {{{ Leader (0/2)
 -- <leader>q is ...
+--
+
+map({ "n" }, "<leader>qv", ":lua vim.cmd('set cursorline!')<CR>", { expr = false, desc = "cursorline" })
+map({ "n" }, "<leader>qc", ":lua vim.cmd('set number!')<CR>", { expr = false, desc = "cursorline" })
+
 -- }}} Leader
 -- {{{ g (1/2)
 -- gq / gQ  is for ... no idea.

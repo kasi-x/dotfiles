@@ -29,9 +29,9 @@ local options = {
   -- buftype = "",
 
   -- of the file, if one exists
-  clipboard = "unnamed", -- Use * and + registers to access system clipboard(i.e. tmux)
+  -- clipboard = "unnamed", -- Use * and + registers to access system clipboard(i.e. tmux)
   -- clipboard = "unnamedplus",
-  -- clipboard = ,
+  clipboard = "",
 
   -- confirm = true,       -- Dialog for unsaved changes
   splitright = true, -- Go to right pane by default (Needed for quickmenu)
@@ -68,8 +68,8 @@ local options = {
   scrolloff = 5,
   cmdheight = 0,
   cmdwinheight = 1,
-  -- conceallevel=3,
-  -- concealcursor='nvc'
+  conceallevel = 2,
+  -- concealcursor=':nvc:'
   --
   -- foldtext = "",
 }
@@ -79,7 +79,7 @@ for k, v in pairs(options) do
 end
 
 vim.cmd("setlocal ignorecase")
-vim.cmd("setlocal conceallevel=0")
+vim.cmd("setlocal conceallevel=2")
 -- local alpha = function()
 -- return string.format("%x", math.floor(255 * vim.g.transparency or 0.9))
 -- end

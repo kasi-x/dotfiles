@@ -28,8 +28,31 @@ return {
   --
   --}}}
   -- },
+  -- {
+  --   "rhysd/accelerated-jk",
+  --   keys = {
+  --     { "n", "<Plug>(accelerated_jk_gj)", mode = { "n" }, expr = true, desc = "accelerated_jk" },
+  --     { "e", "<Plug>(accelerated_jk_gk)", mode = { "n" }, expr = true, desc = "accelerated_jk_gj" },
+  --   },
+  -- },
+  -- {
+  --   "rainbowhxch/accelerated-jk.nvim",
+  --   keys = {
+  --     { "n", "<Plug>(accelerated_jk_gj)", mode = { "n" }, expr = false, desc = "accelerated_jk" },
+  --     { "e", "<Plug>(accelerated_jk_gk)", mode = { "n" }, expr = false, desc = "accelerated_jk_gj" },
+  --   },
+  --   opts = {
+  --     mode = "time_driven",
+  --     enable_deceleration = false,
+  --     acceleration_motions = {},
+  --     acceleration_limit = 150,
+  --     acceleration_table = { 7, 12, 17, 21, 24, 26, 28, 30 },
+  --     -- when 'enable_deceleration = true', 'deceleration_table = { {200, 3}, {300, 7}, {450, 11}, {600, 15}, {750, 21}, {900, 9999} }'
+  --     deceleration_table = { { 150, 9999 } },
+  --   },
+  -- },
   {
-    "glidenote/memolist.vim",
+    "glidenote/memolist.vim", --{{{
     init = function()
       vim.g.memolist_memo_suffix = "md"
     end,
@@ -43,15 +66,15 @@ return {
       {
         "MN",
         "<Cmd>MemoList<CR>",
-        desc = "memo list",
+        dec = "memo list",
         mode = { "n" },
       },
     },
-  },
+  }, --}}}
   {
-    "kevinhwang91/nvim-hlslens",
+    "kevinhwang91/nvim-hlslens", --{{{
     dependencies = {
-      { "petertriho/nvim-scrollbar" },
+      -- { "petertriho/nvim-scrollbar" },
       { "haya14busa/vim-asterisk" },
     },
     keys = {
@@ -92,7 +115,7 @@ return {
         mode = { "n", "x" },
       },
     },
-  },
+  }, --}}}
   {
     "cshuaimin/ssr.nvim", --{{{
     keys = {
@@ -195,7 +218,7 @@ return {
     },
   }, --}}}
   {
-    "2kabhishek/nerdy.nvim",
+    "2kabhishek/nerdy.nvim", --{{{
     dependencies = {
       "stevearc/dressing.nvim",
       "nvim-telescope/telescope.nvim",
@@ -204,7 +227,7 @@ return {
     keys = {
       { "<leader>q-", "<CMD>Telescope nerdy<CR>", desc = "find playphs", mode = "n" },
     },
-  },
+  }, --}}}
   {
     "folke/todo-comments.nvim", --{{{
     -- event = "VimEnter",
@@ -252,11 +275,11 @@ return {
     },
   }, --}}}
   {
-    "chikko80/error-lens.nvim",
+    "chikko80/error-lens.nvim", --{{{
     event = "BufRead",
     dependencies = { "nvim-telescope/telescope.nvim" },
     opts = {},
-  },
+  }, --}}}
   {
     "folke/trouble.nvim", --{{{
     dependencies = {
@@ -266,14 +289,14 @@ return {
     cmd = { "Trouble" },
     keys = {
       {
-        "<C-d>n",
+        "<C-d>d",
         "<CMD>Trouble diagnostics toggle  filter.buf=0<CR>",
-        desc = "workspace trouble_toggle",
+        desc = "diagnostics",
         mode = { "n" },
       },
       {
-        "<C-d>w",
-        "<CMD>Trouble diagnostics  filter.severity=vim.diagnostic.severity.ERROR<CR>",
+        "<C-d>e",
+        "<CMD>Trouble diagnostics filter.severity=vim.diagnostic.severity.ERROR<CR>",
         desc = "Errors",
         mode = { "n" },
       },
@@ -301,7 +324,6 @@ return {
         desc = "todo list",
         mode = { "n" },
       },
-
       -- {
       --   "<C-d>Y",
       --   "<cmd>Trouble document_diagnostics toggle<cr>",
@@ -420,40 +442,6 @@ return {
       "DiffviewFileHistory",
     },
   }, --}}}
-  -- {
-  --   "lewis6991/gitsigns.nvim",
-  --   opts = {
-  --     signs = {
-  --       add = { text = "▎" },
-  --       change = { text = "▎" },
-  --       delete = { text = "" },
-  --       topdelete = { text = "" },
-  --       changedelete = { text = "▎" },
-  --       untracked = { text = "▎" },
-  --     },
-  --     on_attach = function(buffer)
-  --       local gs = package.loaded.gitsigns
-  --
-  --       local function map(mode, l, r, desc)
-  --         vim.keymap.set(mode, l, r, { buffer = buffer, desc = desc })
-  --       end
-  --
-  --       -- stylua: ignore start
-  --       map("n", "]h", gs.next_hunk, "Next Hunk")
-  --       map("n", "[h", gs.prev_hunk, "Prev Hunk")
-  --       map({ "n", "v" }, "<leader>ghs", ":Gitsigns stage_hunk<CR>", "Stage Hunk")
-  --       map({ "n", "v" }, "<leader>ghr", ":Gitsigns reset_hunk<CR>", "Reset Hunk")
-  --       map("n", "<leader>ghS", gs.stage_buffer, "Stage Buffer")
-  --       map("n", "<leader>ghu", gs.undo_stage_hunk, "Undo Stage Hunk")
-  --       map("n", "<leader>ghR", gs.reset_buffer, "Reset Buffer")
-  --       map("n", "<leader>ghp", gs.preview_hunk, "Preview Hunk")
-  --       map("n", "<leader>ghb", function() gs.blame_line({ full = true }) end, "Blame Line")
-  --       map("n", "<leader>ghd", gs.diffthis, "Diff This")
-  --       map("n", "<leader>ghD", function() gs.diffthis("~") end, "Diff This ~")
-  --       map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "GitSigns Select Hunk")
-  --     end,
-  --   },
-  -- },
   {
     "lewis6991/gitsigns.nvim", --{{{
     dependencies = {
@@ -463,7 +451,7 @@ return {
       {
         "<leader>u",
         function()
-          require("gitsigns").prev_hunk()
+          require("gitsigns").nav_hunk("prev")
         end,
         desc = "git move prev",
         mode = { "n", "x" },
@@ -471,7 +459,7 @@ return {
       {
         "<leader>y",
         function()
-          require("gitsigns").next_hunk()
+          require("gitsigns").nav_hunk("next")
         end,
         desc = "git move next",
         mode = { "n", "x" },
@@ -484,6 +472,15 @@ return {
         desc = "stage_hunk",
         mode = { "n" },
       },
+      {
+        "gf",
+        function()
+          require("gitsigns").gitsigns.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
+        end,
+        desc = "stage_hunk",
+        mode = { "v" },
+      },
+
       {
         "gz",
         function()
@@ -501,6 +498,14 @@ return {
         mode = { "n" },
       },
       {
+        "gp",
+        function()
+          require("gitsigns").gitsigns.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
+        end,
+        desc = "stage_hunk",
+        mode = { "v" },
+      },
+      {
         "gP",
         function()
           require("gitsigns").reset_buffer()
@@ -513,11 +518,11 @@ return {
         function()
           require("gitsigns").stage_buffer()
         end,
-        desc = "stage_buffer",
+        desc = "stage buffer",
         mode = { "n" },
       },
       {
-        "gb",
+        "<leader>qg",
         function()
           require("gitsigns").toggle_current_line_blame()
         end,
@@ -527,7 +532,7 @@ return {
       {
         "<leader>g",
         function()
-          require("gitsigns").blame_line({ full = true })
+          require("gitsigns").blame_line()
         end,
         desc = "blame full",
         mode = { "n" },
@@ -537,17 +542,11 @@ return {
         function()
           require("gitsigns").toggle_linehl()
           require("gitsigns").toggle_deleted()
+          -- require("gitsigns").blame_line()
         end,
         desc = "switch git",
         mode = { "n" },
       },
-      -- map('n', '<leader>hb', function() gitsigns.blame_line{full=true} end)
-      -- map('n', '<leader>tb', gitsigns.toggle_current_line_blame)
-      -- map({ "n", "v" }, "<leader>ghs", ":Gitsigns stage_hunk<CR>", "Stage Hunk")
-      -- map({ "n", "v" }, "<leader>ghr", ":Gitsigns reset_hunk<CR>", "Reset Hunk")
-      -- map('v', '<leader>hs', function() gitsigns.stage_hunk {vim.fn.line('.'), vim.fn.line('v')} end)
-      -- map('v', '<leader>hr', function() gitsigns.reset_hunk {vim.fn.line('.'), vim.fn.line('v')} end)
-      -- map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
       {
         "gt",
         function()
@@ -556,8 +555,6 @@ return {
         desc = "git buffer",
         mode = { "n" },
       },
-      -- map('n', '<leader>tb', gitsigns.toggle_current_line_blame)
-      -- map('n', '<leader>hd', gitsigns.diffthis)
     },
     opts = {
       signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
@@ -575,14 +572,6 @@ return {
       show_deleted = true,
     },
   }, --}}}
-  -- {
-  --   "lambdalisue/vim-gin",
-  --   event = { "User DenopsReady" },
-  --   dependencies = { "vim-denops/denops.vim" },
-  --   config = function(spec)
-  --     require("denops-lazy").load(spec.name)
-  --   end,
-  -- },
   {
     "mrjones2014/smart-splits.nvim", --{{{
     event = "VeryLazy",
@@ -1775,12 +1764,12 @@ return {
     end, --}}}
   }, --}}}
   {
-    "mbbill/undotree",
+    "mbbill/undotree", --{{{
     cmd = "UndotreeToggle",
     keys = { { "gz", "<cmd>UndotreeToggle<cr>", desc = "undotree", mode = "n" } },
-  },
+  }, --}}}
   {
-    "aznhe21/actions-preview.nvim",
+    "aznhe21/actions-preview.nvim", --{{{
     dependencies = { "nvim-telescope/telescope.nvim", "MunifTanjim/nui.nvim" },
     keys = {
       {
@@ -1790,9 +1779,9 @@ return {
         mode = { "n", "v" },
       },
     },
-  },
+  }, --}}}
   {
-    "chrisgrieser/nvim-rulebook",
+    "chrisgrieser/nvim-rulebook", --{{{
     keys = {
       {
         "<C-r>g",
@@ -1827,9 +1816,9 @@ return {
         mode = { "n", "x" },
       },
     },
-  },
+  }, --}}}
   {
-    "mfussenegger/nvim-dap",
+    "mfussenegger/nvim-dap", --{{{
     keys = {
       {
         "<leader>dc",
@@ -1868,14 +1857,15 @@ return {
           require("dap-python").setup(debugpyPythonPath, {})
         end,
       },
+      { "Weissle/persistent-breakpoints.nvim" },
     },
-  },
+  }, --}}}
   -- UI for the debugger
   -- - the debugger UI is also automatically opened when starting/stopping the debugger
   -- - toggle debugger UI manually with `<leader>du`
   --
   {
-    "rcarriga/nvim-dap-ui",
+    "rcarriga/nvim-dap-ui", --{{{
     dependencies = "mfussenegger/nvim-dap",
     keys = {
       {
@@ -1898,9 +1888,9 @@ return {
         require("dapui").close()
       end
     end,
-  },
+  }, --}}}
   {
-    "Vigemus/iron.nvim",
+    "Vigemus/iron.nvim", --{{{
     keys = {
       { "<leader>si", vim.cmd.IronRepl, desc = "󱠤 Toggle REPL" },
       { "<leader>sI", vim.cmd.IronRestart, desc = "󱠤 Restart REPL" },
@@ -1943,7 +1933,7 @@ return {
         },
       },
     },
-  },
+  }, --}}}
   -- {
   --   "smjonas/inc-rename.nvim",
   --   cmd = "IncRename",
@@ -1972,7 +1962,7 @@ return {
   --     }
   -- }
   {
-    "nvimdev/lspsaga.nvim",
+    "nvimdev/lspsaga.nvim", --{{{
     lazy = false,
     cmd = "Lspsaga",
     config = function()
@@ -2063,7 +2053,7 @@ return {
       --   mode = { "n" },
       -- },
     },
-  },
+  }, --}}}
   --    vim.keymap.set('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<cr>', opts)
   --    vim.keymap.set('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<cr>', opts)
   -- vim.keymap.set('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<cr>',

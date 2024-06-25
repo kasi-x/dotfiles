@@ -133,9 +133,9 @@ ftplugin.extend_all({
       textwidth = 100,
       keywordprg = ":Pydoc",
     },
-    callback = function(bufnr)
-      vim.opt.iskeyword:append(".")
-    end,
+    -- callback = function(bufnr)
+    --   vim.opt.iskeyword:append(".")
+    -- end,
   },
   qf = {
     opt = {

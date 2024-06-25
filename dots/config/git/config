@@ -31,7 +31,7 @@
 	br = branch
 	pur = pull --rebase
 	la = !git config -l | grep alias | cut -c 7-
-	diffs = !git diff | subl
+	diffs = !git diff | neovide
     di = diff
     dm = diff master
     dw = diff --color-words
@@ -93,7 +93,7 @@
 	name = kashi-x
 	email = kashimiya.exe@gmail.com
 [core]
-	editor = subl -w
+	editor = neovide
 	excludesfile = ~/.gitignore
     pager = delta
 [interactive]
@@ -106,11 +106,11 @@
 [diff]
     colorMoved = default
 [push]
-	default = simple
+    default = simple
 [filter "lfs"]
-	clean = git-lfs clean %f
-	smudge = git-lfs smudge %f
-	required = true
-	process = git-lfs filter-process
+    clean = git-lfs clean %f
+    smudge = git-lfs smudge %f
+    required = true
+    process = git-lfs filter-process
 [ghq]
-        root = ~/ghq
+    root = ~/ghq
