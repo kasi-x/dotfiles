@@ -84,6 +84,7 @@ return {
       })
     end,
   },
+  { "Vimjas/vim-python-pep8-indent", ft = "python" },
   { "dccsillag/magma-nvim", run = ":UpdateRemotePlugins" },
   -- {
   --   "MaximilianLloyd/tw-values.nvim",

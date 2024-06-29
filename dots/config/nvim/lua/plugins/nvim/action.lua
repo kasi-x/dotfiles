@@ -230,7 +230,7 @@ return {
   }, --}}}
   {
     "folke/todo-comments.nvim", --{{{
-    -- event = "VimEnter",
+    event = "VimEnter",
     -- lazy = false,
     dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope.nvim", "folke/trouble.nvim" },
     cmd = { "TodoTrouble", "TodoTelesocpe" },
